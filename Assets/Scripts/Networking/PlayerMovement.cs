@@ -1,7 +1,6 @@
 ﻿using System;
 using Mirror;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : NetworkBehaviour
@@ -9,11 +8,6 @@ public class PlayerMovement : NetworkBehaviour
     [Header("Movement Settings")] public float moveSpeed = 6f;
     public float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
-
-    [Header("Ground Check")] public Transform groundCheck;
-    // public float groundDistance = 0.2f;
-    // public LayerMask groundMask;
-    // private bool isGrounded;
 
     private Rigidbody rb;
     private Vector3 horizontalVelocity;
@@ -27,6 +21,11 @@ public class PlayerMovement : NetworkBehaviour
     ItemsManager itemsManager;
 
     private Animator _animator;
+
+    // Jumping and Gravity
+    private bool isGrounded;
+    public float jumpForce = 5f;
+    public float gravityMultiplier = 2f;
 
     void Start()
     {
@@ -50,8 +49,10 @@ public class PlayerMovement : NetworkBehaviour
             transform.position = Vector3.zero;
         }
 
-        // 地面检测
-        // isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        // Jump
+        isGrounded = CheckIfGrounded();
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+            Jump();
 
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
@@ -138,6 +139,9 @@ public class PlayerMovement : NetworkBehaviour
 
     void FixedUpdate()
     {
+        if (!isLocalPlayer)
+            return;
+
         // 保持原有的 y 向速度（重力、跳跃等由物理系统处理）
         Vector3 newVelocity = new Vector3(
             horizontalVelocity.x,
@@ -145,7 +149,56 @@ public class PlayerMovement : NetworkBehaviour
             horizontalVelocity.z
         );
         rb.linearVelocity = newVelocity;
+
+        // 优化下落速度，确保下落时不会过快（通过增加重力加成来控制下落）
+        if (rb.linearVelocity.y < 0)
+        {
+            newVelocity.y += Physics.gravity.y * gravityMultiplier * Time.fixedDeltaTime;
+        }
+
+        rb.linearVelocity = newVelocity;
     }
+
+    void Jump()
+    {
+        // 跳跃时清除当前垂直速度（防止上次跳跃的速度干扰）
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+
+    bool CheckIfGrounded()
+    {
+        Collider[] objectsDetected;
+        if (isServer)
+        {
+            PhysicsScene physicsScene = gameObject.scene.GetPhysicsScene();
+
+            // 准备一个足够大的缓存（根据你场景中最大的交互物体数调整大小）
+            Collider[] buffer = new Collider[16];
+
+            // 调用 OverlapSphere，将碰撞体写入 buffer，返回命中数量
+            int hitCount = physicsScene.OverlapSphere(
+                transform.position,
+                1f,
+                buffer,
+                LayerMask.GetMask("Ground"),
+                QueryTriggerInteraction.UseGlobal
+            );
+
+            // 将有效结果复制到 objectsDetected
+            objectsDetected = new Collider[hitCount];
+            Array.Copy(buffer, objectsDetected, hitCount);
+        }
+        else
+        {
+            objectsDetected = Physics.OverlapSphere(transform.position, 2f, LayerMask.GetMask("Ground"));
+        }
+
+        if (objectsDetected.Length > 0)
+            return true;
+        return false;
+    }
+
 
     void OnEquipItemChanged(string oldItem, string newItem)
     {
