@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Mirror;
 using UnityEngine;
 
@@ -11,6 +12,9 @@ public class PlayerMovement : NetworkBehaviour
 
     private Rigidbody rb;
     private Vector3 horizontalVelocity;
+
+    Vector3 lastGroundedPosition;
+    Vector3 resPosition = Vector3.zero;
 
     GameObject objPlayerIsNear = null;
     public GameObject ObjPlayerIsNear => objPlayerIsNear;
@@ -44,19 +48,27 @@ public class PlayerMovement : NetworkBehaviour
         if (!isLocalPlayer) // 确保只在本地玩家上执行
             return;
 
-        if (transform.position.y < -5f)
+        isGrounded = CheckIfGrounded();
+        if (isGrounded)
         {
-            transform.position = Vector3.zero;
+            UpdateResPos();
         }
 
+        if (transform.position.y < -5f)
+            transform.position = resPosition;
+
         // Jump
-        isGrounded = CheckIfGrounded();
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             Jump();
 
+        Transform cam = Camera.main.transform;
+        Vector3 camForward = Vector3.Scale(cam.forward, new Vector3(1, 0, 1)).normalized;
+        Vector3 camRight = Vector3.Scale(cam.right, new Vector3(1, 0, 1)).normalized;
+
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
-        Vector3 inputDir = new Vector3(h, 0f, v).normalized;
+        //Vector3 inputDir = new Vector3(h, 0f, v).normalized;
+        Vector3 inputDir = (camForward * v + camRight * h).normalized;
 
         horizontalVelocity = Vector3.zero;
         if (inputDir.magnitude >= 0.1f)
@@ -137,6 +149,25 @@ public class PlayerMovement : NetworkBehaviour
         objPlayerIsNear = objShortestDistance;
     }
 
+    private void UpdateResPos()
+    {
+        lastGroundedPosition = transform.position;
+        Transform[] allResPos = GameObject.FindGameObjectsWithTag("ResPos")
+            .Select(go => go.transform)
+            .ToArray();
+
+        float minDistance = float.MaxValue;
+        foreach (var resPos in allResPos)
+        {
+            float dis = Vector3.Distance(lastGroundedPosition, resPos.position);
+            if (minDistance > dis)
+            {
+                minDistance = dis;
+                resPosition = resPos.position;
+            }
+        }
+    }
+
     void FixedUpdate()
     {
         if (!isLocalPlayer)
@@ -181,7 +212,7 @@ public class PlayerMovement : NetworkBehaviour
                 transform.position,
                 1f,
                 buffer,
-                LayerMask.GetMask("Ground"),
+                LayerMask.GetMask("Ground") | LayerMask.GetMask("Interactable"),
                 QueryTriggerInteraction.UseGlobal
             );
 
@@ -191,14 +222,14 @@ public class PlayerMovement : NetworkBehaviour
         }
         else
         {
-            objectsDetected = Physics.OverlapSphere(transform.position, 2f, LayerMask.GetMask("Ground"));
+            objectsDetected = Physics.OverlapSphere(transform.position, 2f,
+                LayerMask.GetMask("Ground") | LayerMask.GetMask("Interactable"));
         }
 
         if (objectsDetected.Length > 0)
             return true;
         return false;
     }
-
 
     void OnEquipItemChanged(string oldItem, string newItem)
     {
