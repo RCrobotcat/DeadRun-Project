@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Mirror;
 using Steamworks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,6 +23,7 @@ public class LobbyController : MonoBehaviour
     public Button readyBtn;
     public Text readyBtnText;
     public Button startGameBtn;
+    public Button exitLobbyBtn;
 
     public GameObject lobbyCanvas;
 
@@ -47,6 +49,7 @@ public class LobbyController : MonoBehaviour
 
         readyBtn.onClick.AddListener(ReadyPlayer);
         startGameBtn.onClick.AddListener(StartGame);
+        exitLobbyBtn.onClick.AddListener(ExitGameLobby);
     }
 
     private void Update()
@@ -196,6 +199,33 @@ public class LobbyController : MonoBehaviour
         }
     }
 
+    private void ExitGameLobby()
+    {
+        int playerID = localPlayerObject.GetComponent<PlayerObjectController>().playerID;
+
+        if (playerID == 1) // Lobby Host
+        {
+            SteamLobby.Instance.ExitLobby(new CSteamID(CurrentLobbyID));
+            SendPlayerExit(LocalPlayerObjectController);
+
+            foreach (PlayerObjectController player in MyNetworkManager.GamePlayers)
+            {
+                SendPlayerExit(player);
+            }
+        }
+        else // Lobby members
+        {
+            SteamLobby.Instance.ExitLobby(new CSteamID(CurrentLobbyID));
+            SendPlayerExit(LocalPlayerObjectController);
+        }
+    }
+
+    private void SendPlayerExit(PlayerObjectController player)
+    {
+        PlayerExitMsg msg = new PlayerExitMsg(player.connectionID, player.playerID, player.playerSteamID);
+        NetworkServer.SendToAll(msg);
+    }
+
     public void CheckIfAllReady()
     {
         bool AllReady = false;
@@ -243,6 +273,13 @@ public class LobbyController : MonoBehaviour
             {
                 if (lobbyCanvas.activeSelf)
                     lobbyCanvas.SetActive(false);
+
+                if (steamLobby.lobbySceneType == LobbySceneTypesEnum.Offline &&
+                    (SceneManager.GetSceneByName("Scene_1").isLoaded
+                     || SceneManager.GetSceneByName("Scene_2").isLoaded))
+                {
+                    _myNetworkManager.BackToOfflineScene();
+                }
             }
         }
     }

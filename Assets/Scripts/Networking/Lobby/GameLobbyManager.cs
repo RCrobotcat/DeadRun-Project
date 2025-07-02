@@ -9,6 +9,27 @@ public partial class MyNetworkManager
 {
     public List<PlayerObjectController> GamePlayers { get; } = new();
 
+    public void SetUpClientMsgHandlers()
+    {
+        NetworkClient.RegisterHandler<PlayerExitMsg>(OnPlayerExit);
+    }
+
+    private void OnPlayerExit(PlayerExitMsg msg)
+    {
+        if (msg.playerID == 1) // Lobby Host
+            StopHost();
+        else
+            StopClient();
+
+        if (msg.connectionID == LobbyController.Instance.localPlayerObject.GetComponent<PlayerObjectController>()
+                .connectionID)
+        {
+            SteamLobby.Instance.hostButton.gameObject.SetActive(true);
+            SteamLobby.Instance.lobbiesButton.gameObject.SetActive(true);
+            SteamLobby.Instance.lobbySceneType = LobbySceneTypesEnum.Offline;
+        }
+    }
+
     public override void OnServerReady(NetworkConnectionToClient conn)
     {
         base.OnServerReady(conn);

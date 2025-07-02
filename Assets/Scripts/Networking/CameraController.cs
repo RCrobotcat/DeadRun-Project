@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour
                 || SceneManager.GetSceneByName("Scene_2").isLoaded)
             {
                 if (freeLookCam.Target.TrackingTarget == null)
-                    freeLookCam.Target.TrackingTarget = FindObjectOfType<PlayerMovement>().transform;
+                    freeLookCam.Target.TrackingTarget = FindObjectOfType<PlayerMovement>()?.transform;
             }
         }
     }

@@ -8,7 +8,7 @@ public class FadeInOutScreen : MonoBehaviour
 
     private Image fadeOutScreen;
     private Color fadeColor = Color.black;
-    
+
     public void Start()
     {
         DontDestroyOnLoad(this.gameObject);

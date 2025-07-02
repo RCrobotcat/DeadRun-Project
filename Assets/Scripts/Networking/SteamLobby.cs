@@ -64,6 +64,9 @@ public class SteamLobby : MonoBehaviour
 
     public void HostLobby()
     {
+        if (Instance == null)
+            Instance = this;
+
         // SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, networkManager.maxConnections);
         SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypePublic, networkManager.maxConnections);
 
@@ -77,6 +80,7 @@ public class SteamLobby : MonoBehaviour
         if (callback.m_eResult != EResult.k_EResultOK)
         {
             hostButton.gameObject.SetActive(true);
+            Debug.LogError("Failed to create lobby: " + callback.m_eResult);
             return;
         }
 
@@ -123,6 +127,14 @@ public class SteamLobby : MonoBehaviour
         hostButton.gameObject.SetActive(false);
         lobbiesButton.gameObject.SetActive(false);
         lobbySceneType = LobbySceneTypesEnum.GameLobby;
+    }
+
+    public void ExitLobby(CSteamID lobbyID)
+    {
+        SteamMatchmaking.LeaveLobby(lobbyID);
+        hostButton.gameObject.SetActive(true);
+        lobbiesButton.gameObject.SetActive(true);
+        lobbySceneType = LobbySceneTypesEnum.Offline;
     }
 
     private void OnGetLobbiesList(LobbyMatchList_t result)
