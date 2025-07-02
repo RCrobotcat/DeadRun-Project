@@ -4,11 +4,21 @@ using UnityEngine.SceneManagement;
 
 public class CameraController : MonoBehaviour
 {
+    public static CameraController Instance;
+
     private bool isThirdPerson = false;
     private CinemachineCamera freeLookCam;
 
     private void Start()
     {
+        if (Instance == null)
+            Instance = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         DontDestroyOnLoad(this.gameObject);
         if (GetComponent<CinemachineCamera>() != null)
         {

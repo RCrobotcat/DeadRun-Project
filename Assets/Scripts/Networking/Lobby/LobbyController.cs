@@ -273,13 +273,6 @@ public class LobbyController : MonoBehaviour
             {
                 if (lobbyCanvas.activeSelf)
                     lobbyCanvas.SetActive(false);
-
-                if (steamLobby.lobbySceneType == LobbySceneTypesEnum.Offline &&
-                    (SceneManager.GetSceneByName("Scene_1").isLoaded
-                     || SceneManager.GetSceneByName("Scene_2").isLoaded))
-                {
-                    _myNetworkManager.BackToOfflineScene();
-                }
             }
         }
     }

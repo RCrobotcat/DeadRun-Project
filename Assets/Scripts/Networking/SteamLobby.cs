@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Mirror;
 using Steamworks;
+using UnityEngine.SceneManagement;
 
 public enum LobbySceneTypesEnum
 {
@@ -103,6 +104,7 @@ public class SteamLobby : MonoBehaviour
     void OnLobbyEntered(LobbyEnter_t callback)
     {
         currentLobbyID = callback.m_ulSteamIDLobby;
+        networkManager.SetUpClientMsgHandlers();
 
         if (NetworkServer.active)
             return;
@@ -132,9 +134,9 @@ public class SteamLobby : MonoBehaviour
     public void ExitLobby(CSteamID lobbyID)
     {
         SteamMatchmaking.LeaveLobby(lobbyID);
-        hostButton.gameObject.SetActive(true);
-        lobbiesButton.gameObject.SetActive(true);
-        lobbySceneType = LobbySceneTypesEnum.Offline;
+        // hostButton.gameObject.SetActive(true);
+        // lobbiesButton.gameObject.SetActive(true);
+        // lobbySceneType = LobbySceneTypesEnum.Offline;
     }
 
     private void OnGetLobbiesList(LobbyMatchList_t result)

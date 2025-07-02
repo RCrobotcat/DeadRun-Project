@@ -474,9 +474,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c438b825a0740c380f9ddf688aa5147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
   lobbyNameText: {fileID: 806897474}
   playerListViewContent: {fileID: 2122015435}
   playerListItemPrefab: {fileID: 5271145189354243074, guid: aa315850dd73a8d48ad96ab9eb95d868, type: 3}

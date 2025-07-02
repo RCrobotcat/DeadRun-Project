@@ -141,7 +141,6 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
-  - component: {fileID: 330585548}
   - component: {fileID: 330585549}
   m_Layer: 0
   m_Name: Main Camera
@@ -217,12 +216,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.13331446, y: 0.03774943, z: -0.005072266, w: -0.99034166}
-  m_LocalPosition: {x: 1.0791731, y: 2.179016, z: -11.376317}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 867354023}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
@@ -268,18 +267,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!114 &330585548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d98f1ce95d4494195c330ae6a1daf2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &330585549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,6 +431,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &480873124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 480873125}
+  - component: {fileID: 480873126}
+  m_Layer: 0
+  m_Name: SteamManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &480873125
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480873124}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &480873126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480873124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef4bffeda13d7a748973ff9204401c07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &791186824
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,7 +590,7 @@ GameObject:
   - component: {fileID: 867354024}
   m_Layer: 0
   m_Name: PlayerSelfCamera
-  m_TagString: Untagged
+  m_TagString: DDOL
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -786,7 +817,8 @@ Transform:
   m_LocalPosition: {x: 1.0791731, y: 2.179016, z: -11.376317}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 330585546}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &867354024
@@ -973,14 +1005,6 @@ PrefabInstance:
     - target: {fileID: 8804847282976531024, guid: 014673285ee4d9049afc2db103b12566, type: 3}
       propertyPath: m_Name
       value: NetworkManager_Steam
-      objectReference: {fileID: 0}
-    - target: {fileID: 8955021702242725552, guid: 014673285ee4d9049afc2db103b12566, type: 3}
-      propertyPath: onlineScene
-      value: Assets/Scenes/DemoScene/PersistentScene.unity
-      objectReference: {fileID: 0}
-    - target: {fileID: 8955021702242725552, guid: 014673285ee4d9049afc2db103b12566, type: 3}
-      propertyPath: offlineScene
-      value: Assets/Scenes/DemoScene/OfflineScene.unity
       objectReference: {fileID: 0}
     - target: {fileID: 8955021702242725552, guid: 014673285ee4d9049afc2db103b12566, type: 3}
       propertyPath: fadeinOutScreen
@@ -1205,12 +1229,12 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 330585546}
   - {fileID: 867354023}
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 488408163681362307}
   - {fileID: 9185768485234711222}
+  - {fileID: 480873125}
   - {fileID: 903876148}
   - {fileID: 5161994887664101058}
   - {fileID: 791186826}

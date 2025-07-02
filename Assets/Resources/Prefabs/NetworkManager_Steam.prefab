@@ -513,13 +513,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1476250128263870046}
   - component: {fileID: 8955021702242725552}
-  - component: {fileID: 3429329696175031962}
   - component: {fileID: 4593592896836871119}
   - component: {fileID: 5643620858545497795}
   - component: {fileID: 5379570917558315006}
   m_Layer: 0
   m_Name: NetworkManager_Steam
-  m_TagString: Untagged
+  m_TagString: DDOL
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -557,8 +556,8 @@ MonoBehaviour:
   headlessStartMode: 0
   editorAutoStart: 0
   sendRate: 60
-  offlineScene: Assets/Scenes/OfflineScene.unity
-  onlineScene: Assets/Scenes/PersistentScene.unity
+  offlineScene: Assets/Scenes/DemoScene/OfflineScene.unity
+  onlineScene: Assets/Scenes/DemoScene/PersistentScene.unity
   offlineSceneLoadDelay: 0
   transport: {fileID: 4593592896836871119}
   networkAddress: localhost
@@ -587,18 +586,6 @@ MonoBehaviour:
   timeInterpolationGui: 0
   fadeinOutScreen: {fileID: 0}
   firstSceneToLoad: PersistentScene
---- !u!114 &3429329696175031962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8804847282976531024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef4bffeda13d7a748973ff9204401c07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4593592896836871119
 MonoBehaviour:
   m_ObjectHideFlags: 0
