@@ -148,8 +148,11 @@ public class SteamLobby : MonoBehaviour
         for (int i = 0; i < result.m_nLobbiesMatching; i++)
         {
             CSteamID lobbyID = SteamMatchmaking.GetLobbyByIndex(i);
-            lobbiesIDs.Add(lobbyID);
-            SteamMatchmaking.RequestLobbyData(lobbyID);
+            if (!lobbiesIDs.Contains(lobbyID))
+            {
+                lobbiesIDs.Add(lobbyID);
+                SteamMatchmaking.RequestLobbyData(lobbyID);
+            }
         }
     }
 

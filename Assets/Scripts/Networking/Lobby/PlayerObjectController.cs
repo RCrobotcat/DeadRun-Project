@@ -134,9 +134,16 @@ public class PlayerObjectController : NetworkBehaviour
     public void LocalPlayerExit()
     {
         Debug.Log("Client(Member) is leaving lobby!");
-        SteamLobby.Instance.ExitLobby(new CSteamID(SteamLobby.Instance.currentLobbyID));
-        
         PlayerExitMsg msg = new PlayerExitMsg(connectionID, playerID, playerSteamID);
         NetworkClient.Send(msg);
+
+        SteamLobby.Instance.ExitLobby(new CSteamID(SteamLobby.Instance.currentLobbyID));
+        _myNetworkManager.StopClient();
+        _myNetworkManager.GamePlayers.Clear();
+
+        SceneManager.LoadSceneAsync("OfflineScene");
+        SteamLobby.Instance.hostButton.gameObject.SetActive(true);
+        SteamLobby.Instance.lobbiesButton.gameObject.SetActive(true);
+        SteamLobby.Instance.lobbySceneType = LobbySceneTypesEnum.Offline;
     }
 }
