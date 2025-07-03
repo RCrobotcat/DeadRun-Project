@@ -201,29 +201,21 @@ public class LobbyController : MonoBehaviour
 
     private void ExitGameLobby()
     {
-        int playerID = localPlayerObject.GetComponent<PlayerObjectController>().playerID;
-
-        if (playerID == 1) // Lobby Host
+        // SteamLobby.Instance.ExitLobby(new CSteamID(CurrentLobbyID));
+        // LocalPlayerObjectController.SendPlayerExit();
+        int playerID = LocalPlayerObjectController.playerID;
+        if (playerID == 1)
         {
-            SteamLobby.Instance.ExitLobby(new CSteamID(CurrentLobbyID));
-            SendPlayerExit(LocalPlayerObjectController);
-
-            foreach (PlayerObjectController player in MyNetworkManager.GamePlayers)
-            {
-                SendPlayerExit(player);
-            }
+            Debug.Log("Host is exiting lobby!");
+            PlayerExitMsg msg = new PlayerExitMsg(LocalPlayerObjectController.connectionID,
+                LocalPlayerObjectController.playerID, LocalPlayerObjectController.playerSteamID);
+            NetworkServer.SendToAll(msg);
+            SteamLobby.Instance.ExitLobby(new CSteamID(SteamLobby.Instance.currentLobbyID));
         }
-        else // Lobby members
+        else
         {
-            SteamLobby.Instance.ExitLobby(new CSteamID(CurrentLobbyID));
-            SendPlayerExit(LocalPlayerObjectController);
+            LocalPlayerObjectController.SendPlayerExit();
         }
-    }
-
-    private void SendPlayerExit(PlayerObjectController player)
-    {
-        PlayerExitMsg msg = new PlayerExitMsg(player.connectionID, player.playerID, player.playerSteamID);
-        NetworkServer.SendToAll(msg);
     }
 
     public void CheckIfAllReady()

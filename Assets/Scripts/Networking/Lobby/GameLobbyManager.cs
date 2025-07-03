@@ -12,21 +12,33 @@ public partial class MyNetworkManager
     public void SetUpClientMsgHandlers()
     {
         NetworkClient.RegisterHandler<PlayerExitMsg>(OnPlayerExit);
+        NetworkServer.RegisterHandler<PlayerExitMsg>(OnPlayerExit_ServerHost);
     }
 
     private void OnPlayerExit(PlayerExitMsg msg)
     {
-        if (msg.playerID == 1) // Lobby Host
-            StopHost();
-        else
-            StopClient();
+        Debug.Log("PlayerExitMsg received: " + msg.connectionID + " - " + msg.playerID);
 
-        if (msg.connectionID == LobbyController.Instance.localPlayerObject.GetComponent<PlayerObjectController>()
-                .connectionID)
+        StopHost();
+
+        SteamLobby.Instance.hostButton.gameObject.SetActive(true);
+        SteamLobby.Instance.lobbiesButton.gameObject.SetActive(true);
+        SteamLobby.Instance.lobbySceneType = LobbySceneTypesEnum.Offline;
+    }
+
+    private void OnPlayerExit_ServerHost(NetworkConnectionToClient conn, PlayerExitMsg msg)
+    {
+        Debug.Log("PlayerExitMsg received on server: " + msg.connectionID + " - " + msg.playerID);
+
+        if (msg.playerID == 1)
+            return;
+
+        PlayerObjectController player =
+            GamePlayers.Find(p => p.connectionID == msg.connectionID && p.playerID == msg.playerID);
+        if (player != null)
         {
-            SteamLobby.Instance.hostButton.gameObject.SetActive(true);
-            SteamLobby.Instance.lobbiesButton.gameObject.SetActive(true);
-            SteamLobby.Instance.lobbySceneType = LobbySceneTypesEnum.Offline;
+            GamePlayers.Remove(player);
+            NetworkServer.Destroy(player.gameObject);
         }
     }
 

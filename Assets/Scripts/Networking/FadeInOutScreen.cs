@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class FadeInOutScreen : MonoBehaviour
 {
+    public static FadeInOutScreen Instance;
+
     public float speed = 1;
 
     private Image fadeOutScreen;
@@ -11,6 +13,16 @@ public class FadeInOutScreen : MonoBehaviour
 
     public void Start()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         DontDestroyOnLoad(this.gameObject);
 
         fadeOutScreen = this.GetComponentInChildren<Image>(true);

@@ -113,6 +113,7 @@ public class SteamLobby : MonoBehaviour
 
         networkManager.networkAddress = hostAddress;
         networkManager.StartClient();
+        networkManager.SetUpClientMsgHandlers();
     }
 
     public void GetListOfLobbies()

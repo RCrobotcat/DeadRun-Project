@@ -1,6 +1,6 @@
-﻿#nullable enable
-using Mirror;
+﻿using Mirror;
 using Steamworks;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerObjectController : NetworkBehaviour
@@ -121,5 +121,22 @@ public class PlayerObjectController : NetworkBehaviour
         {
             CmdSetReadyStatus();
         }
+    }
+
+    public void SendPlayerExit()
+    {
+        if (isOwned)
+        {
+            LocalPlayerExit(); // Client
+        }
+    }
+
+    public void LocalPlayerExit()
+    {
+        Debug.Log("Client(Member) is leaving lobby!");
+        SteamLobby.Instance.ExitLobby(new CSteamID(SteamLobby.Instance.currentLobbyID));
+        
+        PlayerExitMsg msg = new PlayerExitMsg(connectionID, playerID, playerSteamID);
+        NetworkClient.Send(msg);
     }
 }

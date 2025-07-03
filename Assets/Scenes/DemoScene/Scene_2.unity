@@ -335,7 +335,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   transitionToSceneName: Assets/Scenes/DemoScene/Scene_1.unity
-  scenePosToSpawnOn: SpawnPos
+  scenePosToSpawnOn: SpawnPos_portal
 --- !u!65 &1437311675
 BoxCollider:
   m_ObjectHideFlags: 0
