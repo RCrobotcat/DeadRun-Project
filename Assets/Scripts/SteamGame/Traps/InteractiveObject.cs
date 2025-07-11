@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Mirror;
+using UnityEngine;
 
-public class InteractiveObject : MonoBehaviour
+public class InteractiveObject : NetworkBehaviour
 {
     public string Io_name;
 
@@ -36,33 +37,88 @@ public class InteractiveObject : MonoBehaviour
 
     private void Update()
     {
-        MouseDetect();
+        if (LobbyController.Instance != null &&
+            LobbyController.Instance.LocalPlayerObjectController != null &&
+            LobbyController.Instance.LocalPlayerObjectController.role == PlayerRole.Trapper)
+        {
+            MouseDetect();
+            MouseClick();
+        }
     }
 
     private void MouseDetect()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (isServer)
         {
-            InteractiveObject interactiveObject = hit.collider.GetComponent<InteractiveObject>();
-            if (interactiveObject == this)
-            {
-                if (!isMouseOver)
-                {
-                    isMouseOver = true;
-
-                    InteractionEvents.OnMouseHover?.Invoke(this);
-                }
-
+            PhysicsScene physicsScene = gameObject.scene.GetPhysicsScene();
+            if (Camera.main == null)
                 return;
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            RaycastHit hit;
+            float maxDistance = 100f;
+            int mask = LayerMask.GetMask("Ground");
+            QueryTriggerInteraction query = QueryTriggerInteraction.Collide;
+            Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.red);
+
+            physicsScene.Raycast(ray.origin, ray.direction, out hit, maxDistance, mask, query);
+            if (hit.collider != null)
+            {
+                InteractiveObject interactiveObject = hit.collider.GetComponent<InteractiveObject>();
+                if (interactiveObject == this)
+                {
+                    if (!isMouseOver)
+                    {
+                        isMouseOver = true;
+                        InteractionEvents.OnMouseHover?.Invoke(this);
+                    }
+
+                    return;
+                }
+            }
+
+            if (isMouseOver)
+            {
+                isMouseOver = false;
+                InteractionEvents.OnMouseExit?.Invoke(this);
             }
         }
-
-        if (isMouseOver)
+        else
         {
-            isMouseOver = false;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            InteractionEvents.OnMouseExit?.Invoke(this);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                InteractiveObject interactiveObject = hit.collider.GetComponent<InteractiveObject>();
+                if (interactiveObject == this)
+                {
+                    if (!isMouseOver)
+                    {
+                        isMouseOver = true;
+                        InteractionEvents.OnMouseHover?.Invoke(this);
+                    }
+
+                    return;
+                }
+            }
+
+            if (isMouseOver)
+            {
+                isMouseOver = false;
+                InteractionEvents.OnMouseExit?.Invoke(this);
+            }
+        }
+    }
+
+    private void MouseClick()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (isMouseOver)
+            {
+                InteractionEvents.OnMouseClick?.Invoke(this);
+            }
         }
     }
 

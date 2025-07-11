@@ -6,10 +6,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LobbyController : MonoBehaviour
+public class LobbyController : Singleton<LobbyController>
 {
-    public static LobbyController Instance;
-
     public Text lobbyNameText;
     public GameObject playerListViewContent;
     public GameObject playerListItemPrefab;
@@ -42,11 +40,9 @@ public class LobbyController : MonoBehaviour
         }
     }
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-
+        base.Awake();
         readyBtn.onClick.AddListener(ReadyPlayer);
         startGameBtn.onClick.AddListener(StartGame);
         exitLobbyBtn.onClick.AddListener(ExitGameLobby);
@@ -182,6 +178,15 @@ public class LobbyController : MonoBehaviour
     {
         string scenePath = SceneManager.GetSceneByName("Scene_1").name;
         lobbyCanvas.SetActive(false);
+
+        float randomValue = Random.Range(0f, 1f);
+        if (randomValue < _myNetworkManager.escaperProbability)
+            LocalPlayerObjectController.role = PlayerRole.Escaper;
+        else
+            LocalPlayerObjectController.role = PlayerRole.Trapper;
+
+        Debug.Log("You are now: " + LocalPlayerObjectController.role);
+
         MyNetworkManager.HandleSendPlayerToNewScene(scenePath, "SpawnPos");
     }
 

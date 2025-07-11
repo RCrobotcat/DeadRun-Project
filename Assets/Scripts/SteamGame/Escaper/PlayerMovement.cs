@@ -48,6 +48,9 @@ public class PlayerMovement : NetworkBehaviour
         if (!isLocalPlayer) // 确保只在本地玩家上执行
             return;
 
+        if (GetComponent<PlayerObjectController>().role == PlayerRole.Trapper)
+            return;
+
         isGrounded = CheckIfGrounded();
         if (isGrounded)
         {

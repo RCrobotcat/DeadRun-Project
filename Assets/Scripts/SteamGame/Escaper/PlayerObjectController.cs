@@ -3,6 +3,12 @@ using Steamworks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum PlayerRole
+{
+    Escaper,
+    Trapper
+}
+
 public class PlayerObjectController : NetworkBehaviour
 {
     // Player Data
@@ -30,6 +36,8 @@ public class PlayerObjectController : NetworkBehaviour
             return _myNetworkManager = MyNetworkManager.singleton as MyNetworkManager;
         }
     }
+
+    [HideInInspector] public PlayerRole role = PlayerRole.Escaper;
 
     private void Update()
     {

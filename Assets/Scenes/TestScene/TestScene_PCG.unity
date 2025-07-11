@@ -383,6 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d98f1ce95d4494195c330ae6a1daf2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  freeLookCam: {fileID: 0}
 --- !u!114 &497496380
 MonoBehaviour:
   m_ObjectHideFlags: 0

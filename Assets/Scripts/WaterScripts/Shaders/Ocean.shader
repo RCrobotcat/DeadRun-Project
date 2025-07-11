@@ -225,7 +225,7 @@ Shader "RCrobotcat/Ocean"
                 sss *= Scattering(saturate(depth / _DepthScale));
 
                 // 水面颜色 = ((折射颜色,反射颜色) 按照 菲尼尔项 的插值) * 阴影 + 散射
-                half3 waterColor = (lerp(refraction - 0.1, reflection, fresnelTerm) + spec) * shadow + sss;
+                half3 waterColor = (lerp(refraction, reflection + 0.05, fresnelTerm) + spec) * shadow + sss;
 
                 return half4(waterColor, 1);
             }
