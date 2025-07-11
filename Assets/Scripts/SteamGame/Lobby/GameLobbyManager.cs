@@ -92,6 +92,7 @@ public partial class MyNetworkManager
         NetworkServer.AddPlayerForConnection(conn, player);
 
         player.transform.position = new Vector3(1000, 1000, 1000); // offscreen
+        CameraController.Instance.freeLookCam.Target.TrackingTarget = null;
     }
 
     public void HandleSendPlayerToNewScene(string sceneName, string spawnPos)

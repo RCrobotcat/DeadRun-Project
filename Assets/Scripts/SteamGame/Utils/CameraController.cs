@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
     public static CameraController Instance;
 
     private bool isThirdPerson = false;
-    private CinemachineCamera freeLookCam;
+    [HideInInspector] public CinemachineCamera freeLookCam;
 
     private void Start()
     {
@@ -35,7 +35,8 @@ public class CameraController : MonoBehaviour
             if (SceneManager.GetSceneByName("Scene_1").isLoaded
                 || SceneManager.GetSceneByName("Scene_2").isLoaded)
             {
-                if (freeLookCam.Target.TrackingTarget == null)
+                if (freeLookCam.Target.TrackingTarget == null &&
+                    FindObjectOfType<PlayerMovement>()?.gameObject.scene.name != "PersistentScene")
                     freeLookCam.Target.TrackingTarget = FindObjectOfType<PlayerMovement>()?.transform;
             }
         }
