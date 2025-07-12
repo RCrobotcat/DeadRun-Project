@@ -9,7 +9,7 @@ public partial class MyNetworkManager
 {
     [Range(0, 1)] public float escaperProbability = 0.5f;
     [Range(0, 1)] public float trapperProbability = 0.5f;
-    
+
     public List<PlayerObjectController> GamePlayers { get; } = new();
 
     public void SetUpClientMsgHandlers()

@@ -18,6 +18,21 @@ public class PlaneRotation : Singleton<PlaneRotation>
     private bool isRotatingLeft = false;
     private bool isRotatingRight = false;
 
+    private MyNetworkManager _myNetworkManager;
+
+    private MyNetworkManager MyNetworkManager
+    {
+        get
+        {
+            if (_myNetworkManager != null)
+            {
+                return _myNetworkManager;
+            }
+
+            return _myNetworkManager = MyNetworkManager.singleton as MyNetworkManager;
+        }
+    }
+
     private void Start()
     {
         var leftTrigger = leftRotationBtn.gameObject.AddComponent<EventTrigger>();
@@ -46,33 +61,6 @@ public class PlaneRotation : Singleton<PlaneRotation>
 
     private void Update()
     {
-        if (LobbyController.Instance != null)
-        {
-            if (LobbyController.Instance.LocalPlayerObjectController != null)
-            {
-                if (LobbyController.Instance.LocalPlayerObjectController.role == PlayerRole.Trapper)
-                {
-                    if (!planeRotationCanvas.activeSelf)
-                        planeRotationCanvas.SetActive(true);
-                    if (!trapperCamera.activeSelf)
-                        trapperCamera.SetActive(true);
-
-                    CameraController.Instance.gameObject.SetActive(false);
-                    LobbyController.Instance.LocalPlayerObjectController.transform.position =
-                        new Vector3(1000, 1000, 1000); // offscreen
-                }
-                else if (LobbyController.Instance.LocalPlayerObjectController.role == PlayerRole.Escaper)
-                {
-                    if (planeRotationCanvas.activeSelf)
-                        planeRotationCanvas.SetActive(false);
-                    if (trapperCamera.activeSelf)
-                        trapperCamera.SetActive(false);
-
-                    CameraController.Instance.gameObject.SetActive(true);
-                }
-            }
-        }
-
         if (planeToRotate != null)
         {
             if (isRotatingLeft)

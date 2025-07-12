@@ -19,26 +19,12 @@ public class CameraController : MonoBehaviour
             return;
         }
 
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
         if (GetComponent<CinemachineCamera>() != null)
         {
             isThirdPerson = true;
             freeLookCam = GetComponent<CinemachineCamera>();
         }
         else isThirdPerson = false;
-    }
-
-    private void Update()
-    {
-        if (isThirdPerson)
-        {
-            if (SceneManager.GetSceneByName("Scene_1").isLoaded
-                || SceneManager.GetSceneByName("Scene_2").isLoaded)
-            {
-                if (freeLookCam.Target.TrackingTarget == null &&
-                    FindObjectOfType<PlayerMovement>()?.gameObject.scene.name != "PersistentScene")
-                    freeLookCam.Target.TrackingTarget = FindObjectOfType<PlayerMovement>()?.transform;
-            }
-        }
     }
 }

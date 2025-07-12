@@ -6,9 +6,9 @@ public class TrapperCameraMovement : MonoBehaviour
     float horizontal, vertical, elevation;
     public float MoveSpeed = 5f; // 摄像机的移动速度
     public float MouseRotateSpeed = 3f; // 鼠标控制摄像机旋转的灵敏度
-    
+
     Vector3 lastMousePosition;
-    
+
     bool isRightMouseDragging;
 
     float yaw = 0f; // 水平旋转
@@ -30,6 +30,10 @@ public class TrapperCameraMovement : MonoBehaviour
         {
             isRightMouseDragging = true;
             lastMousePosition = Input.mousePosition;
+
+            Vector3 angles = transform.rotation.eulerAngles;
+            yaw = angles.y;
+            pitch = angles.x;
         }
 
         if (Input.GetMouseButtonUp(1))

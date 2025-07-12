@@ -41,27 +41,7 @@ public class PlayerObjectController : NetworkBehaviour
 
     private void Update()
     {
-        if (SceneManager.GetSceneByName("PersistentScene").isLoaded)
-        {
-            if (SceneManager.GetSceneByName("Scene_1").isLoaded
-                || SceneManager.GetSceneByName("Scene_2").isLoaded)
-            {
-                LobbyController? lobbyController = FindObjectOfType<LobbyController>();
-                SteamLobby? steamLobby = FindObjectOfType<SteamLobby>();
-
-                if (lobbyController != null && steamLobby != null)
-                {
-                    if (lobbyController.LocalPlayerObjectController != null)
-                    {
-                        if (lobbyController.LocalPlayerObjectController.playerID > 1 // Not the Host
-                            && steamLobby.lobbySceneType != LobbySceneTypesEnum.GameScene)
-                        {
-                            steamLobby.lobbySceneType = LobbySceneTypesEnum.GameScene;
-                        }
-                    }
-                }
-            }
-        }
+        UpdateImportantParams();
     }
 
     public override void OnStartAuthority()
@@ -152,6 +132,81 @@ public class PlayerObjectController : NetworkBehaviour
         SceneManager.LoadSceneAsync("OfflineScene");
         SteamLobby.Instance.hostButton.gameObject.SetActive(true);
         SteamLobby.Instance.lobbiesButton.gameObject.SetActive(true);
+        SteamLobby.Instance.quitBtn.gameObject.SetActive(true);
         SteamLobby.Instance.lobbySceneType = LobbySceneTypesEnum.Offline;
+    }
+
+    public void UpdateImportantParams()
+    {
+        if (SceneManager.GetSceneByName("PersistentScene").isLoaded)
+        {
+            if (SceneManager.GetSceneByName("Scene_1").isLoaded
+                || SceneManager.GetSceneByName("Scene_2").isLoaded)
+            {
+                LobbyController? lobbyController = FindObjectOfType<LobbyController>();
+                SteamLobby? steamLobby = FindObjectOfType<SteamLobby>();
+
+                if (lobbyController != null && steamLobby != null)
+                {
+                    if (lobbyController.LocalPlayerObjectController != null)
+                    {
+                        if (lobbyController.LocalPlayerObjectController.playerID > 1 // Not the Host
+                            && steamLobby.lobbySceneType != LobbySceneTypesEnum.GameScene)
+                        {
+                            steamLobby.lobbySceneType = LobbySceneTypesEnum.GameScene;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (LobbyController.Instance != null)
+        {
+            if (LobbyController.Instance.LocalPlayerObjectController != null)
+            {
+                var planeRotation = FindObjectOfType<PlaneRotation>();
+                if (LobbyController.Instance.LocalPlayerObjectController.role == PlayerRole.Trapper)
+                {
+                    if (planeRotation != null)
+                    {
+                        if (!planeRotation.planeRotationCanvas.activeSelf)
+                            planeRotation.planeRotationCanvas.SetActive(true);
+                        if (!planeRotation.trapperCamera.activeSelf)
+                            planeRotation.trapperCamera.SetActive(true);
+                    }
+
+                    CameraController.Instance.gameObject.SetActive(false);
+                    LobbyController.Instance.LocalPlayerObjectController.transform.position =
+                        new Vector3(1000, 1000, 1000); // offscreen
+                }
+                else if (LobbyController.Instance.LocalPlayerObjectController.role == PlayerRole.Escaper)
+                {
+                    if (planeRotation != null)
+                    {
+                        if (planeRotation.planeRotationCanvas.activeSelf)
+                            planeRotation.planeRotationCanvas.SetActive(false);
+                        if (planeRotation.trapperCamera.activeSelf)
+                            planeRotation.trapperCamera.SetActive(false);
+                    }
+
+                    CameraController.Instance.gameObject.SetActive(true);
+                    if (CameraController.Instance.freeLookCam.Target.TrackingTarget == null)
+                    {
+                        if (SceneManager.GetSceneByName("Scene_1").isLoaded ||
+                            SceneManager.GetSceneByName("Scene_2").isLoaded)
+                        {
+                            if (LobbyController.Instance.LocalPlayerObjectController.playerID == 1
+                                && LobbyController.Instance.localPlayerObject.scene.name != "PersistentScene")
+                                CameraController.Instance.freeLookCam.Target.TrackingTarget = LobbyController.Instance
+                                    .LocalPlayerObjectController.transform;
+
+                            if (LobbyController.Instance.LocalPlayerObjectController.playerID > 1)
+                                CameraController.Instance.freeLookCam.Target.TrackingTarget = LobbyController.Instance
+                                    .LocalPlayerObjectController.transform;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

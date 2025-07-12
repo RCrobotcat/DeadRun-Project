@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 8
-  MouseRotateSpeed: 5
+  MouseRotateSpeed: 15
 --- !u!114 &8213238609009041985
 MonoBehaviour:
   m_ObjectHideFlags: 0
