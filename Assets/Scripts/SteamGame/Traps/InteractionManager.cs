@@ -47,7 +47,7 @@ public class InteractionManager : Singleton<InteractionManager>
         Material materialInstance_out = new Material(obj.outlineMaterial);
         // 设置高亮属性
         // materialInstance_emi.SetFloat("_is_HighLighted", 1.0f);
-        Debug.Log($"length: {materials.Length}.");
+        //Debug.Log($"length: {materials.Length}.");
         // 更新材质数组
         materials[materials.Length - 1] = materialInstance_emi;
         materials[materials.Length - 2] = materialInstance_out;

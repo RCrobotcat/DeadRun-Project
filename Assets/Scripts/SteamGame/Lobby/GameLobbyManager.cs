@@ -26,6 +26,7 @@ public partial class MyNetworkManager
 
         SteamLobby.Instance.hostButton.gameObject.SetActive(true);
         SteamLobby.Instance.lobbiesButton.gameObject.SetActive(true);
+        SteamLobby.Instance.quitBtn.gameObject.SetActive(true);
         SteamLobby.Instance.lobbySceneType = LobbySceneTypesEnum.Offline;
     }
 

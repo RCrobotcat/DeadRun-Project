@@ -4,25 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7061f1fe-81be-4fca-999e-11768f455133" name="Changes" comment="fixed exit lobby bugs">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Traps/TrapperCameraMovement.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Traps/TrapperCameraMovement.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Arts/RCrobotcat/Water_RCrobotcat_plane/Color.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Arts/RCrobotcat/Water_RCrobotcat_plane/Color.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Water/TerrainWithDangerousWater.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Water/TerrainWithDangerousWater.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/DemoScene/OfflineScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DemoScene/OfflineScene.unity" afterDir="false" />
+    <list default="true" id="7061f1fe-81be-4fca-999e-11768f455133" name="Changes" comment="Added trapper and escaper logic">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/EscController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/EscController.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/EventSystemController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Item_1.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Item_1.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/NetworkManager_KCP.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/NetworkManager_KCP.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/NetworkManager_Steam.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/NetworkManager_Steam.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Traps/PlayerRotationTrap.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Traps/PlayerRotationTrap.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/DemoScene/PersistentScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DemoScene/PersistentScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/DemoScene/Scene_1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DemoScene/Scene_1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/DemoScene/Scene_2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DemoScene/Scene_2.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestScene/TestScene_PCG.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestScene/TestScene_PCG.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestScene/TestScene_Trap.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestScene/TestScene_Trap.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Escaper/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Escaper/PlayerMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Escaper/PlayerObjectController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Escaper/PlayerObjectController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Lobby/GameLobbyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Lobby/GameLobbyManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Lobby/LobbiesManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Lobby/LobbiesManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Lobby/LobbyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Lobby/LobbyController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Traps/InteractiveObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Traps/InteractiveObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Lobby/SteamLobby.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Lobby/SteamLobby.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Traps/InteractionManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Traps/InteractionManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Traps/PlaneRotation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Traps/PlaneRotation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/WaterScripts/Shaders/Ocean.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WaterScripts/Shaders/Ocean.shader" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,8 +67,10 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0900e0d4bb644dafbfd59eb7fd222a681ddc00/35/8697b773/GameObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6524f18ff747462d8847618bfcedbe402ac00/59/324ce4f5/QueryTriggerInteraction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/EventSystemController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/PCG/SeamlessNoiseGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/PCG/TerrainGeneration.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui/Runtime/UGUI/EventSystem/EventSystem.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -129,10 +134,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="24704">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="41092">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="24704" />
+      <option name="pid" value="41092" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
         <list>
@@ -164,7 +169,8 @@
       <workItem from="1751990587190" duration="181000" />
       <workItem from="1752079991942" duration="687000" />
       <workItem from="1752237960033" duration="611000" />
-      <workItem from="1752246221234" duration="11368000" />
+      <workItem from="1752246221234" duration="11702000" />
+      <workItem from="1752320019689" duration="4402000" />
     </task>
     <task id="LOCAL-00001" summary="fixed exit lobby bugs">
       <option name="closed" value="true" />
@@ -174,7 +180,15 @@
       <option name="project" value="LOCAL" />
       <updated>1751474736416</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added trapper and escaper logic">
+      <option name="closed" value="true" />
+      <created>1752257892653</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1752257892653</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,7 +227,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fixed exit lobby bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed exit lobby bugs" />
+    <MESSAGE value="Added trapper and escaper logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added trapper and escaper logic" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -221,14 +236,7 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/SteamGame/TrapsController/InteractiveObject.cs</url>
           <line>62</line>
-          <properties documentPath="C:\Users\25190\Desktop\course\DeadRunProject\Assets\Scripts\SteamGame\TrapsController\InteractiveObject.cs" containingFunctionPresentation="Method 'MouseDetect'">
-            <startOffsets>
-              <option value="1541" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1561" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\25190\Desktop\course\DeadRunProject\Assets\Scripts\SteamGame\TrapsController\InteractiveObject.cs" containingFunctionPresentation="Method 'MouseDetect'" />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>

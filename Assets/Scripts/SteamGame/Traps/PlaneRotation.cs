@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class PlaneRotation : Singleton<PlaneRotation>
 {
@@ -16,12 +17,6 @@ public class PlaneRotation : Singleton<PlaneRotation>
 
     private bool isRotatingLeft = false;
     private bool isRotatingRight = false;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        DontDestroyOnLoad(this);
-    }
 
     private void Start()
     {
@@ -63,7 +58,8 @@ public class PlaneRotation : Singleton<PlaneRotation>
                         trapperCamera.SetActive(true);
 
                     CameraController.Instance.gameObject.SetActive(false);
-                    LobbyController.Instance.LocalPlayerObjectController.transform.position = new Vector3(1000, 1000, 1000); // offscreen
+                    LobbyController.Instance.LocalPlayerObjectController.transform.position =
+                        new Vector3(1000, 1000, 1000); // offscreen
                 }
                 else if (LobbyController.Instance.LocalPlayerObjectController.role == PlayerRole.Escaper)
                 {

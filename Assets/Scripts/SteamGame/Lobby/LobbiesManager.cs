@@ -27,6 +27,7 @@ public class LobbiesManager : MonoBehaviour
     {
         SteamLobby.Instance.hostButton.gameObject.SetActive(true);
         SteamLobby.Instance.lobbiesButton.gameObject.SetActive(true);
+        SteamLobby.Instance.quitBtn.gameObject.SetActive(true);
         lobbiesMenu.SetActive(false);
     }
 

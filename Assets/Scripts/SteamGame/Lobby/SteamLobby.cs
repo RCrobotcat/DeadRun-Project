@@ -18,6 +18,7 @@ public class SteamLobby : MonoBehaviour
 
     public Button hostButton;
     public Button lobbiesButton;
+    public Button quitBtn;
 
     protected Callback<LobbyCreated_t> lobbyCreated;
     protected Callback<GameLobbyJoinRequested_t> gameLobbyJoinRequested;
@@ -48,6 +49,7 @@ public class SteamLobby : MonoBehaviour
 
         hostButton.onClick.AddListener(HostLobby);
         lobbiesButton.onClick.AddListener(GetListOfLobbies);
+        quitBtn.onClick.AddListener(() => Application.Quit());
 
         lobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
         gameLobbyJoinRequested = Callback<GameLobbyJoinRequested_t>.Create(OnGameLobbyJoinRequested);
@@ -59,8 +61,9 @@ public class SteamLobby : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            Application.Quit();
+        if (SceneManager.GetSceneByName("OfflineScene").isLoaded)
+            if (!CameraController.Instance.gameObject.activeSelf)
+                CameraController.Instance.gameObject.SetActive(true);
     }
 
     public void HostLobby()
@@ -73,6 +76,7 @@ public class SteamLobby : MonoBehaviour
 
         hostButton.gameObject.SetActive(false);
         lobbiesButton.gameObject.SetActive(false);
+        quitBtn.gameObject.SetActive(false);
         lobbySceneType = LobbySceneTypesEnum.GameLobby;
     }
 
@@ -120,6 +124,7 @@ public class SteamLobby : MonoBehaviour
     {
         hostButton.gameObject.SetActive(false);
         lobbiesButton.gameObject.SetActive(false);
+        quitBtn.gameObject.SetActive(false);
         LobbiesManager.Instance.lobbiesMenu.SetActive(true);
         GetLobbiesList();
     }
@@ -129,6 +134,7 @@ public class SteamLobby : MonoBehaviour
         SteamMatchmaking.JoinLobby(lobbyID);
         hostButton.gameObject.SetActive(false);
         lobbiesButton.gameObject.SetActive(false);
+        quitBtn.gameObject.SetActive(false);
         lobbySceneType = LobbySceneTypesEnum.GameLobby;
     }
 

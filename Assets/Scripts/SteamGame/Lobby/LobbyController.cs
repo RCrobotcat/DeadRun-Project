@@ -204,12 +204,12 @@ public class LobbyController : Singleton<LobbyController>
         }
     }
 
-    private void ExitGameLobby()
+    public void ExitGameLobby()
     {
         // SteamLobby.Instance.ExitLobby(new CSteamID(CurrentLobbyID));
         // LocalPlayerObjectController.SendPlayerExit();
         int playerID = LocalPlayerObjectController.playerID;
-        if (playerID == 1)
+        if (playerID == 1) // Host
         {
             Debug.Log("Host is exiting lobby!");
             PlayerExitMsg msg = new PlayerExitMsg(LocalPlayerObjectController.connectionID,
@@ -217,7 +217,7 @@ public class LobbyController : Singleton<LobbyController>
             NetworkServer.SendToAll(msg);
             SteamLobby.Instance.ExitLobby(new CSteamID(SteamLobby.Instance.currentLobbyID));
         }
-        else
+        else // Lobby Member
         {
             LocalPlayerObjectController.SendPlayerExit();
         }
