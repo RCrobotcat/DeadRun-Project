@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 4836395760523236955}
   - component: {fileID: 7225028744999048480}
   m_Layer: 0
-  m_Name: PlayerRotationTrap
+  m_Name: PlaneRotationTrapController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

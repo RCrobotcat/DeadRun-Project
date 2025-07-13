@@ -102,6 +102,7 @@ public class SteamLobby : MonoBehaviour
         SteamMatchmaking.JoinLobby(callback.m_steamIDLobby);
         hostButton.gameObject.SetActive(false);
         lobbiesButton.gameObject.SetActive(false);
+        quitBtn.gameObject.SetActive(false);
         lobbySceneType = LobbySceneTypesEnum.GameLobby;
     }
 

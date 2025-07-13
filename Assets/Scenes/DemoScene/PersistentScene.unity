@@ -547,6 +547,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerListCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2956270179480387093, guid: 427afcc05184c5f4ab4721b4fab3c42f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609018619019895157, guid: 427afcc05184c5f4ab4721b4fab3c42f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609018619019895157, guid: 427afcc05184c5f4ab4721b4fab3c42f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8868324648295829391, guid: 427afcc05184c5f4ab4721b4fab3c42f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
