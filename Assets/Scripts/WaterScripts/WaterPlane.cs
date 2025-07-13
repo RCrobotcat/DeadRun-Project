@@ -38,8 +38,7 @@ namespace RCrobotcat_Water_Plane
         void Update()
         {
             UpdateWaves(); // 更新波浪数据 Update the wave data
-            UpdateDynamicWaves(); // 更新动态波浪 Update the dynamic waves
-            //UpdateGeometry(); // 更新网格对象 Update the mesh object
+            //UpdateDynamicWaves(); // 更新动态波浪 Update the dynamic waves => 高度不为0时会出现bug 暂时不加
         }
 
         private void OnDestroy()

@@ -154,7 +154,7 @@ Shader "RCrobotcat/Ocean"
             {
                 float3 output = SAMPLE_TEXTURE2D(_CameraOpaqueTexture, sampler_CameraOpaqueTexture, distortion).rgb;
                 output += ApplyCaustics(distortion);
-                output *= Absorption(saturate(depth / _DepthScale));
+                // output *= Absorption(saturate(depth / _DepthScale)); //=> 在平面水里面会出现bug, 暂时不加了
                 return output;
             }
 
@@ -225,7 +225,7 @@ Shader "RCrobotcat/Ocean"
                 sss *= Scattering(saturate(depth / _DepthScale));
 
                 // 水面颜色 = ((折射颜色,反射颜色) 按照 菲尼尔项 的插值) * 阴影 + 散射
-                half3 waterColor = (lerp(refraction, reflection + 0.05, fresnelTerm) + spec) * shadow + sss;
+                half3 waterColor = (lerp(refraction, reflection, fresnelTerm) + spec) * shadow + sss;
 
                 return half4(waterColor, 1);
             }
