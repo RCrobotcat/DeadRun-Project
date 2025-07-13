@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bf54c9015484f8095d3cd162b713c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dynamicScale: 100
-  _cascadeCount: 10
+  _dynamicScale: 50
+  _cascadeCount: 5
   _cascadeResolution: 1
   colorsPreset: {fileID: 11400000, guid: 9d96f618c49c75047aa86b2ccacfec98, type: 2}
   waterMaterial: {fileID: 2100000, guid: 55529c4b172e19545931f04ae9d59997, type: 2}

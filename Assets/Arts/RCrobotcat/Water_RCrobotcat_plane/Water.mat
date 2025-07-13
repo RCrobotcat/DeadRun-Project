@@ -33,7 +33,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DepthScale: 25
+    - _DepthScale: 800
     - _DistortionScale: 0.0001
     - _SSSBase: 0.8
     - _SSSDisplacement: 12

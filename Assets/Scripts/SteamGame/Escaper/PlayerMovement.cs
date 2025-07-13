@@ -30,6 +30,8 @@ public class PlayerMovement : NetworkBehaviour
     private bool isGrounded;
     public float jumpForce = 5f;
     public float gravityMultiplier = 2f;
+    public float jumpTimeInterval = 1f; // 跳跃间隔时间
+    private float jumpTimer = 0f;
 
     void Start()
     {
@@ -41,6 +43,8 @@ public class PlayerMovement : NetworkBehaviour
         itemsManager = FindObjectOfType<ItemsManager>();
 
         OnEquipItemChanged(null, currentEquippedItem);
+
+        jumpTimer = jumpTimeInterval;
     }
 
     void Update()
@@ -61,8 +65,10 @@ public class PlayerMovement : NetworkBehaviour
             transform.position = resPosition;
 
         // Jump
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && jumpTimer <= 0f)
             Jump();
+        if (jumpTimer > 0f)
+            jumpTimer -= Time.deltaTime;
 
         Transform cam = Camera.main.transform;
         Vector3 camForward = Vector3.Scale(cam.forward, new Vector3(1, 0, 1)).normalized;
@@ -198,6 +204,7 @@ public class PlayerMovement : NetworkBehaviour
         // 跳跃时清除当前垂直速度（防止上次跳跃的速度干扰）
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        jumpTimer = jumpTimeInterval;
     }
 
     bool CheckIfGrounded()

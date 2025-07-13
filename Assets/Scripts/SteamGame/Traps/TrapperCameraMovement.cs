@@ -46,7 +46,6 @@ public class TrapperCameraMovement : MonoBehaviour
             Vector3 delta = Input.mousePosition - lastMousePosition;
             yaw += delta.x * MouseRotateSpeed * Time.deltaTime;
             pitch -= delta.y * MouseRotateSpeed * Time.deltaTime;
-            pitch = Mathf.Clamp(pitch, -89f, 89f); // 防止上下旋转过头
 
             transform.rotation = Quaternion.Euler(pitch, yaw, 0);
             lastMousePosition = Input.mousePosition;

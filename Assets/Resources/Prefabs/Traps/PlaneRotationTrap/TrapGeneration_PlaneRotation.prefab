@@ -51,10 +51,10 @@ MonoBehaviour:
   endPlanePrefab: {fileID: 1779194011955087901, guid: 8449c37dac8b9374681d8f84f63658da, type: 3}
   tablePrefab: {fileID: 7488834685195679328, guid: d9ff31d0b68b34d45886426f6440c55e, type: 3}
   startPos: {x: 0, y: 0, z: 0}
-  endPos: {x: 100, y: 0, z: 100}
-  maxJumpDistance: 7
-  minJumpDistance: 5
-  maxSteps: 50
+  endPos: {x: 260, y: 0, z: 260}
+  maxJumpDistance: 5
+  minJumpDistance: 3
+  maxSteps: 260
   planeTransformParent: {fileID: 9074882632264181491}
 --- !u!1 &4693124304238212948
 GameObject:

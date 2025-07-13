@@ -185,9 +185,9 @@ public class LobbyController : Singleton<LobbyController>
         for (int i = 0; i < playerCount; i++)
         {
             if (i < half)
-                shuffledPlayers[i].role = PlayerRole.Trapper;
-            else
                 shuffledPlayers[i].role = PlayerRole.Escaper;
+            else
+                shuffledPlayers[i].role = PlayerRole.Trapper;
         }
 
         Debug.Log("You are now: " + LocalPlayerObjectController.role);

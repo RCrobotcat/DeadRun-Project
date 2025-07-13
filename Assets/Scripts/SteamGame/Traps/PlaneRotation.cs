@@ -72,6 +72,16 @@ public class PlaneRotation : Singleton<PlaneRotation>
             {
                 planeToRotate.transform.Rotate(Vector3.forward, -rotationSpeed * Time.deltaTime);
             }
+
+            // Reset
+            if (!isRotatingRight && !isRotatingLeft)
+            {
+                Quaternion currentRotation = planeToRotate.transform.rotation;
+                Quaternion targetRotation = Quaternion.identity;
+
+                planeToRotate.transform.rotation =
+                    Quaternion.Lerp(currentRotation, targetRotation, 0.1f);
+            }
         }
     }
 }

@@ -14,6 +14,8 @@ public class PlaneRotationTrapGeneration : MonoBehaviour
     public GameObject tablePrefab;
 
     private List<Vector2Int> mainPathPoints = new();
+    private List<Vector2Int> pathPosMustBeGenerated = new();
+    private List<Vector2Int> planesHaveBeenGenerated = new();
 
     public Vector3 startPos;
     Vector3 lastStartPos = Vector3.zero;
@@ -37,24 +39,23 @@ public class PlaneRotationTrapGeneration : MonoBehaviour
 
     public void UpdatePlaneRotationTraps()
     {
-        if (LobbyController.Instance != null && LobbyController.Instance.LocalPlayerObjectController.playerID == 1)
+        if (SceneManager.GetSceneByName("Scene_1").isLoaded)
         {
-            if (SceneManager.GetSceneByName("Scene_1").isLoaded)
+            if (lastStartPos != startPos || lastEndPos != endPos || lastMaxSteps != maxSteps
+                || lastMaxJumpDistance != maxJumpDistance || lastMinJumpDistance != minJumpDistance)
             {
-                if (lastStartPos != startPos || lastEndPos != endPos || lastMaxSteps != maxSteps
-                    || lastMaxJumpDistance != maxJumpDistance || lastMinJumpDistance != minJumpDistance)
-                {
-                    ClearAllTraps();
+                ClearAllTraps();
 
-                    lastStartPos = startPos;
-                    lastEndPos = endPos;
-                    lastMaxSteps = maxSteps;
+                endPos = new Vector3(Random.Range(150f, 300f), 0, Random.Range(150f, 300f));
 
-                    lastMaxJumpDistance = maxJumpDistance;
-                    lastMinJumpDistance = minJumpDistance;
+                lastStartPos = startPos;
+                lastEndPos = endPos;
+                lastMaxSteps = maxSteps;
 
-                    GenerateTrapsAlongPath();
-                }
+                lastMaxJumpDistance = maxJumpDistance;
+                lastMinJumpDistance = minJumpDistance;
+
+                GenerateTrapsAlongPath();
             }
         }
     }
@@ -65,6 +66,17 @@ public class PlaneRotationTrapGeneration : MonoBehaviour
 
         GetSimplePath();
 
+        foreach (Vector2Int point in pathPosMustBeGenerated)
+        {
+            int x = point.x;
+            int y = point.y;
+
+            Vector3 position = new Vector3(x, 0, y);
+            GameObject plane = Instantiate(planeRotationTrapPrefab, position, Quaternion.identity);
+            NetworkServer.Spawn(plane);
+            plane.transform.parent = planeTransformParent;
+        }
+
         foreach (Vector2Int point in mainPathPoints)
         {
             int x = point.x;
@@ -73,36 +85,34 @@ public class PlaneRotationTrapGeneration : MonoBehaviour
             if (x < 0 || x >= noiseTexture.width || y < 0 || y >= noiseTexture.height)
                 continue;
 
-            Color pixelColor = noiseTexture.GetPixel(x, y);
-            float probability = pixelColor.r;
+            Vector3 position = new Vector3(x, 0, y);
+            if (point == mainPathPoints[^1])
+            {
+                GameObject endPlane = Instantiate(endPlanePrefab, position, Quaternion.identity);
+                NetworkServer.Spawn(endPlane);
+                endPlane.name = "EndPlane";
+                endPlane.transform.parent = planeTransformParent;
+            }
+            else if (point == mainPathPoints[0])
+            {
+                GameObject startPlane = Instantiate(startPlanePrefab, position, Quaternion.identity);
+                NetworkServer.Spawn(startPlane);
+                startPlane.name = "StartPlane";
+                startPlane.transform.parent = planeTransformParent;
+            }
 
+            Color pixelColor = noiseTexture.GetPixel(x, y);
+            float probability = (pixelColor.r + pixelColor.g + pixelColor.b) / 3;
             if (Random.Range(0, 1) <= probability)
             {
-                Vector3 position = new Vector3(x, 0, y);
-                if (point == mainPathPoints[^1])
-                {
-                    GameObject endPlane = Instantiate(endPlanePrefab, position, Quaternion.identity);
-                    NetworkServer.Spawn(endPlane);
-                    endPlane.name = "EndPlane";
-                    endPlane.transform.parent = planeTransformParent;
-                }
-                else if (point == mainPathPoints[0])
-                {
-                    GameObject startPlane = Instantiate(startPlanePrefab, position, Quaternion.identity);
-                    NetworkServer.Spawn(startPlane);
-                    startPlane.name = "StartPlane";
-                    startPlane.transform.parent = planeTransformParent;
-                }
-                else
-                {
-                    GameObject plane = Instantiate(planeRotationTrapPrefab, position, Quaternion.identity);
-                    NetworkServer.Spawn(plane);
-                    plane.transform.parent = planeTransformParent;
-                }
+                GameObject plane = Instantiate(planeRotationTrapPrefab, position, Quaternion.identity);
+                NetworkServer.Spawn(plane);
+                plane.transform.parent = planeTransformParent;
+                planesHaveBeenGenerated.Add(point);
             }
         }
 
-        if (mainPathPoints.Count > 0)
+        if (planesHaveBeenGenerated.Count > 0)
         {
             Vector2Int randomPoint = mainPathPoints[Random.Range(0, mainPathPoints.Count)];
             Vector3 tablePosition = new Vector3(randomPoint.x, 0.65f, randomPoint.y);
@@ -114,6 +124,7 @@ public class PlaneRotationTrapGeneration : MonoBehaviour
 
     void GetSimplePath()
     {
+        pathPosMustBeGenerated.Clear();
         mainPathPoints.Clear();
 
         Vector2Int current = new Vector2Int(Mathf.RoundToInt(startPos.x), Mathf.RoundToInt(startPos.z));
@@ -121,7 +132,35 @@ public class PlaneRotationTrapGeneration : MonoBehaviour
 
         int stepCount = 0;
 
-        while (Vector2Int.Distance(current, end) >= 3f && stepCount < maxSteps)
+        // 生成 pathPosMustBeGenerated
+        Vector2Int mustCurrent = new Vector2Int(Mathf.RoundToInt(startPos.x), Mathf.RoundToInt(startPos.z));
+        stepCount = 0;
+        while (Vector2Int.Distance(mustCurrent, end) > minJumpDistance && stepCount < maxSteps)
+        {
+            stepCount++;
+            Vector2Int direction = end - mustCurrent;
+            float distance = direction.magnitude;
+            int jumpDistance = Mathf.Clamp((int)distance, minJumpDistance, maxJumpDistance);
+
+            Vector2Int step = Vector2Int.RoundToInt(((Vector2)direction).normalized * jumpDistance);
+
+            if (step == Vector2Int.zero)
+                step = direction;
+
+            Vector2Int next = mustCurrent + step;
+
+            if (Vector2Int.Distance(mustCurrent, next) > maxJumpDistance)
+                next = mustCurrent + Vector2Int.RoundToInt(((Vector2)direction).normalized * maxJumpDistance);
+
+            pathPosMustBeGenerated.Add(mustCurrent);
+            mustCurrent = next;
+        }
+
+        pathPosMustBeGenerated.Add(end);
+
+        stepCount = 0;
+
+        while (Vector2Int.Distance(current, end) >= minJumpDistance && stepCount < maxSteps)
         {
             stepCount++;
 
@@ -133,8 +172,8 @@ public class PlaneRotationTrapGeneration : MonoBehaviour
                 : new Vector2Int(0, (int)Mathf.Sign(direction.y));
 
             Vector2Int sideDir = mainDir.x != 0
-                ? new Vector2Int(0, Random.Range(-1, 2))
-                : new Vector2Int(Random.Range(-1, 2), 0);
+                ? new Vector2Int(0, Random.Range(-3, 3))
+                : new Vector2Int(Random.Range(-3, 3), 0);
 
             Vector2Int offset = mainDir * jumpDistance + sideDir;
 

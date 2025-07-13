@@ -11,7 +11,7 @@ public class InteractiveObject : NetworkBehaviour
 
     public Material[] originalMaterials; // 原始材质列表
     public Material[] materialsWithOutline; // 包含 Outline 的材质列表
-
+    
     private void Awake()
     {
         if (string.IsNullOrEmpty(Io_name))
