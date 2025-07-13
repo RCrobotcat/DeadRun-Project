@@ -37,27 +37,32 @@ public class PlaneRotationTrapGeneration : MonoBehaviour
 
     public void UpdatePlaneRotationTraps()
     {
-        if (SceneManager.GetSceneByName("Scene_1").isLoaded)
+        if (LobbyController.Instance != null && LobbyController.Instance.LocalPlayerObjectController.playerID == 1)
         {
-            if (lastStartPos != startPos || lastEndPos != endPos || lastMaxSteps != maxSteps
-                || lastMaxJumpDistance != maxJumpDistance || lastMinJumpDistance != minJumpDistance)
+            if (SceneManager.GetSceneByName("Scene_1").isLoaded)
             {
-                ClearAllTraps();
+                if (lastStartPos != startPos || lastEndPos != endPos || lastMaxSteps != maxSteps
+                    || lastMaxJumpDistance != maxJumpDistance || lastMinJumpDistance != minJumpDistance)
+                {
+                    ClearAllTraps();
 
-                lastStartPos = startPos;
-                lastEndPos = endPos;
-                lastMaxSteps = maxSteps;
+                    lastStartPos = startPos;
+                    lastEndPos = endPos;
+                    lastMaxSteps = maxSteps;
 
-                lastMaxJumpDistance = maxJumpDistance;
-                lastMinJumpDistance = minJumpDistance;
+                    lastMaxJumpDistance = maxJumpDistance;
+                    lastMinJumpDistance = minJumpDistance;
 
-                GenerateTrapsAlongPath();
+                    GenerateTrapsAlongPath();
+                }
             }
         }
     }
 
     void GenerateTrapsAlongPath()
     {
+        if (!NetworkServer.active) return;
+
         GetSimplePath();
 
         foreach (Vector2Int point in mainPathPoints)
