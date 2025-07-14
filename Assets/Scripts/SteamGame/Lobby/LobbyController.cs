@@ -179,6 +179,7 @@ public class LobbyController : Singleton<LobbyController>
         string scenePath = SceneManager.GetSceneByName("Scene_1").name;
         lobbyCanvas.SetActive(false);
         MyNetworkManager.HandleSendPlayerToNewScene(scenePath, "SpawnPos");
+        MyNetworkManager.SetPlayersRoles();
     }
 
     public void UpdateReadyBtn()

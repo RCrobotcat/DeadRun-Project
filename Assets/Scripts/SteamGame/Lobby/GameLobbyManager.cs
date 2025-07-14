@@ -143,13 +143,12 @@ public partial class MyNetworkManager
             });
 
             NetworkServer.AddPlayerForConnection(conn, player.gameObject);
-            SetPlayersRoles();
             if (NetworkClient.localPlayer.TryGetComponent<PlayerMovement>(out var pm))
                 pm.enabled = true;
         }
     }
 
-    void SetPlayersRoles()
+    public void SetPlayersRoles()
     {
         int playerCount = GamePlayers.Count;
         var shuffledPlayers = GamePlayers.OrderBy(_ => Random.value).ToList();
