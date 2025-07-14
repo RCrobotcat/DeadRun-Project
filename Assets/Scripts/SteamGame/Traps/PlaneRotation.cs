@@ -1,15 +1,12 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 
 public class PlaneRotation : Singleton<PlaneRotation>
 {
     public float rotationSpeed = 100f;
 
     public GameObject planeRotationCanvas;
-    public Button leftRotationBtn;
-    public Button rightRotationBtn;
+    // public Button leftRotationBtn;
+    // public Button rightRotationBtn;
 
     public GameObject trapperCamera;
 
@@ -33,34 +30,45 @@ public class PlaneRotation : Singleton<PlaneRotation>
         }
     }
 
-    private void Start()
-    {
-        var leftTrigger = leftRotationBtn.gameObject.AddComponent<EventTrigger>();
-        var rightTrigger = rightRotationBtn.gameObject.AddComponent<EventTrigger>();
-
-        var leftDown = new EventTrigger.Entry
-            { eventID = EventTriggerType.PointerDown };
-        leftDown.callback.AddListener((_) => isRotatingLeft = true);
-        leftTrigger.triggers.Add(leftDown);
-
-        var leftUp = new EventTrigger.Entry
-            { eventID = EventTriggerType.PointerUp };
-        leftUp.callback.AddListener((_) => isRotatingLeft = false);
-        leftTrigger.triggers.Add(leftUp);
-
-        var rightDown = new EventTrigger.Entry
-            { eventID = EventTriggerType.PointerDown };
-        rightDown.callback.AddListener((_) => isRotatingRight = true);
-        rightTrigger.triggers.Add(rightDown);
-
-        var rightUp = new EventTrigger.Entry
-            { eventID = EventTriggerType.PointerUp };
-        rightUp.callback.AddListener((_) => isRotatingRight = false);
-        rightTrigger.triggers.Add(rightUp);
-    }
+    // void SetupButton()
+    // {
+    //     var leftTrigger = leftRotationBtn.gameObject.AddComponent<EventTrigger>();
+    //     var rightTrigger = rightRotationBtn.gameObject.AddComponent<EventTrigger>();
+    //
+    //     var leftDown = new EventTrigger.Entry
+    //         { eventID = EventTriggerType.PointerDown };
+    //     leftDown.callback.AddListener((_) => isRotatingLeft = true);
+    //     leftTrigger.triggers.Add(leftDown);
+    //
+    //     var leftUp = new EventTrigger.Entry
+    //         { eventID = EventTriggerType.PointerUp };
+    //     leftUp.callback.AddListener((_) => isRotatingLeft = false);
+    //     leftTrigger.triggers.Add(leftUp);
+    //
+    //     var rightDown = new EventTrigger.Entry
+    //         { eventID = EventTriggerType.PointerDown };
+    //     rightDown.callback.AddListener((_) => isRotatingRight = true);
+    //     rightTrigger.triggers.Add(rightDown);
+    //
+    //     var rightUp = new EventTrigger.Entry
+    //         { eventID = EventTriggerType.PointerUp };
+    //     rightUp.callback.AddListener((_) => isRotatingRight = false);
+    //     rightTrigger.triggers.Add(rightUp);
+    // }
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Q))
+            isRotatingLeft = true;
+        if (Input.GetKeyUp(KeyCode.Q))
+            isRotatingLeft = false;
+
+        if (Input.GetKeyDown(KeyCode.E))
+            isRotatingRight = true;
+        if (Input.GetKeyUp(KeyCode.E))
+            isRotatingRight = false;
+
+
         if (planeToRotate != null)
         {
             if (isRotatingLeft)
@@ -76,12 +84,17 @@ public class PlaneRotation : Singleton<PlaneRotation>
             // Reset
             if (!isRotatingRight && !isRotatingLeft)
             {
-                Quaternion currentRotation = planeToRotate.transform.rotation;
-                Quaternion targetRotation = Quaternion.identity;
-
-                planeToRotate.transform.rotation =
-                    Quaternion.Lerp(currentRotation, targetRotation, 0.1f);
+                ResetPlane();
             }
         }
+    }
+
+    void ResetPlane()
+    {
+        Quaternion currentRotation = planeToRotate.transform.rotation;
+        Quaternion targetRotation = Quaternion.identity;
+
+        planeToRotate.transform.rotation =
+            Quaternion.Lerp(currentRotation, targetRotation, 0.1f);
     }
 }

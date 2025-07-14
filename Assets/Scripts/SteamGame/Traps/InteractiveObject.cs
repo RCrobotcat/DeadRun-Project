@@ -11,7 +11,7 @@ public class InteractiveObject : NetworkBehaviour
 
     public Material[] originalMaterials; // 原始材质列表
     public Material[] materialsWithOutline; // 包含 Outline 的材质列表
-    
+
     private void Awake()
     {
         if (string.IsNullOrEmpty(Io_name))
@@ -37,6 +37,9 @@ public class InteractiveObject : NetworkBehaviour
 
     private void Update()
     {
+        if (PlaneRotation.Instance.planeToRotate != gameObject && transform.rotation != Quaternion.identity)
+            ResetPlaneRotation();
+
         if (LobbyController.Instance != null &&
             LobbyController.Instance.LocalPlayerObjectController != null &&
             LobbyController.Instance.LocalPlayerObjectController.role == PlayerRole.Trapper)
@@ -44,6 +47,15 @@ public class InteractiveObject : NetworkBehaviour
             MouseDetect();
             MouseClick();
         }
+    }
+
+    private void ResetPlaneRotation()
+    {
+        Quaternion currentRotation = transform.rotation;
+        Quaternion targetRotation = Quaternion.identity;
+
+        transform.rotation =
+            Quaternion.Lerp(currentRotation, targetRotation, 0.1f);
     }
 
     private void MouseDetect()

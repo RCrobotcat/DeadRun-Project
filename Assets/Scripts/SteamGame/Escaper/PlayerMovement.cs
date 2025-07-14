@@ -61,8 +61,8 @@ public class PlayerMovement : NetworkBehaviour
             UpdateResPos();
         }
 
-        if (transform.position.y < -5f)
-            transform.position = resPosition;
+        if (transform.position.y < -3f)
+            transform.position = resPosition + Vector3.up * 0.5f;
 
         // Jump
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && jumpTimer <= 0f)

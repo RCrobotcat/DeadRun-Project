@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+// Perlin Noise
 public class TerrainGeneration : MonoBehaviour
 {
     public Texture2D noiseTexture;

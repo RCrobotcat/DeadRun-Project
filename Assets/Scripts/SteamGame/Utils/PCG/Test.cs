@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using Mirror;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 // Cellular Automata
-public class PlaneRotationTrapGeneration : MonoBehaviour
+public class Test : MonoBehaviour
 {
     public int width = 100; // 迷宫宽度
     private int lastWidth;
@@ -25,20 +24,27 @@ public class PlaneRotationTrapGeneration : MonoBehaviour
     {
         if (lastWidth != width || lastHeight != height)
         {
+            ClearPlanes();
             lastWidth = width;
             lastHeight = height;
             GenerateMaze();
         }
     }
 
+    private void ClearPlanes()
+    {
+        //if (!NetworkServer.active) return;
+
+        foreach (Transform child in planeTransformParent)
+            Destroy(child.gameObject);
+    }
+
     void GenerateMaze()
     {
-        if (!NetworkServer.active) return;
+        //if (!NetworkServer.active) return;
 
         mainPathPoints.Clear();
         maze = null;
-        foreach (Transform child in planeTransformParent)
-            Destroy(child.gameObject);
 
         InitializeMaze();
         RunCellularAutomata();
@@ -110,9 +116,9 @@ public class PlaneRotationTrapGeneration : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                float spacing = 3.5f;
-                float minOffset = -5f;
-                float maxOffset = 5f;
+                float spacing = 3f;
+                float minOffset = -2f;
+                float maxOffset = 2f;
 
                 if (maze[x, y] == 0)
                 {
@@ -121,8 +127,8 @@ public class PlaneRotationTrapGeneration : MonoBehaviour
                     Vector3 position = new Vector3(x * spacing + offsetX, 0, y * spacing + offsetZ);
 
                     GameObject plane = Instantiate(planeRotationTrapPrefab, position, Quaternion.identity);
-                    NetworkServer.Spawn(plane);
-                    FindObjectOfType<QuadTreeCulling>().tree.InsertData(plane.transform);
+                    //NetworkServer.Spawn(plane);
+                    //QuadTreeCulling.Instance.tree.InsertData(plane.transform);
                     plane.transform.parent = planeTransformParent;
                     mainPathPoints.Add(new Vector2Int((int)position.x, (int)position.z));
                 }
@@ -137,23 +143,25 @@ public class PlaneRotationTrapGeneration : MonoBehaviour
         // Start and End Points:
         Vector3 startPos = new Vector3(0, 0, 0);
         GameObject startPlane = Instantiate(startPlanePrefab, startPos, Quaternion.identity);
-        NetworkServer.Spawn(startPlane);
+        //NetworkServer.Spawn(startPlane);
+        //QuadTreeCulling.Instance.tree.InsertData(startPlane.transform);
         startPlane.transform.parent = planeTransformParent;
         mainPathPoints.Add(new Vector2Int(0, 0));
 
-        var randomIndex = Random.Range(25, mainPathPoints.Count + 1);
-        Vector3 endPos = new Vector3(mainPathPoints[randomIndex].x, 0, mainPathPoints[randomIndex].y);
+        Vector3 endPos = new Vector3(width - 1, 0, height - 1);
         GameObject endPlane = Instantiate(endPlanePrefab, endPos, Quaternion.identity);
-        NetworkServer.Spawn(endPlane);
+        //NetworkServer.Spawn(endPlane);
+        //QuadTreeCulling.Instance.tree.InsertData(endPlane.transform);
         endPlane.transform.parent = planeTransformParent;
         mainPathPoints.Add(new Vector2Int(width - 1, height - 1));
 
         // Table
-        var randomIndex_1 = Random.Range(10, mainPathPoints.Count + 1);
-        Vector2Int randomPoint = new Vector2Int(mainPathPoints[randomIndex_1].x, mainPathPoints[randomIndex_1].y);
+        Vector2Int randomPoint = new Vector2Int(mainPathPoints[Random.Range(0, mainPathPoints.Count + 1)].x,
+            mainPathPoints[Random.Range(0, mainPathPoints.Count + 1)].y);
         Vector3 tablePosition = new Vector3(randomPoint.x, 0.65f, randomPoint.y);
         GameObject table = Instantiate(tablePrefab, tablePosition, Quaternion.identity);
-        NetworkServer.Spawn(table);
+        //NetworkServer.Spawn(table);
+        //QuadTreeCulling.Instance.tree.InsertData(table.transform);
         table.transform.parent = planeTransformParent;
     }
 }
