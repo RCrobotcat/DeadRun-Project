@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Mirror;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -142,8 +143,23 @@ public partial class MyNetworkManager
             });
 
             NetworkServer.AddPlayerForConnection(conn, player.gameObject);
+            SetPlayersRoles();
             if (NetworkClient.localPlayer.TryGetComponent<PlayerMovement>(out var pm))
                 pm.enabled = true;
+        }
+    }
+
+    void SetPlayersRoles()
+    {
+        int playerCount = GamePlayers.Count;
+        var shuffledPlayers = GamePlayers.OrderBy(_ => Random.value).ToList();
+        int half = playerCount / 2;
+        for (int i = 0; i < playerCount; i++)
+        {
+            if (i < half)
+                shuffledPlayers[i].role = PlayerRole.Escaper;
+            else
+                shuffledPlayers[i].role = PlayerRole.Trapper;
         }
     }
 }

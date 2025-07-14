@@ -111,18 +111,17 @@ public class PlaneRotationTrapGeneration : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 float spacing = 3.5f;
-                float minOffset = -5f;
-                float maxOffset = 5f;
+                float minOffset = 5f;
+                float maxOffset = 7f;
 
                 if (maze[x, y] == 0)
                 {
-                    float offsetX = Random.Range(minOffset, maxOffset);
-                    float offsetZ = Random.Range(minOffset, maxOffset);
+                    float offsetX = Random.Range(minOffset, maxOffset) * (Random.value < 0.5f ? 1 : -1);
+                    float offsetZ = Random.Range(minOffset, maxOffset) * (Random.value < 0.5f ? 1 : -1);
                     Vector3 position = new Vector3(x * spacing + offsetX, 0, y * spacing + offsetZ);
 
                     GameObject plane = Instantiate(planeRotationTrapPrefab, position, Quaternion.identity);
                     NetworkServer.Spawn(plane);
-                    FindObjectOfType<QuadTreeCulling>().tree.InsertData(plane.transform);
                     plane.transform.parent = planeTransformParent;
                     mainPathPoints.Add(new Vector2Int((int)position.x, (int)position.z));
                 }

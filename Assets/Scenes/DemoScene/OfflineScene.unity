@@ -124,55 +124,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6736573682889395796, guid: 06b6b732b4039684c867eaaf4bb0eb92, type: 3}
   m_PrefabInstance: {fileID: 5161994887664101058}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &192801135
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 192801136}
-  - component: {fileID: 192801137}
-  m_Layer: 0
-  m_Name: FrustumCulling
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &192801136
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 192801135}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 867354023}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &192801137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 192801135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9e1b2209ff84bdea9a1e4a7c3a29658, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  n: 150
-  mainBound:
-    m_Center: {x: 75, y: 0, z: 75}
-    m_Extent: {x: 0, y: 0, z: 0}
-  cam: {fileID: 330585545}
 --- !u!224 &205272791 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9171162326153939171, guid: 06b6b732b4039684c867eaaf4bb0eb92, type: 3}
@@ -914,7 +865,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 330585546}
-  - {fileID: 192801136}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &867354024

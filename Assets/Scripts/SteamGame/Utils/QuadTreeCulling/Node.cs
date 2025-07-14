@@ -100,8 +100,9 @@ public class Node
 
         for (int i = 0; i < datas.Count; i++)
         {
-            datas[i].gameObject.SetActive(GeometryUtility.TestPlanesAABB(planes, bound));
-            datas[i].gameObject.GetComponent<MeshRenderer>().enabled = datas[i].gameObject.activeSelf;
+            bool active = GeometryUtility.TestPlanesAABB(planes, bound);
+            datas[i].gameObject.SetActive(active);
+            datas[i].GetComponent<Renderer>().enabled = active;
         }
     }
 }

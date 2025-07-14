@@ -1,4 +1,5 @@
-﻿using Mirror;
+﻿using System;
+using Mirror;
 using UnityEngine;
 
 public class InteractiveObject : NetworkBehaviour
@@ -18,7 +19,6 @@ public class InteractiveObject : NetworkBehaviour
         {
             Io_name = this.name;
         }
-
 
         Renderer renderer = GetComponent<Renderer>();
 

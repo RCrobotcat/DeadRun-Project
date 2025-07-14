@@ -178,21 +178,6 @@ public class LobbyController : Singleton<LobbyController>
     {
         string scenePath = SceneManager.GetSceneByName("Scene_1").name;
         lobbyCanvas.SetActive(false);
-
-        int playerCount = MyNetworkManager.GamePlayers.Count;
-        var shuffledPlayers = MyNetworkManager.GamePlayers.OrderBy(_ => Random.value).ToList();
-        int half = playerCount / 2;
-        for (int i = 0; i < playerCount; i++)
-        {
-            if (i < half)
-                shuffledPlayers[i].role = PlayerRole.Escaper;
-            else
-                shuffledPlayers[i].role = PlayerRole.Trapper;
-        }
-
-        Debug.Log("You are now: " + LocalPlayerObjectController.role);
-        // TODO: add UI to show player roles
-
         MyNetworkManager.HandleSendPlayerToNewScene(scenePath, "SpawnPos");
     }
 

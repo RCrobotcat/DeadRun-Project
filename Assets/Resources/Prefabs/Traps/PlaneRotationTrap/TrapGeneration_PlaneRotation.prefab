@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc7662a824d465383c1b5580c907d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 40
-  height: 40
+  width: 30
+  height: 30
   planeRotationTrapPrefab: {fileID: 6134106947719216321, guid: ef38c5d069dfc6d46a210115c7bae228, type: 3}
   startPlanePrefab: {fileID: 6493595029224243830, guid: cbc3629001285f9458beac6e2b11026a, type: 3}
   endPlanePrefab: {fileID: 1779194011955087901, guid: 8449c37dac8b9374681d8f84f63658da, type: 3}
