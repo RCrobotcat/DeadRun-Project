@@ -2515,6 +2515,8 @@ MonoBehaviour:
   moveSpeed: 6
   turnSmoothTime: 0.1
   currentEquippedItem: 
+  _animator: {fileID: 2434720585710299854}
+  equipItemSlot: {fileID: 8249234083593266622}
   jumpForce: 5
   gravityMultiplier: 2
   jumpTimeInterval: 0.8

@@ -18,6 +18,7 @@ public class PlaneRotationTrapGeneration : MonoBehaviour
 
     private List<Vector2Int> mainPathPoints = new();
     private int[,] maze; // 0 = 路径，1 = 墙壁
+    private int[,] newMap;
 
     public Transform planeTransformParent;
 
@@ -53,55 +54,81 @@ public class PlaneRotationTrapGeneration : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                maze[x, y] = Random.Range(0f, 1f) < 0.5f ? 1 : 0;
+                maze[x, y] = 1;
+                var r = LCGRandom(CantorPair(x, y)) % 50 + 50;
+                if (r < 55)
+                    maze[x, y] = 0;
+                else
+                    maze[x, y] = 1;
             }
         }
     }
+
+    #region LCG Random Number Generator
+
+    // 线性同余生成器 (LCG) 随机数生成器
+    // out = (in * a + c) mod m
+    public static int LCGRandom(int v)
+    {
+        return (1140671485 * v + 12820163) % 16777216;
+    }
+
+    // 康托配对函数
+    public static int CantorPair(int a, int b)
+    {
+        return (a + b) * (a + b + 1) / 2 + b;
+    }
+
+    #endregion
 
     void RunCellularAutomata()
     {
+        newMap = new int[width, height];
+
         // Cellular Automata:
-        // 一个活细胞有两个或三个邻居时继续存活;
-        // 一个死细胞有三个邻居时变为活细胞;
-        // 其他情况下, 细胞保持当前状态不变;
-        int iterations = 5;
-        for (int i = 0; i < iterations; i++)
+        // 遍历整片地图,如果以当前遍历点为中心周围9个方格内执行如下判断:
+        // 如果中心点为墙, 判断周围8个点是否存在4个及以上的墙壁,
+        // 如果满足则中心为墙壁, 否则为空洞;
+        // 如果中心点为空洞, 判断周围8个点是否存在5个及以上的墙壁;
+        // 如果存在则中心为墙壁, 否则为空洞.
+        for (int x = 1; x < width - 1; x++)
         {
-            for (int x = 0; x < width; x++)
+            for (int y = 1; y < height - 1; y++)
             {
-                for (int y = 0; y < height; y++)
+                var wallCount = 0;
+                for (int i = x - 1; i <= x + 1; i++)
                 {
-                    int neighbors = CountAliveNeighbors(x, y);
-                    if (neighbors > 4) // 4个以上邻居为墙，保持墙壁 => 活细胞
-                        maze[x, y] = 1;
-                    else if (neighbors < 4) // 4个以下邻居为墙，变为路径 => 死细胞
-                        maze[x, y] = 0;
+                    for (int j = y - 1; j <= y + 1; j++)
+                    {
+                        if (maze[i, j] == 1)
+                            wallCount++;
+                    }
                 }
-            }
-        }
-    }
 
-    int CountAliveNeighbors(int x, int y)
-    {
-        int aliveCount = 0;
-
-        for (int dx = -1; dx <= 1; dx++)
-        {
-            for (int dy = -1; dy <= 1; dy++)
-            {
-                if (dx == 0 && dy == 0) continue;
-
-                int nx = x + dx;
-                int ny = y + dy;
-
-                if (nx >= 0 && nx < width && ny >= 0 && ny < height)
+                if (maze[x, y] == 1)
                 {
-                    aliveCount += maze[nx, ny]; // 墙壁 = 1
+                    if (wallCount > 4)
+                        newMap[x, y] = 1;
+                    else
+                        newMap[x, y] = 0;
+                }
+                else
+                {
+                    if (wallCount > 4)
+                        newMap[x, y] = 1;
+                    else
+                        newMap[x, y] = 0;
                 }
             }
         }
 
-        return aliveCount;
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                maze[x, y] = newMap[x, y];
+            }
+        }
     }
 
     void PlacePlanesOnMaze()
@@ -111,8 +138,8 @@ public class PlaneRotationTrapGeneration : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 float spacing = 3.5f;
-                float minOffset = 5f;
-                float maxOffset = 7f;
+                float minOffset = 0.5f;
+                float maxOffset = 1f;
 
                 if (maze[x, y] == 0)
                 {

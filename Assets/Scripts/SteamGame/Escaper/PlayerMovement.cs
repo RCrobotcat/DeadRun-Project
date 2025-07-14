@@ -24,7 +24,9 @@ public class PlayerMovement : NetworkBehaviour
 
     ItemsManager itemsManager;
 
-    private Animator _animator;
+    public Animator _animator;
+
+    public Transform equipItemSlot;
 
     // Jumping and Gravity
     private bool isGrounded;
@@ -38,7 +40,6 @@ public class PlayerMovement : NetworkBehaviour
         rb = GetComponent<Rigidbody>();
         // 锁定旋转 X、Z，避免物理碰撞时翻滚
         rb.freezeRotation = true;
-        _animator = GetComponent<Animator>();
 
         itemsManager = FindObjectOfType<ItemsManager>();
 
@@ -67,6 +68,7 @@ public class PlayerMovement : NetworkBehaviour
         // Jump
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && jumpTimer <= 0f)
             Jump();
+
         if (jumpTimer > 0f)
             jumpTimer -= Time.deltaTime;
 
@@ -97,6 +99,8 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         _animator.SetFloat("Speed", horizontalVelocity.magnitude);
+        _animator.SetBool("Grounded", isGrounded);
+        _animator.SetFloat("FallSpeed", rb.linearVelocity.y);
 
         Collider[] objectsDetected;
         LayerMask interactableMask = LayerMask.GetMask("Interactable");
@@ -245,15 +249,14 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (itemsManager != null)
         {
-            foreach (Transform item in transform.Find("EquippedItem").transform)
+            foreach (Transform item in equipItemSlot)
             {
                 Destroy(item.gameObject);
             }
 
             if (newItem != "")
             {
-                Transform newObj = Instantiate(itemsManager.items.transform.Find(newItem),
-                    transform.Find("EquippedItem").transform);
+                Transform newObj = Instantiate(itemsManager.items.transform.Find(newItem), equipItemSlot);
                 newObj.transform.name = newItem;
                 newObj.gameObject.SetActive(true);
             }

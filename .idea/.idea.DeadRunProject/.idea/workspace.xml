@@ -4,30 +4,94 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7061f1fe-81be-4fca-999e-11768f455133" name="Changes" comment="Fixed plane traps synchronization bugs">
+    <list default="true" id="7061f1fe-81be-4fca-999e-11768f455133" name="Changes" comment="modified">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Arts/RCrobotcat/Water_RCrobotcat_plane/PlaneWaves.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Arts/RCrobotcat/Water_RCrobotcat_plane/PlaneWaves.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Arts/RCrobotcat/Water_RCrobotcat_plane/Water.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Arts/RCrobotcat/Water_RCrobotcat_plane/Water.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/CharacterSelection/Materials/MaterialRed.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/CharacterSelection/Materials/MaterialRed.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/ESC.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/ESC.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Arts/Animators/Player.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Arts/Animators/Player.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AssetPacks/SkySeries Freebie/ExampleScenes/SceneObjects/2_10.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AssetPacks/SkySeries Freebie/ExampleScenes/SceneObjects/2_10.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AssetPacks/SkySeries Freebie/ExampleScenes/SceneObjects/4_10.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AssetPacks/SkySeries Freebie/ExampleScenes/SceneObjects/4_10.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AssetPacks/SkySeries Freebie/ExampleScenes/SceneObjects/6_10.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AssetPacks/SkySeries Freebie/ExampleScenes/SceneObjects/6_10.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AssetPacks/SkySeries Freebie/ExampleScenes/SceneObjects/8_10.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AssetPacks/SkySeries Freebie/ExampleScenes/SceneObjects/8_10.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AssetPacks/SkySeries Freebie/ExampleScenes/SceneObjects/Full.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AssetPacks/SkySeries Freebie/ExampleScenes/SceneObjects/Full.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Components/Profiling/Prefabs/BandwidthGraph.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Components/Profiling/Prefabs/BandwidthGraph.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Components/Profiling/Prefabs/FPSMinMaxAvg.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Components/Profiling/Prefabs/FPSMinMaxAvg.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Components/Profiling/Prefabs/GraphCanvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Components/Profiling/Prefabs/GraphCanvas.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Components/Profiling/Prefabs/NetworkGraph.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Components/Profiling/Prefabs/NetworkGraph.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Components/Profiling/Prefabs/PingGraph.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Components/Profiling/Prefabs/PingGraph.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/AdditiveLevels/Prefabs/PlayerReliable.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/AdditiveLevels/Prefabs/PlayerReliable.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/AdditiveLevels/Prefabs/PlayerUnreliable.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/AdditiveLevels/Prefabs/PlayerUnreliable.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/AdditiveLevels/Scenes/MirrorAdditiveLevelsOffline.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/AdditiveLevels/Scenes/MirrorAdditiveLevelsOffline.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/AdditiveScenes/Prefabs/PlayerReliable.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/AdditiveScenes/Prefabs/PlayerReliable.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/AdditiveScenes/Prefabs/PlayerUnreliable.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/AdditiveScenes/Prefabs/PlayerUnreliable.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/AdditiveScenes/Prefabs/Tank.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/AdditiveScenes/Prefabs/Tank.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/AdditiveScenes/Scenes/MirrorAdditiveScenesMain.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/AdditiveScenes/Scenes/MirrorAdditiveScenesMain.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/AutoLANClientController/MirrorAutoLANClientController.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/AutoLANClientController/MirrorAutoLANClientController.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/Basic/Prefabs/PlayerUI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/Basic/Prefabs/PlayerUI.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/Basic/Scenes/MirrorBasic.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/Basic/Scenes/MirrorBasic.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/BenchmarkStinkySteak/Dependencies/netcode-benchmarker-util/Runtime/Prefabs/BaseGUIGame.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/BenchmarkStinkySteak/Dependencies/netcode-benchmarker-util/Runtime/Prefabs/BaseGUIGame.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/BenchmarkStinkySteak/Prefabs/GUIGame.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/BenchmarkStinkySteak/Prefabs/GUIGame.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/Billiards/Ball/White.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/Billiards/Ball/White.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/Billiards/MirrorBilliards.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/Billiards/MirrorBilliards.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/BilliardsPredicted/Ball/WhitePredicted.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/BilliardsPredicted/Ball/WhitePredicted.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/BilliardsPredicted/MirrorBilliardsPredicted.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/BilliardsPredicted/MirrorBilliardsPredicted.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/CharacterSelection/MirrorCharacterSelection.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/CharacterSelection/MirrorCharacterSelection.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/CharacterSelection/MirrorCharacterSelectionNoCharacter.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/CharacterSelection/MirrorCharacterSelectionNoCharacter.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/CharacterSelection/MirrorCharacterSelectionPreScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/CharacterSelection/MirrorCharacterSelectionPreScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/CharacterSelection/Prefabs/CharacterSelection.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/CharacterSelection/Prefabs/CharacterSelection.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/Chat/Scenes/MirrorChat.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/Chat/Scenes/MirrorChat.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/CouchCoop/MirrorCouchCoop.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/CouchCoop/MirrorCouchCoop.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/CouchCoop/Prefabs/CouchPlayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/CouchCoop/Prefabs/CouchPlayer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/Discovery/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/Discovery/Prefabs/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/EdgegapLobby/EdgegapLobbyTanks.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/EdgegapLobby/EdgegapLobbyTanks.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/EdgegapLobby/Prefabs/LobbyUI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/EdgegapLobby/Prefabs/LobbyUI.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/EdgegapLobby/Prefabs/LobbyUIEntry.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/EdgegapLobby/Prefabs/LobbyUIEntry.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/MultipleAdditiveScenes/Prefabs/PlayerReliable.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/MultipleAdditiveScenes/Prefabs/PlayerReliable.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/MultipleAdditiveScenes/Prefabs/PlayerUnreliable.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/MultipleAdditiveScenes/Prefabs/PlayerUnreliable.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/MultipleMatches/Prefabs/CellGUI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/MultipleMatches/Prefabs/CellGUI.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/MultipleMatches/Prefabs/MatchController.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/MultipleMatches/Prefabs/MatchController.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/MultipleMatches/Prefabs/MatchGUI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/MultipleMatches/Prefabs/MatchGUI.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/MultipleMatches/Prefabs/PlayerGUI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/MultipleMatches/Prefabs/PlayerGUI.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/MultipleMatches/Scenes/MirrorMultipleMatches.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/MultipleMatches/Scenes/MirrorMultipleMatches.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/PlayerTest/PlayerHybrid.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/PlayerTest/PlayerHybrid.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/PlayerTest/PlayerRBHybrid.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/PlayerTest/PlayerRBHybrid.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/PlayerTest/PlayerRBReliable.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/PlayerTest/PlayerRBReliable.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/PlayerTest/PlayerRBUnreliable.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/PlayerTest/PlayerRBUnreliable.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/PlayerTest/PlayerReliable.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/PlayerTest/PlayerReliable.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/PlayerTest/PlayerTestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/PlayerTest/PlayerTestScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/PlayerTest/PlayerUnreliable.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/PlayerTest/PlayerUnreliable.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/PlayerTest/TankHybrid.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/PlayerTest/TankHybrid.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/PlayerTest/TankReliable.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/PlayerTest/TankReliable.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/PlayerTest/TankUnreliable.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/PlayerTest/TankUnreliable.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/Pong/Prefabs/Ball.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/Pong/Prefabs/Ball.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/Pong/Prefabs/Racket.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/Pong/Prefabs/Racket.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/Pong/Scenes/MirrorPong.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/Pong/Scenes/MirrorPong.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/Room/Prefabs/GamePlayerReliable.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/Room/Prefabs/GamePlayerReliable.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/Room/Prefabs/GamePlayerUnreliable.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/Room/Prefabs/GamePlayerUnreliable.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/TankTheftAuto/MirrorTankTheftAuto.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/TankTheftAuto/MirrorTankTheftAuto.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/TankTheftAuto/Prefabs/PlayerReliable.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/TankTheftAuto/Prefabs/PlayerReliable.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/TankTheftAuto/Prefabs/PlayerUnreliable.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/TankTheftAuto/Prefabs/PlayerUnreliable.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/TankTheftAuto/Prefabs/TankReliable.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/TankTheftAuto/Prefabs/TankReliable.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/TankTheftAuto/Prefabs/TankUnreliable.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/TankTheftAuto/Prefabs/TankUnreliable.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/Tanks/Prefabs/Tank.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/Tanks/Prefabs/Tank.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/TopDownShooter/Scenes/MirrorTopDownShooter.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/TopDownShooter/Scenes/MirrorTopDownShooter.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/_Common/Controllers/FlyerController/FlyerControllerUI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/_Common/Controllers/FlyerController/FlyerControllerUI.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/_Common/Controllers/PlayerController/PlayerControllerUI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/_Common/Controllers/PlayerController/PlayerControllerUI.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/_Common/Controllers/PlayerControllerRB/PlayerControllerRBUI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/_Common/Controllers/PlayerControllerRB/PlayerControllerRBUI.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/_Common/Controllers/TankController/TankControllerUI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/_Common/Controllers/TankController/TankControllerUI.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/_Common/Controllers/TankController/TurretUI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/_Common/Controllers/TankController/TurretUI.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/_Common/Scripts/CanvasNetworkManagerHUD/CanvasNetworkManagerHUD.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/_Common/Scripts/CanvasNetworkManagerHUD/CanvasNetworkManagerHUD.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/_Common/TankModel/BasePrefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/_Common/TankModel/BasePrefab.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Materials/PlaneMat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Materials/PlaneMat.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/NetworkManager_Steam.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/NetworkManager_Steam.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player_Dog.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player_Dog.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Traps/PlaneRotationTrap/PlaneCubeToRotate.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Traps/PlaneRotationTrap/PlaneCubeToRotate.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Traps/PlaneRotationTrap/PlaneRotationTrapController.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Traps/PlaneRotationTrap/PlaneRotationTrapController.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Traps/PlaneRotationTrap/TrapGeneration_PlaneRotation.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Traps/PlaneRotationTrap/TrapGeneration_PlaneRotation.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Water/TerrainWithDangerousWater.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Water/TerrainWithDangerousWater.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/DemoScene/OfflineScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DemoScene/OfflineScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/DemoScene/PersistentScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DemoScene/PersistentScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/DemoScene/Scene_1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DemoScene/Scene_1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/DemoScene/Scene_2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DemoScene/Scene_2.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestScene/TestScene_PCG_Terrain_Water.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestScene/TestScene_PCG_Terrain_Water.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestScene/TestScene_PCG_PlaneRotationTrap.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestScene/TestScene_PCG_PlaneRotationTrap.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Escaper/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Escaper/PlayerMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Lobby/LobbyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Lobby/LobbyController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Traps/InteractionManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Traps/InteractionManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Traps/InteractiveObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Traps/InteractiveObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Traps/PlaneRotation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Traps/PlaneRotation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Traps/TrapperCameraMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Traps/TrapperCameraMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Lobby/GameLobbyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Lobby/GameLobbyManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/PCG/PlaneRotationTrapGeneration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/PCG/PlaneRotationTrapGeneration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,7 +240,9 @@
       <workItem from="1752379268415" duration="1676000" />
       <workItem from="1752381555092" duration="4213000" />
       <workItem from="1752387649560" duration="14398000" />
-      <workItem from="1752415776530" duration="9800000" />
+      <workItem from="1752415776530" duration="10715000" />
+      <workItem from="1752480578309" duration="11204000" />
+      <workItem from="1752505041410" duration="9046000" />
     </task>
     <task id="LOCAL-00001" summary="fixed exit lobby bugs">
       <option name="closed" value="true" />
@@ -226,7 +292,23 @@
       <option name="project" value="LOCAL" />
       <updated>1752406172706</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Fixed plane traps synchronization bugs_2">
+      <option name="closed" value="true" />
+      <created>1752426314979</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1752426314979</updated>
+    </task>
+    <task id="LOCAL-00008" summary="modified">
+      <option name="closed" value="true" />
+      <created>1752426354757</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1752426354757</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -270,6 +352,8 @@
     <MESSAGE value="Fixed bugs" />
     <MESSAGE value="Added plane PCG logic" />
     <MESSAGE value="Fixed plane traps synchronization bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed plane traps synchronization bugs" />
+    <MESSAGE value="Fixed plane traps synchronization bugs_2" />
+    <MESSAGE value="modified" />
+    <option name="LAST_COMMIT_MESSAGE" value="modified" />
   </component>
 </project>
