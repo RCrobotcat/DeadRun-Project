@@ -91,13 +91,13 @@ public class GunShooting : MonoBehaviour
 
         bullet.SetDirection(ray.direction + Vector3.up * 0.05f);
 
-        // Client
-        player.GetComponent<PlayerMovement>()
-            .CmdSpawnBullet(shootingPoint.position, ray.direction + Vector3.up * 0.05f);
-
         // Server
-        player.GetComponent<PlayerMovement>()
-            .RPCSpawnBulletOfServer(shootingPoint.position, ray.direction + Vector3.up * 0.05f);
+        if (NetworkServer.active)
+            player.GetComponent<PlayerMovement>()
+                .RPCSpawnBulletOfServer(shootingPoint.position, ray.direction + Vector3.up * 0.05f);
+        else // Client
+            player.GetComponent<PlayerMovement>()
+                .CmdSpawnBullet(shootingPoint.position, ray.direction + Vector3.up * 0.05f);
 
         shootingFire.GetComponent<ParticleSystem>()
             .Spawn(shootingFirePoint, shootingFirePoint.localPosition, Quaternion.identity);
