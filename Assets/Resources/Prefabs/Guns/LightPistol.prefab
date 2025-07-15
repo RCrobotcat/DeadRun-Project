@@ -119,6 +119,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2868960251185268052}
   - component: {fileID: 442269140455052908}
+  - component: {fileID: 4091192147881859157}
   m_Layer: 6
   m_Name: LightPistol
   m_TagString: Gun
@@ -167,6 +168,23 @@ MonoBehaviour:
   player: {fileID: 0}
   normalFOV: 70
   zoomedFOV: 40
+--- !u!114 &4091192147881859157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625171806000200105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  clientAuthority: 0
+  animator: {fileID: 6918382380163880727}
 --- !u!1 &5065976842220835145
 GameObject:
   m_ObjectHideFlags: 0

@@ -74,7 +74,10 @@ public class GunShooting : MonoBehaviour
         Bullet bullet = Instantiate(bulletPrefab, shootingPoint.position, Quaternion.identity,
                 gameObject.scene.GetRootGameObjects()[0].transform)
             .GetComponent<Bullet>();
-        NetworkServer.Spawn(bullet.gameObject);
+        
+        if (NetworkServer.active) // Host
+            NetworkServer.Spawn(bullet.gameObject);
+        
         bullet.SetDirection(ray.direction + Vector3.up * 0.05f);
 
         shootingFire.GetComponent<ParticleSystem>()

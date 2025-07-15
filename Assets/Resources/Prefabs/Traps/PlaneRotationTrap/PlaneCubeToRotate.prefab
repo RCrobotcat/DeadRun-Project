@@ -43,8 +43,8 @@ GameObject:
   - component: {fileID: 3608457643206773420}
   - component: {fileID: 8888177908970678013}
   - component: {fileID: 6385113037754416303}
-  - component: {fileID: 2171245305196999758}
   - component: {fileID: 4615257855687334011}
+  - component: {fileID: 7744985113703289850}
   - component: {fileID: 5823086994501683758}
   m_Layer: 3
   m_Name: PlaneCubeToRotate
@@ -145,7 +145,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2171245305196999758
+--- !u!114 &4615257855687334011
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -154,7 +154,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 6134106947719216321}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a553cb17010b2403e8523b558bffbc14, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 336541602
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
+--- !u!114 &7744985113703289850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6134106947719216321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 1
@@ -174,28 +191,11 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  bufferResetMultiplier: 3
+  onlySyncOnChangeCorrectionMultiplier: 2
   useFixedUpdate: 0
-  positionSensitivity: 0.01
   rotationSensitivity: 0.01
-  scaleSensitivity: 0.01
---- !u!114 &4615257855687334011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6134106947719216321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  _assetId: 336541602
-  serverOnly: 0
-  visibility: 0
-  hasSpawned: 0
+  positionPrecision: 0.01
+  scalePrecision: 0.01
 --- !u!114 &5823086994501683758
 MonoBehaviour:
   m_ObjectHideFlags: 0
