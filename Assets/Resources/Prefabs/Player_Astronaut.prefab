@@ -194,7 +194,6 @@ GameObject:
   m_Component:
   - component: {fileID: 262580152168443196}
   - component: {fileID: 2474453205690138116}
-  - component: {fileID: 2067876743436431421}
   m_Layer: 6
   m_Name: LightPistol
   m_TagString: Gun
@@ -243,23 +242,6 @@ MonoBehaviour:
   player: {fileID: 4469674561755831084}
   normalFOV: 70
   zoomedFOV: 40
---- !u!114 &2067876743436431421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3231694565609525697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 1
-  syncMode: 0
-  syncInterval: 0
-  clientAuthority: 0
-  animator: {fileID: 4933499305105375103}
 --- !u!1 &4979368475730002152
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,7 +497,7 @@ GameObject:
   - component: {fileID: 8006116282596168099}
   - component: {fileID: 3117749976821271133}
   - component: {fileID: 3747450267070874134}
-  - component: {fileID: 7270553142022087508}
+  - component: {fileID: 5863589837388468427}
   - component: {fileID: 7684459242103810418}
   - component: {fileID: 4636597238382713328}
   m_Layer: 0
@@ -628,7 +610,7 @@ MonoBehaviour:
   syncInterval: 0
   clientAuthority: 0
   animator: {fileID: 1971487635109874076}
---- !u!114 &7270553142022087508
+--- !u!114 &5863589837388468427
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -637,7 +619,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9019578353437237485}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a553cb17010b2403e8523b558bffbc14, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 1
@@ -657,11 +639,11 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  bufferResetMultiplier: 3
+  onlySyncOnChangeCorrectionMultiplier: 2
   useFixedUpdate: 0
-  positionSensitivity: 0.01
   rotationSensitivity: 0.01
-  scaleSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
 --- !u!114 &7684459242103810418
 MonoBehaviour:
   m_ObjectHideFlags: 0
