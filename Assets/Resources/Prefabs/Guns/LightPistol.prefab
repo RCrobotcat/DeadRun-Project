@@ -165,8 +165,8 @@ MonoBehaviour:
   playerCamera: {fileID: 0}
   crosshair: {fileID: 0}
   player: {fileID: 0}
-  normalFOV: 80
-  zoomedFOV: 50
+  normalFOV: 70
+  zoomedFOV: 40
 --- !u!1 &5065976842220835145
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startUpPools:
-  - size: 100
+  - size: 10
     prefab: {fileID: 8838183399588844931, guid: e58b19f90f2a23740b7164a25e6b7411, type: 3}
-  - size: 100
-    prefab: {fileID: 0}
+  - size: 10
+    prefab: {fileID: 7759854869545606040, guid: 64b842f600b97a549916cb54e7a3be2e, type: 3}

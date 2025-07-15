@@ -1057,6 +1057,10 @@ PrefabInstance:
       propertyPath: fadeinOutScreen
       value: 
       objectReference: {fileID: 1440615576}
+    - target: {fileID: 8955021702242725552, guid: 014673285ee4d9049afc2db103b12566, type: 3}
+      propertyPath: spawnPrefabs.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

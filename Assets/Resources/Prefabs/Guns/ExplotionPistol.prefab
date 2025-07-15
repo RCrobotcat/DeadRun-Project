@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7759854869545606042}
   - component: {fileID: 7759854869545606043}
   - component: {fileID: 4913493103604037310}
+  - component: {fileID: 4768826620981353964}
   m_Layer: 0
   m_Name: ExplotionPistol
   m_TagString: Untagged
@@ -4905,3 +4906,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recycleTime: 0.5
+--- !u!114 &4768826620981353964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7759854869545606040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 1687811889
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0

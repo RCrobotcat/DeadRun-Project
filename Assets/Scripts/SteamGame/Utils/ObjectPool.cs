@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
 public sealed class ObjectPool : MonoBehaviour
@@ -55,7 +56,7 @@ public sealed class ObjectPool : MonoBehaviour
         {
             var list = new List<GameObject>();
             Instance.pooledGameObjects.Add(prefab, list);
-            
+
             if (initialPoolSize > 0)
             {
                 bool active = prefab.activeSelf;
@@ -65,6 +66,7 @@ public sealed class ObjectPool : MonoBehaviour
                 {
                     var obj = (GameObject)Instantiate(prefab);
                     obj.transform.SetParent(parent);
+                    NetworkServer.Spawn(obj);
                     list.Add(obj);
                 }
 
@@ -72,7 +74,7 @@ public sealed class ObjectPool : MonoBehaviour
             }
         }
     }
-    
+
     public static void CreateStartUpPools()
     {
         if (!Instance.startUpPoolsCreated)
@@ -88,7 +90,7 @@ public sealed class ObjectPool : MonoBehaviour
             }
         }
     }
-    
+
     public static GameObject Spawn(GameObject prefab, Transform parent, Vector3 position, Quaternion rotation)
     {
         List<GameObject> list;
@@ -117,13 +119,14 @@ public sealed class ObjectPool : MonoBehaviour
                     return obj;
                 }
             }
-            
+
             obj = (GameObject)Instantiate(prefab);
             trans = obj.transform;
             trans.parent = parent;
             trans.localPosition = position;
             trans.localRotation = rotation;
             Instance.spawnedGameObjects.Add(obj, prefab);
+            NetworkServer.Spawn(obj);
             return obj;
         }
         else
@@ -133,10 +136,11 @@ public sealed class ObjectPool : MonoBehaviour
             trans.parent = parent;
             trans.localPosition = position;
             trans.localRotation = rotation;
+            NetworkServer.Spawn(obj);
             return obj;
         }
     }
-    
+
     static void Recycle(GameObject obj, GameObject prefab)
     {
         Instance.pooledGameObjects[prefab].Add(obj);
