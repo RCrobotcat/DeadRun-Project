@@ -82,21 +82,22 @@ public class GunShooting : MonoBehaviour
                 gameObject.scene.GetRootGameObjects()[0].transform)
             .GetComponent<Bullet>();
 
-        if (NetworkServer.active) // Host
-        {
-            NetworkServer.Spawn(bullet.gameObject);
-            player.GetComponent<PlayerMovement>()
-                .CmdSpawnFireEffect(shootingFirePoint, shootingFirePoint.position);
-        }
+        // if (NetworkServer.active) // Host
+        // {
+        //     NetworkServer.Spawn(bullet.gameObject);
+        //     player.GetComponent<PlayerMovement>()
+        //         .CmdSpawnFireEffect(shootingFirePoint, shootingFirePoint.position);
+        // }
 
         bullet.SetDirection(ray.direction + Vector3.up * 0.05f);
 
-        if (!NetworkServer.active)
-        {
-            // Client
-            player.GetComponent<PlayerMovement>()
-                .CmdSpawnBullet(shootingPoint.position, ray.direction + Vector3.up * 0.05f);
-        }
+        // Client
+        player.GetComponent<PlayerMovement>()
+            .CmdSpawnBullet(shootingPoint.position, ray.direction + Vector3.up * 0.05f);
+
+        // Server
+        player.GetComponent<PlayerMovement>()
+            .RPCSpawnBulletOfServer(shootingPoint.position, ray.direction + Vector3.up * 0.05f);
 
         shootingFire.GetComponent<ParticleSystem>()
             .Spawn(shootingFirePoint, shootingFirePoint.localPosition, Quaternion.identity);
