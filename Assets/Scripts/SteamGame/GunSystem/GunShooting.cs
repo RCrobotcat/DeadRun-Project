@@ -91,6 +91,10 @@ public class GunShooting : MonoBehaviour
             .Spawn(shootingFirePoint, shootingFirePoint.localPosition, Quaternion.identity);
 
         _animator.SetTrigger("Shoot");
+
+        if (NetworkClient.isConnected)
+            player.GetComponent<PlayerMovement>()
+                .CmdSpawnBullet(shootingPoint.position, ray.direction + Vector3.up * 0.05f);
     }
 
     void UpdateRotation()

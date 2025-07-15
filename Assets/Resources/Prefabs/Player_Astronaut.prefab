@@ -668,6 +668,7 @@ MonoBehaviour:
   gravityMultiplier: 2
   jumpTimeInterval: 0.8
   isAiming: 0
+  gun: {fileID: 2474453205690138116}
 --- !u!114 &4636597238382713328
 MonoBehaviour:
   m_ObjectHideFlags: 0

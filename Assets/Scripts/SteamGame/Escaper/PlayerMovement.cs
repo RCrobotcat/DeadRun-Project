@@ -36,6 +36,7 @@ public class PlayerMovement : NetworkBehaviour
     private float jumpTimer = 0f;
 
     [HideInInspector] public bool isAiming = false;
+    public GunShooting gun;
 
     void Start()
     {
@@ -279,5 +280,13 @@ public class PlayerMovement : NetworkBehaviour
                 newObj.gameObject.SetActive(true);
             }
         }
+    }
+
+    [Command]
+    public void CmdSpawnBullet(Vector3 position, Vector3 direction)
+    {
+        GameObject bullet = Instantiate(gun.bulletPrefab, position, Quaternion.identity);
+        bullet.GetComponent<Bullet>().SetDirection(direction);
+        NetworkServer.Spawn(bullet);
     }
 }
