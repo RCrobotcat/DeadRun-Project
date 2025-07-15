@@ -100,7 +100,14 @@ public class PlayerMovement : NetworkBehaviour
 
         _animator.SetFloat("Speed", horizontalVelocity.magnitude);
         _animator.SetBool("Grounded", isGrounded);
-        _animator.SetFloat("FallSpeed", rb.linearVelocity.y);
+
+        if (rb.linearVelocity.y < 0)
+        {
+            _animator.SetBool("Falling", true);
+            _animator.SetBool("Jumping", false);
+        }
+        else
+            _animator.SetBool("Falling", false);
 
         Collider[] objectsDetected;
         LayerMask interactableMask = LayerMask.GetMask("Interactable");
@@ -205,6 +212,8 @@ public class PlayerMovement : NetworkBehaviour
 
     void Jump()
     {
+        _animator.SetBool("Jumping", true);
+
         // 跳跃时清除当前垂直速度（防止上次跳跃的速度干扰）
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
