@@ -1,6 +1,5 @@
 ﻿using Mirror;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GunShooting : MonoBehaviour
 {
@@ -34,6 +33,14 @@ public class GunShooting : MonoBehaviour
     }
 
     private void Update()
+    {
+        if (!player.GetComponent<PlayerMovement>().isLocalPlayer)
+            return;
+
+        HandleShooting();
+    }
+
+    void HandleShooting()
     {
         if (_lastShootTime > 0)
             _lastShootTime -= Time.deltaTime;
@@ -74,10 +81,10 @@ public class GunShooting : MonoBehaviour
         Bullet bullet = Instantiate(bulletPrefab, shootingPoint.position, Quaternion.identity,
                 gameObject.scene.GetRootGameObjects()[0].transform)
             .GetComponent<Bullet>();
-        
+
         if (NetworkServer.active) // Host
             NetworkServer.Spawn(bullet.gameObject);
-        
+
         bullet.SetDirection(ray.direction + Vector3.up * 0.05f);
 
         shootingFire.GetComponent<ParticleSystem>()

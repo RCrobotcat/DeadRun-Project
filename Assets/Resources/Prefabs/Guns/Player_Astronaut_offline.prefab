@@ -296,6 +296,7 @@ MonoBehaviour:
   _animator: {fileID: 4202843224851434788}
   jumpForce: 5
   gravityMultiplier: 2
+  isAiming: 0
 --- !u!1 &2073326761030052003
 GameObject:
   m_ObjectHideFlags: 0
