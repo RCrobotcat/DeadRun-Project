@@ -86,7 +86,7 @@ public class GunShooting : MonoBehaviour
         {
             NetworkServer.Spawn(bullet.gameObject);
             player.GetComponent<PlayerMovement>()
-                .CmdSpawnFireEffect(shootingFirePoint, shootingFirePoint.localPosition);
+                .CmdSpawnFireEffect(shootingFirePoint, shootingFirePoint.position);
         }
 
         bullet.SetDirection(ray.direction + Vector3.up * 0.05f);

@@ -37,8 +37,11 @@ public class InteractiveObject : NetworkBehaviour
 
     private void Update()
     {
-        if (PlaneRotation.Instance.planeToRotate != gameObject && transform.rotation != Quaternion.identity)
-            ResetPlaneRotation();
+        if (PlaneRotation.Instance != null)
+        {
+            if (PlaneRotation.Instance.planeToRotate != gameObject && transform.rotation != Quaternion.identity)
+                ResetPlaneRotation();
+        }
 
         if (LobbyController.Instance != null &&
             LobbyController.Instance.LocalPlayerObjectController != null &&
