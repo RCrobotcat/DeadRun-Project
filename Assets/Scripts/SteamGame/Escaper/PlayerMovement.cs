@@ -297,6 +297,8 @@ public class PlayerMovement : NetworkBehaviour
     [ClientRpc]
     public void CmdSpawnFireEffect(Transform parent ,Vector3 position)
     {
+        if(!isClientOnly)
+            return;
         gun.shootingFire.GetComponent<ParticleSystem>()
             .Spawn(parent, position, Quaternion.identity);
     }

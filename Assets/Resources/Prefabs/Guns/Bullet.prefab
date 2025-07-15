@@ -467,7 +467,7 @@ MonoBehaviour:
   syncRotation: 1
   syncScale: 0
   onlySyncOnChange: 1
-  compressRotation: 1
+  compressRotation: 0
   interpolatePosition: 1
   interpolateRotation: 1
   interpolateScale: 1
