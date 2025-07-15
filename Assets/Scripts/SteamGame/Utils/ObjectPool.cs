@@ -66,7 +66,6 @@ public sealed class ObjectPool : MonoBehaviour
                 {
                     var obj = (GameObject)Instantiate(prefab);
                     obj.transform.SetParent(parent);
-                    NetworkServer.Spawn(obj);
                     list.Add(obj);
                 }
 
@@ -126,7 +125,6 @@ public sealed class ObjectPool : MonoBehaviour
             trans.localPosition = position;
             trans.localRotation = rotation;
             Instance.spawnedGameObjects.Add(obj, prefab);
-            NetworkServer.Spawn(obj);
             return obj;
         }
         else
@@ -136,7 +134,6 @@ public sealed class ObjectPool : MonoBehaviour
             trans.parent = parent;
             trans.localPosition = position;
             trans.localRotation = rotation;
-            NetworkServer.Spawn(obj);
             return obj;
         }
     }

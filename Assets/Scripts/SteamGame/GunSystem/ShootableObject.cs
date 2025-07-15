@@ -17,7 +17,7 @@ public class ShootableObject : MonoBehaviour
         {
             Vector3 direction = -(other.transform.position - transform.position).normalized;
             rb.AddForce(direction * shotForce, ForceMode.Impulse);
-            other.gameObject.Recycle();
+            Destroy(other.gameObject, 0.1f);
         }
     }
 }

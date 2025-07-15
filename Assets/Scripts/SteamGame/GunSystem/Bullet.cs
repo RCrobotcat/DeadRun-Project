@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour
         if (curDistance > maxDistance)
         {
             curDistance = 0;
-            gameObject.Recycle();
+            Destroy(gameObject, 0.1f);
         }
 
         Quaternion targetRotation = Quaternion.LookRotation(directionToCenter);

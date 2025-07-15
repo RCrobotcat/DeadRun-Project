@@ -223,7 +223,7 @@ Transform:
   m_GameObject: {fileID: 5636344557992670932}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.08715578, z: 0, w: 0.9961947}
-  m_LocalPosition: {x: -0.029, y: 0.162, z: 0.646}
+  m_LocalPosition: {x: -0.048, y: 0.162, z: 0.539}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -274,7 +274,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startUpPools:
-  - size: 10
-    prefab: {fileID: 8838183399588844931, guid: e58b19f90f2a23740b7164a25e6b7411, type: 3}
   - size: 10
     prefab: {fileID: 7759854869545606040, guid: 64b842f600b97a549916cb54e7a3be2e, type: 3}

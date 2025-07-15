@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 7270553142022087508}
   - component: {fileID: 7684459242103810418}
   - component: {fileID: 4636597238382713328}
+  - component: {fileID: 6022365650534042750}
   m_Layer: 0
   m_Name: Player_Astronaut
   m_TagString: Untagged
@@ -413,6 +414,23 @@ MonoBehaviour:
   playerName: 
   isReady: 0
   role: 0
+--- !u!114 &6022365650534042750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9019578353437237485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  clientAuthority: 0
+  animator: {fileID: 4933499305105375103}
 --- !u!1001 &1971487635102530812
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -692,6 +710,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4469674561755831084}
     m_Modifications:
+    - target: {fileID: 132878352562698681, guid: 3675d7f3d96b77147af6456a5db24658, type: 3}
+      propertyPath: _assetId
+      value: 695420033
+      objectReference: {fileID: 0}
     - target: {fileID: 442269140455052908, guid: 3675d7f3d96b77147af6456a5db24658, type: 3}
       propertyPath: player
       value: 
@@ -752,5 +774,10 @@ PrefabInstance:
 --- !u!4 &262580152168443196 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2868960251185268052, guid: 3675d7f3d96b77147af6456a5db24658, type: 3}
+  m_PrefabInstance: {fileID: 2626802978317428840}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4933499305105375103 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6918382380163880727, guid: 3675d7f3d96b77147af6456a5db24658, type: 3}
   m_PrefabInstance: {fileID: 2626802978317428840}
   m_PrefabAsset: {fileID: 0}
