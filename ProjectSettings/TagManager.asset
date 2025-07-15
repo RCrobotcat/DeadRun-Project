@@ -9,6 +9,8 @@ TagManager:
   - InterestParent
   - ResPos
   - DDOL
+  - Gun
+  - Bullet
   layers:
   - Default
   - TransparentFX

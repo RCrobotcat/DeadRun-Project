@@ -26,6 +26,8 @@ public class PlayerMovementOffline : MonoBehaviour
     public float jumpForce = 5f;
     public float gravityMultiplier = 2f;
 
+    [HideInInspector] public bool isAiming = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -62,18 +64,25 @@ public class PlayerMovementOffline : MonoBehaviour
         horizontalVelocity = Vector3.zero;
         if (inputDir.magnitude >= 0.1f)
         {
-            // 计算并平滑朝向
-            float targetAngle = Mathf.Atan2(inputDir.x, inputDir.z) * Mathf.Rad2Deg;
-            float smoothAngle = Mathf.SmoothDampAngle(
-                transform.eulerAngles.y,
-                targetAngle,
-                ref turnSmoothVelocity,
-                turnSmoothTime
-            );
-            transform.rotation = Quaternion.Euler(0f, smoothAngle, 0f);
+            if (!isAiming)
+            {
+                // 计算并平滑朝向
+                float targetAngle = Mathf.Atan2(inputDir.x, inputDir.z) * Mathf.Rad2Deg;
+                float smoothAngle = Mathf.SmoothDampAngle(
+                    transform.eulerAngles.y,
+                    targetAngle,
+                    ref turnSmoothVelocity,
+                    turnSmoothTime
+                );
+                transform.rotation = Quaternion.Euler(0f, smoothAngle, 0f);
 
-            // 计算水平速度向量
-            horizontalVelocity = transform.forward * moveSpeed;
+                // 计算水平速度向量
+                horizontalVelocity = transform.forward * moveSpeed;
+            }
+            else
+            {
+                horizontalVelocity = inputDir * moveSpeed;
+            }
         }
 
         _animator.SetFloat("Speed", horizontalVelocity.magnitude);

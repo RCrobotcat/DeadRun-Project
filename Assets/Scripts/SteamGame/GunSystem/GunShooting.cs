@@ -38,6 +38,9 @@ public class GunShooting : MonoBehaviour
 
         if (Input.GetMouseButton(1))
         {
+            //player.GetComponent<PlayerMovementOffline>().isAiming = true;
+            player.GetComponent<PlayerMovement>().isAiming = true;
+            
             UpdateRotation();
 
             currentFOV = Mathf.SmoothDamp(currentFOV, zoomedFOV, ref fovSmoothVelocity, 0.2f);
@@ -55,6 +58,9 @@ public class GunShooting : MonoBehaviour
         }
         else
         {
+            //player.GetComponent<PlayerMovementOffline>().isAiming = false;
+            player.GetComponent<PlayerMovement>().isAiming = false;
+            
             currentFOV = Mathf.SmoothDamp(currentFOV, normalFOV, ref fovSmoothVelocity, 0.2f);
             CameraController.Instance.freeLookCam.Lens.FieldOfView = currentFOV;
             crosshair.gameObject.SetActive(false);
@@ -65,7 +71,7 @@ public class GunShooting : MonoBehaviour
     {
         Bullet bullet = bulletPrefab.GetComponent<Bullet>()
             .Spawn(null, shootingPoint.position, Quaternion.identity);
-        bullet.SetDirection(ray.direction);
+        bullet.SetDirection(ray.direction + Vector3.up * 0.05f);
 
         shootingFire.GetComponent<ParticleSystem>()
             .Spawn(shootingFirePoint, shootingFirePoint.localPosition, Quaternion.identity);
