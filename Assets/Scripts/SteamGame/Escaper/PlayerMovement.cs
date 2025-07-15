@@ -282,11 +282,22 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
-    [Command]
+    [Command(requiresAuthority = false)]
     public void CmdSpawnBullet(Vector3 position, Vector3 direction)
     {
         GameObject bullet = Instantiate(gun.bulletPrefab, position, Quaternion.identity);
         bullet.GetComponent<Bullet>().SetDirection(direction);
         NetworkServer.Spawn(bullet);
+        bullet.GetComponent<MeshRenderer>().enabled = true;
+
+        gun.shootingFire.GetComponent<ParticleSystem>()
+            .Spawn(gun.shootingFirePoint, gun.shootingFirePoint.localPosition, Quaternion.identity);
+    }
+
+    [ClientRpc]
+    public void CmdSpawnFireEffect(Transform parent ,Vector3 position)
+    {
+        gun.shootingFire.GetComponent<ParticleSystem>()
+            .Spawn(parent, position, Quaternion.identity);
     }
 }
