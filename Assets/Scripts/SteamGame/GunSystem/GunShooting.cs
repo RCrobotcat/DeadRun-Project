@@ -94,7 +94,7 @@ public class GunShooting : MonoBehaviour
         // Server
         if (NetworkServer.active)
             player.GetComponent<PlayerMovement>()
-                .RPCSpawnBulletOfServer(shootingPoint.position, ray.direction + Vector3.up * 0.05f);
+                .RPCSpawnBulletFromHost(shootingPoint.position, ray.direction + Vector3.up * 0.05f);
         else // Client
             player.GetComponent<PlayerMovement>()
                 .CmdSpawnBullet(shootingPoint.position, ray.direction + Vector3.up * 0.05f);

@@ -295,7 +295,7 @@ public class PlayerMovement : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RPCSpawnBulletOfServer(Vector3 position, Vector3 direction)
+    public void RPCSpawnBulletFromHost(Vector3 position, Vector3 direction)
     {
         if(!isClientOnly)
             return;
