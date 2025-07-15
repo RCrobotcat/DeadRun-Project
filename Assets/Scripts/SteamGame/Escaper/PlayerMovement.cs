@@ -302,7 +302,6 @@ public class PlayerMovement : NetworkBehaviour
         
         GameObject bullet = Instantiate(gun.bulletPrefab, position, Quaternion.identity);
         bullet.GetComponent<Bullet>().SetDirection(direction);
-        NetworkServer.Spawn(bullet);
         bullet.GetComponent<MeshRenderer>().enabled = true;
 
         gun.shootingFire.GetComponent<ParticleSystem>()
