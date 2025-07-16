@@ -1,23 +1,39 @@
-﻿using UnityEngine;
+﻿using Mirror;
+using UnityEngine;
 
-public class ShootableObject : MonoBehaviour
+public partial class PlayerMovement
 {
     public float shotForce = 10f;
-
-    private Rigidbody rb;
-
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
 
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
-            Vector3 direction = -(other.transform.position - transform.position).normalized;
+            Vector3 direction = (other.transform.position - transform.position).normalized;
             rb.AddForce(direction * shotForce, ForceMode.Impulse);
+
+            CmdAddForce(direction, shotForce);
+            RpcAddForce(direction, shotForce);
+
             Destroy(other.gameObject, 0.1f);
+        }
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdAddForce(Vector3 direction, float force)
+    {
+        if (isServer)
+        {
+            rb.AddForce(direction * force, ForceMode.Impulse);
+        }
+    }
+
+    [ClientRpc]
+    void RpcAddForce(Vector3 direction, float force)
+    {
+        if (!isServer)
+        {
+            rb.AddForce(direction * force, ForceMode.Impulse);
         }
     }
 }

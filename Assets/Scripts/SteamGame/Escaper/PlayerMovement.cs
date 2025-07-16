@@ -4,7 +4,7 @@ using Mirror;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerMovement : NetworkBehaviour
+public partial class PlayerMovement : NetworkBehaviour
 {
     [Header("Movement Settings")] public float moveSpeed = 6f;
     public float turnSmoothTime = 0.1f;
