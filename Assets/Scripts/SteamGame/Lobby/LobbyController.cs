@@ -59,7 +59,7 @@ public class LobbyController : Singleton<LobbyController>
                 MyNetworkManager.SetPlayersRoles();
 
                 LocalPlayerObjectController.RpcUpdatePlayerParams(MyNetworkManager.allPlayersInGameScene,
-                    MyNetworkManager.playersRolesSet);
+                    MyNetworkManager.playersRolesSet, MyNetworkManager.GamePlayers);
             }
 
             ShowPlayerRoleText();
