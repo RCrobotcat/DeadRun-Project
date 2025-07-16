@@ -159,10 +159,12 @@ public partial class MyNetworkManager
 
     public void SetPlayersRoles()
     {
-        var shuffledPlayers = GamePlayers.OrderBy(_ => Random.value).ToList();
+        var shuffledPlayers = GamePlayers.OrderBy(_ => Random.value).ToList();s
+        playersRolesSet = true;
+        if (shuffledPlayers.Count < 2)
+            return; // Escaper
+
         shuffledPlayers[0].role = PlayerRole.Trapper;
         shuffledPlayers[1].role = PlayerRole.Escaper;
-
-        playersRolesSet = true;
     }
 }
