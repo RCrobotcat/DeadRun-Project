@@ -1,5 +1,4 @@
-﻿using System;
-using Mirror;
+﻿using Mirror;
 using UnityEngine;
 
 public class TrapperCameraMovement : MonoBehaviour
@@ -14,15 +13,6 @@ public class TrapperCameraMovement : MonoBehaviour
 
     float yaw = 0f; // 水平旋转
     float pitch = 0f; // 垂直旋转
-
-    private void OnEnable()
-    {
-        if (NetworkServer.active)
-        {
-            NetworkServer.Spawn(gameObject);
-            transform.GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = true;
-        }
-    }
 
     void Update()
     {

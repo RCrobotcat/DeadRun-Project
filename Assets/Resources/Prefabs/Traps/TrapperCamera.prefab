@@ -15,13 +15,14 @@ GameObject:
   - component: {fileID: 4349379302152485527}
   - component: {fileID: 4420096400980255477}
   - component: {fileID: 1915868265026200940}
+  - component: {fileID: 2011106736244004364}
   m_Layer: 0
   m_Name: TrapperCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1866515793163629820
 Transform:
   m_ObjectHideFlags: 0
@@ -167,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 1
+  syncDirection: 0
   syncMode: 0
   syncInterval: 0
   target: {fileID: 1866515793163629820}
@@ -202,10 +203,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneId: 0
-  _assetId: 1781256332
+  _assetId: 589326156
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
+--- !u!114 &2011106736244004364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312514304001796264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  clientAuthority: 1
+  animator: {fileID: 6341097733705343898}
 --- !u!1001 &4803442556842974970
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -266,5 +284,10 @@ PrefabInstance:
 --- !u!4 &5744688627730831559 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 941386808460166717, guid: 1ce163cf8856ea94395e1396f2be7e23, type: 3}
+  m_PrefabInstance: {fileID: 4803442556842974970}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6341097733705343898 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1921167066016267616, guid: 1ce163cf8856ea94395e1396f2be7e23, type: 3}
   m_PrefabInstance: {fileID: 4803442556842974970}
   m_PrefabAsset: {fileID: 0}

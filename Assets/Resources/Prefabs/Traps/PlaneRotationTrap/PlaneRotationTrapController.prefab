@@ -173,10 +173,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrapperCamera
       objectReference: {fileID: 0}
-    - target: {fileID: 312514304001796264, guid: 5c1f368467d1e5b4cbac575c122dd78f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1866515793163629820, guid: 5c1f368467d1e5b4cbac575c122dd78f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7
