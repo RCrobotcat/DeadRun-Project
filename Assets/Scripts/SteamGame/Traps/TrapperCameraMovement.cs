@@ -15,6 +15,9 @@ public class TrapperCameraMovement : MonoBehaviour
 
     void Update()
     {
+        if (LobbyController.Instance.LocalPlayerObjectController.role != PlayerRole.Trapper)
+            return;
+
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
         elevation = 0;

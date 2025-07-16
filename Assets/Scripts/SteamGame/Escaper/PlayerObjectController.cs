@@ -178,7 +178,9 @@ public class PlayerObjectController : NetworkBehaviour
                         {
                             planeRotation.trapperCamera.transform.GetChild(0).GetChild(0)
                                 .GetComponent<SkinnedMeshRenderer>().enabled = true;
-                            NetworkServer.Spawn(planeRotation.trapperCamera);
+
+                            if (NetworkServer.active)
+                                NetworkServer.Spawn(planeRotation.trapperCamera);
                         }
                     }
 
