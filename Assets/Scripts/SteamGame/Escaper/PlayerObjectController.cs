@@ -213,7 +213,11 @@ public class PlayerObjectController : NetworkBehaviour
     [ClientRpc]
     public void RpcUpdatePlayerParams(bool state_allPlayersInGameScene, bool state_playersRolesSet)
     {
+        if (!isClientOnly)
+            return;
         MyNetworkManager.allPlayersInGameScene = state_allPlayersInGameScene;
         MyNetworkManager.playersRolesSet = state_playersRolesSet;
+
+        LobbyController.Instance.ShowPlayerRoleText();
     }
 }
