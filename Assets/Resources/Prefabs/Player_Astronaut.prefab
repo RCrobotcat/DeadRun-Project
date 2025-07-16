@@ -500,6 +500,7 @@ GameObject:
   - component: {fileID: 8858057033186078359}
   - component: {fileID: 7684459242103810418}
   - component: {fileID: 4636597238382713328}
+  - component: {fileID: 2786405555573589082}
   m_Layer: 0
   m_Name: Player_Astronaut
   m_TagString: Untagged
@@ -690,6 +691,19 @@ MonoBehaviour:
   playerName: 
   isReady: 0
   role: 0
+--- !u!114 &2786405555573589082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9019578353437237485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 489b6cc58d514398ac8343fe79adaf5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotForce: 8
 --- !u!1001 &1971487635102530812
 PrefabInstance:
   m_ObjectHideFlags: 0
