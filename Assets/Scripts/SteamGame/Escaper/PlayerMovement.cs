@@ -2,6 +2,7 @@
 using System.Linq;
 using Mirror;
 using UnityEngine;
+using UnityEngine.VFX;
 
 [RequireComponent(typeof(Rigidbody))]
 public partial class PlayerMovement : NetworkBehaviour
@@ -289,6 +290,7 @@ public partial class PlayerMovement : NetworkBehaviour
         bullet.GetComponent<Bullet>().SetDirection(direction);
         NetworkServer.Spawn(bullet);
         bullet.GetComponent<MeshRenderer>().enabled = true;
+        bullet.transform.GetChild(0).GetComponent<VisualEffect>().enabled = true;
 
         gun.shootingFire.GetComponent<ParticleSystem>()
             .Spawn(gun.shootingFirePoint, gun.shootingFirePoint.localPosition, Quaternion.identity);
@@ -297,12 +299,13 @@ public partial class PlayerMovement : NetworkBehaviour
     [ClientRpc]
     public void RPCSpawnBulletFromHost(Vector3 position, Vector3 direction)
     {
-        if(!isClientOnly)
+        if (!isClientOnly)
             return;
-        
+
         GameObject bullet = Instantiate(gun.bulletPrefab, position, Quaternion.identity);
         bullet.GetComponent<Bullet>().SetDirection(direction);
         bullet.GetComponent<MeshRenderer>().enabled = true;
+        bullet.transform.GetChild(0).GetComponent<VisualEffect>().enabled = true;
 
         gun.shootingFire.GetComponent<ParticleSystem>()
             .Spawn(gun.shootingFirePoint, gun.shootingFirePoint.localPosition, Quaternion.identity);
