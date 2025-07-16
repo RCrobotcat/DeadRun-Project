@@ -48,6 +48,9 @@ public partial class MyNetworkManager : NetworkManager
 
         if (fadeinOutScreen == null)
             fadeinOutScreen = FindObjectOfType<FadeInOutScreen>();
+
+        if (allPlayersInGameScene && !playersRolesSet)
+            SetPlayersRoles();
     }
 
     public override void OnServerSceneChanged(string sceneName)

@@ -9,6 +9,8 @@ using Steamworks;
 public partial class MyNetworkManager
 {
     public List<PlayerObjectController> GamePlayers { get; } = new();
+    private bool allPlayersInGameScene = false;
+    private bool playersRolesSet = false;
 
     public void SetUpClientMsgHandlers()
     {
@@ -26,6 +28,8 @@ public partial class MyNetworkManager
         SteamLobby.Instance.lobbiesButton.gameObject.SetActive(true);
         SteamLobby.Instance.quitBtn.gameObject.SetActive(true);
         SteamLobby.Instance.lobbySceneType = LobbySceneTypesEnum.Offline;
+        allPlayersInGameScene = false;
+        playersRolesSet = false;
     }
 
     private void OnPlayerExit_ServerHost(NetworkConnectionToClient conn, PlayerExitMsg msg)
@@ -42,6 +46,9 @@ public partial class MyNetworkManager
             GamePlayers.Remove(player);
             NetworkServer.Destroy(player.gameObject);
         }
+
+        allPlayersInGameScene = false;
+        playersRolesSet = false;
     }
 
     public override void OnServerReady(NetworkConnectionToClient conn)
@@ -147,8 +154,7 @@ public partial class MyNetworkManager
                 pm.enabled = true;
         }
 
-        if (LobbyController.Instance != null)
-            LobbyController.Instance.SetAndShowPlayerRoleText();
+        allPlayersInGameScene = true;
     }
 
     public void SetPlayersRoles()
@@ -163,5 +169,7 @@ public partial class MyNetworkManager
             else
                 shuffledPlayers[i].role = PlayerRole.Escaper;
         }
+
+        playersRolesSet = true;
     }
 }
