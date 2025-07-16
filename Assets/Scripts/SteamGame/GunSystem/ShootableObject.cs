@@ -12,8 +12,10 @@ public partial class PlayerMovement
             Vector3 direction = (other.transform.position - transform.position).normalized;
             rb.AddForce(direction * shotForce, ForceMode.Impulse);
 
-            CmdAddForce(direction, shotForce);
-            RpcAddForce(direction, shotForce);
+            if (NetworkServer.active)
+                RpcAddForce(direction, shotForce);
+            else
+                CmdAddForce(direction, shotForce);
 
             Destroy(other.gameObject, 0.1f);
         }
@@ -22,18 +24,15 @@ public partial class PlayerMovement
     [Command(requiresAuthority = false)]
     void CmdAddForce(Vector3 direction, float force)
     {
-        if (isServer)
-        {
-            rb.AddForce(direction * force, ForceMode.Impulse);
-        }
+        rb.AddForce(direction * force, ForceMode.Impulse);
     }
 
     [ClientRpc]
     void RpcAddForce(Vector3 direction, float force)
     {
-        if (!isServer)
-        {
-            rb.AddForce(direction * force, ForceMode.Impulse);
-        }
+        if (!isClientOnly)
+            return;
+
+        rb.AddForce(direction * force, ForceMode.Impulse);
     }
 }
