@@ -1,4 +1,5 @@
-﻿using Mirror;
+﻿using System.Collections.Generic;
+using Mirror;
 using Steamworks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -173,7 +174,7 @@ public class PlayerObjectController : NetworkBehaviour
                             planeRotation.planeRotationCanvas.SetActive(true);
                         if (!planeRotation.trapperCamera.activeSelf)
                             planeRotation.trapperCamera.SetActive(true);
-                        
+
                         planeRotation.trapperCamera.GetComponent<Camera>().enabled = true;
                         planeRotation.trapperCamera.GetComponent<AudioListener>().enabled = true;
 
@@ -197,7 +198,7 @@ public class PlayerObjectController : NetworkBehaviour
                             planeRotation.planeRotationCanvas.SetActive(false);
                         if (!planeRotation.trapperCamera.activeSelf)
                             planeRotation.trapperCamera.SetActive(true);
-                        
+
                         planeRotation.trapperCamera.GetComponent<Camera>().enabled = false;
                         planeRotation.trapperCamera.GetComponent<AudioListener>().enabled = false;
 
@@ -231,12 +232,19 @@ public class PlayerObjectController : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RpcUpdatePlayerParams(bool state_allPlayersInGameScene, bool state_playersRolesSet)
+    public void RpcUpdatePlayerParams(bool state_allPlayersInGameScene, bool state_playersRolesSet,
+        List<PlayerObjectController> players)
     {
         if (!isClientOnly)
             return;
         MyNetworkManager.allPlayersInGameScene = state_allPlayersInGameScene;
         MyNetworkManager.playersRolesSet = state_playersRolesSet;
+
+        foreach (var player in players)
+        {
+            if (player.playerID == this.playerID)
+                this.role = player.role;
+        }
 
         LobbyController.Instance.ShowPlayerRoleText();
     }
