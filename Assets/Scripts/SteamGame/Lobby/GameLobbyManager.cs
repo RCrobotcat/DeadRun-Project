@@ -159,7 +159,7 @@ public partial class MyNetworkManager
 
     public void SetPlayersRoles()
     {
-        var shuffledPlayers = GamePlayers.OrderBy(_ => Random.value).ToList();s
+        var shuffledPlayers = GamePlayers.OrderBy(_ => Random.value).ToList();
         playersRolesSet = true;
         if (shuffledPlayers.Count < 2)
             return; // Escaper
