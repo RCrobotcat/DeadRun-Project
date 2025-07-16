@@ -9,8 +9,8 @@ using Steamworks;
 public partial class MyNetworkManager
 {
     public List<PlayerObjectController> GamePlayers { get; } = new();
-    private bool allPlayersInGameScene = false;
-    private bool playersRolesSet = false;
+    public bool allPlayersInGameScene = false;
+    public bool playersRolesSet = false;
 
     public void SetUpClientMsgHandlers()
     {

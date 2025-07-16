@@ -51,6 +51,19 @@ public class LobbyController : Singleton<LobbyController>
     private void Update()
     {
         SetLobbyCanvasState();
+
+        if (MyNetworkManager.allPlayersInGameScene && !MyNetworkManager.playersRolesSet)
+        {
+            if (NetworkServer.active)
+            {
+                MyNetworkManager.SetPlayersRoles();
+
+                LocalPlayerObjectController.RpcUpdatePlayerParams(MyNetworkManager.allPlayersInGameScene,
+                    MyNetworkManager.playersRolesSet);
+            }
+
+            ShowPlayerRoleText();
+        }
     }
 
     public void UpdateLobbyName()
