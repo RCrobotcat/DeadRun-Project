@@ -173,6 +173,10 @@ public class PlayerObjectController : NetworkBehaviour
                             planeRotation.planeRotationCanvas.SetActive(true);
                         if (!planeRotation.trapperCamera.activeSelf)
                             planeRotation.trapperCamera.SetActive(true);
+                        if (!planeRotation.trapperCamera.transform.GetChild(0).GetChild(0)
+                                .GetComponent<SkinnedMeshRenderer>().enabled)
+                            planeRotation.trapperCamera.transform.GetChild(0).GetChild(0)
+                                .GetComponent<SkinnedMeshRenderer>().enabled = true;
                     }
 
                     CameraController.Instance.gameObject.SetActive(false);

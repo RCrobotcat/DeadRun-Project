@@ -69,7 +69,8 @@ public class InteractiveObject : NetworkBehaviour
             if (Camera.main == null)
                 return;
 
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Camera.main.ScreenPointToRay(InteractionManager.Instance.crosshair.position);
 
             RaycastHit hit;
             float maxDistance = 100f;
@@ -101,7 +102,8 @@ public class InteractiveObject : NetworkBehaviour
         }
         else
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Camera.main.ScreenPointToRay(InteractionManager.Instance.crosshair.position);
 
             if (Physics.Raycast(ray, out RaycastHit hit))
             {

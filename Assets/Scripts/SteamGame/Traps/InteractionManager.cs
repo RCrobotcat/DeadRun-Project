@@ -2,12 +2,8 @@
 
 public class InteractionManager : Singleton<InteractionManager>
 {
-    protected override void Awake()
-    {
-        base.Awake();
-        DontDestroyOnLoad(this);
-    }
-
+    public RectTransform crosshair;
+    
     private void OnEnable()
     {
         InteractionEvents.OnMouseHover += HandleObjectEmission_ON;
@@ -53,6 +49,8 @@ public class InteractionManager : Singleton<InteractionManager>
         materials[materials.Length - 2] = materialInstance_out;
 
         renderer.materials = materials;
+        
+        PlaneRotation.Instance.planeToRotate = obj.gameObject;
 
         //Debug.Log($"Mouse is hovering over: {obj.gameObject.name}, highlight and outline applied.");
     }
@@ -70,6 +68,8 @@ public class InteractionManager : Singleton<InteractionManager>
 
         // 还原原始材质
         renderer.materials = obj.originalMaterials;
+        
+        PlaneRotation.Instance.planeToRotate = null;
 
         //Debug.Log($"Mouse exited: {obj.gameObject.name}, highlight removed.");
     }
@@ -83,6 +83,6 @@ public class InteractionManager : Singleton<InteractionManager>
         }
 
         Debug.Log($"Clicked Object: {obj.Io_name}");
-        PlaneRotation.Instance.planeToRotate = obj.gameObject;
+        //PlaneRotation.Instance.planeToRotate = obj.gameObject;
     }
 }

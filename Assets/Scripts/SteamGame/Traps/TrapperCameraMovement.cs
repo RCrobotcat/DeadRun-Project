@@ -24,32 +24,38 @@ public class TrapperCameraMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl))
             elevation = -1;
 
-        // 右键拖拽用于旋转视角
-        if (Input.GetMouseButtonDown(1))
-        {
-            isRightMouseDragging = true;
-            lastMousePosition = Input.mousePosition;
+        // // 右键拖拽用于旋转视角
+        // if (Input.GetMouseButtonDown(1))
+        // {
+        //     isRightMouseDragging = true;
+        //     lastMousePosition = Input.mousePosition;
+        //
+        //     Vector3 angles = transform.rotation.eulerAngles;
+        //     yaw = angles.y;
+        //     pitch = angles.x;
+        // }
+        //
+        // if (Input.GetMouseButtonUp(1))
+        // {
+        //     isRightMouseDragging = false;
+        // }
+        //
+        // // 控制视角旋转
+        // if (isRightMouseDragging)
+        // {
+        //     Vector3 delta = Input.mousePosition - lastMousePosition;
+        //     yaw += delta.x * MouseRotateSpeed * Time.deltaTime;
+        //     pitch -= delta.y * MouseRotateSpeed * Time.deltaTime;
+        //
+        //     transform.rotation = Quaternion.Euler(pitch, yaw, 0);
+        //     lastMousePosition = Input.mousePosition;
+        // }
 
-            Vector3 angles = transform.rotation.eulerAngles;
-            yaw = angles.y;
-            pitch = angles.x;
-        }
+        Vector3 mouseDelta = new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0);
+        yaw += mouseDelta.x * MouseRotateSpeed;
+        pitch -= mouseDelta.y * MouseRotateSpeed;
 
-        if (Input.GetMouseButtonUp(1))
-        {
-            isRightMouseDragging = false;
-        }
-
-        // 控制视角旋转
-        if (isRightMouseDragging)
-        {
-            Vector3 delta = Input.mousePosition - lastMousePosition;
-            yaw += delta.x * MouseRotateSpeed * Time.deltaTime;
-            pitch -= delta.y * MouseRotateSpeed * Time.deltaTime;
-
-            transform.rotation = Quaternion.Euler(pitch, yaw, 0);
-            lastMousePosition = Input.mousePosition;
-        }
+        transform.rotation = Quaternion.Euler(pitch, yaw, 0);
     }
 
     void FixedUpdate()

@@ -290,7 +290,7 @@ public partial class PlayerMovement : NetworkBehaviour
         bullet.GetComponent<Bullet>().SetDirection(direction);
         NetworkServer.Spawn(bullet);
         bullet.GetComponent<MeshRenderer>().enabled = true;
-        bullet.transform.GetChild(0).GetComponent<VisualEffect>().enabled = true;
+        bullet.transform.GetChild(0).GetComponent<TrailRenderer>().enabled = true;
 
         gun.shootingFire.GetComponent<ParticleSystem>()
             .Spawn(gun.shootingFirePoint, gun.shootingFirePoint.localPosition, Quaternion.identity);
@@ -305,7 +305,7 @@ public partial class PlayerMovement : NetworkBehaviour
         GameObject bullet = Instantiate(gun.bulletPrefab, position, Quaternion.identity);
         bullet.GetComponent<Bullet>().SetDirection(direction);
         bullet.GetComponent<MeshRenderer>().enabled = true;
-        bullet.transform.GetChild(0).GetComponent<VisualEffect>().enabled = true;
+        bullet.transform.GetChild(0).GetComponent<TrailRenderer>().enabled = true;
 
         gun.shootingFire.GetComponent<ParticleSystem>()
             .Spawn(gun.shootingFirePoint, gun.shootingFirePoint.localPosition, Quaternion.identity);
