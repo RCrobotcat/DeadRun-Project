@@ -167,7 +167,7 @@ public partial class MyNetworkManager
             if (i < half)
                 shuffledPlayers[i].role = PlayerRole.Trapper;
             else
-                shuffledPlayers[i].role = PlayerRole.Trapper;
+                shuffledPlayers[i].role = PlayerRole.Escaper;
         }
 
         playersRolesSet = true;

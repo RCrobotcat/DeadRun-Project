@@ -22,7 +22,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1866515793163629820
 Transform:
   m_ObjectHideFlags: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
+  syncDirection: 1
   syncMode: 0
   syncInterval: 0
   target: {fileID: 1866515793163629820}
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneId: 0
-  _assetId: 589326156
+  _assetId: 1781256332
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
