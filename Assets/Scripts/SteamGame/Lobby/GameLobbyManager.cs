@@ -146,6 +146,9 @@ public partial class MyNetworkManager
             if (NetworkClient.localPlayer.TryGetComponent<PlayerMovement>(out var pm))
                 pm.enabled = true;
         }
+
+        if (LobbyController.Instance != null)
+            LobbyController.Instance.SetAndShowPlayerRoleText();
     }
 
     public void SetPlayersRoles()
@@ -156,7 +159,7 @@ public partial class MyNetworkManager
         for (int i = 0; i < playerCount; i++)
         {
             if (i < half)
-                shuffledPlayers[i].role = PlayerRole.Escaper;
+                shuffledPlayers[i].role = PlayerRole.Trapper;
             else
                 shuffledPlayers[i].role = PlayerRole.Escaper;
         }

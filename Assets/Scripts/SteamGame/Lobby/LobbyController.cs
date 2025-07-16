@@ -179,7 +179,19 @@ public class LobbyController : Singleton<LobbyController>
         string scenePath = SceneManager.GetSceneByName("Scene_1").name;
         lobbyCanvas.SetActive(false);
         MyNetworkManager.HandleSendPlayerToNewScene(scenePath, "SpawnPos");
+    }
+
+    [Header("Player Role Text")] public Text playerRoleText;
+    public GameObject roleTxtPanel;
+
+    public void SetAndShowPlayerRoleText()
+    {
         MyNetworkManager.SetPlayersRoles();
+
+        roleTxtPanel.SetActive(true);
+        playerRoleText.text = LocalPlayerObjectController.role.ToString();
+        roleTxtPanel.transform.localScale.To(Vector3.one * 1.5f, 2.5f,
+            (a) => { roleTxtPanel.transform.localScale = a; }, () => { roleTxtPanel.SetActive(false); });
     }
 
     public void UpdateReadyBtn()

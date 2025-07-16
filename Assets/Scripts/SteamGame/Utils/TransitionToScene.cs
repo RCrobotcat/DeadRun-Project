@@ -54,7 +54,7 @@ public class TransitionToScene : NetworkBehaviour
                 customHandling = true
             });
 
-            yield return new WaitForSeconds((fadeInOutScreen.speed * 0.1f));
+            yield return new WaitForSeconds(fadeInOutScreen.speed * 0.1f);
 
             NetworkServer.RemovePlayerForConnection(conn, false);
 
