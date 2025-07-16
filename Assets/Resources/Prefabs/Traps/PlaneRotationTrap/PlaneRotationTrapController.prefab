@@ -217,6 +217,10 @@ PrefabInstance:
       propertyPath: _assetId
       value: 589326156
       objectReference: {fileID: 0}
+    - target: {fileID: 4349379302152485527, guid: 5c1f368467d1e5b4cbac575c122dd78f, type: 3}
+      propertyPath: MouseRotateSpeed
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
