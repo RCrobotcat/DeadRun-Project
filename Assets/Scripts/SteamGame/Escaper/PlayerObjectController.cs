@@ -173,14 +173,15 @@ public class PlayerObjectController : NetworkBehaviour
                             planeRotation.planeRotationCanvas.SetActive(true);
                         if (!planeRotation.trapperCamera.activeSelf)
                             planeRotation.trapperCamera.SetActive(true);
+                        
+                        planeRotation.trapperCamera.GetComponent<Camera>().enabled = true;
+                        planeRotation.trapperCamera.GetComponent<AudioListener>().enabled = true;
+
                         if (!planeRotation.trapperCamera.transform.GetChild(0).GetChild(0)
                                 .GetComponent<SkinnedMeshRenderer>().enabled)
                         {
                             planeRotation.trapperCamera.transform.GetChild(0).GetChild(0)
                                 .GetComponent<SkinnedMeshRenderer>().enabled = true;
-
-                            if (NetworkServer.active)
-                                NetworkServer.Spawn(planeRotation.trapperCamera);
                         }
                     }
 
@@ -194,8 +195,18 @@ public class PlayerObjectController : NetworkBehaviour
                     {
                         if (planeRotation.planeRotationCanvas.activeSelf)
                             planeRotation.planeRotationCanvas.SetActive(false);
-                        if (planeRotation.trapperCamera.activeSelf)
-                            planeRotation.trapperCamera.SetActive(false);
+                        if (!planeRotation.trapperCamera.activeSelf)
+                            planeRotation.trapperCamera.SetActive(true);
+                        
+                        planeRotation.trapperCamera.GetComponent<Camera>().enabled = false;
+                        planeRotation.trapperCamera.GetComponent<AudioListener>().enabled = false;
+
+                        if (!planeRotation.trapperCamera.transform.GetChild(0).GetChild(0)
+                                .GetComponent<SkinnedMeshRenderer>().enabled)
+                        {
+                            planeRotation.trapperCamera.transform.GetChild(0).GetChild(0)
+                                .GetComponent<SkinnedMeshRenderer>().enabled = true;
+                        }
                     }
 
                     CameraController.Instance.gameObject.SetActive(true);
