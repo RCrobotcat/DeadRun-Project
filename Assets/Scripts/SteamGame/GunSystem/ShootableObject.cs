@@ -11,9 +11,11 @@ public partial class PlayerMovement
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
-            playerObjectController.CurrentHealth -= 10f;
+            //playerObjectController.CurrentHealth -= 10f;
             if (NetworkServer.active)
                 RpcDamagePlayer(10f);
+            else
+                CmdDamagePlayer(10f);
 
             Vector3 direction = (other.transform.position - transform.position).normalized;
             rb.AddForce(direction * shotForce, ForceMode.Impulse);
@@ -48,6 +50,12 @@ public partial class PlayerMovement
         if (!isClientOnly)
             return;
 
+        playerObjectController.CurrentHealth -= damage;
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdDamagePlayer(float damage)
+    {
         playerObjectController.CurrentHealth -= damage;
     }
 }

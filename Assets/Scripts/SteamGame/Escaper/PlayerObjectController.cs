@@ -269,6 +269,7 @@ public partial class PlayerObjectController : NetworkBehaviour
         }
 
         LobbyController.Instance.ShowPlayerRoleText();
-        LobbyController.Instance.LocalPlayerObjectController.SetPlayerUIState(true);
+        if (LobbyController.Instance.LocalPlayerObjectController.role == PlayerRole.Escaper)
+            LobbyController.Instance.LocalPlayerObjectController.SetPlayerUIState(true);
     }
 }

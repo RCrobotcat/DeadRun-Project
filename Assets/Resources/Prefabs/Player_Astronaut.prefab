@@ -443,7 +443,7 @@ Transform:
   m_GameObject: {fileID: 4979368475730002152}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.649, y: 0.965, z: 0.074}
+  m_LocalPosition: {x: -0.595, y: 0.965, z: 0.074}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1005,13 +1005,13 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  moveSpeed: 6
+  moveSpeed: 4.5
   turnSmoothTime: 0.1
   currentEquippedItem: 
   _animator: {fileID: 1971487635109874076}
   equipItemSlot: {fileID: 6310232972406723056}
   jumpForce: 5
-  gravityMultiplier: 2
+  gravityMultiplier: 1.2
   jumpTimeInterval: 0.8
   isAiming: 0
   gun: {fileID: 2474453205690138116}
