@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Mirror;
@@ -161,7 +160,7 @@ public partial class MyNetworkManager
 
     public List<PlayerRoles> SetPlayersRoles()
     {
-        var shuffledPlayers = GamePlayers.OrderBy(_ => Random.value).ToList();
+        var shuffledPlayers = GamePlayers;
         playersRolesSet = true;
         if (shuffledPlayers.Count < 2)
         {
@@ -169,8 +168,13 @@ public partial class MyNetworkManager
             return null; // Escaper
         }
 
-        shuffledPlayers[0].role = PlayerRole.Trapper;
-        shuffledPlayers[1].role = PlayerRole.Escaper;
+        for (int i = 0; i < shuffledPlayers.Count; i++)
+        {
+            if (shuffledPlayers[i].playerID == 1)
+                shuffledPlayers[i].role = PlayerRole.Trapper; // Host => Trapper
+            else
+                shuffledPlayers[i].role = PlayerRole.Escaper; // Others => Escapers
+        }
 
         List<PlayerRoles> roles = new();
         foreach (var player in shuffledPlayers)
