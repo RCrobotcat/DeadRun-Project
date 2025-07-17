@@ -255,16 +255,16 @@ public partial class PlayerObjectController : NetworkBehaviour
     {
         if (!isClientOnly)
             return;
-        
+
         MyNetworkManager.allPlayersInGameScene_server = state_allPlayersInGameScene;
         MyNetworkManager.playersRolesSet = state_playersRolesSet;
 
         for (int i = roles.Count - 1; i >= 0; i--)
         {
             PlayerRoles player = roles[i];
-            if (player.playerID == this.playerID)
+            if (player.playerID == LobbyController.Instance.LocalPlayerObjectController.playerID)
             {
-                this.role = player.role;
+                LobbyController.Instance.LocalPlayerObjectController.role = player.role;
                 Debug.Log("Player role set to: " + player.role + " for playerID: " + player.playerID);
             }
         }

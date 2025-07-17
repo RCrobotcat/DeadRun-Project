@@ -60,16 +60,13 @@ public class LobbyController : Singleton<LobbyController>
             if (NetworkServer.active)
             {
                 roles = MyNetworkManager.SetPlayersRoles();
+
+                if (roles != null)
+                    LocalPlayerObjectController.RpcUpdatePlayerParams(MyNetworkManager.allPlayersInGameScene_server,
+                        MyNetworkManager.playersRolesSet, roles);
+
                 ShowPlayerRoleText();
             }
-        }
-
-        // Client Update Player Roles
-        if (MyNetworkManager.allPlayersInGameScene_server && roles != null)
-        {
-            if (NetworkServer.active)
-                LocalPlayerObjectController.RpcUpdatePlayerParams(MyNetworkManager.allPlayersInGameScene_server,
-                    MyNetworkManager.playersRolesSet, roles);
         }
     }
 
