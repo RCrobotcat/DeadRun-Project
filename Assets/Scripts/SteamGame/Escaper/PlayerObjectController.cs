@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Mirror;
 using Steamworks;
 using UnityEngine;
@@ -50,7 +51,7 @@ public partial class PlayerObjectController : NetworkBehaviour
         {
             if (_role != value)
             {
-                Debug.Log($"Player role changed from {_role} to {value} at: {Environment.StackTrace}");
+                Debug.Log($"Player {playerID} role changed from {_role} to {value} at: {Environment.StackTrace}");
                 _role = value;
             }
         }
@@ -254,15 +255,18 @@ public partial class PlayerObjectController : NetworkBehaviour
     {
         if (!isClientOnly)
             return;
-        MyNetworkManager.allPlayersInGameScene = state_allPlayersInGameScene;
+        
+        MyNetworkManager.allPlayersInGameScene_server = state_allPlayersInGameScene;
         MyNetworkManager.playersRolesSet = state_playersRolesSet;
 
-        foreach (var player in roles)
+        for (int i = roles.Count - 1; i >= 0; i--)
         {
+            PlayerRoles player = roles[i];
             if (player.playerID == this.playerID)
+            {
                 this.role = player.role;
-
-            Debug.Log("player role: " + player.role + " for playerID: " + player.playerID);
+                Debug.Log("Player role set to: " + player.role + " for playerID: " + player.playerID);
+            }
         }
 
         LobbyController.Instance.ShowPlayerRoleText();

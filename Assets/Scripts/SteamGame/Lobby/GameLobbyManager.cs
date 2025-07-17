@@ -11,7 +11,7 @@ using Random = UnityEngine.Random;
 public partial class MyNetworkManager
 {
     public List<PlayerObjectController> GamePlayers { get; } = new();
-    public bool allPlayersInGameScene = false;
+    public bool allPlayersInGameScene_server = false;
     public bool playersRolesSet = false;
 
     public void SetUpClientMsgHandlers()
@@ -30,7 +30,7 @@ public partial class MyNetworkManager
         SteamLobby.Instance.lobbiesButton.gameObject.SetActive(true);
         SteamLobby.Instance.quitBtn.gameObject.SetActive(true);
         SteamLobby.Instance.lobbySceneType = LobbySceneTypesEnum.Offline;
-        allPlayersInGameScene = false;
+        allPlayersInGameScene_server = false;
         playersRolesSet = false;
     }
 
@@ -49,7 +49,7 @@ public partial class MyNetworkManager
             NetworkServer.Destroy(player.gameObject);
         }
 
-        allPlayersInGameScene = false;
+        allPlayersInGameScene_server = false;
         playersRolesSet = false;
     }
 
@@ -156,7 +156,7 @@ public partial class MyNetworkManager
                 pm.enabled = true;
         }
 
-        allPlayersInGameScene = true;
+        allPlayersInGameScene_server = true;
     }
 
     public List<PlayerRoles> SetPlayersRoles()

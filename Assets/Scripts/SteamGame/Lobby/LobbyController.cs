@@ -27,6 +27,8 @@ public class LobbyController : Singleton<LobbyController>
 
     MyNetworkManager _myNetworkManager;
 
+    private List<PlayerRoles> roles; // all players roles set in host server
+
     private MyNetworkManager MyNetworkManager
     {
         get
@@ -52,18 +54,22 @@ public class LobbyController : Singleton<LobbyController>
     {
         SetLobbyCanvasState();
 
-        if (MyNetworkManager.allPlayersInGameScene && !MyNetworkManager.playersRolesSet)
+        // Host Set Players Roles
+        if (MyNetworkManager.allPlayersInGameScene_server && !MyNetworkManager.playersRolesSet)
         {
             if (NetworkServer.active)
             {
-                var roles = MyNetworkManager.SetPlayersRoles();
-
-                if (roles != null)
-                    LocalPlayerObjectController.RpcUpdatePlayerParams(MyNetworkManager.allPlayersInGameScene,
-                        MyNetworkManager.playersRolesSet, roles);
+                roles = MyNetworkManager.SetPlayersRoles();
+                ShowPlayerRoleText();
             }
+        }
 
-            ShowPlayerRoleText();
+        // Client Update Player Roles
+        if (MyNetworkManager.allPlayersInGameScene_server && roles != null)
+        {
+            if (NetworkServer.active)
+                LocalPlayerObjectController.RpcUpdatePlayerParams(MyNetworkManager.allPlayersInGameScene_server,
+                    MyNetworkManager.playersRolesSet, roles);
         }
     }
 
