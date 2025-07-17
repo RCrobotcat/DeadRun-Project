@@ -103,15 +103,6 @@ public class TableInteracterable : NetworkBehaviour
             {
                 if (player.role == PlayerRole.Trapper)
                 {
-                    var planeRotation = FindObjectOfType<PlaneRotation>();
-                    if (planeRotation != null)
-                    {
-                        if (planeRotation.planeRotationCanvas.activeSelf)
-                            planeRotation.planeRotationCanvas.SetActive(false);
-                        if (planeRotation.trapperCamera.activeSelf)
-                            planeRotation.trapperCamera.SetActive(false);
-                    }
-
                     CameraController.Instance.gameObject.SetActive(true);
                     CameraController.Instance.freeLookCam.Target.TrackingTarget =
                         LobbyController.Instance.LocalPlayerObjectController.transform;
@@ -121,6 +112,9 @@ public class TableInteracterable : NetworkBehaviour
                 }
 
                 StartCoroutine(transitionToScene.SendNewPlayerToScene(player.gameObject));
+                if (CameraController.Instance.freeLookCam.Target.TrackingTarget == null)
+                    CameraController.Instance.freeLookCam.Target.TrackingTarget =
+                        LobbyController.Instance.LocalPlayerObjectController.transform;
             }
         }
     }
