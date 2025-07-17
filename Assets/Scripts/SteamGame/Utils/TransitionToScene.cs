@@ -89,6 +89,8 @@ public class TransitionToScene : NetworkBehaviour
 
             if (CameraController.Instance.freeLookCam.Target.TrackingTarget == null)
                 CameraController.Instance.freeLookCam.Target.TrackingTarget = player.transform;
+            
+            player.GetComponent<PlayerObjectController>().SetPlayerUIState(true);
         }
     }
 }

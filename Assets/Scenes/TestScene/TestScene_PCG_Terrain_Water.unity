@@ -8376,6 +8376,7 @@ MonoBehaviour:
   _animator: {fileID: 0}
   jumpForce: 5
   gravityMultiplier: 2
+  isAiming: 0
 --- !u!136 &8200444549603326299
 CapsuleCollider:
   m_ObjectHideFlags: 0

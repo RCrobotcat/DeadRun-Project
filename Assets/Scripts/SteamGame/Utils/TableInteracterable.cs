@@ -104,18 +104,43 @@ public class TableInteracterable : NetworkBehaviour
                 if (player.role == PlayerRole.Trapper)
                 {
                     CameraController.Instance.gameObject.SetActive(true);
-                    CameraController.Instance.freeLookCam.Target.TrackingTarget =
-                        LobbyController.Instance.LocalPlayerObjectController.transform;
-                    LobbyController.Instance.LocalPlayerObjectController.transform.position = Vector3.zero;
+                    CameraController.Instance.freeLookCam.Target.TrackingTarget = player.transform;
+                    player.transform.position = Vector3.zero;
                     player.role = PlayerRole.Escaper;
-                    LobbyController.Instance.LocalPlayerObjectController.SetPlayerUIState(true);
-                }
+                    player.SetPlayerUIState(true);
 
-                StartCoroutine(transitionToScene.SendNewPlayerToScene(player.gameObject));
-                if (CameraController.Instance.freeLookCam.Target.TrackingTarget == null)
-                    CameraController.Instance.freeLookCam.Target.TrackingTarget =
-                        LobbyController.Instance.LocalPlayerObjectController.transform;
+                    if (player.TryGetComponent<PlayerMovement>(out PlayerMovement pm))
+                        pm.enabled = false;
+
+                    if (isServer)
+                        StartCoroutine(transitionToScene.SendNewPlayerToScene(player.gameObject));
+                }
+                else if (player.role == PlayerRole.Escaper)
+                {
+                    if (player.TryGetComponent<PlayerMovement>(out PlayerMovement pm))
+                        pm.enabled = false;
+
+                    if (isServer)
+                        StartCoroutine(transitionToScene.SendNewPlayerToScene(player.gameObject));
+
+                    if (NetworkServer.active)
+                        RpcPrepareSendPlayerToNewScene();
+                }
             }
         }
+    }
+
+    [ClientRpc]
+    void RpcPrepareSendPlayerToNewScene()
+    {
+        if (!isClientOnly)
+            return;
+
+        PlayerObjectController player = LobbyController.Instance.LocalPlayerObjectController;
+
+        CameraController.Instance.freeLookCam.Target.TrackingTarget = player.transform;
+        player.role = PlayerRole.Escaper;
+
+        player.GetComponent<PlayerObjectController>().SetPlayerUIState(true);
     }
 }
