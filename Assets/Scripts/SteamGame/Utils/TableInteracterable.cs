@@ -113,6 +113,8 @@ public class TableInteracterable : NetworkBehaviour
                     }
 
                     CameraController.Instance.gameObject.SetActive(true);
+                    CameraController.Instance.freeLookCam.Target.TrackingTarget =
+                        LobbyController.Instance.LocalPlayerObjectController.transform;
                     LobbyController.Instance.LocalPlayerObjectController.transform.position = Vector3.zero;
                     player.role = PlayerRole.Escaper;
                     LobbyController.Instance.LocalPlayerObjectController.SetPlayerUIState(true);
