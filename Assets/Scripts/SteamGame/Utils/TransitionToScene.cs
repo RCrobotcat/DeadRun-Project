@@ -39,7 +39,7 @@ public class TransitionToScene : NetworkBehaviour
     }
 
     [ServerCallback]
-    IEnumerator SendNewPlayerToScene(GameObject player)
+    public IEnumerator SendNewPlayerToScene(GameObject player)
     {
         if (player.TryGetComponent<NetworkIdentity>(out NetworkIdentity identity))
         {

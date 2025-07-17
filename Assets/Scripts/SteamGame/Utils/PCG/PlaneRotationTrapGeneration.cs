@@ -137,7 +137,7 @@ public class PlaneRotationTrapGeneration : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                float spacing = 3.5f;
+                float spacing = 5f;
                 float minOffset = 0.5f;
                 float maxOffset = 1f;
 

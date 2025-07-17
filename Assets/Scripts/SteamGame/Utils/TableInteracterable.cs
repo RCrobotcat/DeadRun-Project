@@ -9,12 +9,20 @@ public class TableInteracterable : NetworkBehaviour
     [SyncVar(hook = nameof(OnTableItemChanged))]
     private string tableItem;
 
+    public bool targetTable = false; // 是否是目标桌子 => 逃脱者需要放置目标物品的桌子
+
+    TransitionToScene transitionToScene;
+
     private void Start()
     {
         itemsManager = FindObjectOfType<ItemsManager>();
+        transitionToScene = GetComponent<TransitionToScene>();
         if (isServer)
         {
-            tableItem = desiredItem;
+            if (!targetTable)
+                tableItem = desiredItem;
+            else
+                tableItem = "";
         }
 
         OnTableItemChanged(null, tableItem);
@@ -34,6 +42,12 @@ public class TableInteracterable : NetworkBehaviour
                     CmdInteractWithTable(playerObj);
                 }
             }
+        }
+
+        if (targetTable && tableItem != "")
+        {
+            HandleTargetTablePlaced();
+            tableItem = "";
         }
     }
 
@@ -73,6 +87,38 @@ public class TableInteracterable : NetworkBehaviour
                 newObj.transform.localScale = Vector3.one * 0.6f;
                 newObj.gameObject.SetActive(true);
                 // NetworkServer.Spawn(newObj.gameObject);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 目标物品放置到了桌子上 触发逃脱者成功的条件
+    /// </summary>
+    void HandleTargetTablePlaced()
+    {
+        if (tableItem.Equals(desiredItem))
+        {
+            PlayerObjectController[] allPlayers = FindObjectsOfType<PlayerObjectController>();
+            foreach (var player in allPlayers)
+            {
+                if (player.role == PlayerRole.Trapper)
+                {
+                    var planeRotation = FindObjectOfType<PlaneRotation>();
+                    if (planeRotation != null)
+                    {
+                        if (planeRotation.planeRotationCanvas.activeSelf)
+                            planeRotation.planeRotationCanvas.SetActive(false);
+                        if (planeRotation.trapperCamera.activeSelf)
+                            planeRotation.trapperCamera.SetActive(false);
+                    }
+
+                    CameraController.Instance.gameObject.SetActive(true);
+                    LobbyController.Instance.LocalPlayerObjectController.transform.position = Vector3.zero;
+                    player.role = PlayerRole.Escaper;
+                    LobbyController.Instance.LocalPlayerObjectController.SetPlayerUIState(true);
+                }
+
+                StartCoroutine(transitionToScene.SendNewPlayerToScene(player.gameObject));
             }
         }
     }
