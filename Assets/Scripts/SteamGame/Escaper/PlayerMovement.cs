@@ -2,7 +2,6 @@
 using System.Linq;
 using Mirror;
 using UnityEngine;
-using UnityEngine.VFX;
 
 [RequireComponent(typeof(Rigidbody))]
 public partial class PlayerMovement : NetworkBehaviour
@@ -66,8 +65,11 @@ public partial class PlayerMovement : NetworkBehaviour
             UpdateResPos();
         }
 
-        if (transform.position.y < -3f)
+        if (transform.position.y < -7f)
+        {
             transform.position = resPosition + Vector3.up * 0.5f;
+            playerObjectController.FellCount++;
+        }
 
         // Jump
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && jumpTimer <= 0f)

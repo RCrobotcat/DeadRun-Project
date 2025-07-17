@@ -5,10 +5,14 @@ public partial class PlayerMovement
 {
     public float shotForce = 10f;
 
+    public PlayerObjectController playerObjectController;
+
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
+            playerObjectController.CurrentHealth -= 10f;
+
             Vector3 direction = (other.transform.position - transform.position).normalized;
             rb.AddForce(direction * shotForce, ForceMode.Impulse);
 
