@@ -257,7 +257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3631417551496598221
 RectTransform:
   m_ObjectHideFlags: 0
@@ -296,7 +296,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &757786572811380792
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1037,6 +1037,7 @@ MonoBehaviour:
   playerSteamID: 0
   playerName: 
   isReady: 0
+  healthBarBase: {fileID: 3664847903410532424}
   healthBarFillImage: {fileID: 5868287945290895650}
   maxHealth: 100
   fellCountText: {fileID: 5127545172576463263}

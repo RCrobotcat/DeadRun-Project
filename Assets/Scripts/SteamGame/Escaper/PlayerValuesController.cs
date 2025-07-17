@@ -1,11 +1,11 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
 public partial class PlayerObjectController
 {
-    [Header("Health")] public Image healthBarFillImage;
+    [Header("Health")] public GameObject healthBarBase;
+    public Image healthBarFillImage;
 
     public float maxHealth = 100f;
     private float currentHealth;
@@ -69,5 +69,11 @@ public partial class PlayerObjectController
     {
         Debug.Log("Player died in 1v1.");
         // TODO
+    }
+
+    public void SetPlayerUIState(bool state)
+    {
+        healthBarBase.SetActive(state);
+        fellCountText.gameObject.SetActive(state);
     }
 }

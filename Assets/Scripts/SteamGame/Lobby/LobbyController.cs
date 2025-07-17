@@ -66,6 +66,7 @@ public class LobbyController : Singleton<LobbyController>
                         MyNetworkManager.playersRolesSet, roles);
 
                 ShowPlayerRoleText();
+                LocalPlayerObjectController.SetPlayerUIState(true);
             }
         }
     }

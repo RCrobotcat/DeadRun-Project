@@ -269,5 +269,6 @@ public partial class PlayerObjectController : NetworkBehaviour
         }
 
         LobbyController.Instance.ShowPlayerRoleText();
+        LobbyController.Instance.LocalPlayerObjectController.SetPlayerUIState(true);
     }
 }

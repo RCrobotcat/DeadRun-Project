@@ -169,7 +169,7 @@ public partial class MyNetworkManager
         for (int i = 0; i < shuffledPlayers.Count; i++)
         {
             if (shuffledPlayers[i].playerID == 1)
-                shuffledPlayers[i].role = PlayerRole.Trapper; // Host => Trapper
+                shuffledPlayers[i].role = PlayerRole.Escaper; // Host => Trapper
             else
                 shuffledPlayers[i].role = PlayerRole.Escaper; // Others => Escapers
         }
