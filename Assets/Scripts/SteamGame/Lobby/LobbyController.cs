@@ -66,7 +66,8 @@ public class LobbyController : Singleton<LobbyController>
                         MyNetworkManager.playersRolesSet, roles);
 
                 ShowPlayerRoleText();
-                LocalPlayerObjectController.SetPlayerUIState(true);
+                if(LocalPlayerObjectController.role == PlayerRole.Escaper)
+                    LocalPlayerObjectController.SetPlayerUIState(true);
             }
         }
     }

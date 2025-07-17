@@ -67,7 +67,7 @@ public partial class PlayerObjectController
 
     void DieIn1V1()
     {
-        Debug.Log("Player died in 1v1.");
+        Debug.Log($"Player {playerID} died in 1v1.");
         // TODO
     }
 
