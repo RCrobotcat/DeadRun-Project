@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Mirror;
 using Steamworks;
 using UnityEngine;
@@ -39,7 +40,21 @@ public partial class PlayerObjectController : NetworkBehaviour
         }
     }
 
-    [HideInInspector] public PlayerRole role = PlayerRole.None;
+    private PlayerRole _role = PlayerRole.None;
+
+    [HideInInspector]
+    public PlayerRole role
+    {
+        get => _role;
+        set
+        {
+            if (_role != value)
+            {
+                Debug.Log($"Player role changed from {_role} to {value} at: {Environment.StackTrace}");
+                _role = value;
+            }
+        }
+    }
 
     private void Update()
     {
