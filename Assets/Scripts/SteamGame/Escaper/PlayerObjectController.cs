@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using Mirror;
 using Steamworks;
 using UnityEngine;
@@ -10,7 +12,7 @@ public enum PlayerRole
     Trapper
 }
 
-public class PlayerObjectController : NetworkBehaviour
+public partial class PlayerObjectController : NetworkBehaviour
 {
     // Player Data
     [SyncVar] public int connectionID;
@@ -233,17 +235,19 @@ public class PlayerObjectController : NetworkBehaviour
 
     [ClientRpc]
     public void RpcUpdatePlayerParams(bool state_allPlayersInGameScene, bool state_playersRolesSet,
-        List<PlayerObjectController> players)
+        List<PlayerRoles> roles)
     {
         if (!isClientOnly)
             return;
         MyNetworkManager.allPlayersInGameScene = state_allPlayersInGameScene;
         MyNetworkManager.playersRolesSet = state_playersRolesSet;
 
-        foreach (var player in players)
+        foreach (var player in roles)
         {
             if (player.playerID == this.playerID)
                 this.role = player.role;
+
+            Debug.Log("player role: " + player.role + " for playerID: " + player.playerID);
         }
 
         LobbyController.Instance.ShowPlayerRoleText();

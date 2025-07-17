@@ -15,7 +15,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
                 instance = FindObjectOfType<T>();
                 if (instance == null)
                 {
-                    Debug.LogError("An instance of " + typeof(T) + " is needed in the scene, but there is none.");
+                    Debug.LogWarning("An instance of " + typeof(T) + " is needed in the scene, but there is none.");
                 }
                 else
                 {

@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11831f3830564a0e9057528cf69f53e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 100
+  rotationSpeed: 350
   planeRotationCanvas: {fileID: 6678460632507702836}
   trapperCamera: {fileID: 5258612990561331228}
   planeToRotate: {fileID: 0}

@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Mirror;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Steamworks;
+using Random = UnityEngine.Random;
 
 public partial class MyNetworkManager
 {
@@ -157,14 +159,34 @@ public partial class MyNetworkManager
         allPlayersInGameScene = true;
     }
 
-    public void SetPlayersRoles()
+    public List<PlayerRoles> SetPlayersRoles()
     {
         var shuffledPlayers = GamePlayers.OrderBy(_ => Random.value).ToList();
         playersRolesSet = true;
         if (shuffledPlayers.Count < 2)
-            return; // Escaper
+            return null; // Escaper
 
         shuffledPlayers[0].role = PlayerRole.Trapper;
         shuffledPlayers[1].role = PlayerRole.Escaper;
+
+        List<PlayerRoles> roles = new();
+        foreach (var player in shuffledPlayers)
+        {
+            roles.Add(new PlayerRoles(player.playerID, player.role));
+        }
+
+        return roles;
+    }
+}
+
+public struct PlayerRoles
+{
+    public int playerID;
+    public PlayerRole role;
+
+    public PlayerRoles(int id, PlayerRole r)
+    {
+        playerID = id;
+        role = r;
     }
 }
