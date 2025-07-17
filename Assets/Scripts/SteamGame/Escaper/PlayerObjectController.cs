@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Mirror;
 using Steamworks;
 using UnityEngine;
@@ -8,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public enum PlayerRole
 {
+    None,
     Escaper,
     Trapper
 }
@@ -40,7 +39,7 @@ public partial class PlayerObjectController : NetworkBehaviour
         }
     }
 
-    [HideInInspector] public PlayerRole role = PlayerRole.Escaper;
+    [HideInInspector] public PlayerRole role = PlayerRole.None;
 
     private void Update()
     {
@@ -192,7 +191,8 @@ public partial class PlayerObjectController : NetworkBehaviour
                     LobbyController.Instance.LocalPlayerObjectController.transform.position =
                         new Vector3(1000, 1000, 1000); // offscreen
                 }
-                else if (LobbyController.Instance.LocalPlayerObjectController.role == PlayerRole.Escaper)
+                else if (LobbyController.Instance.LocalPlayerObjectController.role == PlayerRole.Escaper ||
+                         LobbyController.Instance.LocalPlayerObjectController.role == PlayerRole.None)
                 {
                     if (planeRotation != null)
                     {

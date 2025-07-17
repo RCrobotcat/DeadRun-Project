@@ -164,7 +164,10 @@ public partial class MyNetworkManager
         var shuffledPlayers = GamePlayers.OrderBy(_ => Random.value).ToList();
         playersRolesSet = true;
         if (shuffledPlayers.Count < 2)
+        {
+            shuffledPlayers[0].role = PlayerRole.Escaper;
             return null; // Escaper
+        }
 
         shuffledPlayers[0].role = PlayerRole.Trapper;
         shuffledPlayers[1].role = PlayerRole.Escaper;
