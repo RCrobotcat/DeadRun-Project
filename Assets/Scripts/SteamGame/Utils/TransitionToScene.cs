@@ -87,10 +87,15 @@ public class TransitionToScene : NetworkBehaviour
                 playerMove.enabled = true;
             }
 
-            if (CameraController.Instance.freeLookCam.Target.TrackingTarget == null)
-                CameraController.Instance.freeLookCam.Target.TrackingTarget = player.transform;
-            
-            player.GetComponent<PlayerObjectController>().SetPlayerUIState(true);
+
+            if (player.GetComponent<PlayerObjectController>().playerID ==
+                LobbyController.Instance.LocalPlayerObjectController.playerID)
+            {
+                if (CameraController.Instance.freeLookCam.Target.TrackingTarget == null)
+                    CameraController.Instance.freeLookCam.Target.TrackingTarget = player.transform;
+
+                player.GetComponent<PlayerObjectController>().SetPlayerUIState(true);
+            }
         }
     }
 }
