@@ -73,7 +73,7 @@ public partial class LobbyController
 
         if (NetworkServer.active)
             if (scenePathName == SceneManager.GetSceneByName("Scene_4_Terrain").path)
-                TerrainController.Instance.CanGenerateTerrain = false;
+                TerrainController.Instance.CanGenerateTerrain = true;
     }
 
     [ServerCallback]
