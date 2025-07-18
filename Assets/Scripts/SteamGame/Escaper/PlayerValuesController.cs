@@ -78,8 +78,12 @@ public partial class PlayerObjectController
     void DieIn1V1()
     {
         Debug.Log($"Player {playerID} died in 1v1.");
-        if (NetworkServer.active)
-            RpcTransitionToNextLevelScene();
+        if (!NetworkServer.active)
+        {
+            LobbyController.Instance.ShowMissionFailedText("Mission Failed: " + "\n" + "You died in 1v1!");
+            fellCountText.gameObject.SetActive(false);
+            CmdTransitionToNextLevelScene();
+        }
         else
         {
             LobbyController.Instance.ShowMissionFailedText("Mission Failed: " + "\n" + "You died in 1v1!");
@@ -102,13 +106,10 @@ public partial class PlayerObjectController
         LobbyController.Instance.DeadEscaperCount++;
     }
 
-    [ClientRpc]
-    private void RpcTransitionToNextLevelScene()
+    [Command(requiresAuthority = false)]
+    void CmdTransitionToNextLevelScene()
     {
-        if (!isClientOnly)
-            return;
-
-        LobbyController.Instance.ShowMissionFailedText("Mission Failed: " + "\n" + "You died in 1v1!");
-        fellCountText.gameObject.SetActive(false);
+        LobbyController.Instance.TransitionAllPlayersToScene(SceneManager.GetSceneByName("Scene_4_Terrain").path,
+            "SpawnPos", SceneManager.GetSceneByName("Scene_3_1v1").path);
     }
 }

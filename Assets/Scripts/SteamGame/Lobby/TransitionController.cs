@@ -70,10 +70,6 @@ public partial class LobbyController
                 StartCoroutine(SendNewPlayerToScene(player.gameObject, scenePathName, scenePosToSpawnOn,
                     previousScenePath));
         }
-
-        if (NetworkServer.active)
-            if (scenePathName == SceneManager.GetSceneByName("Scene_4_Terrain").path)
-                TerrainController.Instance.CanGenerateTerrain = true;
     }
 
     [ServerCallback]
@@ -138,13 +134,23 @@ public partial class LobbyController
             if (NetworkServer.active)
                 player.GetComponent<PlayerObjectController>().RpcUpdatePlayerParamsAfterTransition();
 
-            // 1v1 Scene Transition
-            if (transitionToSceneName == SceneManager.GetSceneByName("Scene_3_1v1").path)
-            {
-                Show1v1Text();
-                if (NetworkServer.active)
-                    player.GetComponent<PlayerObjectController>().RpcShow1v1Text();
-            }
+            NextSceneSettings(transitionToSceneName, player);
         }
+    }
+
+    void NextSceneSettings(string transitionToSceneName, GameObject player)
+    {
+        // 1v1 Scene Transition
+        if (transitionToSceneName == SceneManager.GetSceneByName("Scene_3_1v1").path)
+        {
+            Show1v1Text();
+            if (NetworkServer.active)
+                player.GetComponent<PlayerObjectController>().RpcShow1v1Text();
+        }
+
+        // Scene 4 Terrain Transition
+        if (transitionToSceneName == SceneManager.GetSceneByName("Scene_4_Terrain").path)
+            if (NetworkServer.active)
+                TerrainController.Instance.CanGenerateTerrain = true;
     }
 }
