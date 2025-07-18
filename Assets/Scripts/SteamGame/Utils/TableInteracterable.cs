@@ -124,23 +124,9 @@ public class TableInteracterable : NetworkBehaviour
                         StartCoroutine(transitionToScene.SendNewPlayerToScene(player.gameObject));
 
                     if (NetworkServer.active)
-                        RpcPrepareSendPlayerToNewScene();
+                        player.RpcUpdatePlayerParamsAfterTransition();
                 }
             }
         }
-    }
-
-    [ClientRpc]
-    void RpcPrepareSendPlayerToNewScene()
-    {
-        if (!isClientOnly)
-            return;
-
-        PlayerObjectController player = LobbyController.Instance.LocalPlayerObjectController;
-
-        CameraController.Instance.freeLookCam.Target.TrackingTarget = player.transform;
-        player.role = PlayerRole.Escaper;
-
-        player.GetComponent<PlayerObjectController>().SetPlayerUIState(true);
     }
 }

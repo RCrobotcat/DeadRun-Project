@@ -272,4 +272,19 @@ public partial class PlayerObjectController : NetworkBehaviour
         if (LobbyController.Instance.LocalPlayerObjectController.role == PlayerRole.Escaper)
             LobbyController.Instance.LocalPlayerObjectController.SetPlayerUIState(true);
     }
+
+    [ClientRpc]
+    public void RpcUpdatePlayerParamsAfterTransition()
+    {
+        if (!isClientOnly)
+            return;
+
+        PlayerObjectController player = LobbyController.Instance.LocalPlayerObjectController;
+
+        if (CameraController.Instance.freeLookCam.Target.TrackingTarget == null)
+            CameraController.Instance.freeLookCam.Target.TrackingTarget = player.transform;
+
+        if (player.role == PlayerRole.Escaper)
+            player.GetComponent<PlayerObjectController>().SetPlayerUIState(true);
+    }
 }
