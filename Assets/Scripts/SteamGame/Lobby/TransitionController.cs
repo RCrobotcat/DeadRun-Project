@@ -10,6 +10,7 @@ public partial class LobbyController
     private int trapperCount = 1;
 
     int deadEscaperCount = 0;
+    [HideInInspector] public string previousScenePath = SceneManager.GetSceneByName("Scene_1").path;
 
     public int DeadEscaperCount
     {
@@ -20,12 +21,12 @@ public partial class LobbyController
             if (deadEscaperCount >= escaperCount)
             {
                 deadEscaperCount = 0;
-                TransitionAllPlayersTo1V1();
+                TransitionAllPlayersTo1V1(previousScenePath);
             }
         }
     }
 
-    public void TransitionAllPlayersTo1V1()
+    public void TransitionAllPlayersTo1V1(string previousScenePath)
     {
         PlayerObjectController[] allPlayers = FindObjectsOfType<PlayerObjectController>();
         foreach (var player in allPlayers)
@@ -43,7 +44,7 @@ public partial class LobbyController
 
                 if (player.isServer)
                     StartCoroutine(SendNewPlayerToScene(player.gameObject,
-                        SceneManager.GetSceneByName("Scene_3_1v1").path, "SpawnPos"));
+                        SceneManager.GetSceneByName("Scene_3_1v1").path, "SpawnPos", previousScenePath));
             }
             else if (player.role == PlayerRole.Escaper)
             {
@@ -52,12 +53,12 @@ public partial class LobbyController
 
                 if (player.isServer)
                     StartCoroutine(SendNewPlayerToScene(player.gameObject,
-                        SceneManager.GetSceneByName("Scene_3_1v1").path, "SpawnPos"));
+                        SceneManager.GetSceneByName("Scene_3_1v1").path, "SpawnPos", previousScenePath));
             }
         }
     }
 
-    public void TransitionAllPlayersToScene(string scenePathName, string scenePosToSpawnOn)
+    public void TransitionAllPlayersToScene(string scenePathName, string scenePosToSpawnOn, string previousScenePath)
     {
         PlayerObjectController[] allPlayers = FindObjectsOfType<PlayerObjectController>();
         foreach (var player in allPlayers)
@@ -66,7 +67,8 @@ public partial class LobbyController
                 pm.enabled = false;
 
             if (player.isServer)
-                StartCoroutine(SendNewPlayerToScene(player.gameObject, scenePathName, scenePosToSpawnOn));
+                StartCoroutine(SendNewPlayerToScene(player.gameObject, scenePathName, scenePosToSpawnOn,
+                    previousScenePath));
         }
 
         if (NetworkServer.active)
@@ -75,7 +77,8 @@ public partial class LobbyController
     }
 
     [ServerCallback]
-    public IEnumerator SendNewPlayerToScene(GameObject player, string transitionToSceneName, string scenePosToSpawnOn)
+    public IEnumerator SendNewPlayerToScene(GameObject player, string transitionToSceneName, string scenePosToSpawnOn,
+        string previousScenePath)
     {
         if (player.TryGetComponent<NetworkIdentity>(out NetworkIdentity identity))
         {
@@ -85,7 +88,7 @@ public partial class LobbyController
 
             conn.Send(new SceneMessage()
             {
-                sceneName = gameObject.scene.path,
+                sceneName = previousScenePath,
                 sceneOperation = SceneOperation.UnloadAdditive,
                 customHandling = true
             });

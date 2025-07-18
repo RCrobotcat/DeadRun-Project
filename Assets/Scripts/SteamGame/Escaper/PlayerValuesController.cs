@@ -67,7 +67,7 @@ public partial class PlayerObjectController
         fellCountText.text = "Try not to die!";
 
         if (!NetworkServer.active)
-            CmdSetDeadEscaperCount();
+            CmdSetDeadEscaperCount(SceneManager.GetSceneByName("Scene_1").path);
         else
             LobbyController.Instance.DeadEscaperCount++;
     }
@@ -85,8 +85,9 @@ public partial class PlayerObjectController
     }
 
     [Command(requiresAuthority = false)]
-    void CmdSetDeadEscaperCount()
+    void CmdSetDeadEscaperCount(string previousScenePath)
     {
+        LobbyController.Instance.previousScenePath = previousScenePath;
         LobbyController.Instance.DeadEscaperCount++;
     }
 }
