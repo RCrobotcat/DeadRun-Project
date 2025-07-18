@@ -439,8 +439,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000030398369, y: 0}
-  m_SizeDelta: {x: 326.3289, y: 92.53961}
+  m_AnchoredPosition: {x: 44, y: 0}
+  m_SizeDelta: {x: 388.576, y: 92.5396}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &690284615
 MonoBehaviour:
@@ -490,7 +490,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Mission Failed
+  m_Text: "Mission Failed: \nFell too many times!"
 --- !u!222 &690284617
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1157,7 +1157,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1877291222
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1625,6 +1625,7 @@ MonoBehaviour:
   oneVOnePanel: {fileID: 785332334}
   missionSuccessPanel: {fileID: 1503491619}
   missionFailedPanel: {fileID: 1877291221}
+  previousScenePath: 
 --- !u!1 &8654477926394538262
 GameObject:
   m_ObjectHideFlags: 0

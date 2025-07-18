@@ -10,7 +10,7 @@ public partial class LobbyController
     private int trapperCount = 1;
 
     int deadEscaperCount = 0;
-    [HideInInspector] public string previousScenePath = SceneManager.GetSceneByName("Scene_1").path;
+    [HideInInspector] public string previousScenePath = "";
 
     public int DeadEscaperCount
     {

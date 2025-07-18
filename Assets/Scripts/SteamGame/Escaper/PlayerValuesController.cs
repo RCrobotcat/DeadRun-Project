@@ -62,20 +62,23 @@ public partial class PlayerObjectController
     private void MissionFailed()
     {
         Debug.Log("Mission Failed: Fell too many times.");
-        LobbyController.Instance.ShowMissionFailedText();
+        LobbyController.Instance.ShowMissionFailedText("Mission Failed:" + "\n" + " Fell too many times!");
         fellCount = 0;
         fellCountText.text = "Try not to die!";
 
         if (!NetworkServer.active)
             CmdSetDeadEscaperCount(SceneManager.GetSceneByName("Scene_1").path);
         else
+        {
+            LobbyController.Instance.previousScenePath = SceneManager.GetSceneByName("Scene_1").path;
             LobbyController.Instance.DeadEscaperCount++;
+        }
     }
 
     void DieIn1V1()
     {
         Debug.Log($"Player {playerID} died in 1v1.");
-        LobbyController.Instance.ShowMissionFailedText();
+        LobbyController.Instance.ShowMissionFailedText("Mission Failed: " + "\n" + "You died in 1v1!");
     }
 
     public void SetPlayerUIState(bool state)

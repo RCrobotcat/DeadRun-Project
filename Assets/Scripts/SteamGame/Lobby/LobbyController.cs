@@ -322,11 +322,12 @@ public partial class LobbyController : Singleton<LobbyController>
             (a) => { missionSuccessPanel.transform.localScale = a; }, () => { missionSuccessPanel.SetActive(false); });
     }
 
-    public void ShowMissionFailedText()
+    public void ShowMissionFailedText(string text)
     {
         missionFailedPanel.SetActive(true);
         missionFailedPanel.transform.localScale.To(Vector3.one * 1.5f, 2.5f,
             (a) => { missionFailedPanel.transform.localScale = a; }, () => { missionFailedPanel.SetActive(false); });
+        missionFailedPanel.GetComponentInChildren<Text>().text = text;
     }
 
     #endregion
