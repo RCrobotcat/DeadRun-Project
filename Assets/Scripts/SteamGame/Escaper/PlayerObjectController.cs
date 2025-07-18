@@ -290,4 +290,13 @@ public partial class PlayerObjectController : NetworkBehaviour
             player.SetPlayerUIState(true);
         }
     }
+
+    [ClientRpc]
+    public void RpcShow1v1Text()
+    {
+        if (!isClientOnly)
+            return;
+
+        LobbyController.Instance.Show1v1Text();
+    }
 }

@@ -105,17 +105,8 @@ public class TransitionToScene : NetworkBehaviour
             {
                 LobbyController.Instance.Show1v1Text();
                 if (NetworkServer.active)
-                    RpcShow1v1Text();
+                    player.GetComponent<PlayerObjectController>().RpcShow1v1Text();
             }
         }
-    }
-
-    [ClientRpc]
-    void RpcShow1v1Text()
-    {
-        if (!isClientOnly)
-            return;
-
-        LobbyController.Instance.Show1v1Text();
     }
 }
