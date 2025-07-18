@@ -99,6 +99,23 @@ public class TransitionToScene : NetworkBehaviour
 
             if (NetworkServer.active)
                 player.GetComponent<PlayerObjectController>().RpcUpdatePlayerParamsAfterTransition();
+
+            // 1v1 Scene Transition
+            if (transitionToSceneName == SceneManager.GetSceneByName("Scene_3_1v1").path)
+            {
+                LobbyController.Instance.Show1v1Text();
+                if (NetworkServer.active)
+                    RpcShow1v1Text();
+            }
         }
+    }
+
+    [ClientRpc]
+    void RpcShow1v1Text()
+    {
+        if (!isClientOnly)
+            return;
+
+        LobbyController.Instance.Show1v1Text();
     }
 }

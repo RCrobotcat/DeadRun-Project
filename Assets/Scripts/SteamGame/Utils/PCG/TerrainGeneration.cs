@@ -19,20 +19,23 @@ public class TerrainGeneration : MonoBehaviour
     {
         terrain = GetComponent<Terrain>();
         terrainCollider = GetComponent<TerrainCollider>();
-        GenerateTerrainFromTexture();
+        //GenerateTerrainFromTexture();
     }
 
     private void Update()
     {
-        if (lastHeightMultiplier != heightMultiplier)
+        if (terrainData != null)
         {
-            terrainData.size = new Vector3(noiseTexture.width, heightMultiplier, noiseTexture.height);
-            terrainCollider.terrainData = terrainData;
-            lastHeightMultiplier = heightMultiplier;
+            if (lastHeightMultiplier != heightMultiplier)
+            {
+                terrainData.size = new Vector3(noiseTexture.width, heightMultiplier, noiseTexture.height);
+                terrainCollider.terrainData = terrainData;
+                lastHeightMultiplier = heightMultiplier;
+            }
         }
     }
 
-    void GenerateTerrainFromTexture()
+    public void GenerateTerrainFromTexture()
     {
         terrainData = new TerrainData();
         terrainData.heightmapResolution = noiseTexture.width + 1;

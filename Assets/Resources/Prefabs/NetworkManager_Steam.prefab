@@ -790,7 +790,7 @@ MonoBehaviour:
   evaluationMethod: 0
   evaluationInterval: 3
   timeInterpolationGui: 0
-  allPlayersInGameScene: 0
+  allPlayersInGameScene_server: 0
   playersRolesSet: 0
   fadeinOutScreen: {fileID: 0}
   firstSceneToLoad: PersistentScene

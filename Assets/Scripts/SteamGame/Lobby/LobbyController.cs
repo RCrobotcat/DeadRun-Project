@@ -66,7 +66,7 @@ public class LobbyController : Singleton<LobbyController>
                         MyNetworkManager.playersRolesSet, roles);
 
                 ShowPlayerRoleText();
-                if(LocalPlayerObjectController.role == PlayerRole.Escaper)
+                if (LocalPlayerObjectController.role == PlayerRole.Escaper)
                     LocalPlayerObjectController.SetPlayerUIState(true);
             }
         }
@@ -209,6 +209,16 @@ public class LobbyController : Singleton<LobbyController>
         playerRoleText.text = LocalPlayerObjectController.role.ToString();
         roleTxtPanel.transform.localScale.To(Vector3.one * 1.5f, 2.5f,
             (a) => { roleTxtPanel.transform.localScale = a; }, () => { roleTxtPanel.SetActive(false); });
+    }
+
+    [Header("1v1 Text")] public Text oneVOneText;
+    public GameObject oneVOnePanel;
+
+    public void Show1v1Text()
+    {
+        oneVOnePanel.SetActive(true);
+        oneVOnePanel.transform.localScale.To(Vector3.one * 1.5f, 2.5f,
+            (a) => { oneVOnePanel.transform.localScale = a; }, () => { oneVOnePanel.SetActive(false); });
     }
 
     public void UpdateReadyBtn()

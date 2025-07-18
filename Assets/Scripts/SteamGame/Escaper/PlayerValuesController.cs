@@ -53,8 +53,8 @@ public partial class PlayerObjectController
     private void Awake()
     {
         currentHealth = maxHealth;
-        healthBarFillImage.fillAmount = 1f;
-        fellCountText.text = "0/3";
+        healthBarFillImage.fillAmount = currentHealth / maxHealth;
+        fellCountText.text = fellCount.ToString() + "/3";
     }
 
     private void MissionFailed()
