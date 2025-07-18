@@ -13,14 +13,7 @@ public class TerrainController : Singleton<TerrainController>
         {
             canGenerateTerrain = value;
             if (canGenerateTerrain)
-            {
-                terrainGeneration.gameObject.SetActive(true);
                 terrainGeneration.GenerateTerrainFromTexture();
-            }
-            else
-            {
-                terrainGeneration.gameObject.SetActive(false);
-            }
         }
     }
 

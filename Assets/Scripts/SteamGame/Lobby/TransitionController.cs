@@ -149,8 +149,8 @@ public partial class LobbyController
         }
 
         // Scene 4 Terrain Transition
-        if (transitionToSceneName == SceneManager.GetSceneByName("Scene_4_Terrain").path)
-            if (NetworkServer.active)
-                TerrainController.Instance.CanGenerateTerrain = true;
+        // if (transitionToSceneName == SceneManager.GetSceneByName("Scene_4_Terrain").path)
+        //     if (NetworkServer.active)
+        //         TerrainController.Instance.CanGenerateTerrain = true;
     }
 }
