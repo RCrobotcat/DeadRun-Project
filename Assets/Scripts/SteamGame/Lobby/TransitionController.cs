@@ -26,7 +26,7 @@ public partial class LobbyController
         }
     }
 
-    public void TransitionAllPlayersTo1V1(string previousScenePath)
+    void TransitionAllPlayersTo1V1(string previousScenePath)
     {
         PlayerObjectController[] allPlayers = FindObjectsOfType<PlayerObjectController>();
         foreach (var player in allPlayers)
