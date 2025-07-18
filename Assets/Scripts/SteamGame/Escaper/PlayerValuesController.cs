@@ -1,6 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.IO;
+using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Mirror;
+using UnityEngine.SceneManagement;
 
 public partial class PlayerObjectController
 {
@@ -42,8 +46,8 @@ public partial class PlayerObjectController
         set
         {
             fellCount = value;
-            fellCountText.text = fellCount.ToString() + "/3";
-            if (fellCount > 3)
+            fellCountText.text = fellCount.ToString() + "/5";
+            if (fellCount > 5)
             {
                 MissionFailed();
             }
@@ -54,26 +58,114 @@ public partial class PlayerObjectController
     {
         currentHealth = maxHealth;
         healthBarFillImage.fillAmount = currentHealth / maxHealth;
-        fellCountText.text = fellCount.ToString() + "/3";
+        fellCountText.text = fellCount.ToString() + "/5";
     }
 
     private void MissionFailed()
     {
         Debug.Log("Mission Failed: Fell too many times.");
+        LobbyController.Instance.ShowMissionFailedText();
         fellCount = 0;
-        fellCountText.text = "0/3";
-        // TODO: Go to 1v1
+        fellCountText.text = "Try to defeat the trapper!";
+
+        StartCoroutine(SendNewPlayerToScene(gameObject, SceneManager.GetSceneByName("Scene_3_1v1").path, "SpawnPos"));
     }
 
     void DieIn1V1()
     {
         Debug.Log($"Player {playerID} died in 1v1.");
-        // TODO
+        LobbyController.Instance.ShowMissionFailedText();
+
+        PlayerObjectController[] allPlayers = FindObjectsOfType<PlayerObjectController>();
+        foreach (var player in allPlayers)
+        {
+            if (player.TryGetComponent<PlayerMovement>(out PlayerMovement pm))
+                pm.enabled = false;
+
+            if (isServer)
+                StartCoroutine(SendNewPlayerToScene(player.gameObject,
+                    SceneManager.GetSceneByName("Scene_4_Terrain").path, "SpawnPos"));
+        }
+
+        if (NetworkServer.active)
+            TerrainController.Instance.CanGenerateTerrain = true;
     }
 
     public void SetPlayerUIState(bool state)
     {
         healthBarBase.SetActive(state);
         fellCountText.gameObject.SetActive(state);
+    }
+
+    [ServerCallback]
+    public IEnumerator SendNewPlayerToScene(GameObject player, string transitionToSceneName, string scenePosToSpawnOn)
+    {
+        if (player.TryGetComponent<NetworkIdentity>(out NetworkIdentity identity))
+        {
+            NetworkConnectionToClient conn = identity.connectionToClient;
+            if (conn == null)
+                yield break;
+
+            conn.Send(new SceneMessage()
+            {
+                sceneName = gameObject.scene.path,
+                sceneOperation = SceneOperation.UnloadAdditive,
+                customHandling = true
+            });
+
+            yield return new WaitForSeconds(MyNetworkManager.fadeinOutScreen.speed * 0.1f);
+
+            NetworkServer.RemovePlayerForConnection(conn, false);
+
+            NetworkStartPosition[] startPositions = FindObjectsOfType<NetworkStartPosition>();
+            Transform startPos = MyNetworkManager.GetStartPosition();
+            foreach (var item in startPositions)
+            {
+                if (item.gameObject.scene.name == Path.GetFileNameWithoutExtension(transitionToSceneName) &&
+                    item.name == scenePosToSpawnOn)
+                {
+                    startPos = item.transform;
+                }
+            }
+
+            player.transform.position = startPos.position;
+
+            SceneManager.MoveGameObjectToScene(player, SceneManager.GetSceneByPath(transitionToSceneName));
+            conn.Send(new SceneMessage()
+            {
+                sceneName = transitionToSceneName,
+                sceneOperation = SceneOperation.LoadAdditive,
+                customHandling = true
+            });
+
+            NetworkServer.AddPlayerForConnection(conn, player);
+
+            if (NetworkClient.localPlayer != null &&
+                player.TryGetComponent<PlayerMovement>(out PlayerMovement playerMove))
+            {
+                playerMove.enabled = true;
+            }
+
+
+            if (player.GetComponent<PlayerObjectController>().playerID ==
+                LobbyController.Instance.LocalPlayerObjectController.playerID)
+            {
+                if (CameraController.Instance.freeLookCam.Target.TrackingTarget == null)
+                    CameraController.Instance.freeLookCam.Target.TrackingTarget = player.transform;
+
+                player.GetComponent<PlayerObjectController>().SetPlayerUIState(true);
+            }
+
+            if (NetworkServer.active)
+                player.GetComponent<PlayerObjectController>().RpcUpdatePlayerParamsAfterTransition();
+
+            // 1v1 Scene Transition
+            if (transitionToSceneName == SceneManager.GetSceneByName("Scene_3_1v1").path)
+            {
+                LobbyController.Instance.Show1v1Text();
+                if (NetworkServer.active)
+                    player.GetComponent<PlayerObjectController>().RpcShow1v1Text();
+            }
+        }
     }
 }

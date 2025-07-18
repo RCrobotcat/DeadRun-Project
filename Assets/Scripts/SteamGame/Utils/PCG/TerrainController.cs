@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class TerrainController : MonoBehaviour
+public class TerrainController : Singleton<TerrainController>
 {
     public TerrainGeneration terrainGeneration;
 

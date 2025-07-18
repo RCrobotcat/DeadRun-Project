@@ -200,27 +200,6 @@ public class LobbyController : Singleton<LobbyController>
         MyNetworkManager.HandleSendPlayerToNewScene(scenePath, "SpawnPos");
     }
 
-    [Header("Player Role Text")] public Text playerRoleText;
-    public GameObject roleTxtPanel;
-
-    public void ShowPlayerRoleText()
-    {
-        roleTxtPanel.SetActive(true);
-        playerRoleText.text = LocalPlayerObjectController.role.ToString();
-        roleTxtPanel.transform.localScale.To(Vector3.one * 1.5f, 2.5f,
-            (a) => { roleTxtPanel.transform.localScale = a; }, () => { roleTxtPanel.SetActive(false); });
-    }
-
-    [Header("1v1 Text")] public Text oneVOneText;
-    public GameObject oneVOnePanel;
-
-    public void Show1v1Text()
-    {
-        oneVOnePanel.SetActive(true);
-        oneVOnePanel.transform.localScale.To(Vector3.one * 1.5f, 2.5f,
-            (a) => { oneVOnePanel.transform.localScale = a; }, () => { oneVOnePanel.SetActive(false); });
-    }
-
     public void UpdateReadyBtn()
     {
         if (LocalPlayerObjectController.isReady)
@@ -304,4 +283,46 @@ public class LobbyController : Singleton<LobbyController>
             }
         }
     }
+
+    #region Text Popups
+
+    [Header("Player Role Text")] public Text playerRoleText;
+    public GameObject roleTxtPanel;
+
+    public void ShowPlayerRoleText()
+    {
+        roleTxtPanel.SetActive(true);
+        playerRoleText.text = LocalPlayerObjectController.role.ToString();
+        roleTxtPanel.transform.localScale.To(Vector3.one * 1.5f, 2.5f,
+            (a) => { roleTxtPanel.transform.localScale = a; }, () => { roleTxtPanel.SetActive(false); });
+    }
+
+    [Header("1v1 Text")] public Text oneVOneText;
+    public GameObject oneVOnePanel;
+
+    public void Show1v1Text()
+    {
+        oneVOnePanel.SetActive(true);
+        oneVOnePanel.transform.localScale.To(Vector3.one * 1.5f, 2.5f,
+            (a) => { oneVOnePanel.transform.localScale = a; }, () => { oneVOnePanel.SetActive(false); });
+    }
+
+    [Header("Mission Status Text")] public GameObject missionSuccessPanel;
+    public GameObject missionFailedPanel;
+
+    public void ShowMissionSuccessText()
+    {
+        missionSuccessPanel.SetActive(true);
+        missionSuccessPanel.transform.localScale.To(Vector3.one * 1.5f, 2.5f,
+            (a) => { missionSuccessPanel.transform.localScale = a; }, () => { missionSuccessPanel.SetActive(false); });
+    }
+
+    public void ShowMissionFailedText()
+    {
+        missionFailedPanel.SetActive(true);
+        missionFailedPanel.transform.localScale.To(Vector3.one * 1.5f, 2.5f,
+            (a) => { missionFailedPanel.transform.localScale = a; }, () => { missionFailedPanel.SetActive(false); });
+    }
+
+    #endregion
 }

@@ -13,9 +13,9 @@ public partial class PlayerMovement
         {
             //playerObjectController.CurrentHealth -= 10f;
             if (NetworkServer.active)
-                RpcDamagePlayer(10f);
+                RpcDamagePlayer(5f);
             else
-                CmdDamagePlayer(10f);
+                CmdDamagePlayer(5f);
 
             Vector3 direction = (other.transform.position - transform.position).normalized;
             rb.AddForce(direction * shotForce, ForceMode.Impulse);
