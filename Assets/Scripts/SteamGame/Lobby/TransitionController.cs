@@ -19,6 +19,7 @@ public partial class LobbyController
             deadEscaperCount = value;
             if (deadEscaperCount >= escaperCount)
             {
+                deadEscaperCount = 0;
                 TransitionAllPlayersTo1V1();
             }
         }
@@ -123,8 +124,7 @@ public partial class LobbyController
             }
 
 
-            if (player.GetComponent<PlayerObjectController>().playerID ==
-                LobbyController.Instance.LocalPlayerObjectController.playerID)
+            if (player.GetComponent<PlayerObjectController>().playerID == LocalPlayerObjectController.playerID)
             {
                 if (CameraController.Instance.freeLookCam.Target.TrackingTarget == null)
                     CameraController.Instance.freeLookCam.Target.TrackingTarget = player.transform;
@@ -138,7 +138,7 @@ public partial class LobbyController
             // 1v1 Scene Transition
             if (transitionToSceneName == SceneManager.GetSceneByName("Scene_3_1v1").path)
             {
-                LobbyController.Instance.Show1v1Text();
+                Show1v1Text();
                 if (NetworkServer.active)
                     player.GetComponent<PlayerObjectController>().RpcShow1v1Text();
             }
