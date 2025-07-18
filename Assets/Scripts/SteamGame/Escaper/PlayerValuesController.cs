@@ -68,7 +68,34 @@ public partial class PlayerObjectController
         fellCount = 0;
         fellCountText.text = "Try to defeat the trapper!";
 
-        StartCoroutine(SendNewPlayerToScene(gameObject, SceneManager.GetSceneByName("Scene_3_1v1").path, "SpawnPos"));
+        PlayerObjectController[] allPlayers = FindObjectsOfType<PlayerObjectController>();
+        foreach (var player in allPlayers)
+        {
+            if (player.role == PlayerRole.Trapper)
+            {
+                CameraController.Instance.gameObject.SetActive(true);
+                CameraController.Instance.freeLookCam.Target.TrackingTarget = player.transform;
+                player.transform.position = Vector3.zero;
+                player.role = PlayerRole.Escaper;
+                player.SetPlayerUIState(true);
+
+                if (player.TryGetComponent<PlayerMovement>(out PlayerMovement pm))
+                    pm.enabled = false;
+
+                if (isServer)
+                    StartCoroutine(SendNewPlayerToScene(player.gameObject,
+                        SceneManager.GetSceneByName("Scene_3_1v1").path, "SpawnPos"));
+            }
+            else if (player.role == PlayerRole.Escaper)
+            {
+                if (player.TryGetComponent<PlayerMovement>(out PlayerMovement pm))
+                    pm.enabled = false;
+
+                if (isServer)
+                    StartCoroutine(SendNewPlayerToScene(player.gameObject,
+                        SceneManager.GetSceneByName("Scene_3_1v1").path, "SpawnPos"));
+            }
+        }
     }
 
     void DieIn1V1()
