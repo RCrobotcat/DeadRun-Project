@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Mirror;
 using Steamworks;
@@ -6,7 +8,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LobbyController : Singleton<LobbyController>
+public partial class LobbyController : Singleton<LobbyController>
 {
     public Text lobbyNameText;
     public GameObject playerListViewContent;
@@ -59,6 +61,9 @@ public class LobbyController : Singleton<LobbyController>
         {
             if (NetworkServer.active)
             {
+                trapperCount = 1;
+                escaperCount = MyNetworkManager.GamePlayers.Count - trapperCount;
+
                 roles = MyNetworkManager.SetPlayersRoles();
 
                 if (roles != null)
