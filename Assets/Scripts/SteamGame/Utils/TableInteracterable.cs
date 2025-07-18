@@ -122,9 +122,6 @@ public class TableInteracterable : NetworkBehaviour
 
                     if (isServer)
                         StartCoroutine(transitionToScene.SendNewPlayerToScene(player.gameObject));
-
-                    if (NetworkServer.active)
-                        player.RpcUpdatePlayerParamsAfterTransition();
                 }
             }
         }

@@ -279,12 +279,10 @@ public partial class PlayerObjectController : NetworkBehaviour
         if (!isClientOnly)
             return;
 
-        PlayerObjectController player = LobbyController.Instance.LocalPlayerObjectController;
-
         if (CameraController.Instance.freeLookCam.Target.TrackingTarget == null)
-            CameraController.Instance.freeLookCam.Target.TrackingTarget = player.transform;
+            CameraController.Instance.freeLookCam.Target.TrackingTarget = transform;
 
-        if (player.role == PlayerRole.Escaper)
-            player.GetComponent<PlayerObjectController>().SetPlayerUIState(true);
+        if (role == PlayerRole.Escaper)
+            SetPlayerUIState(true);
     }
 }
