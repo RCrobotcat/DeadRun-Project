@@ -19,7 +19,7 @@ public class TerrainGeneration : MonoBehaviour
     {
         terrain = GetComponent<Terrain>();
         terrainCollider = GetComponent<TerrainCollider>();
-        //GenerateTerrainFromTexture();
+        GenerateTerrainFromTexture();
     }
 
     private void Update()
