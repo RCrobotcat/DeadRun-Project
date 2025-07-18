@@ -168,6 +168,7 @@ GameObject:
   - component: {fileID: 1662049030306628975}
   - component: {fileID: 22865138841292321}
   - component: {fileID: 8045618767601314242}
+  - component: {fileID: 2534990473757051465}
   m_Layer: 3
   m_Name: TerrainWithDangerousWater
   m_TagString: Untagged
@@ -267,3 +268,20 @@ MonoBehaviour:
   heightMultiplier: 20
   grassLayer: {fileID: 8574412962073106934, guid: 93929caca176bfa4e9cb0539bb2c6cb5, type: 2}
   soilLayer: {fileID: 8574412962073106934, guid: ce3a9f657d13a844abcf34cded183953, type: 2}
+--- !u!114 &2534990473757051465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8146917111408207675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 3517175097
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
