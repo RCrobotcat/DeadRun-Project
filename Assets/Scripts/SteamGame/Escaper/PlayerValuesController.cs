@@ -80,6 +80,16 @@ public partial class PlayerObjectController
         Debug.Log($"Player {playerID} died in 1v1.");
         LobbyController.Instance.ShowMissionFailedText("Mission Failed: " + "\n" + "You died in 1v1!");
         fellCountText.gameObject.SetActive(false);
+
+        if (!NetworkServer.active)
+            CmdSetSendingAllPlayersToScene(SceneManager.GetSceneByName("Scene_4").path,
+                SceneManager.GetSceneByName("Scene_3_1v1").path);
+        else
+        {
+            LobbyController.Instance.nextScenePath = SceneManager.GetSceneByName("Scene_4").path;
+            LobbyController.Instance.previousScenePath = SceneManager.GetSceneByName("Scene_3_1v1").path;
+            LobbyController.Instance.NeedTransitionToOtherScene = true;
+        }
     }
 
     public void SetPlayerUIState(bool state)
@@ -93,5 +103,13 @@ public partial class PlayerObjectController
     {
         LobbyController.Instance.previousScenePath = previousScenePath;
         LobbyController.Instance.DeadEscaperCount++;
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdSetSendingAllPlayersToScene(string nextScenePath, string previousScenePath)
+    {
+        LobbyController.Instance.nextScenePath = nextScenePath;
+        LobbyController.Instance.previousScenePath = previousScenePath;
+        LobbyController.Instance.NeedTransitionToOtherScene = true;
     }
 }

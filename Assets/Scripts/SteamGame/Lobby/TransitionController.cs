@@ -21,7 +21,32 @@ public partial class LobbyController
             if (deadEscaperCount >= escaperCount)
             {
                 deadEscaperCount = 0;
-                TransitionAllPlayersTo1V1(previousScenePath);
+
+                string previousScenePathTemp = previousScenePath;
+                previousScenePath = "";
+                TransitionAllPlayersTo1V1(previousScenePathTemp);
+            }
+        }
+    }
+
+    private bool needTransitionToOtherScene = false;
+    [HideInInspector] public string nextScenePath = "";
+
+    public bool NeedTransitionToOtherScene
+    {
+        get => needTransitionToOtherScene;
+        set
+        {
+            needTransitionToOtherScene = value;
+            if (needTransitionToOtherScene)
+            {
+                needTransitionToOtherScene = false;
+
+                string nextScenePathTemp = nextScenePath;
+                nextScenePath = "";
+                string previousScenePathTemp = previousScenePath;
+                previousScenePath = "";
+                TransitionAllPlayersToScene(nextScenePathTemp, "SpawnPos", previousScenePathTemp);
             }
         }
     }
