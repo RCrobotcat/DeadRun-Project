@@ -359,7 +359,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 411a48b4a197d4924bec3e3809bc9320, type: 2}
+  - {fileID: 2100000, guid: 0030806f360ed9d4e9b3b25723e91f9f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1626,6 +1626,7 @@ MonoBehaviour:
   missionSuccessPanel: {fileID: 1503491619}
   missionFailedPanel: {fileID: 1877291221}
   previousScenePath: 
+  nextScenePath: 
 --- !u!1 &8654477926394538262
 GameObject:
   m_ObjectHideFlags: 0

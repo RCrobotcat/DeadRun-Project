@@ -6,12 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="7061f1fe-81be-4fca-999e-11768f455133" name="Changes" comment="modified">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Guns/ExplotionPistol.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Guns/ExplotionPistol.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Water/TerrainWithDangerousWater.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Water/TerrainWithDangerousWater.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/DemoScene/OfflineScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DemoScene/OfflineScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/DemoScene/PersistentScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DemoScene/PersistentScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/DemoScene/Scene_3_1v1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DemoScene/Scene_3_1v1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/DemoScene/Scene_4.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DemoScene/Scene_4.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/DemoScene/Scene_4.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DemoScene/Scene_4.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Escaper/PlayerValuesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Escaper/PlayerValuesController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Lobby/TransitionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Lobby/TransitionController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,10 +57,12 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0900e0d4bb644dafbfd59eb7fd222a681ddc00/02/e7a2cb8f/SceneManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0900e0d4bb644dafbfd59eb7fd222a681ddc00/35/8697b773/GameObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6524f18ff747462d8847618bfcedbe402ac00/59/324ce4f5/QueryTriggerInteraction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ed969b0e627d471da4848289f9c322df46ae00/55/8b89858c/ThrowHelper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/EventSystemController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/PCG/SeamlessNoiseGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/PCG/TerrainGeneration.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine/Runtime/Core/CameraTarget.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal/Runtime/UniversalAdditionalCameraData.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal/ShaderLibrary/DeclareOpaqueTexture.hlsl" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui/Runtime/UGUI/EventSystem/EventSystem.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -123,13 +128,15 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="33960">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="33960" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list />
+        <list>
+          <MonoRuntime />
+        </list>
       </option>
       <option name="selectedOptions">
         <list />
@@ -166,7 +173,8 @@
       <workItem from="1752505041410" duration="9046000" />
       <workItem from="1752761806165" duration="892000" />
       <workItem from="1752764580636" duration="5036000" />
-      <workItem from="1752980441659" duration="1921000" />
+      <workItem from="1752980441659" duration="2250000" />
+      <workItem from="1752989654747" duration="8481000" />
     </task>
     <task id="LOCAL-00001" summary="fixed exit lobby bugs">
       <option name="closed" value="true" />
@@ -232,7 +240,15 @@
       <option name="project" value="LOCAL" />
       <updated>1752426354757</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="modified">
+      <option name="closed" value="true" />
+      <created>1752983420071</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1752983420071</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

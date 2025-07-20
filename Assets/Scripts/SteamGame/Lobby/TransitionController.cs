@@ -51,9 +51,10 @@ public partial class LobbyController
         }
     }
 
-    void TransitionAllPlayersTo1V1(string previousScenePath)
+    void TransitionAllPlayersTo1V1(string previousScenePathName)
     {
         PlayerObjectController[] allPlayers = FindObjectsOfType<PlayerObjectController>();
+
         foreach (var player in allPlayers)
         {
             if (player.role == PlayerRole.Trapper)
@@ -66,40 +67,47 @@ public partial class LobbyController
 
                 if (player.TryGetComponent<PlayerMovement>(out PlayerMovement pm))
                     pm.enabled = false;
+                if (player.transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
+                    gunShooting.enabled = false;
 
                 if (player.isServer)
                     StartCoroutine(SendNewPlayerToScene(player.gameObject,
-                        SceneManager.GetSceneByName("Scene_3_1v1").path, "SpawnPos", previousScenePath));
+                        SceneManager.GetSceneByName("Scene_3_1v1").path, "SpawnPos", previousScenePathName));
             }
             else if (player.role == PlayerRole.Escaper)
             {
                 if (player.TryGetComponent<PlayerMovement>(out PlayerMovement pm))
                     pm.enabled = false;
+                if (player.transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
+                    gunShooting.enabled = false;
 
                 if (player.isServer)
                     StartCoroutine(SendNewPlayerToScene(player.gameObject,
-                        SceneManager.GetSceneByName("Scene_3_1v1").path, "SpawnPos", previousScenePath));
+                        SceneManager.GetSceneByName("Scene_3_1v1").path, "SpawnPos", previousScenePathName));
             }
         }
     }
 
-    public void TransitionAllPlayersToScene(string scenePathName, string scenePosToSpawnOn, string previousScenePath)
+    public void TransitionAllPlayersToScene(string scenePathName, string scenePosToSpawnOn,
+        string previousScenePathName)
     {
         PlayerObjectController[] allPlayers = FindObjectsOfType<PlayerObjectController>();
         foreach (var player in allPlayers)
         {
             if (player.TryGetComponent<PlayerMovement>(out PlayerMovement pm))
                 pm.enabled = false;
+            if (player.transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
+                gunShooting.enabled = false;
 
             if (player.isServer)
                 StartCoroutine(SendNewPlayerToScene(player.gameObject, scenePathName, scenePosToSpawnOn,
-                    previousScenePath));
+                    previousScenePathName));
         }
     }
 
     [ServerCallback]
     public IEnumerator SendNewPlayerToScene(GameObject player, string transitionToSceneName, string scenePosToSpawnOn,
-        string previousScenePath)
+        string previousScenePathName)
     {
         if (player.TryGetComponent<NetworkIdentity>(out NetworkIdentity identity))
         {
@@ -109,7 +117,7 @@ public partial class LobbyController
 
             conn.Send(new SceneMessage()
             {
-                sceneName = previousScenePath,
+                sceneName = previousScenePathName,
                 sceneOperation = SceneOperation.UnloadAdditive,
                 customHandling = true
             });
@@ -143,10 +151,9 @@ public partial class LobbyController
 
             if (NetworkClient.localPlayer != null &&
                 player.TryGetComponent<PlayerMovement>(out PlayerMovement playerMove))
-            {
                 playerMove.enabled = true;
-            }
-
+            if (player.transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
+                gunShooting.enabled = true;
 
             if (player.GetComponent<PlayerObjectController>().playerID == LocalPlayerObjectController.playerID)
             {
@@ -172,10 +179,5 @@ public partial class LobbyController
             if (NetworkServer.active)
                 player.GetComponent<PlayerObjectController>().RpcShow1v1Text();
         }
-
-        // Scene 4 Terrain Transition
-        // if (transitionToSceneName == SceneManager.GetSceneByName("Scene_4_Terrain").path)
-        //     if (NetworkServer.active)
-        //         TerrainController.Instance.CanGenerateTerrain = true;
     }
 }

@@ -10,7 +10,7 @@ public partial class PlayerObjectController
     public Image healthBarFillImage;
 
     public float maxHealth = 100f;
-    private float currentHealth;
+    private static float currentHealth;
 
     public float CurrentHealth
     {
@@ -26,8 +26,7 @@ public partial class PlayerObjectController
         }
     }
 
-
-    int currentScore = 0;
+    static int currentScore = 0;
 
     public int CurrentScore
     {
@@ -35,7 +34,7 @@ public partial class PlayerObjectController
         set { currentScore = value; }
     }
 
-    [Header("Fell Count")] int fellCount = 0;
+    [Header("Fell Count")] static int fellCount = 0;
     public Text fellCountText;
 
     public int FellCount
@@ -65,6 +64,16 @@ public partial class PlayerObjectController
         LobbyController.Instance.ShowMissionFailedText("Mission Failed:" + "\n" + " Fell too many times!");
         fellCount = 0;
         fellCountText.text = "Try not to die!";
+        CurrentHealth = maxHealth;
+
+        Bullet[] allBullets = FindObjectsOfType<Bullet>();
+        foreach (var bullet in allBullets)
+        {
+            if (bullet.TryGetComponent<NetworkIdentity>(out NetworkIdentity identity))
+            {
+                DestroyImmediate(bullet.gameObject);
+            }
+        }
 
         if (!NetworkServer.active)
             CmdSetDeadEscaperCount(SceneManager.GetSceneByName("Scene_1").path);
@@ -80,6 +89,16 @@ public partial class PlayerObjectController
         Debug.Log($"Player {playerID} died in 1v1.");
         LobbyController.Instance.ShowMissionFailedText("Mission Failed: " + "\n" + "You died in 1v1!");
         fellCountText.gameObject.SetActive(false);
+        CurrentHealth = maxHealth;
+
+        Bullet[] allBullets = FindObjectsOfType<Bullet>();
+        foreach (var bullet in allBullets)
+        {
+            if (bullet.TryGetComponent<NetworkIdentity>(out NetworkIdentity identity))
+            {
+                DestroyImmediate(bullet.gameObject);
+            }
+        }
 
         if (!NetworkServer.active)
             CmdSetSendingAllPlayersToScene(SceneManager.GetSceneByName("Scene_4").path,
