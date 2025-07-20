@@ -44,7 +44,7 @@ public partial class PlayerObjectController
         {
             fellCount = value;
             fellCountText.text = fellCount.ToString() + "/5";
-            if (fellCount > 5)
+            if (fellCount >= 5)
             {
                 MissionFailed();
             }
@@ -66,14 +66,7 @@ public partial class PlayerObjectController
         fellCountText.text = "Try not to die!";
         CurrentHealth = maxHealth;
 
-        Bullet[] allBullets = FindObjectsOfType<Bullet>();
-        foreach (var bullet in allBullets)
-        {
-            if (bullet.TryGetComponent<NetworkIdentity>(out NetworkIdentity identity))
-            {
-                DestroyImmediate(bullet.gameObject);
-            }
-        }
+        LobbyController.Instance.ClearBullets();
 
         if (!NetworkServer.active)
             CmdSetDeadEscaperCount(SceneManager.GetSceneByName("Scene_1").path);
@@ -89,19 +82,11 @@ public partial class PlayerObjectController
         Debug.Log($"Player {playerID} died in 1v1.");
         LobbyController.Instance.ShowMissionFailedText("Mission Failed: " + "\n" + "You died in 1v1!");
         fellCountText.gameObject.SetActive(false);
-        CurrentHealth = maxHealth;
 
-        Bullet[] allBullets = FindObjectsOfType<Bullet>();
-        foreach (var bullet in allBullets)
-        {
-            if (bullet.TryGetComponent<NetworkIdentity>(out NetworkIdentity identity))
-            {
-                DestroyImmediate(bullet.gameObject);
-            }
-        }
+        LobbyController.Instance.ClearBullets();
 
         if (!NetworkServer.active)
-            CmdSetSendingAllPlayersToScene(SceneManager.GetSceneByName("Scene_4").path,
+            CmdSetSendingAllPlayersToScene("Assets/Scenes/DemoScene/Scene_4.unity", // level 2 => TODO: will be modified in the future
                 SceneManager.GetSceneByName("Scene_3_1v1").path);
         else
         {
@@ -125,10 +110,12 @@ public partial class PlayerObjectController
     }
 
     [Command(requiresAuthority = false)]
-    void CmdSetSendingAllPlayersToScene(string nextScenePath, string previousScenePath)
+    void CmdSetSendingAllPlayersToScene(string nextScenePathName, string previousScenePathName)
     {
-        LobbyController.Instance.nextScenePath = nextScenePath;
-        LobbyController.Instance.previousScenePath = previousScenePath;
+        LobbyController.Instance.ClearBullets();
+        
+        LobbyController.Instance.nextScenePath = nextScenePathName;
+        LobbyController.Instance.previousScenePath = previousScenePathName;
         LobbyController.Instance.NeedTransitionToOtherScene = true;
     }
 }

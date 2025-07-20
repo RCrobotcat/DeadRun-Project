@@ -23,7 +23,6 @@ public partial class LobbyController
                 deadEscaperCount = 0;
 
                 string previousScenePathTemp = previousScenePath;
-                previousScenePath = "";
                 TransitionAllPlayersTo1V1(previousScenePathTemp);
             }
         }
@@ -43,9 +42,7 @@ public partial class LobbyController
                 needTransitionToOtherScene = false;
 
                 string nextScenePathTemp = nextScenePath;
-                nextScenePath = "";
                 string previousScenePathTemp = previousScenePath;
-                previousScenePath = "";
                 TransitionAllPlayersToScene(nextScenePathTemp, "SpawnPos", previousScenePathTemp);
             }
         }
@@ -54,9 +51,11 @@ public partial class LobbyController
     void TransitionAllPlayersTo1V1(string previousScenePathName)
     {
         PlayerObjectController[] allPlayers = FindObjectsOfType<PlayerObjectController>();
+        ClearBullets();
 
         foreach (var player in allPlayers)
         {
+            ClearBullets();
             if (player.role == PlayerRole.Trapper)
             {
                 CameraController.Instance.gameObject.SetActive(true);
@@ -92,16 +91,40 @@ public partial class LobbyController
         string previousScenePathName)
     {
         PlayerObjectController[] allPlayers = FindObjectsOfType<PlayerObjectController>();
+        ClearBullets();
+
         foreach (var player in allPlayers)
         {
-            if (player.TryGetComponent<PlayerMovement>(out PlayerMovement pm))
-                pm.enabled = false;
-            if (player.transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
-                gunShooting.enabled = false;
+            if (player.role == PlayerRole.Trapper)
+            {
+                CameraController.Instance.gameObject.SetActive(true);
+                CameraController.Instance.freeLookCam.Target.TrackingTarget = player.transform;
+                player.transform.position = Vector3.zero;
+                player.role = PlayerRole.Escaper;
+                player.SetPlayerUIState(true);
 
-            if (player.isServer)
-                StartCoroutine(SendNewPlayerToScene(player.gameObject, scenePathName, scenePosToSpawnOn,
-                    previousScenePathName));
+                if (player.TryGetComponent<PlayerMovement>(out PlayerMovement pm))
+                    pm.enabled = false;
+                if (player.transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
+                    gunShooting.enabled = false;
+
+                if (player.isServer)
+                    StartCoroutine(SendNewPlayerToScene(player.gameObject, scenePathName, scenePosToSpawnOn,
+                        previousScenePathName));
+            }
+            else if (player.role == PlayerRole.Escaper || player.role == PlayerRole.None)
+            {
+                if (player.TryGetComponent<PlayerMovement>(out PlayerMovement pm))
+                    pm.enabled = false;
+                if (player.transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
+                    gunShooting.enabled = false;
+
+                if (player.isServer)
+                    StartCoroutine(SendNewPlayerToScene(player.gameObject, scenePathName, scenePosToSpawnOn,
+                        previousScenePathName));
+            }
+
+            player.CurrentHealth = player.maxHealth;
         }
     }
 
@@ -139,13 +162,13 @@ public partial class LobbyController
 
             player.transform.position = startPos.position;
 
-            SceneManager.MoveGameObjectToScene(player, SceneManager.GetSceneByPath(transitionToSceneName));
             conn.Send(new SceneMessage()
             {
                 sceneName = transitionToSceneName,
                 sceneOperation = SceneOperation.LoadAdditive,
                 customHandling = true
             });
+            SceneManager.MoveGameObjectToScene(player, SceneManager.GetSceneByPath(transitionToSceneName));
 
             NetworkServer.AddPlayerForConnection(conn, player);
 
@@ -168,6 +191,9 @@ public partial class LobbyController
 
             NextSceneSettings(transitionToSceneName, player);
         }
+
+        nextScenePath = "";
+        previousScenePath = "";
     }
 
     void NextSceneSettings(string transitionToSceneName, GameObject player)
@@ -178,6 +204,18 @@ public partial class LobbyController
             Show1v1Text();
             if (NetworkServer.active)
                 player.GetComponent<PlayerObjectController>().RpcShow1v1Text();
+        }
+    }
+
+    public void ClearBullets()
+    {
+        Bullet[] allBullets = FindObjectsOfType<Bullet>();
+        foreach (var bullet in allBullets)
+        {
+            if (bullet.TryGetComponent<NetworkIdentity>(out NetworkIdentity identity))
+            {
+                DestroyImmediate(bullet.gameObject);
+            }
         }
     }
 }
