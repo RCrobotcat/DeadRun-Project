@@ -53,6 +53,8 @@ public partial class PlayerMovement : NetworkBehaviour
 
     void Update()
     {
+        HandleOutlineTimerLogic();
+
         if (!isLocalPlayer) // 确保只在本地玩家上执行
             return;
 
@@ -180,8 +182,6 @@ public partial class PlayerMovement : NetworkBehaviour
         }
 
         objPlayerIsNear = objShortestDistance;
-        
-        HandleOutlineTimerLogic();
     }
 
     void HandleOutlineTimerLogic()
@@ -195,7 +195,7 @@ public partial class PlayerMovement : NetworkBehaviour
                     child.gameObject.layer = LayerMask.NameToLayer("Default");
             }
         }
-        
+
         if (outlineShowTimerLocal > 0)
         {
             outlineShowTimerLocal -= Time.deltaTime;
