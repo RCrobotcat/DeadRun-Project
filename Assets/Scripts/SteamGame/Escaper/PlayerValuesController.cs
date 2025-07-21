@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using DG.Tweening;
 using Mirror;
+using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 
 public partial class PlayerObjectController
@@ -80,17 +81,18 @@ public partial class PlayerObjectController
     void DieIn1V1()
     {
         Debug.Log($"Player {playerID} died in 1v1.");
-        if (NetworkServer.active)
-            RpcShowMissionFailed1v1Text();
-        else
-            CmdShowMissionFailed1v1Text();
 
         LobbyController.Instance.ClearBullets();
 
+        if (playerID == LobbyController.Instance.LocalPlayerObjectController.playerID)
+            LobbyController.Instance.ShowMissionFailedText("Mission Failed: " + "\n" + "You died in 1v1!");
+
         if (!NetworkServer.active)
+        {
             CmdSetSendingAllPlayersToScene(
                 "Assets/Scenes/DemoScene/Scene_4.unity", // level 2 => TODO: will be modified in the future
                 SceneManager.GetSceneByName("Scene_3_1v1").path);
+        }
         else
         {
             LobbyController.Instance.nextScenePath = SceneManager.GetSceneByName("Scene_4").path;
@@ -120,19 +122,5 @@ public partial class PlayerObjectController
         LobbyController.Instance.nextScenePath = nextScenePathName;
         LobbyController.Instance.previousScenePath = previousScenePathName;
         LobbyController.Instance.NeedTransitionToOtherScene = true;
-    }
-
-    [ClientRpc]
-    void RpcShowMissionFailed1v1Text()
-    {
-        if (!isClientOnly)
-            return;
-        LobbyController.Instance.ShowMissionFailedText("Mission Failed: " + "\n" + "You died in 1v1!");
-    }
-
-    [Command(requiresAuthority = false)]
-    private void CmdShowMissionFailed1v1Text()
-    {
-        LobbyController.Instance.ShowMissionFailedText("Mission Failed: " + "\n" + "You died in 1v1!");
     }
 }
