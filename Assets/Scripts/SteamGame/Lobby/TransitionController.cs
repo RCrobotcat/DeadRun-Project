@@ -203,15 +203,17 @@ public partial class LobbyController
         if (transitionToSceneName == SceneManager.GetSceneByName("Scene_3_1v1").path)
         {
             Show1v1Text();
+            player.GetComponent<PlayerObjectController>().fellCountText.gameObject.SetActive(false);
             if (NetworkServer.active)
                 player.GetComponent<PlayerObjectController>().RpcShow1v1Text();
         }
-        
+
         // Scene 4 Transition
         if (transitionToSceneName == SceneManager.GetSceneByName("Scene_4").path)
         {
             CityGroupGenerator.Instance.InstantGenerating();
-            if(NetworkServer.active)
+            player.GetComponent<PlayerObjectController>().fellCountText.gameObject.SetActive(false);
+            if (NetworkServer.active)
                 player.GetComponent<PlayerObjectController>().RpcCityInstantGenerating();
         }
     }

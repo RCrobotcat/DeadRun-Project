@@ -299,6 +299,7 @@ public partial class PlayerObjectController : NetworkBehaviour
             return;
 
         LobbyController.Instance.Show1v1Text();
+        fellCountText.gameObject.SetActive(false);
     }
 
     [ClientRpc]
@@ -308,5 +309,6 @@ public partial class PlayerObjectController : NetworkBehaviour
             return;
 
         CityGroupGenerator.Instance.InstantGenerating();
+        fellCountText.gameObject.SetActive(false);
     }
 }

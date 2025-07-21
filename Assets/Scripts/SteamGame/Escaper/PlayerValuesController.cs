@@ -63,7 +63,7 @@ public partial class PlayerObjectController
         Debug.Log("Mission Failed: Fell too many times.");
         LobbyController.Instance.ShowMissionFailedText("Mission Failed:" + "\n" + " Fell too many times!");
         fellCount = 0;
-        fellCountText.text = "Try not to die!";
+        fellCountText.gameObject.SetActive(false);
         CurrentHealth = maxHealth;
 
         LobbyController.Instance.ClearBullets();
