@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b9bbf176ec84c2a9c43db20f03f077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 36
+  seed: 35
   column: 3
   row: 3
   lotColumn: 10
