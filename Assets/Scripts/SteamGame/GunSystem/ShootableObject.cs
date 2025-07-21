@@ -1,8 +1,14 @@
 ﻿using Mirror;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public partial class PlayerMovement
 {
+    public UniversalRendererData urpRendererData;
+
+    public float outlineShowTime = 0.5f;
+    private float outlineShowTimer = 0;
+
     public float shotForce = 10f;
 
     public PlayerObjectController playerObjectController;
@@ -51,11 +57,23 @@ public partial class PlayerMovement
             return;
 
         playerObjectController.CurrentHealth -= damage;
+
+        if (outlineShowTime <= 0)
+        {
+            urpRendererData.rendererFeatures[1].SetActive(true);
+            outlineShowTimer = outlineShowTime;
+        }
     }
 
     [Command(requiresAuthority = false)]
     void CmdDamagePlayer(float damage)
     {
         playerObjectController.CurrentHealth -= damage;
+
+        if (outlineShowTime <= 0)
+        {
+            urpRendererData.rendererFeatures[1].SetActive(true);
+            outlineShowTimer = outlineShowTime;
+        }
     }
 }

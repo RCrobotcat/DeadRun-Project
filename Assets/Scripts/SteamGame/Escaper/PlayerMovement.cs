@@ -2,6 +2,8 @@
 using System.Linq;
 using Mirror;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(Rigidbody))]
 public partial class PlayerMovement : NetworkBehaviour
@@ -49,6 +51,8 @@ public partial class PlayerMovement : NetworkBehaviour
         OnEquipItemChanged(null, currentEquippedItem);
 
         jumpTimer = jumpTimeInterval;
+
+        outlineShowTimer = outlineShowTime;
     }
 
     void Update()
@@ -180,6 +184,9 @@ public partial class PlayerMovement : NetworkBehaviour
         }
 
         objPlayerIsNear = objShortestDistance;
+
+        if (outlineShowTimer > 0)
+            outlineShowTimer -= Time.deltaTime;
     }
 
     private void UpdateResPos()
