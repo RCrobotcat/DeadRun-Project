@@ -8,6 +8,12 @@ public partial class PlayerMovement
     public float outlineShowTime = 0.5f;
     private float outlineShowTimer = 0;
 
+    public float OutlineShowTimer
+    {
+        get => outlineShowTimer;
+        set => outlineShowTimer = value;
+    }
+
     public float shotForce = 10f;
 
     public PlayerObjectController playerObjectController;
