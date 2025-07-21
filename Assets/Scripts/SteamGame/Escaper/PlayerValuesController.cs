@@ -83,7 +83,7 @@ public partial class PlayerObjectController
         if (NetworkServer.active)
             RpcShowMissionFailed1v1Text();
         else
-            LobbyController.Instance.ShowMissionFailedText("Mission Failed: " + "\n" + "You died in 1v1!");
+            CmdShowMissionFailed1v1Text();
 
         LobbyController.Instance.ClearBullets();
 
@@ -127,6 +127,12 @@ public partial class PlayerObjectController
     {
         if (!isClientOnly)
             return;
+        LobbyController.Instance.ShowMissionFailedText("Mission Failed: " + "\n" + "You died in 1v1!");
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdShowMissionFailed1v1Text()
+    {
         LobbyController.Instance.ShowMissionFailedText("Mission Failed: " + "\n" + "You died in 1v1!");
     }
 }
