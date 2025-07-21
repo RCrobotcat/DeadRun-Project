@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 8789620735250472666}
   - component: {fileID: 8381581339804526330}
   - component: {fileID: 1064673105066606656}
-  - component: {fileID: 358852124505246649}
   m_Layer: 0
   m_Name: BaseRoad
   m_TagString: Untagged
@@ -90,6 +89,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials: []
@@ -157,15 +159,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!114 &358852124505246649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6417759129036728760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ac8fb779bb9d439e8a39659a26f8862, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

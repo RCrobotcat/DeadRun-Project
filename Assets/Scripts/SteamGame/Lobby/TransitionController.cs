@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.IO;
+using CityGenerator;
 using Mirror;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -204,6 +205,14 @@ public partial class LobbyController
             Show1v1Text();
             if (NetworkServer.active)
                 player.GetComponent<PlayerObjectController>().RpcShow1v1Text();
+        }
+        
+        // Scene 4 Transition
+        if (transitionToSceneName == SceneManager.GetSceneByName("Scene_4").path)
+        {
+            CityGroupGenerator.Instance.InstantGenerating();
+            if(NetworkServer.active)
+                player.GetComponent<PlayerObjectController>().RpcCityInstantGenerating();
         }
     }
 

@@ -50,14 +50,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6417759129036728760, guid: 5d18c01857907467f81516740de97ce0, type: 3}
       propertyPath: m_Name
-      value: BaseRoad Major
+      value: BaseRoad Minor
       objectReference: {fileID: 0}
     - target: {fileID: 8789620735250472666, guid: 5d18c01857907467f81516740de97ce0, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8789620735250472666, guid: 5d18c01857907467f81516740de97ce0, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: ae08a86ef35614b14a90148c42d96a2e, type: 2}
     m_RemovedComponents: []

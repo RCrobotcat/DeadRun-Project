@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Splines;
@@ -94,11 +92,6 @@ namespace CityGenerator
                 cityGeneratorPool = new PoolingObjects<CityGenerator>(subCityPrefab, subCityParent);
         }
 
-        private void Start()
-        {
-            InstantGenerating();
-        }
-
         private void Update()
         {
             if (isInitial && isRealtimeRefresh)
@@ -135,8 +128,7 @@ namespace CityGenerator
             Generate();
             //LogAllCitiesMarks();
 
-            ComputeCameraPosition();
-
+            //ComputeCameraPosition();
 
             estimateTime = Time.realtimeSinceStartup - estimateTime;
             //print($"Finish : {Time.realtimeSinceStartup}");

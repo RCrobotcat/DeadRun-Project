@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CityGenerator;
 using Mirror;
 using Steamworks;
 using UnityEngine;
@@ -298,5 +299,14 @@ public partial class PlayerObjectController : NetworkBehaviour
             return;
 
         LobbyController.Instance.Show1v1Text();
+    }
+
+    [ClientRpc]
+    public void RpcCityInstantGenerating()
+    {
+        if (!isClientOnly)
+            return;
+
+        CityGroupGenerator.Instance.InstantGenerating();
     }
 }
