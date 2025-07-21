@@ -1,10 +1,9 @@
 ﻿using Mirror;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 public partial class PlayerMovement
 {
-    public UniversalRendererData urpRendererData;
+    public GameObject astronautModel;
 
     public float outlineShowTime = 0.5f;
     private float outlineShowTimer = 0;
@@ -58,9 +57,10 @@ public partial class PlayerMovement
 
         playerObjectController.CurrentHealth -= damage;
 
-        if (outlineShowTime <= 0)
+        if (outlineShowTimer <= 0)
         {
-            urpRendererData.rendererFeatures[1].SetActive(true);
+            foreach (Transform child in astronautModel.GetComponentsInChildren<Transform>(true))
+                child.gameObject.layer = LayerMask.NameToLayer("Outlined");
             outlineShowTimer = outlineShowTime;
         }
     }
@@ -70,9 +70,10 @@ public partial class PlayerMovement
     {
         playerObjectController.CurrentHealth -= damage;
 
-        if (outlineShowTime <= 0)
+        if (outlineShowTimer <= 0)
         {
-            urpRendererData.rendererFeatures[1].SetActive(true);
+            foreach (Transform child in astronautModel.GetComponentsInChildren<Transform>(true))
+                child.gameObject.layer = LayerMask.NameToLayer("Outlined");
             outlineShowTimer = outlineShowTime;
         }
     }
