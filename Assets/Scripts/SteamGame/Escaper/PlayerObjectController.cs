@@ -313,6 +313,7 @@ public partial class PlayerObjectController : NetworkBehaviour
             return;
 
         fellCountText.gameObject.SetActive(false);
+        GetComponent<PlayerMovement>().isAiming = false;
         GetComponent<PlayerMovement>().gun.gameObject.SetActive(false);
         CityGroupGenerator.Instance.InstantGenerating();
     }

@@ -212,6 +212,7 @@ public partial class LobbyController
         if (transitionToSceneName == SceneManager.GetSceneByName("Scene_4").path)
         {
             player.GetComponent<PlayerObjectController>().fellCountText.gameObject.SetActive(false);
+            GetComponent<PlayerMovement>().isAiming = false;
             player.GetComponent<PlayerMovement>().gun.gameObject.SetActive(false);
             CityGroupGenerator.Instance.InstantGenerating();
             if (NetworkServer.active)
