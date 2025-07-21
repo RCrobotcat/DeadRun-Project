@@ -158,12 +158,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Pree Q to do left rotation
+  m_Text: 'Press Q to do left rotation
 
-    Press E to do right rotation
-
-    Mouse
-    Click to select plane to rotate'
+    Press E to do right rotation'
 --- !u!114 &9120310205877221708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +258,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96

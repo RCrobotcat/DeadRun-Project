@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11831f3830564a0e9057528cf69f53e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 350
+  rotationSpeed: 500
   planeRotationCanvas: {fileID: 6678460632507702836}
   trapperCamera: {fileID: 5258612990561331228}
   planeToRotate: {fileID: 0}
@@ -172,6 +172,10 @@ PrefabInstance:
     - target: {fileID: 312514304001796264, guid: 5c1f368467d1e5b4cbac575c122dd78f, type: 3}
       propertyPath: m_Name
       value: TrapperCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 312514304001796264, guid: 5c1f368467d1e5b4cbac575c122dd78f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1866515793163629820, guid: 5c1f368467d1e5b4cbac575c122dd78f, type: 3}
       propertyPath: m_LocalPosition.x
