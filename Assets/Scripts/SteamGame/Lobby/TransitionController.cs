@@ -188,7 +188,8 @@ public partial class LobbyController
             }
 
             if (NetworkServer.active)
-                player.GetComponent<PlayerObjectController>().RpcUpdatePlayerParamsAfterTransition(transitionToSceneName);
+                player.GetComponent<PlayerObjectController>()
+                    .RpcUpdatePlayerParamsAfterTransition(transitionToSceneName);
 
             NextSceneSettings(transitionToSceneName, player);
         }
@@ -213,6 +214,7 @@ public partial class LobbyController
         {
             player.GetComponent<PlayerObjectController>().fellCountText.gameObject.SetActive(false);
             player.GetComponent<PlayerMovement>().isAiming = false;
+            CameraController.Instance.freeLookCam.Lens.FieldOfView = 70f;
             player.GetComponent<PlayerMovement>().gun.gameObject.SetActive(false);
             CityGroupGenerator.Instance.InstantGenerating();
             if (NetworkServer.active)

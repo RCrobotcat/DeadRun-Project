@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class EscController : MonoBehaviour
@@ -9,6 +10,21 @@ public class EscController : MonoBehaviour
     public Button mainMenuBtn;
     public Button quitBtn;
 
+    MyNetworkManager _myNetworkManager;
+
+    private MyNetworkManager MyNetworkManager
+    {
+        get
+        {
+            if (_myNetworkManager != null)
+            {
+                return _myNetworkManager;
+            }
+
+            return _myNetworkManager = MyNetworkManager.singleton as MyNetworkManager;
+        }
+    }
+
     private void Start()
     {
         mainMenuBtn.onClick.AddListener(OnMainMenuButtonClicked);
@@ -17,10 +33,16 @@ public class EscController : MonoBehaviour
 
     private void Update()
     {
+        bool inRoomScene = MyNetworkManager.allPlayersInGameScene_server;
+        bool escActive = escPanel.activeSelf;
+
+        Cursor.visible = !inRoomScene || escActive;
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            escPanel.SetActive(!escActive);
+            Cursor.visible = !inRoomScene || !escActive;
             roleTxt.text = LobbyController.Instance.LocalPlayerObjectController.role.ToString();
-            escPanel.SetActive(!escPanel.activeSelf);
         }
     }
 

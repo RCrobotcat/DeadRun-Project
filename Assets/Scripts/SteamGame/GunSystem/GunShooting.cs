@@ -54,7 +54,7 @@ public class GunShooting : MonoBehaviour
 
             currentFOV = Mathf.SmoothDamp(currentFOV, zoomedFOV, ref fovSmoothVelocity, 0.2f);
             CameraController.Instance.freeLookCam.Lens.FieldOfView = currentFOV;
-            
+
             if (Input.GetMouseButton(0))
             {
                 if (_lastShootTime > 0)

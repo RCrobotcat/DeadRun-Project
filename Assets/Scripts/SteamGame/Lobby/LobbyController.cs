@@ -27,9 +27,9 @@ public partial class LobbyController : Singleton<LobbyController>
 
     public GameObject lobbyCanvas;
 
-    MyNetworkManager _myNetworkManager;
-
     private List<PlayerRoles> roles; // all players roles set in host server
+
+    MyNetworkManager _myNetworkManager;
 
     private MyNetworkManager MyNetworkManager
     {

@@ -314,6 +314,7 @@ public partial class PlayerObjectController : NetworkBehaviour
 
         fellCountText.gameObject.SetActive(false);
         GetComponent<PlayerMovement>().isAiming = false;
+        CameraController.Instance.freeLookCam.Lens.FieldOfView = 70f;
         GetComponent<PlayerMovement>().gun.gameObject.SetActive(false);
         CityGroupGenerator.Instance.InstantGenerating();
     }
