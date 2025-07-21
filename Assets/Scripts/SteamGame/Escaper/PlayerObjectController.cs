@@ -308,7 +308,8 @@ public partial class PlayerObjectController : NetworkBehaviour
         if (!isClientOnly)
             return;
 
-        CityGroupGenerator.Instance.InstantGenerating();
         fellCountText.gameObject.SetActive(false);
+        GetComponent<PlayerMovement>().gun.gameObject.SetActive(false);
+        CityGroupGenerator.Instance.InstantGenerating();
     }
 }

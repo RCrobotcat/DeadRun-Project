@@ -10,7 +10,7 @@ public partial class PlayerObjectController
     public Image healthBarFillImage;
 
     public float maxHealth = 100f;
-    private static float currentHealth;
+    private float currentHealth;
 
     public float CurrentHealth
     {
