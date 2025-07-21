@@ -188,7 +188,7 @@ public partial class LobbyController
             }
 
             if (NetworkServer.active)
-                player.GetComponent<PlayerObjectController>().RpcUpdatePlayerParamsAfterTransition();
+                player.GetComponent<PlayerObjectController>().RpcUpdatePlayerParamsAfterTransition(transitionToSceneName);
 
             NextSceneSettings(transitionToSceneName, player);
         }

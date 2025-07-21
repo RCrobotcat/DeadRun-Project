@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using CityGenerator;
 using Mirror;
 using Steamworks;
@@ -275,7 +276,7 @@ public partial class PlayerObjectController : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RpcUpdatePlayerParamsAfterTransition()
+    public void RpcUpdatePlayerParamsAfterTransition(string sceneToTransit)
     {
         if (!isClientOnly)
             return;
@@ -289,6 +290,9 @@ public partial class PlayerObjectController : NetworkBehaviour
         {
             player.role = PlayerRole.Escaper;
             player.SetPlayerUIState(true);
+            if (Path.GetFileNameWithoutExtension(sceneToTransit) != "Scene_1" ||
+                Path.GetFileNameWithoutExtension(sceneToTransit) != "Scene_2")
+                player.fellCountText.gameObject.SetActive(false);
         }
     }
 
