@@ -46,21 +46,6 @@ public class Bullet : MonoBehaviour
         curDistance += movementSpeed * Time.deltaTime;
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            PlayerMovement player = other.transform.GetComponent<PlayerMovement>();
-            if (player.OutlineShowTimer <= 0)
-            {
-                foreach (Transform child in player.astronautModel
-                             .GetComponentsInChildren<Transform>(true))
-                    child.gameObject.layer = LayerMask.NameToLayer("Outlined");
-                player.OutlineShowTimer = player.outlineShowTime;
-            }
-        }
-    }
-
     public void SetDirection(Vector3 directionToCrosshair)
     {
         directionToCenter = directionToCrosshair.normalized;

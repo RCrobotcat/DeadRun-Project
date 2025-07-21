@@ -180,11 +180,26 @@ public partial class PlayerMovement : NetworkBehaviour
         }
 
         objPlayerIsNear = objShortestDistance;
+        
+        HandleOutlineTimerLogic();
+    }
 
+    void HandleOutlineTimerLogic()
+    {
         if (outlineShowTimer > 0)
         {
             outlineShowTimer -= Time.deltaTime;
             if (outlineShowTimer <= 0)
+            {
+                foreach (Transform child in astronautModel.GetComponentsInChildren<Transform>(true))
+                    child.gameObject.layer = LayerMask.NameToLayer("Default");
+            }
+        }
+        
+        if (outlineShowTimerLocal > 0)
+        {
+            outlineShowTimerLocal -= Time.deltaTime;
+            if (outlineShowTimerLocal <= 0)
             {
                 foreach (Transform child in astronautModel.GetComponentsInChildren<Transform>(true))
                     child.gameObject.layer = LayerMask.NameToLayer("Default");

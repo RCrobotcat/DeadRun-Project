@@ -7,12 +7,7 @@ public partial class PlayerMovement
 
     public float outlineShowTime = 0.5f;
     private float outlineShowTimer = 0;
-
-    public float OutlineShowTimer
-    {
-        get => outlineShowTimer;
-        set => outlineShowTimer = value;
-    }
+    private float outlineShowTimerLocal = 0;
 
     public float shotForce = 10f;
 
@@ -24,9 +19,25 @@ public partial class PlayerMovement
         {
             //playerObjectController.CurrentHealth -= 10f;
             if (NetworkServer.active)
+            {
                 RpcDamagePlayer(5f);
+                if (outlineShowTimerLocal <= 0)
+                {
+                    foreach (Transform child in astronautModel.GetComponentsInChildren<Transform>(true))
+                        child.gameObject.layer = LayerMask.NameToLayer("Outlined");
+                    outlineShowTimerLocal = outlineShowTime;
+                }
+            }
             else
+            {
                 CmdDamagePlayer(5f);
+                if (outlineShowTimerLocal <= 0)
+                {
+                    foreach (Transform child in astronautModel.GetComponentsInChildren<Transform>(true))
+                        child.gameObject.layer = LayerMask.NameToLayer("Outlined");
+                    outlineShowTimerLocal = outlineShowTime;
+                }
+            }
 
             Vector3 direction = (other.transform.position - transform.position).normalized;
             rb.AddForce(direction * shotForce, ForceMode.Impulse);
