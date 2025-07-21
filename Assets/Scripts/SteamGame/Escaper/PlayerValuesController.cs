@@ -125,6 +125,8 @@ public partial class PlayerObjectController
     [ClientRpc]
     void RpcShowMissionFailed1v1Text()
     {
+        if (!isClientOnly)
+            return;
         LobbyController.Instance.ShowMissionFailedText("Mission Failed: " + "\n" + "You died in 1v1!");
     }
 }

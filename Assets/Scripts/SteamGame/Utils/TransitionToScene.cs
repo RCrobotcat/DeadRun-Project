@@ -98,7 +98,7 @@ public class TransitionToScene : NetworkBehaviour
             }
 
             if (NetworkServer.active)
-                player.GetComponent<PlayerObjectController>().RpcUpdatePlayerParamsAfterTransition();
+                player.GetComponent<PlayerObjectController>().RpcUpdatePlayerParamsAfterTransition(transitionToSceneName);
 
             // 1v1 Scene Transition
             if (transitionToSceneName == SceneManager.GetSceneByName("Scene_3_1v1").path)
