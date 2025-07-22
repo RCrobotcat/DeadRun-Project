@@ -296,6 +296,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CityGroupGenerator
       objectReference: {fileID: 0}
+    - target: {fileID: 910399375978182894, guid: 7d47019a41db14086907e5eb6d39ea8e, type: 3}
+      propertyPath: seed
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 910399375978182894, guid: 7d47019a41db14086907e5eb6d39ea8e, type: 3}
+      propertyPath: maximumLotRoadCount
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4836818158493233149, guid: 7d47019a41db14086907e5eb6d39ea8e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

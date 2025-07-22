@@ -1,9 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Splines;
-using UnityEngine.UI;
 
 //   Back
 // Left Right
@@ -15,8 +13,9 @@ namespace CityGenerator
     {
         [SerializeField] private int seed;
 
-        [Header("City Attribute")]
-        [SerializeField] private Transform markParent;
+        [Header("City Attribute")] [SerializeField]
+        private Transform markParent;
+
         [SerializeField] private CityMark markPrefab;
         [SerializeField] private GameObject cityBase;
 
@@ -26,13 +25,18 @@ namespace CityGenerator
         private CityMark[,] marks;
         public CityMark[,] GetMarks() => marks;
 
-        [Space(5), Header("Road Attribute")]
-        [SerializeField] private Transform roadParent;
-        private int maximumMinorRoadCount = 0; // 1st priority for road generation, if no room for it, it will not continue spawning
+        [Space(5), Header("Road Attribute")] [SerializeField]
+        private Transform roadParent;
+
+        private int
+            maximumMinorRoadCount =
+                0; // 1st priority for road generation, if no room for it, it will not continue spawning
+
         [SerializeField] private SplineContainer minorRoadPrefab;
-     
-        [Space(5), Header("Building Attribute")]
-        [SerializeField] private Transform buildingParent;
+
+        [Space(5), Header("Building Attribute")] [SerializeField]
+        private Transform buildingParent;
+
         [SerializeField] private CityBuildingGenerator buildingPrefab;
 
         [SerializeField] private int currentDrawnRoad = 0;
@@ -71,7 +75,8 @@ namespace CityGenerator
         {
             if (markPool == null) markPool = new PoolingObjects<CityMark>(markPrefab, markParent);
             if (roadPool == null) roadPool = new PoolingObjects<SplineContainer>(minorRoadPrefab, roadParent);
-            if (buildingPool == null) buildingPool = new PoolingObjects<CityBuildingGenerator>(buildingPrefab, buildingParent);
+            if (buildingPool == null)
+                buildingPool = new PoolingObjects<CityBuildingGenerator>(buildingPrefab, buildingParent);
         }
 
         [ContextMenu("Generate City Mark")]
@@ -93,9 +98,12 @@ namespace CityGenerator
                     {
                         var newMark = markPool.GetFromPool();
 
-                        newMark.transform.position = new Vector3(cityOffsetPosition.x + (x * CityUtility.MARKS_SPACE), 0f, cityOffsetPosition.y + (y * CityUtility.MARKS_SPACE));
+                        newMark.transform.position = new Vector3(cityOffsetPosition.x + (x * CityUtility.MARKS_SPACE),
+                            0f, cityOffsetPosition.y + (y * CityUtility.MARKS_SPACE));
                         newMark.name = $"{x} {y}";
-                        newMark.markType = (((x == 0 || x == subCityColumn - 1) || (y == 0 || y == subCityRow - 1)) ? CityObjectType.MajorRoad : CityObjectType.None);
+                        newMark.markType = (((x == 0 || x == subCityColumn - 1) || (y == 0 || y == subCityRow - 1))
+                            ? CityObjectType.MajorRoad
+                            : CityObjectType.None);
 
                         marks[x, y] = newMark;
                     }
@@ -127,7 +135,7 @@ namespace CityGenerator
         {
             var (nextStep, isMoveSuccess) = MoveStep(step, drawDir);
             var isStraight = ((int)(CityUtility.GetCurrentSeedValue() * 10)) % 7 > 0;
-            var stopStep = isStraight  ? - 1 : (int)((CityUtility.GetCurrentSeedValue() * 10) + (seed % 10));
+            var stopStep = isStraight ? -1 : (int)((CityUtility.GetCurrentSeedValue() * 10) + (seed % 10));
             var forceBreak = false;
 
             while (isMoveSuccess) // move until at the edge or intersection if isStopAtIntersection is true
@@ -153,8 +161,8 @@ namespace CityGenerator
                 }
                 else
                 {
-                    if(currentMark.markType != CityObjectType.Junction)
-                        currentMark.markType = CityObjectType.MinorRoad;   
+                    if (currentMark.markType != CityObjectType.Junction)
+                        currentMark.markType = CityObjectType.MinorRoad;
                 }
 
                 var (leftStep, _) = MoveStep(step, drawDir.TurnLeft());
@@ -175,6 +183,7 @@ namespace CityGenerator
         }
 
         #region Minor Road
+
         [ContextMenu("Generate/Minor Road")]
         private void GenerateMinorRoad()
         {
@@ -243,6 +252,7 @@ namespace CityGenerator
                     Debug.LogWarning($"Loop occur");
                     break;
                 }
+
                 currentCreatedRoad++;
             }
 
@@ -287,6 +297,7 @@ namespace CityGenerator
                     currentStepDirection = checkDir;
                     (nextStep, _) = MoveStep(currentStep, currentStepDirection);
                 }
+
                 currentStep = nextStep;
 
                 //print($"VisualizeRoad : {currentStep} {roadToVisualize}");
@@ -312,12 +323,14 @@ namespace CityGenerator
 
                 var (nextStep, _) = MoveStep(currentStep, currentStepDirection);
 
-                {   // first knot
+                {
+                    // first knot
                     var newKnot = new BezierKnot();
                     var startMark = marks[currentStep.Item1, currentStep.Item2];
                     var nextMark = marks[nextStep.Item1, nextStep.Item2];
 
-                    newKnot.Position = startMark.transform.position.ApplyOffset(CityUtility.ROAD_OFFSET, currentStepDirection, true);
+                    newKnot.Position =
+                        startMark.transform.position.ApplyOffset(CityUtility.ROAD_OFFSET, currentStepDirection, true);
                     spline.Add(newKnot);
                 }
 
@@ -328,10 +341,13 @@ namespace CityGenerator
                     var currentMark = marks[currentStep.Item1, currentStep.Item2];
 
                     if (marks.IsStepOn(currentStep, CityObjectType.MajorRoad, CityObjectType.MajorJunction))
-                    {   // last knot
+                    {
+                        // last knot
                         var newKnot = new BezierKnot();
 
-                        newKnot.Position = currentMark.transform.position.ApplyOffset(CityUtility.ROAD_OFFSET, currentStepDirection, false);
+                        newKnot.Position =
+                            currentMark.transform.position.ApplyOffset(CityUtility.ROAD_OFFSET, currentStepDirection,
+                                false);
                         spline.Add(newKnot);
 
                         var (backStep, _) = MoveStep(currentStep, currentStepDirection.TurnAround());
@@ -343,9 +359,11 @@ namespace CityGenerator
                     {
                         var newKnot = new BezierKnot();
 
-                        newKnot.Position = currentMark.transform.position.ApplyOffset(CityUtility.ROAD_OFFSET, currentStepDirection, false);
+                        newKnot.Position =
+                            currentMark.transform.position.ApplyOffset(CityUtility.ROAD_OFFSET, currentStepDirection,
+                                false);
                         spline.Add(newKnot);
-                        
+
                         var (advanceStep, _) = MoveStep(currentStep, currentStepDirection);
                         var (backStep, _) = MoveStep(currentStep, currentStepDirection.TurnAround());
                         var previousMark = marks[backStep.Item1, backStep.Item2];
@@ -355,7 +373,8 @@ namespace CityGenerator
                         var newKnot = new BezierKnot();
 
                         if (currentMark.IsDrawn)
-                            newKnot.Position = currentMark.transform.position.ApplyOffset(CityUtility.ROAD_OFFSET, currentStepDirection, false);
+                            newKnot.Position = currentMark.transform.position.ApplyOffset(CityUtility.ROAD_OFFSET,
+                                currentStepDirection, false);
                         else
                             newKnot.Position = currentMark.transform.position;
 
@@ -366,7 +385,8 @@ namespace CityGenerator
 
                     (nextStep, _) = MoveStep(currentStep, currentStepDirection);
                     if (!marks.IsStepOnRoad(nextStep))
-                    {   // if front have no road check side
+                    {
+                        // if front have no road check side
                         var (leftStep, _) = MoveStep(currentStep, currentStepDirection.TurnLeft());
                         var (rightStep, _) = MoveStep(currentStep, currentStepDirection.TurnRight());
 
@@ -386,9 +406,10 @@ namespace CityGenerator
                         else
                             break;
                     }
-                    currentStep = nextStep;
 
+                    currentStep = nextStep; 
                 }
+
                 spline.SetTangentMode(TangentMode.AutoSmooth);
                 newRoad.AddSpline(spline);
 
@@ -398,11 +419,13 @@ namespace CityGenerator
                 minorRoads.Add(newRoad);
             }
         }
+
         #endregion Minor Road
 
         #endregion Road Stuff
 
         #region Building Stuff
+
         [ContextMenu("Generate/City Base")]
         private void GenerateCityBase()
         {
@@ -421,119 +444,127 @@ namespace CityGenerator
         {
             //print($"GenerateBuilding {marks.GetLength(0)} {marks.GetLength(1)}");
             for (int x = 0; x < marks.GetLength(0); x++)
-                for (int y = 0; y < marks.GetLength(1); y++)
+            for (int y = 0; y < marks.GetLength(1); y++)
+            {
+                (int, int) currentStep = (x, y);
+
+                if (marks.IsStepOn(currentStep, CityObjectType.None))
                 {
-                    (int,int) currentStep = (x, y);
+                    var isBuildingValid = true; // Rand.value > 0.15;
 
-                    if (marks.IsStepOn(currentStep, CityObjectType.None))
+                    if (!isBuildingValid || !marks.IsMarkAvailableToDraw(currentStep))
+                        continue;
+
+                    var newBuilding = buildingPool.GetFromPool();
+
+                    var isMerge = (CityUtility.GetCurrentSeedValue() * 100) > 75;
+
+                    marks[x, y].markType = CityObjectType.Building;
+
+                    var facingDirection = StepMoveDirectionType.Front;
+
                     {
-                        var isBuildingValid = true;// Rand.value > 0.15;
+                        var step1 = (x, y + 1); // Left
+                        var step2 = (x, y - 1); // Right
+                        var step3 = (x + 1, y); // Front
+                        var step4 = (x - 1, y); // Back
 
-                        if (!isBuildingValid || !marks.IsMarkAvailableToDraw(currentStep))
-                            continue;
+                        var facingList = new List<StepMoveDirectionType>();
 
-                        var newBuilding = buildingPool.GetFromPool();
+                        if (marks.IsMarkAvailable(step1) && marks.IsStepOnRoad(step1))
+                            facingList.Add(StepMoveDirectionType.Left);
+                        if (marks.IsMarkAvailable(step2) && marks.IsStepOnRoad(step2))
+                            facingList.Add(StepMoveDirectionType.Right);
+                        if (marks.IsMarkAvailable(step3) && marks.IsStepOnRoad(step3))
+                            facingList.Add(StepMoveDirectionType.Front);
+                        if (marks.IsMarkAvailable(step4) && marks.IsStepOnRoad(step4))
+                            facingList.Add(StepMoveDirectionType.Back);
 
-                        var isMerge = (CityUtility.GetCurrentSeedValue() * 100) > 75;
+                        var facingSeed = CityUtility.GetCurrentSeedValue() * 100f;
 
-                        marks[x, y].markType = CityObjectType.Building;
-
-                        var facingDirection = StepMoveDirectionType.Front;
-
+                        if (facingList.Count > 0)
+                            facingDirection = facingList[(int)(facingSeed % facingList.Count)];
+                        else
                         {
-                            var step1 = (x, y + 1); // Left
-                            var step2 = (x, y - 1); // Right
-                            var step3 = (x + 1, y); // Front
-                            var step4 = (x - 1, y); // Back
-
-                            var facingList = new List<StepMoveDirectionType>();
-
-                            if (marks.IsMarkAvailable(step1) && marks.IsStepOnRoad(step1))
-                                facingList.Add(StepMoveDirectionType.Left);
-                            if (marks.IsMarkAvailable(step2) && marks.IsStepOnRoad(step2))
-                                facingList.Add(StepMoveDirectionType.Right);
-                            if (marks.IsMarkAvailable(step3) && marks.IsStepOnRoad(step3))
-                                facingList.Add(StepMoveDirectionType.Front);
-                            if (marks.IsMarkAvailable(step4) && marks.IsStepOnRoad(step4))
-                                facingList.Add(StepMoveDirectionType.Back);
-
-                            var facingSeed = CityUtility.GetCurrentSeedValue() * 100f;
-
-                            if (facingList.Count > 0)
-                                facingDirection = facingList[(int)(facingSeed % facingList.Count)];
-                            else
-                            {
-                                if (facingSeed >= 0 && facingSeed <= 25f) facingDirection = StepMoveDirectionType.Left;
-                                else if (facingSeed > 25 && facingSeed <= 50f) facingDirection = StepMoveDirectionType.Right;
-                                else if (facingSeed > 50f && facingSeed <= 75f) facingDirection = StepMoveDirectionType.Back;
-                            }
+                            if (facingSeed >= 0 && facingSeed <= 25f) facingDirection = StepMoveDirectionType.Left;
+                            else if (facingSeed > 25 && facingSeed <= 50f)
+                                facingDirection = StepMoveDirectionType.Right;
+                            else if (facingSeed > 50f && facingSeed <= 75f)
+                                facingDirection = StepMoveDirectionType.Back;
                         }
-
-                        var buildingPosition = marks[x, y].transform.position;
-                        if (isMerge)
-                        {
-                            (int, int) mergeStep1 = (x, y + 1);
-                            (int, int) mergeStep2 = (x + 1, y);
-                            (int, int) mergeStep3 = (x + 1, y + 1);
-
-                            var amplifySize = 2f;
-
-                            if ((marks.IsMarkAvailable(mergeStep1) && marks.IsMarkAvailableToDraw(mergeStep1) && !marks.IsStepOnRoad(mergeStep1)) &&
-                               (marks.IsMarkAvailable(mergeStep2) && marks.IsMarkAvailableToDraw(mergeStep2) && !marks.IsStepOnRoad(mergeStep2)) &&
-                               (marks.IsMarkAvailable(mergeStep3) && marks.IsMarkAvailableToDraw(mergeStep3) && !marks.IsStepOnRoad(mergeStep3)))
-                            {
-                                marks[mergeStep1.Item1, mergeStep1.Item2].RegisterBuilding(newBuilding);
-                                marks[mergeStep2.Item1, mergeStep2.Item2].RegisterBuilding(newBuilding);
-                                marks[mergeStep3.Item1, mergeStep3.Item2].RegisterBuilding(newBuilding);
-                                newBuilding.Resize(new Vector3(amplifySize, 1f, amplifySize));
-                                buildingPosition = CityUtility.CalculateCentroid(
-                                    marks[currentStep.Item1, currentStep.Item2].transform.position,
-                                    marks[mergeStep1.Item1, mergeStep1.Item2].transform.position,
-                                    marks[mergeStep2.Item1, mergeStep2.Item2].transform.position,
-                                    marks[mergeStep3.Item1, mergeStep3.Item2].transform.position);
-                            }
-                            else if (marks.IsMarkAvailable(mergeStep1) && marks.IsMarkAvailableToDraw(mergeStep1) && !marks.IsStepOnRoad(mergeStep1))
-                            {
-                                var newSize = facingDirection switch
-                                {
-                                    StepMoveDirectionType.Left => new Vector3(amplifySize, 1f, 1f),
-                                    StepMoveDirectionType.Right => new Vector3(amplifySize, 1f, 1f),
-                                    StepMoveDirectionType.Front => new Vector3(1f, 1f, amplifySize),
-                                    StepMoveDirectionType.Back => new Vector3(1f, 1f, amplifySize),
-                                };
-
-                                marks[mergeStep1.Item1, mergeStep1.Item2].RegisterBuilding(newBuilding);
-                                newBuilding.Resize(newSize);
-                                buildingPosition = CityUtility.CalculateCentroid(
-                                    marks[currentStep.Item1, currentStep.Item2].transform.position,
-                                    marks[mergeStep1.Item1, mergeStep1.Item2].transform.position);
-                            }
-                            else if (marks.IsMarkAvailable(mergeStep2) && marks.IsMarkAvailableToDraw(mergeStep2) && !marks.IsStepOnRoad(mergeStep2))
-                            {
-                                var newSize = facingDirection switch
-                                {
-                                    StepMoveDirectionType.Left => new Vector3(1f, 1f, amplifySize),
-                                    StepMoveDirectionType.Right => new Vector3(1f, 1f, amplifySize),
-                                    StepMoveDirectionType.Front => new Vector3(amplifySize, 1f, 1f),
-                                    StepMoveDirectionType.Back => new Vector3(amplifySize, 1f, 1f),
-                                };
-
-                                marks[mergeStep2.Item1, mergeStep2.Item2].RegisterBuilding(newBuilding);
-                                newBuilding.Resize(newSize);
-                                buildingPosition = CityUtility.CalculateCentroid(
-                                    marks[currentStep.Item1, currentStep.Item2].transform.position,
-                                    marks[mergeStep2.Item1, mergeStep2.Item2].transform.position);
-                            }
-                        }
-
-                        newBuilding.SetFacingDirection(facingDirection);
-                        newBuilding.Construct();
-                        newBuilding.transform.position = buildingPosition;
-
-                        buildings.Add(newBuilding);
                     }
+
+                    var buildingPosition = marks[x, y].transform.position;
+                    if (isMerge)
+                    {
+                        (int, int) mergeStep1 = (x, y + 1);
+                        (int, int) mergeStep2 = (x + 1, y);
+                        (int, int) mergeStep3 = (x + 1, y + 1);
+
+                        var amplifySize = 2f;
+
+                        if ((marks.IsMarkAvailable(mergeStep1) && marks.IsMarkAvailableToDraw(mergeStep1) &&
+                             !marks.IsStepOnRoad(mergeStep1)) &&
+                            (marks.IsMarkAvailable(mergeStep2) && marks.IsMarkAvailableToDraw(mergeStep2) &&
+                             !marks.IsStepOnRoad(mergeStep2)) &&
+                            (marks.IsMarkAvailable(mergeStep3) && marks.IsMarkAvailableToDraw(mergeStep3) &&
+                             !marks.IsStepOnRoad(mergeStep3)))
+                        {
+                            marks[mergeStep1.Item1, mergeStep1.Item2].RegisterBuilding(newBuilding);
+                            marks[mergeStep2.Item1, mergeStep2.Item2].RegisterBuilding(newBuilding);
+                            marks[mergeStep3.Item1, mergeStep3.Item2].RegisterBuilding(newBuilding);
+                            newBuilding.Resize(new Vector3(amplifySize, 1f, amplifySize));
+                            buildingPosition = CityUtility.CalculateCentroid(
+                                marks[currentStep.Item1, currentStep.Item2].transform.position,
+                                marks[mergeStep1.Item1, mergeStep1.Item2].transform.position,
+                                marks[mergeStep2.Item1, mergeStep2.Item2].transform.position,
+                                marks[mergeStep3.Item1, mergeStep3.Item2].transform.position);
+                        }
+                        else if (marks.IsMarkAvailable(mergeStep1) && marks.IsMarkAvailableToDraw(mergeStep1) &&
+                                 !marks.IsStepOnRoad(mergeStep1))
+                        {
+                            var newSize = facingDirection switch
+                            {
+                                StepMoveDirectionType.Left => new Vector3(amplifySize, 1f, 1f),
+                                StepMoveDirectionType.Right => new Vector3(amplifySize, 1f, 1f),
+                                StepMoveDirectionType.Front => new Vector3(1f, 1f, amplifySize),
+                                StepMoveDirectionType.Back => new Vector3(1f, 1f, amplifySize),
+                            };
+
+                            marks[mergeStep1.Item1, mergeStep1.Item2].RegisterBuilding(newBuilding);
+                            newBuilding.Resize(newSize);
+                            buildingPosition = CityUtility.CalculateCentroid(
+                                marks[currentStep.Item1, currentStep.Item2].transform.position,
+                                marks[mergeStep1.Item1, mergeStep1.Item2].transform.position);
+                        }
+                        else if (marks.IsMarkAvailable(mergeStep2) && marks.IsMarkAvailableToDraw(mergeStep2) &&
+                                 !marks.IsStepOnRoad(mergeStep2))
+                        {
+                            var newSize = facingDirection switch
+                            {
+                                StepMoveDirectionType.Left => new Vector3(1f, 1f, amplifySize),
+                                StepMoveDirectionType.Right => new Vector3(1f, 1f, amplifySize),
+                                StepMoveDirectionType.Front => new Vector3(amplifySize, 1f, 1f),
+                                StepMoveDirectionType.Back => new Vector3(amplifySize, 1f, 1f),
+                            };
+
+                            marks[mergeStep2.Item1, mergeStep2.Item2].RegisterBuilding(newBuilding);
+                            newBuilding.Resize(newSize);
+                            buildingPosition = CityUtility.CalculateCentroid(
+                                marks[currentStep.Item1, currentStep.Item2].transform.position,
+                                marks[mergeStep2.Item1, mergeStep2.Item2].transform.position);
+                        }
+                    }
+
+                    newBuilding.SetFacingDirection(facingDirection);
+                    newBuilding.Construct();
+                    newBuilding.transform.position = buildingPosition;
+
+                    buildings.Add(newBuilding);
                 }
+            }
         }
+
         #endregion Building Stuff
 
         private ((int, int), bool) MoveStep((int, int) step, StepMoveDirectionType stepMove, bool isLog = false)
@@ -544,52 +575,52 @@ namespace CityGenerator
             switch (stepMove)
             {
                 case StepMoveDirectionType.Left:
-                    {
-                        var nextStep = step.Item2 - 1;
+                {
+                    var nextStep = step.Item2 - 1;
 
-                        if (nextStep < 0)
-                            isMoveSuccess = false;
-                        else
-                            newStep = (step.Item1, nextStep);
-                        if (isLog)
-                            Debug.Log($"Left {step}");
-                    }
+                    if (nextStep < 0)
+                        isMoveSuccess = false;
+                    else
+                        newStep = (step.Item1, nextStep);
+                    if (isLog)
+                        Debug.Log($"Left {step}");
+                }
                     break;
                 case StepMoveDirectionType.Right:
-                    {
-                        var nextStep = step.Item2 + 1;
+                {
+                    var nextStep = step.Item2 + 1;
 
-                        if (nextStep >= subCityRow)
-                            isMoveSuccess = false;
-                        else
-                            newStep = (step.Item1, nextStep);
-                        if (isLog)
-                            Debug.Log($"Right {step}");
-                    }
+                    if (nextStep >= subCityRow)
+                        isMoveSuccess = false;
+                    else
+                        newStep = (step.Item1, nextStep);
+                    if (isLog)
+                        Debug.Log($"Right {step}");
+                }
                     break;
                 case StepMoveDirectionType.Front:
-                    {
-                        var nextStep = step.Item1 + 1;
+                {
+                    var nextStep = step.Item1 + 1;
 
-                        if (nextStep >= subCityColumn)
-                            isMoveSuccess = false;
-                        else
-                            newStep = (nextStep, step.Item2);
-                        if (isLog)
-                            Debug.Log($"Front {step}");
-                    }
+                    if (nextStep >= subCityColumn)
+                        isMoveSuccess = false;
+                    else
+                        newStep = (nextStep, step.Item2);
+                    if (isLog)
+                        Debug.Log($"Front {step}");
+                }
                     break;
                 case StepMoveDirectionType.Back:
-                    {
-                        var nextStep = step.Item1 - 1;
+                {
+                    var nextStep = step.Item1 - 1;
 
-                        if (nextStep < 0)
-                            isMoveSuccess = false;
-                        else
-                            newStep = (nextStep, step.Item2);
-                        if (isLog)
-                            Debug.Log($"Back {step}");
-                    }
+                    if (nextStep < 0)
+                        isMoveSuccess = false;
+                    else
+                        newStep = (nextStep, step.Item2);
+                    if (isLog)
+                        Debug.Log($"Back {step}");
+                }
                     break;
                 default:
                     throw new NotImplementedException($"{stepMove}");
@@ -599,7 +630,7 @@ namespace CityGenerator
         }
 
         [ContextMenu("Clear")]
-        private void Clear()  => ClearCheckCache();
+        private void Clear() => ClearCheckCache();
 
         private void ClearCheckCache(bool checkCache = false)
         {
@@ -615,6 +646,7 @@ namespace CityGenerator
                     minorRoad.RemoveSpline(minorRoad.Spline);
                     roadPool.ReturnToPool(minorRoad);
                 }
+
                 minorRoads.Clear();
             }
 
@@ -629,23 +661,23 @@ namespace CityGenerator
             {
                 if (marks != null && marks.Length > 0)
                     for (int x = 0; x < marks.GetLength(0); x++)
-                        for (int y = 0; y < marks.GetLength(1); y++)
-                        {
-                            if (marks[x, y].markType == CityObjectType.MajorJunction)
-                                marks[x, y].markType = CityObjectType.MajorRoad;
-                            if (marks[x, y].markType != CityObjectType.MajorRoad)
-                                marks[x, y].Clear();
-                        }
+                    for (int y = 0; y < marks.GetLength(1); y++)
+                    {
+                        if (marks[x, y].markType == CityObjectType.MajorJunction)
+                            marks[x, y].markType = CityObjectType.MajorRoad;
+                        if (marks[x, y].markType != CityObjectType.MajorRoad)
+                            marks[x, y].Clear();
+                    }
             }
             else
             {
                 if (marks != null && marks.Length > 0)
                     for (int x = 0; x < marks.GetLength(0); x++)
-                        for (int y = 0; y < marks.GetLength(1); y++)
-                        {
-                            marks[x, y].Clear();
-                            markPool.ReturnToPool(marks[x, y]);
-                        }
+                    for (int y = 0; y < marks.GetLength(1); y++)
+                    {
+                        marks[x, y].Clear();
+                        markPool.ReturnToPool(marks[x, y]);
+                    }
 
                 marks = null;
             }

@@ -221,8 +221,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.5
-  far clip plane: 75
+  near clip plane: 1
+  far clip plane: 1000
   field of view: 69.99998
   orthographic: 0
   orthographic size: 5
@@ -249,8 +249,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 389951735}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2716352, y: 0.28331983, z: -0.0840242, w: 0.91590625}
-  m_LocalPosition: {x: -4.099252, y: 4.721537, z: -5.9919305}
+  m_LocalRotation: {x: 0.39498723, y: 0.5972673, z: -0.42758417, w: 0.5517505}
+  m_LocalPosition: {x: -31.556448, y: 88.3273, z: 2.289249}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2620,12 +2620,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b9bbf176ec84c2a9c43db20f03f077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 35
+  seed: 60
   column: 3
   row: 3
   lotColumn: 10
   lotRow: 10
-  maximumLotRoadCount: 10
+  maximumLotRoadCount: 8
   cityBase: {fileID: 4661336464382634067}
   subCityParent: {fileID: 2540522558389680593}
   subCityPrefab: {fileID: 5592535947723989454, guid: e1ff7cf0d58f2484784ccd41053ac3e3, type: 3}
