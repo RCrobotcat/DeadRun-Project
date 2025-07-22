@@ -81,6 +81,8 @@ namespace CityGenerator
         private PoolingObjects<SplineContainer> roadPool;
         private PoolingObjects<CityBuildingGenerator> buildingPool;
         private PoolingObjects<CityGenerator> cityGeneratorPool;
+        
+        bool isExpandScale = false;
 
         protected override void Awake()
         {
@@ -97,6 +99,12 @@ namespace CityGenerator
         {
             if (isInitial && isRealtimeRefresh)
                 RegenrateChecking();
+
+            if (isInitial && !isExpandScale)
+            {
+                transform.localScale = Vector3.one * 3f;
+                isExpandScale = true;
+            }
         }
 
         void RegenrateChecking()
