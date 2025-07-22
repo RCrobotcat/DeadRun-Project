@@ -302,6 +302,7 @@ public partial class PlayerObjectController : NetworkBehaviour
         if (!isClientOnly)
             return;
 
+        GetComponent<PlayerMovement>().currentEquippedItem = "";
         LobbyController.Instance.Show1v1Text();
         fellCountText.gameObject.SetActive(false);
     }
@@ -312,9 +313,11 @@ public partial class PlayerObjectController : NetworkBehaviour
         if (!isClientOnly)
             return;
 
+        GetComponent<PlayerMovement>().currentEquippedItem = "";
         fellCountText.gameObject.SetActive(false);
         GetComponent<PlayerMovement>().isAiming = false;
         CameraController.Instance.freeLookCam.Lens.FieldOfView = 70f;
+        CameraController.Instance.freeLookCam.Lens.FarClipPlane = 150f;
         GetComponent<PlayerMovement>().gun.gameObject.SetActive(false);
         CityGroupGenerator.Instance.InstantGenerating();
     }

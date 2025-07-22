@@ -203,6 +203,7 @@ public partial class LobbyController
         // 1v1 Scene Transition
         if (transitionToSceneName == SceneManager.GetSceneByName("Scene_3_1v1").path)
         {
+            player.GetComponent<PlayerMovement>().currentEquippedItem = "";
             Show1v1Text();
             player.GetComponent<PlayerObjectController>().fellCountText.gameObject.SetActive(false);
             if (NetworkServer.active)
@@ -212,9 +213,11 @@ public partial class LobbyController
         // Scene 4 Transition
         if (transitionToSceneName == SceneManager.GetSceneByName("Scene_4").path)
         {
+            player.GetComponent<PlayerMovement>().currentEquippedItem = "";
             player.GetComponent<PlayerObjectController>().fellCountText.gameObject.SetActive(false);
             player.GetComponent<PlayerMovement>().isAiming = false;
             CameraController.Instance.freeLookCam.Lens.FieldOfView = 70f;
+            CameraController.Instance.freeLookCam.Lens.FarClipPlane = 150f;
             player.GetComponent<PlayerMovement>().gun.gameObject.SetActive(false);
             CityGroupGenerator.Instance.InstantGenerating();
             if (NetworkServer.active)
