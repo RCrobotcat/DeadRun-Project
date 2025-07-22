@@ -30,7 +30,7 @@ public partial class PlayerMovement : NetworkBehaviour
     public Transform equipItemSlot;
 
     // Jumping and Gravity
-    private bool isGrounded;
+    private bool isGrounded = false;
     public float jumpForce = 5f;
     public float gravityMultiplier = 2f;
     public float jumpTimeInterval = 1f; // 跳跃间隔时间
@@ -89,6 +89,8 @@ public partial class PlayerMovement : NetworkBehaviour
         float v = Input.GetAxisRaw("Vertical");
         //Vector3 inputDir = new Vector3(h, 0f, v).normalized;
         Vector3 inputDir = (camForward * v + camRight * h).normalized;
+
+        PlayMovementSounds(h, v);
 
         horizontalVelocity = Vector3.zero;
         if (inputDir.magnitude >= 0.1f)
@@ -232,7 +234,6 @@ public partial class PlayerMovement : NetworkBehaviour
         if (!isLocalPlayer)
             return;
 
-        // 保持原有的 y 向速度（重力、跳跃等由物理系统处理）
         Vector3 newVelocity = new Vector3(
             horizontalVelocity.x,
             rb.linearVelocity.y,
@@ -263,6 +264,8 @@ public partial class PlayerMovement : NetworkBehaviour
     void Jump()
     {
         _animator.SetBool("Jumping", true);
+        if (SoundController.Instance != null)
+            SoundController.Instance.sfxSource_walk.Stop();
 
         // 跳跃时清除当前垂直速度（防止上次跳跃的速度干扰）
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
@@ -329,6 +332,45 @@ public partial class PlayerMovement : NetworkBehaviour
         foreach (var point in buoyancy.Voxels)
         {
             buoyancy.ApplyBuoyancyForce(point);
+        }
+    }
+
+    void PlayMovementSounds(float h, float v)
+    {
+        if (h > 0.1f || h < -0.1f || v > 0.1f || v < -0.1f)
+        {
+            if (SoundController.Instance != null)
+            {
+                if (NetworkServer.active)
+                {
+                    if (gameObject.scene.name != "PersistentScene")
+                    {
+                        if (gameObject.scene.name == "Scene_3_1v1")
+                        {
+                            if (isGrounded && !SoundController.Instance.IsSFXWalkPlaying())
+                                SoundController.Instance.PlayFootstep_grass(0.5f, 2.2f);
+                        }
+                        else
+                        {
+                            if (isGrounded && !SoundController.Instance.IsSFXWalkPlaying())
+                                SoundController.Instance.PlayFootstep_floor(0.5f, 2.2f);
+                        }
+                    }
+                }
+                else
+                {
+                    if (SceneManager.GetSceneByName("Scene_3_1v1").isLoaded)
+                    {
+                        if (isGrounded && !SoundController.Instance.IsSFXWalkPlaying())
+                            SoundController.Instance.PlayFootstep_grass(0.5f, 2.2f);
+                    }
+                    else
+                    {
+                        if (isGrounded && !SoundController.Instance.IsSFXWalkPlaying())
+                            SoundController.Instance.PlayFootstep_floor(0.5f, 2.2f);
+                    }
+                }
+            }
         }
     }
 

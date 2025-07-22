@@ -101,6 +101,10 @@ public class GunShooting : MonoBehaviour
             .Spawn(shootingFirePoint, shootingFirePoint.localPosition, Quaternion.identity);
 
         _animator.SetTrigger("Shoot");
+        if (SoundController.Instance != null)
+        {
+            SoundController.Instance.PlayShooting(0.3f, 2f);
+        }
     }
 
     void UpdateRotation()
