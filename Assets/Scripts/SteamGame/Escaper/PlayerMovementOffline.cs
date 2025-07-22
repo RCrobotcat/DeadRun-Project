@@ -127,12 +127,14 @@ public class PlayerMovementOffline : MonoBehaviour
         rb.linearVelocity = newVelocity;
 
         // 优化下落速度，确保下落时不会过快（通过增加重力加成来控制下落）
-        if (rb.linearVelocity.y < 0)
-        {
-            newVelocity.y += Physics.gravity.y * gravityMultiplier * Time.fixedDeltaTime;
-        }
+        // if (rb.linearVelocity.y < 0)
+        // {
+        //     newVelocity.y += Physics.gravity.y * gravityMultiplier * Time.fixedDeltaTime;
+        // }
+        //
+        // rb.linearVelocity = newVelocity;
 
-        rb.linearVelocity = newVelocity;
+        ApplyBuoyancyForce();
     }
 
     void Jump()
@@ -153,5 +155,15 @@ public class PlayerMovementOffline : MonoBehaviour
         if (objectsDetected.Length > 0)
             return true;
         return false;
+    }
+
+    void ApplyBuoyancyForce()
+    {
+        Buoyancy buoyancy = GetComponent<Buoyancy>();
+        buoyancy.Forces.Clear();
+        foreach (var point in buoyancy.Voxels)
+        {
+            buoyancy.ApplyBuoyancyForce(point);
+        }
     }
 }

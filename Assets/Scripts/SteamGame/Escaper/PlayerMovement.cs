@@ -2,6 +2,7 @@
 using System.Linq;
 using Mirror;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody))]
 public partial class PlayerMovement : NetworkBehaviour
@@ -240,12 +241,23 @@ public partial class PlayerMovement : NetworkBehaviour
         rb.linearVelocity = newVelocity;
 
         // 优化下落速度，确保下落时不会过快（通过增加重力加成来控制下落）
-        if (rb.linearVelocity.y < 0)
-        {
-            newVelocity.y += Physics.gravity.y * gravityMultiplier * Time.fixedDeltaTime;
-        }
+        // if (rb.linearVelocity.y < 0)
+        // {
+        //     newVelocity.y += Physics.gravity.y * gravityMultiplier * Time.fixedDeltaTime;
+        // }
+        //
+        // rb.linearVelocity = newVelocity;
 
-        rb.linearVelocity = newVelocity;
+        if (NetworkServer.active)
+        {
+            if (gameObject.scene.name == "Scene_3_1v1")
+                ApplyBuoyancyForce();
+        }
+        else if (!NetworkServer.active)
+        {
+            if (SceneManager.GetSceneByName("Scene_3_1v1").isLoaded)
+                ApplyBuoyancyForce();
+        }
     }
 
     void Jump()
@@ -307,6 +319,16 @@ public partial class PlayerMovement : NetworkBehaviour
                 newObj.transform.name = newItem;
                 newObj.gameObject.SetActive(true);
             }
+        }
+    }
+
+    void ApplyBuoyancyForce()
+    {
+        Buoyancy buoyancy = GetComponent<Buoyancy>();
+        buoyancy.Forces.Clear();
+        foreach (var point in buoyancy.Voxels)
+        {
+            buoyancy.ApplyBuoyancyForce(point);
         }
     }
 

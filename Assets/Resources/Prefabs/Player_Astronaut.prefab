@@ -845,6 +845,7 @@ GameObject:
   - component: {fileID: 8858057033186078359}
   - component: {fileID: 7684459242103810418}
   - component: {fileID: 4636597238382713328}
+  - component: {fileID: 6079483899543180120}
   m_Layer: 0
   m_Name: Player_Astronaut
   m_TagString: Untagged
@@ -903,7 +904,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9019578353437237485}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 1.5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1010,7 +1011,7 @@ MonoBehaviour:
   currentEquippedItem: 
   _animator: {fileID: 1971487635109874076}
   equipItemSlot: {fileID: 6310232972406723056}
-  jumpForce: 5
+  jumpForce: 6
   gravityMultiplier: 1.2
   jumpTimeInterval: 0.8
   isAiming: 0
@@ -1043,6 +1044,23 @@ MonoBehaviour:
   healthBarFillImage: {fileID: 5868287945290895650}
   maxHealth: 100
   fellCountText: {fileID: 5127545172576463263}
+--- !u!114 &6079483899543180120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9019578353437237485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c5140adfede407f82a228ea85ee1866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicesPerAxis: 2
+  voxelsLimit: 16
+  density: 500
+  waterHeight: 13
+  isCreature: 1
 --- !u!1001 &1971487635102530812
 PrefabInstance:
   m_ObjectHideFlags: 0
