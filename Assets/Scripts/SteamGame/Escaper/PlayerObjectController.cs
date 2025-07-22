@@ -290,8 +290,8 @@ public partial class PlayerObjectController : NetworkBehaviour
         {
             player.role = PlayerRole.Escaper;
             player.SetPlayerUIState(true);
-            if (Path.GetFileNameWithoutExtension(sceneToTransit) != "Scene_1" ||
-                Path.GetFileNameWithoutExtension(sceneToTransit) != "Scene_2")
+            if (sceneToTransit != "Assets/Scenes/DemoScene/Scene_1.unity" &&
+                sceneToTransit != "Assets/Scenes/DemoScene/Scene_2.unity")
                 player.fellCountText.gameObject.SetActive(false);
         }
     }
