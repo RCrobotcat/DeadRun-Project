@@ -4,14 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7061f1fe-81be-4fca-999e-11768f455133" name="Changes" comment="Fixed transition to scene_4 bug">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/SoundController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/SoundController.cs.meta" afterDir="false" />
+    <list default="true" id="7061f1fe-81be-4fca-999e-11768f455133" name="Changes" comment="Added sounds logic">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Guns/ExplotionPistol.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Guns/ExplotionPistol.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player_Astronaut.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player_Astronaut.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/DemoScene/OfflineScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DemoScene/OfflineScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Escaper/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Escaper/PlayerMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/GunSystem/GunShooting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/GunSystem/GunShooting.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestScene/ShaderTestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestScene/ShaderTestScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Escaper/Buoyancy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Escaper/Buoyancy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/PC_RPAsset.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/PC_RPAsset.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +173,10 @@
       <workItem from="1752980441659" duration="2250000" />
       <workItem from="1752989654747" duration="20081000" />
       <workItem from="1753111311062" duration="2007000" />
-      <workItem from="1753200710723" duration="4519000" />
+      <workItem from="1753200710723" duration="5318000" />
+      <workItem from="1753245230425" duration="666000" />
+      <workItem from="1753260530509" duration="2040000" />
+      <workItem from="1753283741338" duration="1226000" />
     </task>
     <task id="LOCAL-00001" summary="fixed exit lobby bugs">
       <option name="closed" value="true" />
@@ -254,7 +258,15 @@
       <option name="project" value="LOCAL" />
       <updated>1752998561450</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Added sounds logic">
+      <option name="closed" value="true" />
+      <created>1753205575784</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1753205575784</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -301,6 +313,7 @@
     <MESSAGE value="Fixed plane traps synchronization bugs_2" />
     <MESSAGE value="modified" />
     <MESSAGE value="Fixed transition to scene_4 bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed transition to scene_4 bug" />
+    <MESSAGE value="Added sounds logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added sounds logic" />
   </component>
 </project>

@@ -166,7 +166,7 @@ public class Buoyancy : MonoBehaviour
             rb.AddForceAtPosition(force, worldPoint);
 
             if (SoundController.Instance != null && !SoundController.Instance.sfxSource_water.isPlaying)
-                SoundController.Instance.PlayWaterSplash(0.5f, 2f);
+                SoundController.Instance.PlayWaterSplash(0.5f, 1.2f);
 
             Forces.Add(new[] { worldPoint, force });
         }

@@ -1,11 +1,11 @@
 {
   "dependencies": {
     "com.fluid.behavior-tree": {
-      "version": "https://github.com/ashblue/fluid-behavior-tree.git",
+      "version": "2.3.0",
       "depth": 0,
-      "source": "git",
+      "source": "registry",
       "dependencies": {},
-      "hash": "278131723445425fec62e4fb5b0462e2f4a1f754"
+      "url": "https://registry.npmjs.org"
     },
     "com.unity.ai.navigation": {
       "version": "2.0.5",

@@ -1058,7 +1058,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slicesPerAxis: 2
   voxelsLimit: 16
-  density: 500
+  density: 350
   waterHeight: 13
   isCreature: 1
 --- !u!1001 &1971487635102530812
