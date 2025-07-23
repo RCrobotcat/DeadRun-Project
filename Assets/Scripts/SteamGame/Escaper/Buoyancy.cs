@@ -165,6 +165,9 @@ public class Buoyancy : MonoBehaviour
             var force = localDampingForce * k + LocalArchimedesForce; // Buoyancy force
             rb.AddForceAtPosition(force, worldPoint);
 
+            if (SoundController.Instance != null && !SoundController.Instance.sfxSource_water.isPlaying)
+                SoundController.Instance.PlayWaterSplash(0.5f, 2f);
+
             Forces.Add(new[] { worldPoint, force });
         }
     }

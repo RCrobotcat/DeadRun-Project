@@ -352,8 +352,9 @@ public partial class PlayerMovement : NetworkBehaviour
                         }
                         else
                         {
-                            if (isGrounded && !SoundController.Instance.IsSFXWalkPlaying())
-                                SoundController.Instance.PlayFootstep_floor(0.5f, 2.2f);
+                            if (isGrounded && !SoundController.Instance.IsSFXWalkPlaying() &&
+                                rb.linearVelocity.y < 0.1f)
+                                SoundController.Instance.PlayFootstep_floor(1.2f, 2.2f);
                         }
                     }
                 }
@@ -366,8 +367,8 @@ public partial class PlayerMovement : NetworkBehaviour
                     }
                     else
                     {
-                        if (isGrounded && !SoundController.Instance.IsSFXWalkPlaying())
-                            SoundController.Instance.PlayFootstep_floor(0.5f, 2.2f);
+                        if (isGrounded && !SoundController.Instance.IsSFXWalkPlaying() && rb.linearVelocity.y < 0.1f)
+                            SoundController.Instance.PlayFootstep_floor(1.2f, 2.2f);
                     }
                 }
             }
