@@ -217,7 +217,7 @@ public partial class LobbyController
             player.GetComponent<PlayerObjectController>().fellCountText.gameObject.SetActive(false);
             player.GetComponent<PlayerMovement>().isAiming = false;
             CameraController.Instance.freeLookCam.Lens.FieldOfView = 70f;
-            CameraController.Instance.freeLookCam.Lens.FarClipPlane = 150f;
+            CameraController.Instance.freeLookCam.Lens.FarClipPlane = 500f;
             player.GetComponent<PlayerMovement>().gun.gameObject.SetActive(false);
             CityGroupGenerator.Instance.InstantGenerating();
             if (NetworkServer.active)

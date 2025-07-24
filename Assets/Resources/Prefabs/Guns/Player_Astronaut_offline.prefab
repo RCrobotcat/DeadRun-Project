@@ -1294,6 +1294,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LightPistol
       objectReference: {fileID: 0}
+    - target: {fileID: 625171806000200105, guid: 3675d7f3d96b77147af6456a5db24658, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2868960251185268052, guid: 3675d7f3d96b77147af6456a5db24658, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.546
