@@ -7,6 +7,12 @@ public class ActorManager : Singleton<ActorManager>
 {
     List<Actor> actors = new List<Actor>();
 
+    protected override void Awake()
+    {
+        base.Awake();
+        DontDestroyOnLoad(this);
+    }
+
     public void RegisterActor(Actor actor)
     {
         if (!actors.Contains(actor))
