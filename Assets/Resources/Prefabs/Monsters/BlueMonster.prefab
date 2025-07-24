@@ -548,7 +548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f0dd5c43eab43dbaff6f3ccfdde9c04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewRadius: 15
+  viewRadius: 25
   attackRadius: 5
   attackTarget: {fileID: 0}
 --- !u!114 &1269965372382522316
