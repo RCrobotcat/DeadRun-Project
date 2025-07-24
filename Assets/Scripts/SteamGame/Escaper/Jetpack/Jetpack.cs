@@ -76,6 +76,14 @@ public class Jetpack : MonoBehaviour
     void ApplyThrust()
     {
         rb.useGravity = false;
+        if (SoundController.Instance != null)
+        {
+            if (!SoundController.Instance.sfxSource_others.isPlaying)
+            {
+                SoundController.Instance.PlaySFX_others(SoundController.Instance.sfxClip_jetpack, 1.5f, true);
+            }
+        }
+
         transform.Translate(Vector3.up * thrust * Time.deltaTime, Space.World);
         if (transform.position.y >= maxHeight)
             transform.position = new Vector3(transform.position.x, maxHeight, transform.position.z);
@@ -94,6 +102,13 @@ public class Jetpack : MonoBehaviour
     void StopThrust()
     {
         rb.useGravity = true;
+        if (SoundController.Instance != null)
+        {
+            if (SoundController.Instance.sfxSource_others.isPlaying)
+            {
+                SoundController.Instance.sfxSource_others.Stop();
+            }
+        }
     }
 
     void StartCooldown()

@@ -9,6 +9,7 @@ public class SoundController : Singleton<SoundController>
     public AudioSource sfxSource_walk;
     public AudioSource sfxSource_shooting;
     public AudioSource sfxSource_water;
+    public AudioSource sfxSource_others;
 
     [Header("Music Clips")] [SerializeField]
     private List<AudioClip> musicClips;
@@ -17,6 +18,7 @@ public class SoundController : Singleton<SoundController>
     [SerializeField] private List<AudioClip> footstepClips_grass;
     [SerializeField] private List<AudioClip> shootingClips;
     [SerializeField] private List<AudioClip> waterSplashClips;
+    public AudioClip sfxClip_jetpack;
 
     private int currentMusicIndex = 0;
 
@@ -78,10 +80,15 @@ public class SoundController : Singleton<SoundController>
     public void PlayWaterSplash(float volume = 1f, float pitch = 1f)
         => PlayRandomClip(sfxSource_water, waterSplashClips, volume, pitch);
 
-    public void PlaySFX(AudioSource source, AudioClip clip, float volume = 1f)
+    public void PlaySFX_others(AudioClip clip, float volume = 1f, bool loop = false)
     {
         if (clip == null) return;
-        source.PlayOneShot(clip, volume);
+        sfxSource_others.loop = loop;
+        sfxSource_others.clip = clip;
+        if (loop)
+            sfxSource_others.Play();
+        else
+            sfxSource_others.PlayOneShot(clip, volume);
     }
 
     public bool IsSFXWalkPlaying()
