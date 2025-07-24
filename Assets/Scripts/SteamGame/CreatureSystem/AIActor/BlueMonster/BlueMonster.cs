@@ -2,6 +2,7 @@
 using CleverCrow.Fluid.BTs.Tasks;
 using UnityEngine;
 using System.Collections.Generic;
+using Mirror;
 
 public class BlueMonster : AIActor
 {
@@ -19,6 +20,9 @@ public class BlueMonster : AIActor
         base.Update();
 
         UpdateAttackTarget();
+
+        if (animator != null)
+            animator.SetFloat("Height", transform.position.y);
     }
 
     protected override void FixedUpdate()
@@ -50,21 +54,33 @@ public class BlueMonster : AIActor
             })
             .End()
             .End()
-            .Do("Wander", () => // wander behavior Leaf
+            .Selector("Try Wander")
+            .Sequence("Wander Branch")
+            .Condition("Sky or Ground?", () => { return GroundOrSkyPatrol(); })
+            .Do("Sky Wander", () => // sky wander behavior Leaf
             {
-                DoWander();
+                DoSkyWander();
                 return TaskStatus.Success;
             })
+            .End()
+            .Do("Ground Wander", () => // ground wander behavior Leaf
+            {
+                DoGroundWander();
+                return TaskStatus.Success;
+            })
+            .End()
             .Build();
     }
 
-    void DoWander()
+    void DoGroundWander()
     {
         if (animator != null)
         {
             animator.SetBool("Attack", false);
+            animator.SetBool("Flying", false);
         }
 
+        wanderBehaviors.targetHeight = 9f;
         Vector3 acceleration = wanderBehaviors.GetSteering();
 
         if (collisionSensor != null)
@@ -79,11 +95,47 @@ public class BlueMonster : AIActor
         steeringBehaviors.LookMoveDirection();
     }
 
+    void DoSkyWander()
+    {
+        if (animator != null)
+        {
+            animator.SetBool("Attack", false);
+            animator.SetBool("Flying", true);
+        }
+
+        wanderBehaviors.targetHeight = 20f;
+        Vector3 acceleration = wanderBehaviors.GetSteering();
+
+        if (collisionSensor != null)
+        {
+            Vector3 accelerationDir = acceleration.normalized;
+            collisionSensor.GetCollisionFreeDirection(accelerationDir, out accelerationDir);
+            accelerationDir *= acceleration.magnitude;
+            acceleration = accelerationDir;
+        }
+
+        steeringBehaviors.Steer(acceleration);
+        steeringBehaviors.LookMoveDirection();
+    }
+
+    bool GroundOrSkyPatrol()
+    {
+        float num = Random.value;
+        if (num <= 0.7f)
+            return true; // sky patrol
+        return false; // ground patrol
+    }
+
     void DoAttack(Actor actor)
     {
         if (actor == null) return;
+        PlayerMovement target = actor.GetComponent<PlayerMovement>();
 
-        if (animator != null) animator.SetBool("Attack", true);
+        if (animator != null)
+        {
+            animator.SetBool("Attack", true);
+            animator.SetBool("Flying", false);
+        }
 
         steeringBehaviors.Steer(Vector3.zero);
         steeringBehaviors.LookAtDirection(attackTarget.transform.position - transform.position);
@@ -152,5 +204,14 @@ public class BlueMonster : AIActor
         });
 
         return actors[0];
+    }
+
+    public void AttackPlayerAnimationEvent()
+    {
+        if (Vector3.Distance(attackTarget.transform.position, transform.position) < attackRadius)
+        {
+            PlayerMovement player = attackTarget.GetComponent<PlayerMovement>();
+            player.MonsterAttackPlayer(5);
+        }
     }
 }

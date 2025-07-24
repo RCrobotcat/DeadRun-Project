@@ -846,6 +846,7 @@ GameObject:
   - component: {fileID: 7684459242103810418}
   - component: {fileID: 4636597238382713328}
   - component: {fileID: 6079483899543180120}
+  - component: {fileID: 7548509304880714756}
   m_Layer: 0
   m_Name: Player_Astronaut
   m_TagString: Untagged
@@ -1061,6 +1062,20 @@ MonoBehaviour:
   density: 350
   waterHeight: 13
   isCreature: 1
+--- !u!114 &7548509304880714756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9019578353437237485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc2cc611da63451c9fb3c1479e06fe77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 10
+  attackRadius: 1
 --- !u!1001 &1971487635102530812
 PrefabInstance:
   m_ObjectHideFlags: 0

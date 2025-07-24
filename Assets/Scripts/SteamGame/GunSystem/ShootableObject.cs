@@ -20,23 +20,11 @@ public partial class PlayerMovement
             //playerObjectController.CurrentHealth -= 10f;
             if (NetworkServer.active)
             {
-                RpcDamagePlayer(5f);
-                if (outlineShowTimerLocal <= 0)
-                {
-                    foreach (Transform child in astronautModel.GetComponentsInChildren<Transform>(true))
-                        child.gameObject.layer = LayerMask.NameToLayer("Outlined");
-                    outlineShowTimerLocal = outlineShowTime;
-                }
+                AttackPlayerRpc();
             }
             else
             {
-                CmdDamagePlayer(5f);
-                if (outlineShowTimerLocal <= 0)
-                {
-                    foreach (Transform child in astronautModel.GetComponentsInChildren<Transform>(true))
-                        child.gameObject.layer = LayerMask.NameToLayer("Outlined");
-                    outlineShowTimerLocal = outlineShowTime;
-                }
+                AttackPlayerCmd();
             }
 
             Vector3 direction = (other.transform.position - transform.position).normalized;
@@ -87,6 +75,39 @@ public partial class PlayerMovement
     {
         playerObjectController.CurrentHealth -= damage;
 
+        if (outlineShowTimer <= 0)
+        {
+            foreach (Transform child in astronautModel.GetComponentsInChildren<Transform>(true))
+                child.gameObject.layer = LayerMask.NameToLayer("Outlined");
+            outlineShowTimer = outlineShowTime;
+        }
+    }
+
+    public void AttackPlayerRpc()
+    {
+        RpcDamagePlayer(5f);
+        if (outlineShowTimerLocal <= 0)
+        {
+            foreach (Transform child in astronautModel.GetComponentsInChildren<Transform>(true))
+                child.gameObject.layer = LayerMask.NameToLayer("Outlined");
+            outlineShowTimerLocal = outlineShowTime;
+        }
+    }
+
+    public void AttackPlayerCmd()
+    {
+        CmdDamagePlayer(5f);
+        if (outlineShowTimerLocal <= 0)
+        {
+            foreach (Transform child in astronautModel.GetComponentsInChildren<Transform>(true))
+                child.gameObject.layer = LayerMask.NameToLayer("Outlined");
+            outlineShowTimerLocal = outlineShowTime;
+        }
+    }
+
+    public void MonsterAttackPlayer(float damage)
+    {
+        playerObjectController.CurrentHealth -= damage;
         if (outlineShowTimer <= 0)
         {
             foreach (Transform child in astronautModel.GetComponentsInChildren<Transform>(true))

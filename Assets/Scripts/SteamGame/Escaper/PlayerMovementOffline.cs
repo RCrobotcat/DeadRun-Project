@@ -134,7 +134,7 @@ public class PlayerMovementOffline : MonoBehaviour
         //
         // rb.linearVelocity = newVelocity;
 
-        ApplyBuoyancyForce();
+        //ApplyBuoyancyForce();
     }
 
     void Jump()
@@ -157,13 +157,13 @@ public class PlayerMovementOffline : MonoBehaviour
         return false;
     }
 
-    void ApplyBuoyancyForce()
-    {
-        Buoyancy buoyancy = GetComponent<Buoyancy>();
-        buoyancy.Forces.Clear();
-        foreach (var point in buoyancy.Voxels)
-        {
-            buoyancy.ApplyBuoyancyForce(point);
-        }
-    }
+    // void ApplyBuoyancyForce()
+    // {
+    //     Buoyancy buoyancy = GetComponent<Buoyancy>();
+    //     buoyancy.Forces.Clear();
+    //     foreach (var point in buoyancy.Voxels)
+    //     {
+    //         buoyancy.ApplyBuoyancyForce(point);
+    //     }
+    // }
 }
