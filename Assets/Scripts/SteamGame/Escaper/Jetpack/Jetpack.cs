@@ -1,10 +1,11 @@
-﻿using DG.Tweening;
+﻿using System.Linq;
+using DG.Tweening;
 using Mirror;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Jetpack : MonoBehaviour
+public class Jetpack : NetworkBehaviour
 {
     public float thrust = 10f;
     public float fuel = 100f;
@@ -23,6 +24,21 @@ public class Jetpack : MonoBehaviour
 
     public GameObject jetpackUIPanel;
     public Image fuelBarImage;
+
+    private MyNetworkManager _myNetworkManager;
+
+    private MyNetworkManager MyNetworkManager
+    {
+        get
+        {
+            if (_myNetworkManager != null)
+            {
+                return _myNetworkManager;
+            }
+
+            return _myNetworkManager = MyNetworkManager.singleton as MyNetworkManager;
+        }
+    }
 
     void Start()
     {
@@ -105,6 +121,11 @@ public class Jetpack : MonoBehaviour
         jetpackSmokeEffect.GetComponent<ParticleSystem>()
             .Spawn(jetpackSmokeParent, jetpackSmokeParent.localPosition, Quaternion.identity);
 
+        if (NetworkServer.active)
+            RpcJetpackSmoke(GetComponent<PlayerObjectController>().playerID);
+        else
+            CmdJetpackSmoke(GetComponent<PlayerObjectController>().playerID);
+
         if (currentFuel <= 0)
         {
             currentFuel = 0;
@@ -130,6 +151,33 @@ public class Jetpack : MonoBehaviour
         {
             isCoolingDown = true;
             cooldownTimer = 0f;
+        }
+    }
+
+    [ClientRpc]
+    void RpcJetpackSmoke(int playerId)
+    {
+        if (!isClientOnly)
+            return;
+
+        var player = MyNetworkManager.GamePlayers.FirstOrDefault(p => p.playerID == playerId);
+        if (player != null)
+        {
+            Jetpack jetpack = player.GetComponent<Jetpack>();
+            jetpack.jetpackSmokeEffect.GetComponent<ParticleSystem>()
+                .Spawn(jetpack.jetpackSmokeParent, jetpack.jetpackSmokeParent.localPosition, Quaternion.identity);
+        }
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdJetpackSmoke(int playerId)
+    {
+        var player = MyNetworkManager.GamePlayers.FirstOrDefault(p => p.playerID == playerId);
+        if (player != null)
+        {
+            Jetpack jetpack = player.GetComponent<Jetpack>();
+            jetpack.jetpackSmokeEffect.GetComponent<ParticleSystem>()
+                .Spawn(jetpack.jetpackSmokeParent, jetpack.jetpackSmokeParent.localPosition, Quaternion.identity);
         }
     }
 }

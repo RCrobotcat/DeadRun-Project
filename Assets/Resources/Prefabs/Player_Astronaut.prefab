@@ -1327,12 +1327,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 242c7f7a670e4a0da2af3d7f4820975a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   thrust: 8
   fuel: 7
   fuelConsumptionRate: 1
-  maxHeight: 20
-  cooldownTime: 2.5
-  cooldownRecoveryRate: 3.5
+  maxHeight: 23
+  cooldownTime: 5
+  cooldownRecoveryRate: 1.5
   currentFuel: 0
   jetpackSmokeEffect: {fileID: 5797428246745224015, guid: 34af8b798c0500442bf11123dbad047c, type: 3}
   jetpackSmokeParent: {fileID: 4204403811488950149}

@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7061f1fe-81be-4fca-999e-11768f455133" name="Changes" comment="Added sounds logic">
+    <list default="true" id="7061f1fe-81be-4fca-999e-11768f455133" name="Changes" comment="Added blue monster logic">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AssetPacks/msVFX_Free Smoke Effects Pack/Prefabs/msVFX_Stylized Smoke 4.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AssetPacks/msVFX_Free Smoke Effects Pack/Prefabs/msVFX_Stylized Smoke 4.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player_Astronaut.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player_Astronaut.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/DemoScene/OfflineScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DemoScene/OfflineScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestScene/ShaderTestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestScene/ShaderTestScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Escaper/Buoyancy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Escaper/Buoyancy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/PC_RPAsset.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/PC_RPAsset.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Escaper/Jetpack/Jetpack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Escaper/Jetpack/Jetpack.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +55,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6524f18ff747462d8847618bfcedbe402ac00/59/324ce4f5/QueryTriggerInteraction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c34cbf4d96f64646aa2dfafcf26806e318600/73/f9623f4e/AudioSource.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ed969b0e627d471da4848289f9c322df46ae00/55/8b89858c/ThrowHelper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/SteamGame/CreatureSystem/AIActor/AIActor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/EventSystemController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/PCG/SeamlessNoiseGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/PCG/TerrainGeneration.cs" root0="FORCE_HIGHLIGHTING" />
@@ -176,7 +175,12 @@
       <workItem from="1753200710723" duration="5318000" />
       <workItem from="1753245230425" duration="666000" />
       <workItem from="1753260530509" duration="2040000" />
-      <workItem from="1753283741338" duration="1226000" />
+      <workItem from="1753283741338" duration="4332000" />
+      <workItem from="1753354101578" duration="80000" />
+      <workItem from="1753354192925" duration="1346000" />
+      <workItem from="1753357528033" duration="123000" />
+      <workItem from="1753357662763" duration="2225000" />
+      <workItem from="1753370443388" duration="3628000" />
     </task>
     <task id="LOCAL-00001" summary="fixed exit lobby bugs">
       <option name="closed" value="true" />
@@ -266,7 +270,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753205575784</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Added blue monster logic">
+      <option name="closed" value="true" />
+      <created>1753288117886</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1753288117886</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -314,6 +326,7 @@
     <MESSAGE value="modified" />
     <MESSAGE value="Fixed transition to scene_4 bug" />
     <MESSAGE value="Added sounds logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added sounds logic" />
+    <MESSAGE value="Added blue monster logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added blue monster logic" />
   </component>
 </project>
