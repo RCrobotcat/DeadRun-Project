@@ -1119,6 +1119,7 @@ MonoBehaviour:
   waterSplashClips:
   - {fileID: 8300000, guid: 7e4bf89070917a5479e68eab55314537, type: 3}
   sfxClip_jetpack: {fileID: 8300000, guid: 022387ca4b0a40b408cd8f00225f2185, type: 3}
+  sfxClip_monsterAttack: {fileID: 8300000, guid: 8ebcb6234d419344daa712ba65bb3798, type: 3}
 --- !u!82 &1655982207
 AudioSource:
   m_ObjectHideFlags: 0

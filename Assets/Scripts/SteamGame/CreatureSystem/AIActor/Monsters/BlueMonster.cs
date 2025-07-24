@@ -18,6 +18,10 @@ public class BlueMonster : AIActor
 
     protected override void Update()
     {
+        if (NetworkServer.active)
+            if (LobbyController.Instance.localPlayerObject.scene.name != "Scene_3_1v1")
+                return;
+
         base.Update();
 
         UpdateAttackTarget();
@@ -28,6 +32,10 @@ public class BlueMonster : AIActor
 
     protected override void FixedUpdate()
     {
+        if (NetworkServer.active)
+            if (LobbyController.Instance.localPlayerObject.scene.name != "Scene_3_1v1")
+                return;
+
         base.FixedUpdate();
 
         brain.Tick();
@@ -209,6 +217,24 @@ public class BlueMonster : AIActor
 
     public void AttackPlayerAnimationEvent()
     {
+        if (SoundController.Instance != null)
+        {
+            if (NetworkServer.active)
+            {
+                if (attackTarget.gameObject.scene.name == "Scene_3_1v1")
+                {
+                    SoundController.Instance.PlaySFX_others(SoundController.Instance.sfxClip_monsterAttack, 0.4f);
+                }
+            }
+            else
+            {
+                if (SceneManager.GetSceneByName("Scene_3_1v1").isLoaded)
+                {
+                    SoundController.Instance.PlaySFX_others(SoundController.Instance.sfxClip_monsterAttack, 0.4f);
+                }
+            }
+        }
+
         if (Vector3.Distance(attackTarget.transform.position, transform.position) < attackRadius)
         {
             if (NetworkServer.active)

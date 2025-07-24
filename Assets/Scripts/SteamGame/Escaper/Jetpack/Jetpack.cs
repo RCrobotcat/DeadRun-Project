@@ -1,6 +1,8 @@
-﻿using Mirror;
+﻿using DG.Tweening;
+using Mirror;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Jetpack : MonoBehaviour
 {
@@ -18,6 +20,9 @@ public class Jetpack : MonoBehaviour
 
     public GameObject jetpackSmokeEffect;
     public Transform jetpackSmokeParent;
+
+    public GameObject jetpackUIPanel;
+    public Image fuelBarImage;
 
     void Start()
     {
@@ -37,6 +42,9 @@ public class Jetpack : MonoBehaviour
             if (!SceneManager.GetSceneByName("Scene_4").isLoaded)
                 return;
         }
+
+        if (!GetComponent<PlayerMovement>().isLocalPlayer)
+            return;
 
         if (isCoolingDown)
         {
@@ -70,12 +78,16 @@ public class Jetpack : MonoBehaviour
         {
             currentFuel += cooldownRecoveryRate * Time.deltaTime;
             currentFuel = Mathf.Min(currentFuel, fuel);
+            fuelBarImage.fillAmount = currentFuel / fuel;
+            if (currentFuel >= fuel)
+                jetpackUIPanel.gameObject.SetActive(false);
         }
     }
 
     void ApplyThrust()
     {
         rb.useGravity = false;
+        jetpackUIPanel.gameObject.SetActive(true);
         if (SoundController.Instance != null)
         {
             if (!SoundController.Instance.sfxSource_others.isPlaying)
@@ -89,6 +101,7 @@ public class Jetpack : MonoBehaviour
             transform.position = new Vector3(transform.position.x, maxHeight, transform.position.z);
 
         currentFuel -= fuelConsumptionRate * Time.deltaTime;
+        fuelBarImage.fillAmount = currentFuel / fuel;
         jetpackSmokeEffect.GetComponent<ParticleSystem>()
             .Spawn(jetpackSmokeParent, jetpackSmokeParent.localPosition, Quaternion.identity);
 

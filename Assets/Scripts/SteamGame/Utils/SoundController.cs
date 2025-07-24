@@ -19,6 +19,7 @@ public class SoundController : Singleton<SoundController>
     [SerializeField] private List<AudioClip> shootingClips;
     [SerializeField] private List<AudioClip> waterSplashClips;
     public AudioClip sfxClip_jetpack;
+    public AudioClip sfxClip_monsterAttack;
 
     private int currentMusicIndex = 0;
 
