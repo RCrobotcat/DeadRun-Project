@@ -54,9 +54,9 @@ MonoBehaviour:
   seed: 66
   column: 3
   row: 3
-  lotColumn: 10
-  lotRow: 10
-  maximumLotRoadCount: 8
+  lotColumn: 7
+  lotRow: 7
+  maximumLotRoadCount: 5
   cityBase: {fileID: 3620919610242928254}
   subCityParent: {fileID: 5886710678616694780}
   subCityPrefab: {fileID: 5592535947723989454, guid: e1ff7cf0d58f2484784ccd41053ac3e3, type: 3}
@@ -69,7 +69,7 @@ MonoBehaviour:
   isRealtimeRefresh: 1
   cameraPosition: {fileID: 6352754722455855958}
   tableCollectionPrefab: {fileID: 7488834685195679328, guid: d9ff31d0b68b34d45886426f6440c55e, type: 3}
-  maximumTableCount: 50
+  maximumTableCount: 25
   tablesParent: {fileID: 0}
   targetAreaPrefab: {fileID: 4593236637377365868, guid: 819e6b46b0355aa47b3a788f9cbef5dc, type: 3}
   targetAreaParent: {fileID: 0}
