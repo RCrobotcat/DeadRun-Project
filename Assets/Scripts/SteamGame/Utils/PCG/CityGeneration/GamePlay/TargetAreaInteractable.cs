@@ -45,8 +45,8 @@ public class TargetAreaInteractable : NetworkBehaviour
 
         if (possessivePlayerId != LobbyController.Instance.LocalPlayerObjectController.playerID)
         {
-            if (gameObject.layer == LayerMask.GetMask("Interactable"))
-                gameObject.layer = LayerMask.GetMask("Default");
+            if (gameObject.layer == LayerMask.NameToLayer("Interactable"))
+                gameObject.layer = LayerMask.NameToLayer("Default");
         }
     }
 
@@ -64,6 +64,23 @@ public class TargetAreaInteractable : NetworkBehaviour
                 progressText.text = "Done!";
                 progressText.color = Color.green;
             }
+
+            RpcUpdateProgressText(currentCollectableItemCount);
+        }
+    }
+
+    [ClientRpc]
+    private void RpcUpdateProgressText(int val)
+    {
+        if (!isClientOnly)
+            return;
+
+        currentCollectableItemCount = val;
+        progressText.text = currentCollectableItemCount + "/" + requiredCollectableItemCount;
+        if (currentCollectableItemCount >= requiredCollectableItemCount)
+        {
+            progressText.text = "Done!";
+            progressText.color = Color.green;
         }
     }
 
