@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -68,6 +69,24 @@ namespace CityGenerator
         public int maximumTableCount = 15;
         public Transform tablesParent;
 
+        public GameObject targetAreaPrefab;
+        public Transform targetAreaParent;
+
+        private MyNetworkManager _myNetworkManager;
+
+        private MyNetworkManager MyNetworkManager
+        {
+            get
+            {
+                if (_myNetworkManager != null)
+                {
+                    return _myNetworkManager;
+                }
+
+                return _myNetworkManager = MyNetworkManager.singleton as MyNetworkManager;
+            }
+        }
+
         // Cache
         private int seedCache;
         private int columnCache;
@@ -112,7 +131,53 @@ namespace CityGenerator
                 for (int i = 0; i < cities.Count; i++)
                     cities[i].SpawnTables();
 
+                SpawnTargetAreas();
+
                 isExpandScale = true;
+            }
+        }
+
+        void SpawnTargetAreas()
+        {
+            if (!NetworkServer.active)
+                return;
+
+            var usedMarks = new HashSet<CityMark>();
+
+            foreach (var player in MyNetworkManager.GamePlayers)
+            {
+                CityMark mark = null;
+                int attempts = 0;
+                int maxAttempts = 1000;
+                do
+                {
+                    int val0 = Random.Range(0, cityMarks.GetLength(0));
+                    int val1 = Random.Range(0, cityMarks.GetLength(1));
+                    var candidate = cityMarks[val0, val1];
+                    if ((candidate.markType == CityObjectType.MajorRoad ||
+                         candidate.markType == CityObjectType.MinorRoad)
+                        && !usedMarks.Contains(candidate))
+                    {
+                        mark = candidate;
+                        break;
+                    }
+
+                    attempts++;
+                } while (attempts < maxAttempts);
+
+                if (mark == null)
+                    continue;
+
+                usedMarks.Add(mark);
+
+                var targetArea = Instantiate(targetAreaPrefab, mark.transform.position + Vector3.up * 0.1f,
+                    Quaternion.identity,
+                    targetAreaParent);
+                targetArea.name = $"Target Area {mark.Index}";
+                NetworkServer.Spawn(targetArea);
+                targetArea.GetComponent<TargetAreaInteractable>().possessivePlayerId = player.playerID;
+                targetArea.GetComponent<TargetAreaInteractable>()
+                    .RpcUpdateTargetAreaPossessivePlayerId(player.playerID);
             }
         }
 

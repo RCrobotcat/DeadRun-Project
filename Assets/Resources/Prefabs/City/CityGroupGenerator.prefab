@@ -69,8 +69,10 @@ MonoBehaviour:
   isRealtimeRefresh: 1
   cameraPosition: {fileID: 6352754722455855958}
   tableCollectionPrefab: {fileID: 7488834685195679328, guid: d9ff31d0b68b34d45886426f6440c55e, type: 3}
-  maximumTableCount: 30
+  maximumTableCount: 50
   tablesParent: {fileID: 0}
+  targetAreaPrefab: {fileID: 4593236637377365868, guid: 819e6b46b0355aa47b3a788f9cbef5dc, type: 3}
+  targetAreaParent: {fileID: 0}
   currentTableCount: 0
 --- !u!114 &6005335872304518268
 MonoBehaviour:

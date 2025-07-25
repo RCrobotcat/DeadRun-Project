@@ -1147,6 +1147,67 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1001 &1089535292832235858
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3282208396727170879, guid: 819e6b46b0355aa47b3a788f9cbef5dc, type: 3}
+      propertyPath: sceneId
+      value: 3482827689
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593236637377365868, guid: 819e6b46b0355aa47b3a788f9cbef5dc, type: 3}
+      propertyPath: m_Name
+      value: TargetArea
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017902994030361368, guid: 819e6b46b0355aa47b3a788f9cbef5dc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017902994030361368, guid: 819e6b46b0355aa47b3a788f9cbef5dc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017902994030361368, guid: 819e6b46b0355aa47b3a788f9cbef5dc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017902994030361368, guid: 819e6b46b0355aa47b3a788f9cbef5dc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017902994030361368, guid: 819e6b46b0355aa47b3a788f9cbef5dc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017902994030361368, guid: 819e6b46b0355aa47b3a788f9cbef5dc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017902994030361368, guid: 819e6b46b0355aa47b3a788f9cbef5dc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017902994030361368, guid: 819e6b46b0355aa47b3a788f9cbef5dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017902994030361368, guid: 819e6b46b0355aa47b3a788f9cbef5dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017902994030361368, guid: 819e6b46b0355aa47b3a788f9cbef5dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 819e6b46b0355aa47b3a788f9cbef5dc, type: 3}
 --- !u!4 &1147304191270915662
 Transform:
   m_ObjectHideFlags: 0
@@ -2318,15 +2379,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 242c7f7a670e4a0da2af3d7f4820975a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   thrust: 7
   fuel: 5
   fuelConsumptionRate: 1
   maxHeight: 20
   cooldownTime: 2
   cooldownRecoveryRate: 10
+  restoreTime: 1.2
   currentFuel: 0
   jetpackSmokeEffect: {fileID: 5797428246745224015, guid: 34af8b798c0500442bf11123dbad047c, type: 3}
   jetpackSmokeParent: {fileID: 882989782}
+  jetpackUIPanel: {fileID: 0}
+  fuelBarImage: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2336,3 +2403,4 @@ SceneRoots:
   - {fileID: 621479306}
   - {fileID: 2035603894}
   - {fileID: 389025490743205229}
+  - {fileID: 1089535292832235858}

@@ -1,4 +1,3 @@
-using Mirror;
 using UnityEngine;
 
 namespace CityGenerator
@@ -57,7 +56,6 @@ namespace CityGenerator
             basePosition = transform.position;
         }
 
-        // TODO: Add collectable items and target positions for players
         public void Construct(int piece = CityUtility.NULL_INDEX)
         {
             if (!initialize)
