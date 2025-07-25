@@ -13,11 +13,13 @@ public class Jetpack : NetworkBehaviour
     public float maxHeight = 100f;
     public float cooldownTime = 5f;
     public float cooldownRecoveryRate = 10f;
+    public float restoreTime = 1.2f;
 
     private Rigidbody rb;
     public float currentFuel;
     private bool isCoolingDown = false;
     private float cooldownTimer = 0f;
+    private float restoreTimer = 0f;
 
     public GameObject jetpackSmokeEffect;
     public Transform jetpackSmokeParent;
@@ -44,6 +46,7 @@ public class Jetpack : NetworkBehaviour
     {
         rb = GetComponent<Rigidbody>();
         currentFuel = fuel;
+        restoreTimer = restoreTime;
     }
 
     void Update()
@@ -86,23 +89,29 @@ public class Jetpack : NetworkBehaviour
             else
             {
                 StopThrust();
+
+                if (restoreTimer > 0)
+                    restoreTimer -= Time.deltaTime;
+
+                if (restoreTimer <= 0)
+                {
+                    RestoreFuel();
+                    if (Mathf.Approximately(currentFuel, fuel))
+                        restoreTimer = restoreTime;
+                }
             }
         }
 
-        // 燃料恢复
         if (isCoolingDown && currentFuel < fuel)
         {
-            currentFuel += cooldownRecoveryRate * Time.deltaTime;
-            currentFuel = Mathf.Min(currentFuel, fuel);
-            fuelBarImage.fillAmount = currentFuel / fuel;
-            if (currentFuel >= fuel)
-                jetpackUIPanel.gameObject.SetActive(false);
+            RestoreFuel();
         }
     }
 
     void ApplyThrust()
     {
         rb.useGravity = false;
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
         jetpackUIPanel.gameObject.SetActive(true);
         if (SoundController.Instance != null)
         {
@@ -152,6 +161,15 @@ public class Jetpack : NetworkBehaviour
             isCoolingDown = true;
             cooldownTimer = 0f;
         }
+    }
+
+    void RestoreFuel()
+    {
+        currentFuel += cooldownRecoveryRate * Time.deltaTime;
+        currentFuel = Mathf.Min(currentFuel, fuel);
+        fuelBarImage.fillAmount = currentFuel / fuel;
+        if (currentFuel >= fuel)
+            jetpackUIPanel.gameObject.SetActive(false);
     }
 
     [ClientRpc]
