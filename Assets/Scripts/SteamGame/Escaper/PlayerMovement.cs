@@ -195,7 +195,7 @@ public partial class PlayerMovement : NetworkBehaviour
             if (outlineShowTimer <= 0)
             {
                 foreach (Transform child in astronautModel.GetComponentsInChildren<Transform>(true))
-                    child.gameObject.layer = LayerMask.NameToLayer("Default");
+                    child.gameObject.layer = LayerMask.NameToLayer("Player");
             }
         }
 
@@ -205,7 +205,7 @@ public partial class PlayerMovement : NetworkBehaviour
             if (outlineShowTimerLocal <= 0)
             {
                 foreach (Transform child in astronautModel.GetComponentsInChildren<Transform>(true))
-                    child.gameObject.layer = LayerMask.NameToLayer("Default");
+                    child.gameObject.layer = LayerMask.NameToLayer("Player");
             }
         }
     }

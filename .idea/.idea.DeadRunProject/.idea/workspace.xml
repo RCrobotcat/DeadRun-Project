@@ -4,10 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7061f1fe-81be-4fca-999e-11768f455133" name="Changes" comment="added sync jetpack smoke logic">
+    <list default="true" id="7061f1fe-81be-4fca-999e-11768f455133" name="Changes" comment="modified">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/UIFaceCamera.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/UIFaceCamera.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/City/CityGroupGenerator.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/City/CityGroupGenerator.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/DemoScene/Scene_4.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DemoScene/Scene_4.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AssetPacks/msVFX_Free Smoke Effects Pack/Prefabs/msVFX_Stylized Smoke 4.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AssetPacks/msVFX_Free Smoke Effects Pack/Prefabs/msVFX_Stylized Smoke 4.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/City/TargetArea.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/City/TargetArea.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Guns/ExplotionPistol.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Guns/ExplotionPistol.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player_Astronaut.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player_Astronaut.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/DemoScene/OfflineScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DemoScene/OfflineScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/PCG/CityGeneration/GamePlay/TargetAreaInteractable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/PCG/CityGeneration/GamePlay/TargetAreaInteractable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/PC_Renderer.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/PC_Renderer.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,7 +187,8 @@
       <workItem from="1753357662763" duration="2225000" />
       <workItem from="1753370443388" duration="3628000" />
       <workItem from="1753376115532" duration="90000" />
-      <workItem from="1753443009391" duration="1907000" />
+      <workItem from="1753443009391" duration="2716000" />
+      <workItem from="1753458134337" duration="3057000" />
     </task>
     <task id="LOCAL-00001" summary="fixed exit lobby bugs">
       <option name="closed" value="true" />
@@ -285,7 +294,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753376165381</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="modified">
+      <option name="closed" value="true" />
+      <created>1753450461141</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1753450461141</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -330,11 +347,11 @@
     <MESSAGE value="Added plane PCG logic" />
     <MESSAGE value="Fixed plane traps synchronization bugs" />
     <MESSAGE value="Fixed plane traps synchronization bugs_2" />
-    <MESSAGE value="modified" />
     <MESSAGE value="Fixed transition to scene_4 bug" />
     <MESSAGE value="Added sounds logic" />
     <MESSAGE value="Added blue monster logic" />
     <MESSAGE value="added sync jetpack smoke logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="added sync jetpack smoke logic" />
+    <MESSAGE value="modified" />
+    <option name="LAST_COMMIT_MESSAGE" value="modified" />
   </component>
 </project>

@@ -1,5 +1,6 @@
 ﻿using Mirror;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TargetAreaInteractable : NetworkBehaviour
 {
@@ -16,10 +17,13 @@ public class TargetAreaInteractable : NetworkBehaviour
 
     public int possessivePlayerId;
 
+    public Text progressText;
+
     private void Start()
     {
         itemsManager = FindObjectOfType<ItemsManager>();
         OnAreaItemsCountChanged(0, 0);
+        progressText.text = currentCollectableItemCount + "/" + requiredCollectableItemCount;
     }
 
     private void Update()
@@ -38,6 +42,12 @@ public class TargetAreaInteractable : NetworkBehaviour
                 }
             }
         }
+
+        if (possessivePlayerId != LobbyController.Instance.LocalPlayerObjectController.playerID)
+        {
+            if (gameObject.layer == LayerMask.GetMask("Interactable"))
+                gameObject.layer = LayerMask.GetMask("Default");
+        }
     }
 
     [Command(requiresAuthority = false)]
@@ -48,6 +58,12 @@ public class TargetAreaInteractable : NetworkBehaviour
         {
             currentCollectableItemCount++;
             player.GetComponent<PlayerMovement>().currentEquippedItem = "";
+            progressText.text = currentCollectableItemCount + "/" + requiredCollectableItemCount;
+            if (currentCollectableItemCount >= requiredCollectableItemCount)
+            {
+                progressText.text = "Done!";
+                progressText.color = Color.green;
+            }
         }
     }
 
@@ -61,7 +77,7 @@ public class TargetAreaInteractable : NetworkBehaviour
             // TODO 
         }
     }
-    
+
     [ClientRpc]
     public void RpcUpdateTargetAreaPossessivePlayerId(int playerPlayerID)
     {
