@@ -1,7 +1,14 @@
+using Mirror;
 using UnityEngine;
 
 namespace CityGenerator
 {
+    public enum BuildingType
+    {
+        EdgeBuilding,
+        NormalBuilding
+    }
+
     public class CityBuildingGenerator : MonoBehaviour
     {
         private float buildingPositionOffset = 0.5f;
@@ -10,8 +17,9 @@ namespace CityGenerator
         [SerializeField] private float scale;
         [SerializeField] private StepMoveDirectionType facingDirection;
 
-        [Space(20), Header("Building Parts")]
-        [SerializeField] private GameObject[] baseParts;
+        [Space(20), Header("Building Parts")] [SerializeField]
+        private GameObject[] baseParts;
+
         [SerializeField] private GameObject[] bodyParts;
         [SerializeField] private GameObject[] ceilingParts;
 
@@ -29,6 +37,9 @@ namespace CityGenerator
 
         private Vector3 amplifySize = Vector3.one;
         private float totalHeightOffset = 0f;
+        public float TotalHeightOffset => totalHeightOffset;
+
+        public BuildingType buildingType = BuildingType.NormalBuilding;
 
         private void Awake()
         {
@@ -46,6 +57,7 @@ namespace CityGenerator
             basePosition = transform.position;
         }
 
+        // TODO: Add collectable items and target positions for players
         public void Construct(int piece = CityUtility.NULL_INDEX)
         {
             if (!initialize)
@@ -61,12 +73,13 @@ namespace CityGenerator
             for (int i = 2; i < targetPieces; i++)
                 heightOffset += SpawnPieceLayer(heightOffset, bodyParts);
 
-            heightOffset += SpawnPieceLayer(heightOffset, ceilingParts);
+            heightOffset += SpawnPieceLayerCelling(heightOffset, ceilingParts);
 
             totalHeightOffset = heightOffset;
 
             buildingParent.localScale = GetActualScale();
-            buildingParent.localPosition = new Vector3(buildingPositionOffset * scale * amplifySize.x, 0f, buildingPositionOffset * scale * amplifySize.z);
+            buildingParent.localPosition = new Vector3(buildingPositionOffset * scale * amplifySize.x, 0f,
+                buildingPositionOffset * scale * amplifySize.z);
 
             transform.rotation = Quaternion.Euler(facingDirection.ToRotation());
             RefreshCollision();
@@ -78,7 +91,17 @@ namespace CityGenerator
             var layer = Instantiate(pieceArray[Mathf.Min(percentIndex, pieceArray.Length - 1)], buildingParent);
 
             layer.transform.localPosition = new Vector3(0f, basePosition.y + (inputHeight), 0f);
-            
+
+            return layer.GetComponentInChildren<MeshFilter>().mesh.bounds.size.y;
+        }
+
+        private float SpawnPieceLayerCelling(float inputHeight, params GameObject[] pieceArray)
+        {
+            var percentIndex = (int)(pieceArray.Length * CityUtility.GetCurrentSeedValue());
+            var layer = Instantiate(pieceArray[Mathf.Min(percentIndex, pieceArray.Length - 1)], buildingParent);
+
+            layer.transform.localPosition = new Vector3(0f, basePosition.y + (inputHeight), 0f);
+
             return layer.GetComponentInChildren<MeshFilter>().mesh.bounds.size.y;
         }
 
@@ -111,8 +134,8 @@ namespace CityGenerator
         }
 
         private Vector3 GetActualScale() => new Vector3(
-                1f * scale * amplifySize.x,
-                1f * scale * amplifySize.y,
-                1f * scale * amplifySize.z);
+            1f * scale * amplifySize.x,
+            1f * scale * amplifySize.y,
+            1f * scale * amplifySize.z);
     }
 }

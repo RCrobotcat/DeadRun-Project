@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 using UnityEngine.Splines;
+using Random = UnityEngine.Random;
 
 //   Back
 // Left Right
@@ -407,7 +409,7 @@ namespace CityGenerator
                             break;
                     }
 
-                    currentStep = nextStep; 
+                    currentStep = nextStep;
                 }
 
                 spline.SetTangentMode(TangentMode.AutoSmooth);
@@ -692,6 +694,41 @@ namespace CityGenerator
         public void SetMaximumRoad(int maximumRoad)
         {
             maximumMinorRoadCount = maximumRoad;
+        }
+
+        public void SpawnTables()
+        {
+            if (!NetworkServer.active)
+                return;
+
+            foreach (var building in buildings)
+            {
+                float value = Random.value;
+                if (value <= 0.6f)
+                {
+                    if (building.transform.position.y + building.TotalHeightOffset * 12f + 0.3f <= 23f)
+                    {
+                        if (CityGroupGenerator.Instance.currentTableCount <
+                            CityGroupGenerator.Instance.maximumTableCount)
+                        {
+                            var table = Instantiate(CityGroupGenerator.Instance.tableCollectionPrefab,
+                                CityGroupGenerator.Instance.tablesParent);
+                            table.transform.position = new Vector3(building.transform.position.x,
+                                building.transform.position.y + building.TotalHeightOffset * 15f + 0.3f,
+                                building.transform.position.z);
+
+                            if (table.transform.position.y > 23f)
+                            {
+                                DestroyImmediate(table.gameObject);
+                                break;
+                            }
+
+                            NetworkServer.Spawn(table);
+                            CityGroupGenerator.Instance.currentTableCount++;
+                        }
+                    }
+                }
+            }
         }
 
         [ContextMenu("Instant Create")]

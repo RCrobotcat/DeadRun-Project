@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Splines;
@@ -65,6 +64,10 @@ namespace CityGenerator
         private int minorRoadIndex = 0;
         public int GetMinorRoadIndex() => minorRoadIndex++;
 
+        [Header("Level 2 Game Process")] public GameObject tableCollectionPrefab;
+        public int maximumTableCount = 15;
+        public Transform tablesParent;
+
         // Cache
         private int seedCache;
         private int columnCache;
@@ -81,8 +84,10 @@ namespace CityGenerator
         private PoolingObjects<SplineContainer> roadPool;
         private PoolingObjects<CityBuildingGenerator> buildingPool;
         private PoolingObjects<CityGenerator> cityGeneratorPool;
-        
+
         bool isExpandScale = false;
+
+        [HideInInspector] public int currentTableCount = 0;
 
         protected override void Awake()
         {
@@ -103,6 +108,10 @@ namespace CityGenerator
             if (isInitial && !isExpandScale)
             {
                 transform.localScale = Vector3.one * 3f;
+
+                for (int i = 0; i < cities.Count; i++)
+                    cities[i].SpawnTables();
+
                 isExpandScale = true;
             }
         }
@@ -257,6 +266,7 @@ namespace CityGenerator
                     var newBuilding = buildingPool.GetFromPool();
 
                     newBuilding.SetFacingDirection(facingSide);
+                    newBuilding.buildingType = BuildingType.EdgeBuilding;
                     newBuilding.Construct(5);
                     newBuilding.transform.position = newBuildingMark.transform.position;
 

@@ -51,12 +51,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b9bbf176ec84c2a9c43db20f03f077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 35
+  seed: 66
   column: 3
   row: 3
   lotColumn: 10
   lotRow: 10
-  maximumLotRoadCount: 10
+  maximumLotRoadCount: 8
   cityBase: {fileID: 3620919610242928254}
   subCityParent: {fileID: 5886710678616694780}
   subCityPrefab: {fileID: 5592535947723989454, guid: e1ff7cf0d58f2484784ccd41053ac3e3, type: 3}
@@ -68,6 +68,10 @@ MonoBehaviour:
   edgePrefab: {fileID: 4832456215228124777, guid: d8897581f8dda4e23b6b23b60347c94a, type: 3}
   isRealtimeRefresh: 1
   cameraPosition: {fileID: 6352754722455855958}
+  tableCollectionPrefab: {fileID: 7488834685195679328, guid: d9ff31d0b68b34d45886426f6440c55e, type: 3}
+  maximumTableCount: 30
+  tablesParent: {fileID: 0}
+  currentTableCount: 0
 --- !u!114 &6005335872304518268
 MonoBehaviour:
   m_ObjectHideFlags: 0
