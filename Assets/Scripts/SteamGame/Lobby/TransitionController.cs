@@ -61,9 +61,11 @@ public partial class LobbyController
             {
                 CameraController.Instance.gameObject.SetActive(true);
                 CameraController.Instance.freeLookCam.Target.TrackingTarget = player.transform;
-                player.transform.position = Vector3.zero;
                 player.role = PlayerRole.Escaper;
                 player.SetPlayerUIState(true);
+
+                if (player.TryGetComponent<Collider>(out Collider collider))
+                    collider.enabled = false;
 
                 if (player.TryGetComponent<PlayerMovement>(out PlayerMovement pm))
                     pm.enabled = false;
@@ -76,6 +78,9 @@ public partial class LobbyController
             }
             else if (player.role == PlayerRole.Escaper)
             {
+                if (player.TryGetComponent<Collider>(out Collider collider))
+                    collider.enabled = false;
+
                 if (player.TryGetComponent<PlayerMovement>(out PlayerMovement pm))
                     pm.enabled = false;
                 if (player.transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
@@ -104,6 +109,9 @@ public partial class LobbyController
                 player.role = PlayerRole.Escaper;
                 player.SetPlayerUIState(true);
 
+                if (player.TryGetComponent<Collider>(out Collider collider))
+                    collider.enabled = false;
+
                 if (player.TryGetComponent<PlayerMovement>(out PlayerMovement pm))
                     pm.enabled = false;
                 if (player.transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
@@ -119,6 +127,9 @@ public partial class LobbyController
                     pm.enabled = false;
                 if (player.transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
                     gunShooting.enabled = false;
+
+                if (player.TryGetComponent<Collider>(out Collider collider))
+                    collider.enabled = false;
 
                 if (player.isServer)
                     StartCoroutine(SendNewPlayerToScene(player.gameObject, scenePathName, scenePosToSpawnOn,
@@ -173,12 +184,6 @@ public partial class LobbyController
 
             NetworkServer.AddPlayerForConnection(conn, player);
 
-            if (NetworkClient.localPlayer != null &&
-                player.TryGetComponent<PlayerMovement>(out PlayerMovement playerMove))
-                playerMove.enabled = true;
-            if (player.transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
-                gunShooting.enabled = true;
-
             if (player.GetComponent<PlayerObjectController>().playerID == LocalPlayerObjectController.playerID)
             {
                 if (CameraController.Instance.freeLookCam.Target.TrackingTarget == null)
@@ -186,6 +191,15 @@ public partial class LobbyController
 
                 player.GetComponent<PlayerObjectController>().SetPlayerUIState(true);
             }
+
+            if (NetworkClient.localPlayer != null &&
+                player.TryGetComponent<PlayerMovement>(out PlayerMovement playerMove))
+                playerMove.enabled = true;
+            if (player.transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
+                gunShooting.enabled = true;
+            
+            if (player.TryGetComponent<Collider>(out Collider collider))
+                collider.enabled = true;
 
             if (NetworkServer.active)
                 player.GetComponent<PlayerObjectController>()
