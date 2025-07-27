@@ -15,6 +15,8 @@ public partial class MyNetworkManager
     {
         NetworkClient.RegisterHandler<PlayerExitMsg>(OnPlayerExit);
         NetworkServer.RegisterHandler<PlayerExitMsg>(OnPlayerExit_ServerHost);
+        
+        NetworkServer.RegisterHandler<PlayerLoadSceneSuccessMsg>(OnPlayerLoadSceneSuccess_ServerHost);
     }
 
     private void OnPlayerExit(PlayerExitMsg msg)
@@ -48,6 +50,24 @@ public partial class MyNetworkManager
 
         allPlayersInGameScene_server = false;
         playersRolesSet = false;
+    }
+
+    void OnPlayerLoadSceneSuccess_ServerHost(NetworkConnectionToClient conn, PlayerLoadSceneSuccessMsg msg)
+    {
+        Debug.Log("PlayerLoadSceneSuccessMsg received on server: " + msg.connectionID + " - " + msg.playerID);
+
+        if (msg.playerID == 1)
+            return;
+        
+        PlayerObjectController player =
+            GamePlayers.Find(p => p.connectionID == msg.connectionID && p.playerID == msg.playerID);
+        if (player != null)
+        {
+            if (!player.GetComponent<Collider>().enabled)
+            {
+                player.GetComponent<Collider>().enabled = true;
+            }
+        }
     }
 
     public override void OnServerReady(NetworkConnectionToClient conn)

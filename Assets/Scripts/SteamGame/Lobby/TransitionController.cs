@@ -197,9 +197,12 @@ public partial class LobbyController
                 playerMove.enabled = true;
             if (player.transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
                 gunShooting.enabled = true;
-            
-            if (player.TryGetComponent<Collider>(out Collider collider))
-                collider.enabled = true;
+
+            if (player.GetComponent<PlayerObjectController>().playerID == 1)
+            {
+                if (player.TryGetComponent<Collider>(out Collider collider))
+                    collider.enabled = true;
+            }
 
             if (NetworkServer.active)
                 player.GetComponent<PlayerObjectController>()

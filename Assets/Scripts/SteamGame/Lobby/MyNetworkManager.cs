@@ -104,6 +104,18 @@ public partial class MyNetworkManager : NetworkManager
         }
 
         yield return fadeinOutScreen.FadeOut();
+
+        if (!NetworkServer.active)
+        {
+            PlayerObjectController localPlayerController =
+                LobbyController.Instance.LocalPlayerObjectController;
+            PlayerLoadSceneSuccessMsg msg = new PlayerLoadSceneSuccessMsg
+            {
+                connectionID = localPlayerController.connectionID,
+                playerID = localPlayerController.playerID
+            };
+            NetworkClient.Send(msg);
+        }
     }
 
     IEnumerator UnloadAdditive(string sceneName)
