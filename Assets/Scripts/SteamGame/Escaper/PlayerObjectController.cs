@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using CityGenerator;
 using Mirror;
 using Steamworks;
@@ -28,6 +27,8 @@ public partial class PlayerObjectController : NetworkBehaviour
     public bool isReady;
 
     private MyNetworkManager _myNetworkManager;
+
+    public Animator animator;
 
     private MyNetworkManager MyNetworkManager
     {
@@ -61,6 +62,28 @@ public partial class PlayerObjectController : NetworkBehaviour
     private void Update()
     {
         UpdateImportantParams();
+
+        HandleRespawnLogic();
+    }
+
+    void HandleRespawnLogic()
+    {
+        if (respawnTimer > 0)
+        {
+            respawnTimer -= Time.deltaTime;
+            if (respawnTimer <= 0 && respawnTimer != -1)
+            {
+                // Respawn the player
+                animator.SetBool("Die", false);
+                if (TryGetComponent<PlayerMovement>(out PlayerMovement pm))
+                    pm.enabled = true;
+                if (transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
+                    gunShooting.enabled = true;
+                currentHealth = maxHealth;
+                healthBarFillImage.fillAmount = currentHealth / maxHealth;
+                respawnTimer = -1;
+            }
+        }
     }
 
     public override void OnStartAuthority()
@@ -313,12 +336,14 @@ public partial class PlayerObjectController : NetworkBehaviour
         if (!isClientOnly)
             return;
 
+        Debug.Log("City instant generating for player: " + playerID);
+        
         GetComponent<PlayerMovement>().currentEquippedItem = "";
         fellCountText.gameObject.SetActive(false);
         GetComponent<PlayerMovement>().isAiming = false;
         CameraController.Instance.freeLookCam.Lens.FieldOfView = 70f;
         CameraController.Instance.freeLookCam.Lens.FarClipPlane = 500f;
-        GetComponent<PlayerMovement>().gun.gameObject.SetActive(false);
+        //GetComponent<PlayerMovement>().gun.gameObject.SetActive(false);
         CityGroupGenerator.Instance.InstantGenerating();
     }
 }

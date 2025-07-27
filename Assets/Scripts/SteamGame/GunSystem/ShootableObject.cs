@@ -55,12 +55,12 @@ public partial class PlayerMovement
     }
 
     [ClientRpc]
-    void RpcDamagePlayer(float damage)
+    void RpcDamagePlayer()
     {
         if (!isClientOnly)
             return;
 
-        playerObjectController.CurrentHealth -= damage;
+        //playerObjectController.CurrentHealth -= damage;
 
         if (outlineShowTimer <= 0)
         {
@@ -85,7 +85,8 @@ public partial class PlayerMovement
 
     public void AttackPlayerRpc()
     {
-        RpcDamagePlayer(5f);
+        RpcDamagePlayer();
+        playerObjectController.CurrentHealth -= 5f;
         if (outlineShowTimerLocal <= 0)
         {
             foreach (Transform child in astronautModel.GetComponentsInChildren<Transform>(true))
@@ -107,12 +108,15 @@ public partial class PlayerMovement
 
     public void MonsterAttackPlayer(float damage)
     {
-        playerObjectController.CurrentHealth -= damage;
-        if (outlineShowTimer <= 0)
+        if (NetworkServer.active)
         {
-            foreach (Transform child in astronautModel.GetComponentsInChildren<Transform>(true))
-                child.gameObject.layer = LayerMask.NameToLayer("Outlined");
-            outlineShowTimer = outlineShowTime;
+            playerObjectController.CurrentHealth -= damage;
+            if (outlineShowTimer <= 0)
+            {
+                foreach (Transform child in astronautModel.GetComponentsInChildren<Transform>(true))
+                    child.gameObject.layer = LayerMask.NameToLayer("Outlined");
+                outlineShowTimer = outlineShowTime;
+            }
         }
     }
 }

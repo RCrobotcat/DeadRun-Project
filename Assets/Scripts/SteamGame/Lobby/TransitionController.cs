@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.IO;
 using CityGenerator;
+using DG.Tweening.Core;
 using Mirror;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -54,6 +55,8 @@ public partial class LobbyController
         PlayerObjectController[] allPlayers = FindObjectsOfType<PlayerObjectController>();
         ClearBullets();
 
+        MyNetworkManager.isNextSceneSet = false;
+
         foreach (var player in allPlayers)
         {
             ClearBullets();
@@ -99,6 +102,8 @@ public partial class LobbyController
         PlayerObjectController[] allPlayers = FindObjectsOfType<PlayerObjectController>();
         ClearBullets();
 
+        MyNetworkManager.isNextSceneSet = false;
+
         foreach (var player in allPlayers)
         {
             if (player.role == PlayerRole.Trapper)
@@ -135,8 +140,6 @@ public partial class LobbyController
                     StartCoroutine(SendNewPlayerToScene(player.gameObject, scenePathName, scenePosToSpawnOn,
                         previousScenePathName));
             }
-
-            player.CurrentHealth = player.maxHealth;
         }
     }
 
@@ -180,8 +183,8 @@ public partial class LobbyController
                 sceneOperation = SceneOperation.LoadAdditive,
                 customHandling = true
             });
-            SceneManager.MoveGameObjectToScene(player, SceneManager.GetSceneByPath(transitionToSceneName));
 
+            SceneManager.MoveGameObjectToScene(player, SceneManager.GetSceneByPath(transitionToSceneName));
             NetworkServer.AddPlayerForConnection(conn, player);
 
             if (player.GetComponent<PlayerObjectController>().playerID == LocalPlayerObjectController.playerID)
@@ -207,39 +210,56 @@ public partial class LobbyController
             if (NetworkServer.active)
                 player.GetComponent<PlayerObjectController>()
                     .RpcUpdatePlayerParamsAfterTransition(transitionToSceneName);
-
-            NextSceneSettings(transitionToSceneName, player);
         }
 
         nextScenePath = "";
         previousScenePath = "";
     }
 
-    void NextSceneSettings(string transitionToSceneName, GameObject player)
+    public void NextSceneSettings(string transitionToSceneName, GameObject player)
     {
+        PlayerObjectController playerObjectController = player.GetComponent<PlayerObjectController>();
+        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+
         // 1v1 Scene Transition
         if (transitionToSceneName == SceneManager.GetSceneByName("Scene_3_1v1").path)
         {
-            player.GetComponent<PlayerMovement>().currentEquippedItem = "";
-            Show1v1Text();
-            player.GetComponent<PlayerObjectController>().fellCountText.gameObject.SetActive(false);
-            if (NetworkServer.active)
-                player.GetComponent<PlayerObjectController>().RpcShow1v1Text();
+            if (playerObjectController.playerID == 1) // Host
+            {
+                playerMovement.currentEquippedItem = "";
+                Show1v1Text();
+                playerObjectController.fellCountText.gameObject.SetActive(false);
+            }
+            else
+            {
+                playerObjectController.RpcShow1v1Text();
+            }
         }
 
         // Scene 4 Transition
         if (transitionToSceneName == SceneManager.GetSceneByName("Scene_4").path)
         {
-            player.GetComponent<PlayerMovement>().currentEquippedItem = "";
-            player.GetComponent<PlayerObjectController>().fellCountText.gameObject.SetActive(false);
-            player.GetComponent<PlayerMovement>().isAiming = false;
-            CameraController.Instance.freeLookCam.Lens.FieldOfView = 70f;
-            CameraController.Instance.freeLookCam.Lens.FarClipPlane = 500f;
-            player.GetComponent<PlayerMovement>().gun.gameObject.SetActive(false);
-            CityGroupGenerator.Instance.InstantGenerating();
-            if (NetworkServer.active)
-                player.GetComponent<PlayerObjectController>().RpcCityInstantGenerating();
+            if (playerObjectController.playerID == 1) // Host
+            {
+                Debug.Log("Host instant generating city.");
+
+                playerMovement.currentEquippedItem = "";
+                playerObjectController.fellCountText.gameObject.SetActive(false);
+                playerMovement.isAiming = false;
+                CameraController.Instance.freeLookCam.Lens.FieldOfView = 70f;
+                CameraController.Instance.freeLookCam.Lens.FarClipPlane = 500f;
+                //player.GetComponent<PlayerMovement>().gun.gameObject.SetActive(false);
+                CityGroupGenerator.Instance.InstantGenerating();
+            }
+            else
+            {
+                Debug.Log("Client " + playerObjectController.playerID + " instant generating city.");
+                playerObjectController.RpcCityInstantGenerating();
+            }
         }
+
+        if (NetworkServer.active)
+            playerObjectController.CurrentHealth = playerObjectController.maxHealth;
     }
 
     public void ClearBullets()

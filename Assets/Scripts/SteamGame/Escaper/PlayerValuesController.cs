@@ -12,6 +12,9 @@ public partial class PlayerObjectController
     public float maxHealth = 100f;
     private float currentHealth;
 
+    public float respawnTime = 2.5f;
+    float respawnTimer = -1f;
+
     public float CurrentHealth
     {
         get => currentHealth;
@@ -19,10 +22,67 @@ public partial class PlayerObjectController
         {
             currentHealth = Mathf.Clamp(value, 0, maxHealth);
             healthBarFillImage.DOFillAmount(currentHealth / maxHealth, 0.2f);
-            if (currentHealth <= 0)
+
+            if (NetworkServer.active)
+                RpcSyncPlayersHealthToClient(currentHealth);
+
+            if (NetworkServer.active)
             {
-                DieIn1V1();
+                if (currentHealth <= 0)
+                {
+                    if (NetworkServer.active)
+                    {
+                        if (gameObject.scene.name == "Scene_3_1v1")
+                        {
+                            DieIn1V1();
+                        }
+                        else
+                        {
+                            animator.SetBool("Die", true);
+
+                            if (TryGetComponent<PlayerMovement>(out PlayerMovement pm))
+                                pm.enabled = false;
+                            if (transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
+                                gunShooting.enabled = false;
+
+                            if (respawnTimer <= -1)
+                                respawnTimer = respawnTime;
+                        }
+                    }
+                    else
+                    {
+                        if (SceneManager.GetSceneByName("Scene_3_1v1").isLoaded)
+                        {
+                            DieIn1V1();
+                        }
+                        else
+                        {
+                            animator.SetBool("Die", true);
+
+                            if (TryGetComponent<PlayerMovement>(out PlayerMovement pm))
+                                pm.enabled = false;
+                            if (transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
+                                gunShooting.enabled = false;
+
+                            if (respawnTimer <= -1)
+                                respawnTimer = respawnTime;
+                        }
+                    }
+                }
             }
+        }
+    }
+
+    [ClientRpc]
+    void RpcSyncPlayersHealthToClient(float currentHealth)
+    {
+        if (!isClientOnly)
+            return;
+
+        if (!Mathf.Approximately(currentHealth, CurrentHealth))
+        {
+            CurrentHealth = currentHealth;
+            healthBarFillImage.DOFillAmount(CurrentHealth / maxHealth, 0.2f);
         }
     }
 

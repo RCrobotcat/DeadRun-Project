@@ -44,6 +44,7 @@ namespace CityGenerator
 
         public bool isRealtimeRefresh = false;
         private bool isInitial = false;
+        public bool IsInitial => isInitial;
 
         [Header("ETC Attribute")] [SerializeField]
         private Transform cameraPosition;
@@ -123,18 +124,6 @@ namespace CityGenerator
         {
             if (isInitial && isRealtimeRefresh)
                 RegenrateChecking();
-
-            if (isInitial && !isExpandScale)
-            {
-                transform.localScale = Vector3.one * 3f;
-
-                for (int i = 0; i < cities.Count; i++)
-                    cities[i].SpawnTables();
-
-                SpawnTargetAreas();
-
-                isExpandScale = true;
-            }
         }
 
         void SpawnTargetAreas()
@@ -226,6 +215,18 @@ namespace CityGenerator
             subCityRowCache = lotRow;
             maximumSubCityRoadCountCache = maximumLotRoadCount;
 
+            if (!isExpandScale)
+            {
+                transform.localScale = Vector3.one * 3f;
+
+                for (int i = 0; i < cities.Count; i++)
+                    cities[i].SpawnTables();
+
+                SpawnTargetAreas();
+
+                isExpandScale = true;
+            }
+            
             isInitial = true;
         }
 

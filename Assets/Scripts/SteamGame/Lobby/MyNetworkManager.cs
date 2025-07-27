@@ -3,6 +3,7 @@ using Mirror;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
+using CityGenerator;
 
 public partial class MyNetworkManager : NetworkManager
 {
@@ -78,12 +79,15 @@ public partial class MyNetworkManager : NetworkManager
             StartCoroutine(LoadAdditiveScene(sceneName));
     }
 
+    public bool isNextSceneSet = false;
+
     IEnumerator LoadAdditiveScene(string sceneName)
     {
         isInTransition = true;
         yield return fadeinOutScreen.FadeIn();
         if (mode == NetworkManagerMode.ClientOnly)
         {
+            Debug.Log("Loading scene: " + sceneName);
             loadingSceneAsync = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
             while (loadingSceneAsync != null && !loadingSceneAsync.isDone)
                 yield return null;
@@ -91,6 +95,17 @@ public partial class MyNetworkManager : NetworkManager
 
         NetworkClient.isLoadingScene = false;
         isInTransition = false;
+
+        if (NetworkServer.active && !isNextSceneSet && !CityGroupGenerator.Instance.IsInitial)
+        {
+            foreach (var player in GamePlayers)
+            {
+                LobbyController.Instance.NextSceneSettings(sceneName, player.gameObject);
+            }
+
+            isNextSceneSet = true;
+        }
+
         OnClientSceneChanged();
         if (!firstSceneLoaded)
         {
@@ -124,8 +139,11 @@ public partial class MyNetworkManager : NetworkManager
         yield return fadeinOutScreen.FadeIn();
         if (mode == NetworkManagerMode.ClientOnly)
         {
-            yield return SceneManager.UnloadSceneAsync(sceneName);
-            yield return Resources.UnloadUnusedAssets();
+            if (SceneManager.GetSceneByPath(sceneName).isLoaded)
+            {
+                yield return SceneManager.UnloadSceneAsync(sceneName);
+                yield return Resources.UnloadUnusedAssets();
+            }
         }
 
         NetworkClient.isLoadingScene = false;

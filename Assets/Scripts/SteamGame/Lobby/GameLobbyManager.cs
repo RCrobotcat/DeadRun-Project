@@ -15,7 +15,7 @@ public partial class MyNetworkManager
     {
         NetworkClient.RegisterHandler<PlayerExitMsg>(OnPlayerExit);
         NetworkServer.RegisterHandler<PlayerExitMsg>(OnPlayerExit_ServerHost);
-        
+
         NetworkServer.RegisterHandler<PlayerLoadSceneSuccessMsg>(OnPlayerLoadSceneSuccess_ServerHost);
     }
 
@@ -58,7 +58,7 @@ public partial class MyNetworkManager
 
         if (msg.playerID == 1)
             return;
-        
+
         PlayerObjectController player =
             GamePlayers.Find(p => p.connectionID == msg.connectionID && p.playerID == msg.playerID);
         if (player != null)
@@ -66,6 +66,11 @@ public partial class MyNetworkManager
             if (!player.GetComponent<Collider>().enabled)
             {
                 player.GetComponent<Collider>().enabled = true;
+            }
+
+            if (!player.GetComponent<Rigidbody>().useGravity)
+            {
+                player.GetComponent<Rigidbody>().useGravity = true;
             }
         }
     }
