@@ -26,48 +26,41 @@ public partial class PlayerObjectController
             if (NetworkServer.active)
                 RpcSyncPlayersHealthToClient(currentHealth);
 
-            if (NetworkServer.active)
+            if (currentHealth <= 0)
             {
-                if (currentHealth <= 0)
+                if (NetworkServer.active)
                 {
-                    if (NetworkServer.active)
+                    if (gameObject.scene.name == "Scene_3_1v1")
                     {
-                        if (gameObject.scene.name == "Scene_3_1v1")
-                        {
-                            DieIn1V1();
-                        }
-                        else
-                        {
-                            animator.SetBool("Die", true);
-
-                            if (TryGetComponent<PlayerMovement>(out PlayerMovement pm))
-                                pm.enabled = false;
-                            if (transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
-                                gunShooting.enabled = false;
-
-                            if (respawnTimer <= -1)
-                                respawnTimer = respawnTime;
-                        }
+                        DieIn1V1();
                     }
                     else
                     {
-                        if (SceneManager.GetSceneByName("Scene_3_1v1").isLoaded)
-                        {
-                            DieIn1V1();
-                        }
-                        else
-                        {
-                            animator.SetBool("Die", true);
+                        animator.SetBool("Die", true);
 
-                            if (TryGetComponent<PlayerMovement>(out PlayerMovement pm))
-                                pm.enabled = false;
-                            if (transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
-                                gunShooting.enabled = false;
+                        if (TryGetComponent<PlayerMovement>(out PlayerMovement pm))
+                            pm.enabled = false;
+                        if (transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
+                            gunShooting.enabled = false;
 
-                            if (respawnTimer <= -1)
-                                respawnTimer = respawnTime;
-                        }
+                        if (respawnTimer <= -1)
+                            respawnTimer = respawnTime;
                     }
+                }
+                else
+                {
+                    if (SceneManager.GetSceneByName("Scene_3_1v1").isLoaded)
+                        return;
+                    
+                    animator.SetBool("Die", true);
+
+                    if (TryGetComponent<PlayerMovement>(out PlayerMovement pm))
+                        pm.enabled = false;
+                    if (transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
+                        gunShooting.enabled = false;
+
+                    if (respawnTimer <= -1)
+                        respawnTimer = respawnTime;
                 }
             }
         }
