@@ -260,7 +260,7 @@ public class RedMonster : AIActor
                 if (attackTarget.gameObject.scene.name == "Scene_4")
                 {
                     PlayerMovement player = attackTarget.GetComponent<PlayerMovement>();
-                    player.MonsterAttackPlayer(5);
+                    player.MonsterAttackPlayer(13);
                 }
             }
             else
@@ -268,7 +268,7 @@ public class RedMonster : AIActor
                 if (SceneManager.GetSceneByName("Scene_4").isLoaded)
                 {
                     PlayerMovement player = attackTarget.GetComponent<PlayerMovement>();
-                    player.MonsterAttackPlayer(5);
+                    player.MonsterAttackPlayer(13);
                 }
             }
         }

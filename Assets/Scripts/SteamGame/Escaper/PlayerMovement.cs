@@ -304,7 +304,7 @@ public partial class PlayerMovement : NetworkBehaviour
         else
         {
             objectsDetected = Physics.OverlapSphere(transform.position, 2f,
-                LayerMask.GetMask("Ground") | LayerMask.GetMask("Interactable"));
+                LayerMask.GetMask("Ground") | LayerMask.GetMask("Interactable") | LayerMask.GetMask("Obstacles"));
         }
 
         if (objectsDetected.Length > 0)

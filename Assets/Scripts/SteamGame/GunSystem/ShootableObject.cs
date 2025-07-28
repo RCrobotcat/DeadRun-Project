@@ -117,6 +117,7 @@ public partial class PlayerMovement
                     child.gameObject.layer = LayerMask.NameToLayer("Outlined");
                 outlineShowTimer = outlineShowTime;
             }
+            RpcDamagePlayer();
         }
     }
 }

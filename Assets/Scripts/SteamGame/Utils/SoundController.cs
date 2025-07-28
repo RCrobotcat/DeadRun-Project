@@ -9,6 +9,7 @@ public class SoundController : Singleton<SoundController>
     public AudioSource sfxSource_walk;
     public AudioSource sfxSource_shooting;
     public AudioSource sfxSource_water;
+    public AudioSource sfxSource_jetpack;
     public AudioSource sfxSource_others;
 
     [Header("Music Clips")] [SerializeField]
@@ -80,6 +81,17 @@ public class SoundController : Singleton<SoundController>
 
     public void PlayWaterSplash(float volume = 1f, float pitch = 1f)
         => PlayRandomClip(sfxSource_water, waterSplashClips, volume, pitch);
+
+    public void PlayJetpackThrust(float volume = 1.5f, bool loop = true)
+    {
+        if (sfxClip_jetpack == null) return;
+        sfxSource_jetpack.loop = loop;
+        sfxSource_jetpack.clip = sfxClip_jetpack;
+        if (loop)
+            sfxSource_jetpack.Play();
+        else
+            sfxSource_jetpack.PlayOneShot(sfxClip_jetpack, volume);
+    }
 
     public void PlaySFX_others(AudioClip clip, float volume = 1f, bool loop = false)
     {

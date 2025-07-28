@@ -114,9 +114,9 @@ public class Jetpack : NetworkBehaviour
         jetpackUIPanel.gameObject.SetActive(true);
         if (SoundController.Instance != null)
         {
-            if (!SoundController.Instance.sfxSource_others.isPlaying)
+            if (!SoundController.Instance.sfxSource_jetpack.isPlaying)
             {
-                SoundController.Instance.PlaySFX_others(SoundController.Instance.sfxClip_jetpack, 1.5f, true);
+                SoundController.Instance.PlayJetpackThrust(3f, true);
             }
         }
 
@@ -146,9 +146,9 @@ public class Jetpack : NetworkBehaviour
         rb.useGravity = true;
         if (SoundController.Instance != null)
         {
-            if (SoundController.Instance.sfxSource_others.isPlaying)
+            if (SoundController.Instance.sfxSource_jetpack.isPlaying)
             {
-                SoundController.Instance.sfxSource_others.Stop();
+                SoundController.Instance.sfxSource_jetpack.Stop();
             }
         }
     }
