@@ -776,6 +776,7 @@ MonoBehaviour:
   - {fileID: 7488834685195679328, guid: d9ff31d0b68b34d45886426f6440c55e, type: 3}
   - {fileID: 8838183399588844931, guid: e58b19f90f2a23740b7164a25e6b7411, type: 3}
   - {fileID: 4593236637377365868, guid: 819e6b46b0355aa47b3a788f9cbef5dc, type: 3}
+  - {fileID: 7220425214883531268, guid: ea8a126bf04c6a04f8009599ca163d6b, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
     bufferTimeMultiplier: 2
@@ -795,6 +796,7 @@ MonoBehaviour:
   playersRolesSet: 0
   fadeinOutScreen: {fileID: 0}
   firstSceneToLoad: PersistentScene
+  isNextSceneSet: 0
 --- !u!114 &4593592896836871119
 MonoBehaviour:
   m_ObjectHideFlags: 0

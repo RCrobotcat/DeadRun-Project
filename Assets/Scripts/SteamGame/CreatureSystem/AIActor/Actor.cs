@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using Mirror;
+using UnityEngine;
 
 
-public class Actor : MonoBehaviour
+public class Actor : NetworkBehaviour
 {
     protected Animator animator;
     protected Rigidbody rb;

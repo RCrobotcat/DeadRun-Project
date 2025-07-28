@@ -548,6 +548,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f0dd5c43eab43dbaff6f3ccfdde9c04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   viewRadius: 25
   attackRadius: 5
   attackTarget: {fileID: 0}
@@ -563,7 +566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84428e4219b042ec8a7387888d235657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVelocity: 3.5
+  maxVelocity: 3.7
   maxAcceleration: 20
   turnSpeed: 15
   targetRadius: 0.1

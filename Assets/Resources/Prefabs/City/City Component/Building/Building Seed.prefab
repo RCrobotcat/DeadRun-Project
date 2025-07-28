@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 907391501235698423}
   - component: {fileID: 4832456215228124777}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Building Seed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,6 +89,7 @@ MonoBehaviour:
   - {fileID: 8627789423855762558, guid: ef8fdd044d91a7f4f8e3f96d8127ab99, type: 3}
   - {fileID: 8953646171182538957, guid: 43a09d8afce0cee44b04f073b14e6ccc, type: 3}
   log: 0
+  buildingType: 1
 --- !u!1 &5905088483576410798
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,7 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5324469965964423917}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spawn Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7358733827760843379}
   - component: {fileID: 6644481978645575719}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}

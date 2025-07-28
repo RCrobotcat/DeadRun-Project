@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8834804229178518180}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Building_062
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,9 +40,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8834804229178518180}
     m_Modifications:
+    - target: {fileID: 100000, guid: f46be549002f3814f8e61ffd27d2389c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: f46be549002f3814f8e61ffd27d2389c, type: 3}
       propertyPath: m_Name
       value: modularBuildings_062
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: f46be549002f3814f8e61ffd27d2389c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: f46be549002f3814f8e61ffd27d2389c, type: 3}
       propertyPath: m_LocalPosition.x

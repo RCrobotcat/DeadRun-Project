@@ -382,8 +382,31 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 329767177517391532, guid: 7d47019a41db14086907e5eb6d39ea8e, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1496002617}
   m_SourcePrefab: {fileID: 100100000, guid: 7d47019a41db14086907e5eb6d39ea8e, type: 3}
+--- !u!1 &1496002616 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 329767177517391532, guid: 7d47019a41db14086907e5eb6d39ea8e, type: 3}
+  m_PrefabInstance: {fileID: 1496002615}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1496002617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496002616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1589b880bf0485f8d3adae4e36fd44e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redMonsterPrefab: {fileID: 7220425214883531268, guid: ea8a126bf04c6a04f8009599ca163d6b, type: 3}
+  monsterCount: 6
+  monstersParent: {fileID: 1701396667}
 --- !u!1 &1592863669
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,6 +430,37 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1592863669}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1701396666
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1701396667}
+  m_Layer: 0
+  m_Name: Monsters
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1701396667
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701396666}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -594,6 +648,7 @@ SceneRoots:
   - {fileID: 1903734790}
   - {fileID: 1592863670}
   - {fileID: 1368095845}
+  - {fileID: 1701396667}
   - {fileID: 97504738}
   - {fileID: 1369595035}
   - {fileID: 1794962922}

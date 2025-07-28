@@ -226,7 +226,9 @@ namespace CityGenerator
 
                 isExpandScale = true;
             }
-            
+
+            GetComponent<MonsterGeneration>().GenerateMonsters();
+
             isInitial = true;
         }
 

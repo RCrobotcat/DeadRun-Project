@@ -293,7 +293,7 @@ public partial class PlayerMovement : NetworkBehaviour
                 transform.position,
                 1f,
                 buffer,
-                LayerMask.GetMask("Ground") | LayerMask.GetMask("Interactable"),
+                LayerMask.GetMask("Ground") | LayerMask.GetMask("Interactable") | LayerMask.GetMask("Obstacles"),
                 QueryTriggerInteraction.UseGlobal
             );
 
