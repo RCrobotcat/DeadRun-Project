@@ -137,11 +137,11 @@ namespace CityGenerator
             {
                 CityMark mark = null;
                 int attempts = 0;
-                int maxAttempts = 1000;
+                int maxAttempts = 100;
                 do
                 {
-                    int val0 = Random.Range(0, cityMarks.GetLength(0));
-                    int val1 = Random.Range(0, cityMarks.GetLength(1));
+                    int val0 = Random.Range(0, cityMarks.GetLength(0) + 1);
+                    int val1 = Random.Range(0, cityMarks.GetLength(1) + 1);
                     var candidate = cityMarks[val0, val1];
                     if ((candidate.markType == CityObjectType.MajorRoad ||
                          candidate.markType == CityObjectType.MinorRoad)
