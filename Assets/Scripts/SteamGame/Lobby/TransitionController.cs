@@ -210,6 +210,9 @@ public partial class LobbyController
             if (NetworkServer.active)
                 player.GetComponent<PlayerObjectController>()
                     .RpcUpdatePlayerParamsAfterTransition(transitionToSceneName);
+
+            // Ensure again some settings are applied successfully
+            NextSceneSettingsSecondary(transitionToSceneName, player);
         }
 
         nextScenePath = "";
@@ -255,6 +258,40 @@ public partial class LobbyController
             {
                 Debug.Log("Client " + playerObjectController.playerID + " instant generating city.");
                 playerObjectController.RpcCityInstantGenerating();
+            }
+        }
+
+        if (NetworkServer.active)
+            playerObjectController.CurrentHealth = playerObjectController.maxHealth;
+    }
+
+    void NextSceneSettingsSecondary(string transitionToSceneName, GameObject player)
+    {
+        PlayerObjectController playerObjectController = player.GetComponent<PlayerObjectController>();
+
+        // 1v1 Scene Transition
+        if (transitionToSceneName == SceneManager.GetSceneByName("Scene_3_1v1").path)
+        {
+            if (playerObjectController.playerID == 1) // Host
+            {
+                playerObjectController.fellCountText.gameObject.SetActive(false);
+            }
+            else
+            {
+                playerObjectController.RpcSetPlayerFellCountUIState(false);
+            }
+        }
+
+        // Scene 4 Transition
+        if (transitionToSceneName == SceneManager.GetSceneByName("Scene_4").path)
+        {
+            if (playerObjectController.playerID == 1) // Host
+            {
+                playerObjectController.fellCountText.gameObject.SetActive(false);
+            }
+            else
+            {
+                playerObjectController.RpcSetPlayerFellCountUIState(false);
             }
         }
 

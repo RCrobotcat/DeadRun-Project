@@ -39,6 +39,8 @@ public partial class PlayerMovement : NetworkBehaviour
     [HideInInspector] public bool isAiming = false;
     public GunShooting gun;
 
+    public bool isDead = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -57,6 +59,9 @@ public partial class PlayerMovement : NetworkBehaviour
         HandleOutlineTimerLogic();
 
         if (!isLocalPlayer) // 确保只在本地玩家上执行
+            return;
+
+        if (isDead)
             return;
 
         if (GetComponent<PlayerObjectController>().role == PlayerRole.Trapper)

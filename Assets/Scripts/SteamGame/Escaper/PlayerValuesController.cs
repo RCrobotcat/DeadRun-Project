@@ -15,6 +15,9 @@ public partial class PlayerObjectController
     public float respawnTime = 2.5f;
     float respawnTimer = -1f;
 
+    public GameObject counterUIBase;
+    public Image counterUIFillImage;
+
     public float CurrentHealth
     {
         get => currentHealth;
@@ -39,28 +42,45 @@ public partial class PlayerObjectController
                         animator.SetBool("Die", true);
 
                         if (TryGetComponent<PlayerMovement>(out PlayerMovement pm))
-                            pm.enabled = false;
+                            pm.isDead = true;
                         if (transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
                             gunShooting.enabled = false;
 
                         if (respawnTimer <= -1)
-                            respawnTimer = respawnTime;
+                        {
+                            if (playerID == LobbyController.Instance.LocalPlayerObjectController.playerID)
+                            {
+                                respawnTimer = respawnTime;
+                                counterUIBase.SetActive(true);
+                            }
+                        }
                     }
                 }
                 else
                 {
                     if (SceneManager.GetSceneByName("Scene_3_1v1").isLoaded)
+                    {
+                        if (playerID == LobbyController.Instance.LocalPlayerObjectController.playerID)
+                            LobbyController.Instance.ShowMissionFailedText("Mission Failed: " + "\n" +
+                                                                           "You died in 1v1!");
                         return;
-                    
+                    }
+
                     animator.SetBool("Die", true);
 
                     if (TryGetComponent<PlayerMovement>(out PlayerMovement pm))
-                        pm.enabled = false;
+                        pm.isDead = true;
                     if (transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
                         gunShooting.enabled = false;
 
                     if (respawnTimer <= -1)
-                        respawnTimer = respawnTime;
+                    {
+                        if (playerID == LobbyController.Instance.LocalPlayerObjectController.playerID)
+                        {
+                            respawnTimer = respawnTime;
+                            counterUIBase.SetActive(true);
+                        }
+                    }
                 }
             }
         }
@@ -174,5 +194,11 @@ public partial class PlayerObjectController
         LobbyController.Instance.nextScenePath = nextScenePathName;
         LobbyController.Instance.previousScenePath = previousScenePathName;
         LobbyController.Instance.NeedTransitionToOtherScene = true;
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdResetHealth()
+    {
+        CurrentHealth = maxHealth;
     }
 }

@@ -71,16 +71,30 @@ public partial class PlayerObjectController : NetworkBehaviour
         if (respawnTimer > 0)
         {
             respawnTimer -= Time.deltaTime;
+            counterUIFillImage.fillAmount = respawnTimer / respawnTime;
             if (respawnTimer <= 0 && respawnTimer != -1)
             {
                 // Respawn the player
                 animator.SetBool("Die", false);
                 if (TryGetComponent<PlayerMovement>(out PlayerMovement pm))
-                    pm.enabled = true;
+                    pm.isDead = false;
                 if (transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
                     gunShooting.enabled = true;
-                currentHealth = maxHealth;
-                healthBarFillImage.fillAmount = currentHealth / maxHealth;
+                counterUIBase.SetActive(false);
+                
+                foreach (Transform child in GetComponent<PlayerMovement>().astronautModel
+                             .GetComponentsInChildren<Transform>(true))
+                    child.gameObject.layer = LayerMask.NameToLayer("Player");
+
+                if (!NetworkServer.active)
+                {
+                    CmdResetHealth();
+                }
+                else
+                {
+                    CurrentHealth = maxHealth;
+                }
+
                 respawnTimer = -1;
             }
         }
@@ -337,7 +351,7 @@ public partial class PlayerObjectController : NetworkBehaviour
             return;
 
         Debug.Log("City instant generating for player: " + playerID);
-        
+
         GetComponent<PlayerMovement>().currentEquippedItem = "";
         fellCountText.gameObject.SetActive(false);
         GetComponent<PlayerMovement>().isAiming = false;
@@ -345,5 +359,14 @@ public partial class PlayerObjectController : NetworkBehaviour
         CameraController.Instance.freeLookCam.Lens.FarClipPlane = 500f;
         //GetComponent<PlayerMovement>().gun.gameObject.SetActive(false);
         CityGroupGenerator.Instance.InstantGenerating();
+    }
+
+    [ClientRpc]
+    public void RpcSetPlayerFellCountUIState(bool state)
+    {
+        if (!isClientOnly)
+            return;
+
+        fellCountText.gameObject.SetActive(state);
     }
 }
