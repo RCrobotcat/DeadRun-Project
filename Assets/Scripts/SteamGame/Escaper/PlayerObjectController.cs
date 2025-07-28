@@ -81,7 +81,7 @@ public partial class PlayerObjectController : NetworkBehaviour
                 if (transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
                     gunShooting.enabled = true;
                 counterUIBase.SetActive(false);
-                
+
                 foreach (Transform child in GetComponent<PlayerMovement>().astronautModel
                              .GetComponentsInChildren<Transform>(true))
                     child.gameObject.layer = LayerMask.NameToLayer("Player");
@@ -368,5 +368,6 @@ public partial class PlayerObjectController : NetworkBehaviour
             return;
 
         fellCountText.gameObject.SetActive(state);
+        GetComponent<PlayerMovement>().currentEquippedItem = "";
     }
 }

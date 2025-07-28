@@ -227,9 +227,9 @@ public partial class LobbyController
         // 1v1 Scene Transition
         if (transitionToSceneName == SceneManager.GetSceneByName("Scene_3_1v1").path)
         {
+            playerMovement.currentEquippedItem = "";
             if (playerObjectController.playerID == 1) // Host
             {
-                playerMovement.currentEquippedItem = "";
                 Show1v1Text();
                 playerObjectController.fellCountText.gameObject.SetActive(false);
             }
@@ -268,10 +268,12 @@ public partial class LobbyController
     void NextSceneSettingsSecondary(string transitionToSceneName, GameObject player)
     {
         PlayerObjectController playerObjectController = player.GetComponent<PlayerObjectController>();
+        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
 
         // 1v1 Scene Transition
         if (transitionToSceneName == SceneManager.GetSceneByName("Scene_3_1v1").path)
         {
+            playerMovement.currentEquippedItem = "";
             if (playerObjectController.playerID == 1) // Host
             {
                 playerObjectController.fellCountText.gameObject.SetActive(false);
