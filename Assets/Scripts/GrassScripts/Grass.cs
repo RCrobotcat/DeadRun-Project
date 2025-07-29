@@ -112,9 +112,6 @@ namespace Grass_RC_14
             {
                 if (LobbyController.Instance.localPlayerObject.scene.name != "Scene_3_1v1")
                 {
-                    visibleTiles.Clear();
-                    tilesToRender.Clear();
-                    terrains.Clear();
                     return;
                 }
             }
@@ -122,9 +119,6 @@ namespace Grass_RC_14
             {
                 if (!SceneManager.GetSceneByName("Scene_3_1v1").isLoaded)
                 {
-                    visibleTiles.Clear();
-                    tilesToRender.Clear();
-                    terrains.Clear();
                     return;
                 }
             }

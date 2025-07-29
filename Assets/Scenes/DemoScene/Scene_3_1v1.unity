@@ -329,6 +329,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5372814282254586377, guid: 1403d6b478e3fbb40bf8ee5c71cbdd70, type: 3}
   m_PrefabInstance: {fileID: 709657450}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &874210108
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 874210109}
+  - component: {fileID: 874210110}
+  m_Layer: 0
+  m_Name: GrassController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &874210109
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874210108}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 766707784001045365}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &874210110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874210108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30c1090ce0fa4e15bfdad10b08c8a298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grass: {fileID: 6528776689538593919}
 --- !u!1 &1369595032
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,12 +889,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4140436339641201857}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 874210109}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2246405837321060440
 MeshFilter:
@@ -1195,7 +1241,7 @@ MonoBehaviour:
   computeShader: {fileID: 7200000, guid: f5053061ca32465abe54d864d6297eb5, type: 3}
   material: {fileID: 2100000, guid: 1682d002c538b4f4ebb08f431ee2a2f6, type: 2}
   cam: {fileID: 0}
-  tileResolution: 1024
+  tileResolution: 512
   tileCount: 20
   jitterStrength: 0.26
   distanceCullStartDisLOD0: 0
@@ -1385,6 +1431,6 @@ SceneRoots:
   - {fileID: 1794962922}
   - {fileID: 1933311002}
   - {fileID: 5606480497050292300}
-  - {fileID: 766707784001045365}
+  - {fileID: 874210109}
   - {fileID: 1671237436}
   - {fileID: 384603707}
