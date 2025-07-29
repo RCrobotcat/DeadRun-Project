@@ -31,7 +31,7 @@ public partial class PlayerObjectController
 
             if (currentHealth <= 0)
             {
-                if (NetworkServer.active)
+                if (NetworkServer.active) // Server
                 {
                     if (gameObject.scene.name == "Scene_3_1v1")
                     {
@@ -46,6 +46,8 @@ public partial class PlayerObjectController
                         if (transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
                             gunShooting.enabled = false;
 
+                        DropCurrentItem();
+
                         if (respawnTimer <= -1)
                         {
                             if (playerID == LobbyController.Instance.LocalPlayerObjectController.playerID)
@@ -56,7 +58,7 @@ public partial class PlayerObjectController
                         }
                     }
                 }
-                else
+                else // Clients
                 {
                     if (SceneManager.GetSceneByName("Scene_3_1v1").isLoaded)
                     {
@@ -72,6 +74,8 @@ public partial class PlayerObjectController
                         pm.isDead = true;
                     if (transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
                         gunShooting.enabled = false;
+
+                    CmdDropCurrentItem();
 
                     if (respawnTimer <= -1)
                     {
@@ -200,5 +204,34 @@ public partial class PlayerObjectController
     void CmdResetHealth()
     {
         CurrentHealth = maxHealth;
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdDropCurrentItem()
+    {
+        DropCurrentItem();
+    }
+
+    void DropCurrentItem()
+    {
+        PlayerMovement player = GetComponent<PlayerMovement>();
+        if (!string.IsNullOrEmpty(player.currentEquippedItem))
+        {
+            string temp = player.currentEquippedItem;
+            player.currentEquippedItem = "";
+            DropItem(temp, transform.position, Quaternion.identity);
+        }
+    }
+
+    public void DropItem(string itemName, Vector3 dropPosition, Quaternion dropRotation)
+    {
+        ItemsManager itemsManager = FindObjectOfType<ItemsManager>();
+        GameObject itemPrefab = itemsManager.FindDropItemByTableItemName(itemName);
+
+        GameObject go = Instantiate(itemPrefab, dropPosition, dropRotation);
+        go.transform.localScale = Vector3.one;
+        go.transform.position += Vector3.up;
+        SceneManager.MoveGameObjectToScene(go, SceneManager.GetSceneByName(gameObject.scene.name));
+        NetworkServer.Spawn(go);
     }
 }

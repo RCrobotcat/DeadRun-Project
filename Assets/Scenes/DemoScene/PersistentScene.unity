@@ -274,7 +274,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1646509005}
+  - {fileID: 5310688102085741093}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &610765161
@@ -1081,11 +1081,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f4fdaf06fd49864c952e985441ef791, type: 3}
---- !u!4 &1646509005 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5310688103727722985, guid: 5f4fdaf06fd49864c952e985441ef791, type: 3}
-  m_PrefabInstance: {fileID: 1646509004}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1680123933 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3381903112736180194, guid: 427afcc05184c5f4ab4721b4fab3c42f, type: 3}
@@ -1142,6 +1137,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: {fileID: 591629866}
+  dropItemsPrefabs:
+  - {fileID: 3119613670265935412, guid: 312f580008f1e624b91279833d4a3a96, type: 3}
 --- !u!1 &1877291221
 GameObject:
   m_ObjectHideFlags: 0
@@ -1530,6 +1527,11 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!4 &5310688102085741093 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5310688103727722985, guid: 5f4fdaf06fd49864c952e985441ef791, type: 3}
+  m_PrefabInstance: {fileID: 1646509004}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6702098335769869389
 RectTransform:
   m_ObjectHideFlags: 0
