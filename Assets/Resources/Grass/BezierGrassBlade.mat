@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BezierGrassBlade
+  m_Shader: {fileID: 4800000, guid: 5f6692ae82294751945cbee0cf9b6b95, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _GrassAlbedo:
+        m_Texture: {fileID: 2800000, guid: 03efa1fc19d6d504eb44b1acfacc62ca, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GrassGloss:
+        m_Texture: {fileID: 2800000, guid: eb60d562c2615204180ef37210f0d640, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _CurvedNormalAmount: 0.21
+    - _PushTipForward: 2
+    - _SinOffsetRange: 7.98
+    - _TaperAmount: 0.78
+    - _WaveAmplitude: 0.46
+    - _WaveSpeed: 5.74
+    - _p1Offset: 0.21
+    - _p2Offset: 0.24
+    m_Colors:
+    - _BottomColor: {r: 0.38431373, g: 0.54901963, b: 0.21960784, a: 1}
+    - _TopColor: {r: 0.654902, g: 0.7921569, b: 0.29411766, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
