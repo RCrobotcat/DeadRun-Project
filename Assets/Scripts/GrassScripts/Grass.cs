@@ -119,6 +119,11 @@ namespace Grass_RC_14
                     return;
             }
 
+            // Fine in Editor, but in build, terrains may not be initialized yet
+            // Don't know whu, lol
+            if (terrains.Count == 0)
+                Initialize();
+
             if (cam == null)
             {
                 cam = Camera.main;
@@ -233,7 +238,7 @@ namespace Grass_RC_14
         {
             terrains.Clear();
 
-            Terrain[] allTerrains = FindObjectsOfType<Terrain>();
+            Terrain[] allTerrains = FindObjectsByType<Terrain>(FindObjectsSortMode.None);
             foreach (Terrain t in allTerrains)
             {
                 if (t.enabled)
