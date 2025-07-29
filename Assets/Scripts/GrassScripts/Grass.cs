@@ -111,12 +111,22 @@ namespace Grass_RC_14
             if (NetworkServer.active)
             {
                 if (LobbyController.Instance.localPlayerObject.scene.name != "Scene_3_1v1")
+                {
+                    visibleTiles.Clear();
+                    tilesToRender.Clear();
+                    terrains.Clear();
                     return;
+                }
             }
             else
             {
                 if (!SceneManager.GetSceneByName("Scene_3_1v1").isLoaded)
+                {
+                    visibleTiles.Clear();
+                    tilesToRender.Clear();
+                    terrains.Clear();
                     return;
+                }
             }
 
             // Fine in Editor, but in build, terrains may not be initialized yet
