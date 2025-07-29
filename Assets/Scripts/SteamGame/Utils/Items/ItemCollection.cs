@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class ItemCollection : NetworkBehaviour
 {
-    public float dropForce = 3f;
-
     private void Update()
     {
         PlayerMovement[] allPlayers = FindObjectsOfType<PlayerMovement>();
@@ -17,19 +15,19 @@ public class ItemCollection : NetworkBehaviour
                 //Debug.Log("Player is near the item: " + gameObject.name);
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    CmdPickupItem();
+                    CmdPickupItem(playerObj);
                 }
             }
         }
     }
 
     [Command(requiresAuthority = false)]
-    void CmdPickupItem()
+    void CmdPickupItem(GameObject player)
     {
-        PlayerMovement player = LobbyController.Instance.localPlayerObject.GetComponent<PlayerMovement>();
-        if (player.currentEquippedItem == "")
+        PlayerMovement playerControl = player.GetComponent<PlayerMovement>();
+        if (playerControl.currentEquippedItem == "")
         {
-            player.currentEquippedItem = gameObject.name.Replace("(Clone)", "");
+            playerControl.currentEquippedItem = gameObject.name.Replace("(Clone)", "");
             NetworkServer.Destroy(gameObject);
         }
     }
