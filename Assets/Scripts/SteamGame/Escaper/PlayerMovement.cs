@@ -62,7 +62,10 @@ public partial class PlayerMovement : NetworkBehaviour
             return;
 
         if (isDead)
+        {
+            rb.linearVelocity = Vector3.zero;
             return;
+        }
 
         if (GetComponent<PlayerObjectController>().role == PlayerRole.Trapper)
             return;
@@ -238,6 +241,12 @@ public partial class PlayerMovement : NetworkBehaviour
     {
         if (!isLocalPlayer)
             return;
+
+        if (isDead)
+        {
+            rb.linearVelocity = Vector3.zero;
+            return;
+        }
 
         Vector3 newVelocity = new Vector3(
             horizontalVelocity.x,

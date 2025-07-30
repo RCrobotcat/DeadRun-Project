@@ -164,7 +164,8 @@ public class RedMonster : AIActor
         if (animator != null)
         {
             animator.SetBool("Attack", false);
-            if (rb.linearVelocity.y > 0.1f)
+            if (attackTarget.transform.position.y > transform.position.y + 1f ||
+                attackTarget.transform.position.y < transform.position.y - 1f)
             {
                 animator.SetBool("Flying", true);
             }
@@ -196,7 +197,8 @@ public class RedMonster : AIActor
     bool isInAttackRange(Actor actor)
     {
         if (actor == null) return false;
-        return Vector3.Distance(transform.position, actor.transform.position) < attackRadius;
+        return (Vector3.Distance(transform.position, actor.transform.position) < attackRadius + 1f)
+                && (Vector3.Dot(actor.transform.position - transform.position, transform.forward) > 0);
     }
 
     void UpdateAttackTarget()
@@ -255,12 +257,15 @@ public class RedMonster : AIActor
 
         if (Vector3.Distance(attackTarget.transform.position, transform.position) < attackRadius)
         {
+            if (Vector3.Dot(attackTarget.transform.position - transform.position, transform.forward) < 0)
+                return;
+
             if (NetworkServer.active)
             {
                 if (attackTarget.gameObject.scene.name == "Scene_4")
                 {
                     PlayerMovement player = attackTarget.GetComponent<PlayerMovement>();
-                    player.MonsterAttackPlayer(13);
+                    player.MonsterAttackPlayer(12);
                 }
             }
             else
@@ -268,7 +273,7 @@ public class RedMonster : AIActor
                 if (SceneManager.GetSceneByName("Scene_4").isLoaded)
                 {
                     PlayerMovement player = attackTarget.GetComponent<PlayerMovement>();
-                    player.MonsterAttackPlayer(13);
+                    player.MonsterAttackPlayer(12);
                 }
             }
         }

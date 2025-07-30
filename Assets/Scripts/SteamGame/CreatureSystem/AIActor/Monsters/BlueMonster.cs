@@ -178,7 +178,8 @@ public class BlueMonster : AIActor
     bool isInAttackRange(Actor actor)
     {
         if (actor == null) return false;
-        return Vector3.Distance(transform.position, actor.transform.position) < attackRadius;
+        return (Vector3.Distance(transform.position, actor.transform.position) < attackRadius)
+               && (Vector3.Dot(actor.transform.position - transform.position, transform.forward) > 0);
     }
 
     void UpdateAttackTarget()
@@ -237,6 +238,9 @@ public class BlueMonster : AIActor
 
         if (Vector3.Distance(attackTarget.transform.position, transform.position) < attackRadius)
         {
+            if (Vector3.Dot(attackTarget.transform.position - transform.position, transform.forward) < 0)
+                return;
+            
             if (NetworkServer.active)
             {
                 if (attackTarget.gameObject.scene.name == "Scene_3_1v1")

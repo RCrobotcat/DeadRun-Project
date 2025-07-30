@@ -3573,7 +3573,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   viewRadius: 20
-  attackRadius: 7
+  attackRadius: 8
   attackTarget: {fileID: 0}
 --- !u!114 &396103344550981569
 MonoBehaviour:
