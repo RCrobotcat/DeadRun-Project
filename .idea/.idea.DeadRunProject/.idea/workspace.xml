@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7061f1fe-81be-4fca-999e-11768f455133" name="Changes" comment="Fixed health bugs and transition bugs">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Escaper/PlayerValuesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Escaper/PlayerValuesController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Paintable/PaintingParent.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Paintable/PaintingParent.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Paintable/Shaders/Paintable.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Paintable/Shaders/Paintable.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestScene/PaintableTestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestScene/PaintableTestScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,10 +133,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="58020">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="37488">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="58020" />
+      <option name="pid" value="37488" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
         <list>
@@ -191,6 +198,8 @@
       <workItem from="1753593101478" duration="24391000" />
       <workItem from="1753620750635" duration="893000" />
       <workItem from="1753621804011" duration="7124000" />
+      <workItem from="1753883256630" duration="1622000" />
+      <workItem from="1753887138121" duration="1378000" />
     </task>
     <task id="LOCAL-00001" summary="fixed exit lobby bugs">
       <option name="closed" value="true" />
