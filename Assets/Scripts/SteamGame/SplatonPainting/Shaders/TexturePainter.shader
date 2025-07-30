@@ -8,6 +8,10 @@ Shader "Painting/TexturePainter"
 
     SubShader
     {
+        Tags
+        {
+            "RenderPipeline" = "UniversalPipeline"
+        }
         Cull Off ZWrite Off ZTest Off
 
         Pass

@@ -12,6 +12,7 @@ Shader "Painting/ExtendIslands"
         Tags
         {
             "RenderType"="Opaque"
+            "RenderPipeline"="UniversalPipeline"
         }
         LOD 100
 

@@ -24,8 +24,8 @@ public class PaintingShooting : MonoBehaviour
 
         if (Input.GetMouseButton(1))
         {
-            //player.GetComponent<PlayerMovementOffline>().isAiming = true;
-            player.GetComponent<PlayerMovement>().isAiming = true;
+            player.GetComponent<PlayerMovementOffline>().isAiming = true;
+            //player.GetComponent<PlayerMovement>().isAiming = true;
 
             UpdateRotation();
 
@@ -46,8 +46,8 @@ public class PaintingShooting : MonoBehaviour
         {
             inkParticle.Stop();
 
-            //player.GetComponent<PlayerMovementOffline>().isAiming = false;
-            player.GetComponent<PlayerMovement>().isAiming = false;
+            player.GetComponent<PlayerMovementOffline>().isAiming = false;
+            //player.GetComponent<PlayerMovement>().isAiming = false;
 
             currentFOV = Mathf.SmoothDamp(currentFOV, normalFOV, ref fovSmoothVelocity, 0.2f);
             CameraController.Instance.freeLookCam.Lens.FieldOfView = currentFOV;
