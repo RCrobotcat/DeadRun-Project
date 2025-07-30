@@ -1,4 +1,4 @@
-Shader "TNTC/ExtendIslands"
+Shader "Painting/ExtendIslands"
 {
     Properties
     {

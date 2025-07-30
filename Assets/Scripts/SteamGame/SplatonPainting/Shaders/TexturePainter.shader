@@ -1,4 +1,4 @@
-Shader "TNTC/TexturePainter"
+Shader "Painting/TexturePainter"
 {
 
     Properties

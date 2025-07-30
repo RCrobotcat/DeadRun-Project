@@ -10442,7 +10442,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 1000
+    maxNumParticles: 1500
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -14737,7 +14737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57caa52cbfd04313ad00d4203431858e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paintColor: {r: 1, g: 0.21960784, b: 0.3254902, a: 1}
+  paintColor: {r: 0.22352941, g: 0.58431375, b: 0.8509804, a: 1}
   minRadius: 0.2
   maxRadius: 1.5
   strength: 1
@@ -19701,7 +19701,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7437337088918576540}
   m_Layer: 0
-  m_Name: Parent
+  m_Name: PaintingParent
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0

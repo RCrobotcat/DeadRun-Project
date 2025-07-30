@@ -37,7 +37,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Body_Threeshold: 0.2
+    - _Body_Threeshold: 0.485
     - _Min_Alpha_Threesold: 0.1
     m_Colors:
     - _Body_Color: {r: 0.22352937, g: 0.58431375, b: 0.8509804, a: 1}
