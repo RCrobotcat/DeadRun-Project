@@ -1,5 +1,6 @@
 ﻿using Mirror;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TargetAreaInteractable : NetworkBehaviour
@@ -91,7 +92,21 @@ public class TargetAreaInteractable : NetworkBehaviour
         {
             isRequiredItemCountReached = true;
             Debug.Log("Required item count reached in target area.");
-            // TODO 
+
+            // TODO: Add Score
+
+            if (possessivePlayerId == LobbyController.Instance.LocalPlayerObjectController.playerID)
+                LobbyController.Instance.ShowMissionSuccessText("Required item count reached in target area.");
+
+            if (!NetworkServer.active)
+            {
+                CmdAddRequiredCountReachedEscaperCount(SceneManager.GetSceneByName("Scene_4").path);
+            }
+            else
+            {
+                LobbyController.Instance.previousScenePath = SceneManager.GetSceneByName("Scene_4").path;
+                LobbyController.Instance.RequiredCountReachedEscaperCount++;
+            }
         }
     }
 
@@ -101,5 +116,12 @@ public class TargetAreaInteractable : NetworkBehaviour
         if (!isClientOnly)
             return;
         possessivePlayerId = playerPlayerID;
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdAddRequiredCountReachedEscaperCount(string previousScenePath)
+    {
+        LobbyController.Instance.previousScenePath = previousScenePath;
+        LobbyController.Instance.RequiredCountReachedEscaperCount++;
     }
 }

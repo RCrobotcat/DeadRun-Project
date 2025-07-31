@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using Mirror;
@@ -145,6 +146,8 @@ public partial class PlayerObjectController
 
         LobbyController.Instance.ClearBullets();
 
+        // TODO: Add Score to Trapper
+
         if (!NetworkServer.active)
             CmdSetDeadEscaperCount(SceneManager.GetSceneByName("Scene_1").path);
         else
@@ -165,15 +168,11 @@ public partial class PlayerObjectController
 
         if (!NetworkServer.active)
         {
-            CmdSetSendingAllPlayersToScene(
-                "Assets/Scenes/DemoScene/Scene_4.unity", // level 2 => TODO: will be modified in the future
-                SceneManager.GetSceneByName("Scene_3_1v1").path);
+            CmdSet1v1DeadPlayerCount();
         }
         else
         {
-            LobbyController.Instance.nextScenePath = SceneManager.GetSceneByName("Scene_4").path;
-            LobbyController.Instance.previousScenePath = SceneManager.GetSceneByName("Scene_3_1v1").path;
-            LobbyController.Instance.NeedTransitionToOtherScene = true;
+            LobbyController.Instance.DeadEscaperCountIn1V1++;
         }
     }
 
@@ -191,13 +190,9 @@ public partial class PlayerObjectController
     }
 
     [Command(requiresAuthority = false)]
-    void CmdSetSendingAllPlayersToScene(string nextScenePathName, string previousScenePathName)
+    void CmdSet1v1DeadPlayerCount()
     {
-        LobbyController.Instance.ClearBullets();
-
-        LobbyController.Instance.nextScenePath = nextScenePathName;
-        LobbyController.Instance.previousScenePath = previousScenePathName;
-        LobbyController.Instance.NeedTransitionToOtherScene = true;
+        LobbyController.Instance.DeadEscaperCountIn1V1++;
     }
 
     [Command(requiresAuthority = false)]

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using CityGenerator;
 using DG.Tweening.Core;
@@ -8,11 +9,31 @@ using UnityEngine.SceneManagement;
 
 public partial class LobbyController
 {
+    int currentGameSceneIndex = 1; // Start from 1 for the first scene
+
+    public int CurrentGameSceneIndex
+    {
+        get
+        {
+            currentGameSceneIndex++;
+            Debug.Log("Current Game Scene Index: " + currentGameSceneIndex);
+            return currentGameSceneIndex;
+        }
+    }
+
+    Dictionary<int, string> mainGameScenes = new Dictionary<int, string>
+    {
+        { 1, "Assets/Scenes/DemoScene/Scene_1.unity" }, // Level 1
+        { 2, "Assets/Scenes/DemoScene/Scene_4.unity" }, // Level 2
+        { 3, "Assets/Scenes/DemoScene/Scene_5_Painting.unity" } // Level 3
+    };
+
     private int escaperCount;
     private int trapperCount = 1;
 
-    int deadEscaperCount = 0;
     [HideInInspector] public string previousScenePath = "";
+
+    int deadEscaperCount = 0;
 
     public int DeadEscaperCount
     {
@@ -28,6 +49,51 @@ public partial class LobbyController
                 TransitionAllPlayersTo1V1(previousScenePathTemp);
             }
         }
+    }
+
+    int requiredCountReachedEscaperCount = 0;
+
+    public int RequiredCountReachedEscaperCount
+    {
+        get => requiredCountReachedEscaperCount;
+        set
+        {
+            requiredCountReachedEscaperCount = value;
+            if (requiredCountReachedEscaperCount >= 1)
+            {
+                requiredCountReachedEscaperCount = 0;
+
+                string previousScenePathTemp = previousScenePath;
+                TransitionAllPlayersTo1V1(previousScenePathTemp);
+            }
+        }
+    }
+
+    int deadEscaperCountIn1V1 = 0;
+
+    public int DeadEscaperCountIn1V1
+    {
+        get => deadEscaperCountIn1V1;
+        set
+        {
+            deadEscaperCountIn1V1 = value;
+            if (deadEscaperCountIn1V1 >= 1)
+            {
+                deadEscaperCountIn1V1 = 0;
+
+                SendingAllPlayersToScene(mainGameScenes[CurrentGameSceneIndex],
+                    SceneManager.GetSceneByName("Scene_3_1v1").path);
+            }
+        }
+    }
+
+    void SendingAllPlayersToScene(string nextScenePathName, string previousScenePathName)
+    {
+        ClearBullets();
+
+        nextScenePath = nextScenePathName;
+        previousScenePath = previousScenePathName;
+        NeedTransitionToOtherScene = true;
     }
 
     private bool needTransitionToOtherScene = false;
@@ -50,7 +116,7 @@ public partial class LobbyController
         }
     }
 
-    void TransitionAllPlayersTo1V1(string previousScenePathName)
+    public void TransitionAllPlayersTo1V1(string previousScenePathName)
     {
         PlayerObjectController[] allPlayers = FindObjectsOfType<PlayerObjectController>();
         ClearBullets();

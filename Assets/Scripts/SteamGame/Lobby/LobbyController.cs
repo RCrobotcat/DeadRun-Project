@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Mirror;
 using Steamworks;
@@ -315,11 +313,12 @@ public partial class LobbyController : Singleton<LobbyController>
     [Header("Mission Status Text")] public GameObject missionSuccessPanel;
     public GameObject missionFailedPanel;
 
-    public void ShowMissionSuccessText()
+    public void ShowMissionSuccessText(string text)
     {
         missionSuccessPanel.SetActive(true);
         missionSuccessPanel.transform.localScale.To(Vector3.one * 1.5f, 2.5f,
             (a) => { missionSuccessPanel.transform.localScale = a; }, () => { missionSuccessPanel.SetActive(false); });
+        missionSuccessPanel.GetComponentInChildren<Text>().text = text;
     }
 
     public void ShowMissionFailedText(string text)

@@ -41,6 +41,6 @@ Material:
     - _Min_Alpha_Threesold: 0.1
     m_Colors:
     - _Body_Color: {r: 0.22352937, g: 0.58431375, b: 0.8509804, a: 1}
-    - _Border_Color: {r: 0.6567283, g: 0.8867924, b: 0.701632, a: 1}
+    - _Border_Color: {r: 0.22352941, g: 0.58431375, b: 0.8509804, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

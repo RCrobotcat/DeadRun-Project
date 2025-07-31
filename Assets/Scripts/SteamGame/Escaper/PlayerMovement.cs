@@ -41,6 +41,8 @@ public partial class PlayerMovement : NetworkBehaviour
 
     public bool isDead = false;
 
+    public PaintingShooting paintingShooting;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -69,6 +71,8 @@ public partial class PlayerMovement : NetworkBehaviour
 
         if (GetComponent<PlayerObjectController>().role == PlayerRole.Trapper)
             return;
+
+        HandlePaintingShootingEnable();
 
         isGrounded = CheckIfGrounded();
         if (isGrounded)
@@ -385,6 +389,36 @@ public partial class PlayerMovement : NetworkBehaviour
                             SoundController.Instance.PlayFootstep_floor(1.2f, 2.2f);
                     }
                 }
+            }
+        }
+    }
+
+    void HandlePaintingShootingEnable()
+    {
+        if (NetworkServer.active)
+        {
+            if (gameObject.scene.name == "Scene_5_Painting")
+            {
+                paintingShooting.enabled = true;
+                gun.enabled = false;
+            }
+            else
+            {
+                paintingShooting.enabled = false;
+                gun.enabled = true;
+            }
+        }
+        else
+        {
+            if (SceneManager.GetSceneByName("Scene_5_Painting").isLoaded)
+            {
+                paintingShooting.enabled = true;
+                gun.enabled = false;
+            }
+            else
+            {
+                paintingShooting.enabled = false;
+                gun.enabled = true;
             }
         }
     }
