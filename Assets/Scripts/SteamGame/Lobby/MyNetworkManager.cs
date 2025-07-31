@@ -24,6 +24,12 @@ public partial class MyNetworkManager : NetworkManager
 
     void Update()
     {
+        if (SceneManager.GetSceneByName("OfflineScene").isLoaded)
+        {
+            if (!Cursor.visible)
+                Cursor.visible = true;
+        }
+
         var loadedScenes = SceneManager.GetAllScenes();
 
         // 如果场景中有 firstSceneToLoad，并且加载了多个 firstSceneToLoad，则卸载最后一个加载的 firstSceneToLoad
