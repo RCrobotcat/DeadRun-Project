@@ -96,7 +96,7 @@ public class TargetAreaInteractable : NetworkBehaviour
             // TODO: Add Score
 
             if (possessivePlayerId == LobbyController.Instance.LocalPlayerObjectController.playerID)
-                LobbyController.Instance.ShowMissionSuccessText("Required item count reached in target area.");
+                LobbyController.Instance.ShowMissionSuccessText("Required item count reached in target area!");
 
             if (!NetworkServer.active)
             {

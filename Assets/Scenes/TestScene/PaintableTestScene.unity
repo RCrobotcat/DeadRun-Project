@@ -2808,7 +2808,7 @@ MonoBehaviour:
       Size: {x: 0.8, y: 0.8}
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
-  TargetOffset: {x: 0, y: 2, z: 0}
+  TargetOffset: {x: 0, y: 2.5, z: 0}
   Damping: {x: 0.5, y: 0.5}
   Lookahead:
     Enabled: 0
@@ -2859,7 +2859,7 @@ MonoBehaviour:
       Time: 2
     Restrictions: 0
   VerticalAxis:
-    Value: 17.5
+    Value: 25
     Center: 17.5
     Range: {x: -10, y: 45}
     Wrap: 0
@@ -2929,8 +2929,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1363310582}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.031204311, y: 0.0000000038693675, z: -7.3427053e-10, w: 0.9995131}
-  m_LocalPosition: {x: 0, y: 3.25, z: -4}
+  m_LocalRotation: {x: 0.09053292, y: -0.000000029679944, z: 0.0000000026980915, w: 0.99589354}
+  m_LocalPosition: {x: 0, y: 4.1801386, z: -3.7099655}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

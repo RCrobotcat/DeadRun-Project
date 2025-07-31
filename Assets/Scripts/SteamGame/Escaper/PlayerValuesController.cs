@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using Mirror;
@@ -24,6 +23,18 @@ public partial class PlayerObjectController
         get => currentHealth;
         set
         {
+            // Prevention
+            if (currentHealth <= 0)
+            {
+                currentHealth = Mathf.Clamp(value, 0, maxHealth);
+                healthBarFillImage.DOFillAmount(currentHealth / maxHealth, 0.2f);
+
+                if (NetworkServer.active)
+                    RpcSyncPlayersHealthToClient(currentHealth);
+
+                return;
+            }
+
             currentHealth = Mathf.Clamp(value, 0, maxHealth);
             healthBarFillImage.DOFillAmount(currentHealth / maxHealth, 0.2f);
 
