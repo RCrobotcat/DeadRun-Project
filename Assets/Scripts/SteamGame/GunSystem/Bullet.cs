@@ -1,4 +1,5 @@
 ﻿using System;
+using Mirror;
 using UnityEngine;
 
 public enum TowardType
@@ -19,9 +20,12 @@ public class Bullet : MonoBehaviour
     public float maxDistance = 100f;
     float curDistance = 0f;
 
+    public ParticleSystem explosionParticle;
+
     private void Start()
     {
-        Physics.IgnoreCollision(GetComponent<Collider>(), GetComponent<Collider>());
+        Physics.IgnoreCollision(LobbyController.Instance.localPlayerObject.GetComponent<Collider>(),
+            GetComponent<Collider>());
     }
 
     private void Update()
@@ -44,6 +48,16 @@ public class Bullet : MonoBehaviour
         }
 
         curDistance += movementSpeed * Time.deltaTime;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+            // Player Scripts will handle the collision
+            return;
+
+        if (NetworkServer.active)
+            NetworkServer.Destroy(gameObject);
     }
 
     public void SetDirection(Vector3 directionToCrosshair)

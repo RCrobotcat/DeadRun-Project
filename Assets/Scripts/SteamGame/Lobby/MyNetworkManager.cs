@@ -57,6 +57,13 @@ public partial class MyNetworkManager : NetworkManager
             fadeinOutScreen = FindObjectOfType<FadeInOutScreen>();
     }
 
+    public override void OnClientDisconnect()
+    {
+        base.OnClientDisconnect();
+        Debug.Log("Time out, Disconnected from server.");
+        // TODO: Do reconnection or show disconnection screen
+    }
+
     public override void OnServerSceneChanged(string sceneName)
     {
         base.OnServerSceneChanged(sceneName);
