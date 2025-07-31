@@ -326,6 +326,20 @@ public partial class LobbyController
             }
         }
 
+        // Scene 5 Transition
+        if (transitionToSceneName == SceneManager.GetSceneByName("Scene_5_Painting").path)
+        {
+            if (playerObjectController.playerID == 1) // Host
+            {
+                playerMovement.currentEquippedItem = "";
+                playerObjectController.fellCountText.gameObject.SetActive(false);
+            }
+            else
+            {
+                playerObjectController.RpcSetPlayerFellCountUIState(false);
+            }
+        }
+
         if (NetworkServer.active)
             playerObjectController.CurrentHealth = playerObjectController.maxHealth;
     }
@@ -354,6 +368,20 @@ public partial class LobbyController
         {
             if (playerObjectController.playerID == 1) // Host
             {
+                playerObjectController.fellCountText.gameObject.SetActive(false);
+            }
+            else
+            {
+                playerObjectController.RpcSetPlayerFellCountUIState(false);
+            }
+        }
+
+        // Scene 5 Transition
+        if (transitionToSceneName == SceneManager.GetSceneByName("Scene_5_Painting").path)
+        {
+            if (playerObjectController.playerID == 1) // Host
+            {
+                playerMovement.currentEquippedItem = "";
                 playerObjectController.fellCountText.gameObject.SetActive(false);
             }
             else
