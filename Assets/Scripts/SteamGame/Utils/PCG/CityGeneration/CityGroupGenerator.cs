@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Mirror;
 using UnityEngine;
 using UnityEngine.Splines;
@@ -140,8 +142,18 @@ namespace CityGenerator
                 int maxAttempts = 100;
                 do
                 {
-                    int val0 = Random.Range(0, cityMarks.GetLength(0) + 1);
-                    int val1 = Random.Range(0, cityMarks.GetLength(1) + 1);
+                    int val0, val1;
+                    using (var rng = RandomNumberGenerator.Create())
+                    {
+                        byte[] bytes = new byte[4];
+                        rng.GetBytes(bytes);
+                        val0 = BitConverter.ToInt32(bytes, 0) % cityMarks.GetLength(0);
+                        if (val0 < 0) val0 += cityMarks.GetLength(0);
+
+                        rng.GetBytes(bytes);
+                        val1 = BitConverter.ToInt32(bytes, 0) % cityMarks.GetLength(1);
+                        if (val1 < 0) val1 += cityMarks.GetLength(1);
+                    }
                     var candidate = cityMarks[val0, val1];
                     if ((candidate.markType == CityObjectType.MajorRoad ||
                          candidate.markType == CityObjectType.MinorRoad)
