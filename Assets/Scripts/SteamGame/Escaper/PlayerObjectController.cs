@@ -370,4 +370,21 @@ public partial class PlayerObjectController : NetworkBehaviour
         fellCountText.gameObject.SetActive(state);
         GetComponent<PlayerMovement>().currentEquippedItem = "";
     }
+
+    [ClientRpc]
+    public void RpcSyncPaint(int id, Vector3 pos, float radius, float hardness, float strength, Color color)
+    {
+        if (!isClientOnly) return;
+
+        Paintable paintable = PaintablesManager.Instance.GetPaintableByID(id);
+        PaintManager.Instance.paint(paintable, pos, radius, hardness, strength, color);
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdSyncPaint(int id, Vector3 pos, float radius, float hardness, float strength,
+        Color color)
+    {
+        Paintable paintable = PaintablesManager.Instance.GetPaintableByID(id);
+        PaintManager.Instance.paint(paintable, pos, radius, hardness, strength, color);
+    }
 }

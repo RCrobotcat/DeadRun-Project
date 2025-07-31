@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
 public class ParticlesController : MonoBehaviour
 {
+    public PlayerObjectController player;
+
     public Color paintColor;
 
     public float minRadius = 0.05f;
@@ -23,6 +26,9 @@ public class ParticlesController : MonoBehaviour
 
     void OnParticleCollision(GameObject other)
     {
+        if (player.playerID != LobbyController.Instance.LocalPlayerObjectController.playerID)
+            return;
+
         int numCollisionEvents = part.GetCollisionEvents(other, collisionEvents);
 
         Paintable p = other.GetComponent<Paintable>();
@@ -33,7 +39,23 @@ public class ParticlesController : MonoBehaviour
                 Vector3 pos = collisionEvents[i].intersection;
                 float radius = Random.Range(minRadius, maxRadius);
                 PaintManager.Instance.paint(p, pos, radius, hardness, strength, paintColor);
+
+                SyncPaint(p, pos, radius, hardness, strength, paintColor);
             }
+        }
+    }
+
+    void SyncPaint(Paintable paintable, Vector3 pos, float radius = 1f, float hardness = .5f, float strength = .5f,
+        Color? color = null)
+    {
+        int paintableId = PaintablesManager.Instance.GetPaintableID(paintable);
+        if (NetworkServer.active)
+        {
+            player.RpcSyncPaint(paintableId, pos, radius, hardness, strength, color ?? paintColor);
+        }
+        else
+        {
+            player.CmdSyncPaint(paintableId, pos, radius, hardness, strength, color ?? paintColor);
         }
     }
 }

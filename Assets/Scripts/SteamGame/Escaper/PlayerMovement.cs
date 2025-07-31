@@ -450,4 +450,50 @@ public partial class PlayerMovement : NetworkBehaviour
         gun.shootingFire.GetComponent<ParticleSystem>()
             .Spawn(gun.shootingFirePoint, gun.shootingFirePoint.localPosition, Quaternion.identity);
     }
+
+    [ClientRpc]
+    public void RpcSetPainting(Vector3 direction, bool state)
+    {
+        if (!isClientOnly)
+            return;
+
+        if (state)
+        {
+            paintingShooting.inkParticle.transform.rotation = Quaternion.LookRotation(direction + Vector3.up * 0.05f);
+            paintingShooting.inkParticle.Play();
+        }
+        else
+        {
+            paintingShooting.inkParticle.Stop();
+        }
+    }
+
+    [ClientRpc]
+    public void RpcSetPaintingDirection(Vector3 direction)
+    {
+        if (!isClientOnly)
+            return;
+
+        paintingShooting.inkParticle.transform.rotation = Quaternion.LookRotation(direction + Vector3.up * 0.05f);
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdSetPainting(Vector3 direction, bool state)
+    {
+        if (state)
+        {
+            paintingShooting.inkParticle.transform.rotation = Quaternion.LookRotation(direction + Vector3.up * 0.05f);
+            paintingShooting.inkParticle.Play();
+        }
+        else
+        {
+            paintingShooting.inkParticle.Stop();
+        }
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdSetPaintingDirection(Vector3 direction)
+    {
+        paintingShooting.inkParticle.transform.rotation = Quaternion.LookRotation(direction + Vector3.up * 0.05f);
+    }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PaintingShooting : MonoBehaviour
 {
-    [SerializeField] ParticleSystem inkParticle;
+    public ParticleSystem inkParticle;
 
     public Transform player;
 
@@ -37,15 +37,40 @@ public class PaintingShooting : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 inkParticle.Play();
+                // Server
+                if (NetworkServer.active)
+                {
+                    player.GetComponent<PlayerMovement>().RpcSetPainting(ray.direction, true);
+                }
+                else // Client
+                {
+                    player.GetComponent<PlayerMovement>().CmdSetPainting(ray.direction, true);
+                }
             }
             else if (Input.GetMouseButtonUp(0))
             {
                 inkParticle.Stop();
+                if (NetworkServer.active)
+                {
+                    player.GetComponent<PlayerMovement>().RpcSetPainting(Vector3.zero, false);
+                }
+                else
+                {
+                    player.GetComponent<PlayerMovement>().CmdSetPainting(Vector3.zero, false);
+                }
             }
         }
         else
         {
             inkParticle.Stop();
+            if (NetworkServer.active)
+            {
+                player.GetComponent<PlayerMovement>().RpcSetPainting(Vector3.zero, false);
+            }
+            else
+            {
+                player.GetComponent<PlayerMovement>().CmdSetPainting(Vector3.zero, false);
+            }
 
             //player.GetComponent<PlayerMovementOffline>().isAiming = false;
             player.GetComponent<PlayerMovement>().isAiming = false;
@@ -72,5 +97,13 @@ public class PaintingShooting : MonoBehaviour
     void SetParticleDirection()
     {
         inkParticle.transform.rotation = Quaternion.LookRotation(ray.direction + Vector3.up * 0.05f);
+        if (NetworkServer.active)
+        {
+            player.GetComponent<PlayerMovement>().RpcSetPaintingDirection(ray.direction + Vector3.up * 0.05f);
+        }
+        else
+        {
+            player.GetComponent<PlayerMovement>().CmdSetPaintingDirection(ray.direction + Vector3.up * 0.05f);
+        }
     }
 }
