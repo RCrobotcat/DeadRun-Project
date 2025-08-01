@@ -381,9 +381,8 @@ public partial class PlayerObjectController : NetworkBehaviour
 
             foreach (var pos in startPos)
             {
-                if (pos.spawnedPlayerID == -1)
+                if (pos.spawnedPlayerID == playerID)
                 {
-                    pos.SetSpawnedPlayerID(playerID);
                     transform.position = pos.transform.position;
                     break;
                 }
@@ -418,5 +417,14 @@ public partial class PlayerObjectController : NetworkBehaviour
     {
         Paintable paintable = PaintablesManager.Instance.GetPaintableByID(id);
         PaintManager.Instance.paint(paintable, pos, radius, hardness, strength, color);
+    }
+    
+    [ClientRpc]
+    public void RpcShowMissionSuccessText(string text)
+    {
+        if (!isClientOnly)
+            return;
+
+        LobbyController.Instance.ShowMissionSuccessText(text);
     }
 }

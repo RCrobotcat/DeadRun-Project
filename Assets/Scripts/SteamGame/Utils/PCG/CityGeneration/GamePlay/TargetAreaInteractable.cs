@@ -64,6 +64,12 @@ public class TargetAreaInteractable : NetworkBehaviour
             {
                 progressText.text = "Done!";
                 progressText.color = Color.green;
+                if (player.GetComponent<PlayerObjectController>().playerID ==
+                    LobbyController.Instance.LocalPlayerObjectController.playerID)
+                    LobbyController.Instance.ShowMissionSuccessText("Required item count reached in target area!");
+                else
+                    player.GetComponent<PlayerObjectController>()
+                        .RpcShowMissionSuccessText("Required item count reached in target area!");
             }
 
             RpcUpdateProgressText(currentCollectableItemCount);
@@ -94,9 +100,6 @@ public class TargetAreaInteractable : NetworkBehaviour
             Debug.Log("Required item count reached in target area.");
 
             // TODO: Add Score
-
-            if (possessivePlayerId == LobbyController.Instance.LocalPlayerObjectController.playerID)
-                LobbyController.Instance.ShowMissionSuccessText("Required item count reached in target area!");
 
             if (!NetworkServer.active)
             {

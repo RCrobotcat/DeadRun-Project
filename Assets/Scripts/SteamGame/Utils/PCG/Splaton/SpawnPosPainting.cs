@@ -14,15 +14,5 @@ public class SpawnPosPainting : NetworkBehaviour
     public void SetSpawnedPlayerID(int playerID)
     {
         spawnedPlayerID = playerID;
-        if (!NetworkServer.active)
-            CmdSetSpawnedPlayerID(playerID);
-        Debug.Log("SpawnPosPainting: Set SpawnedPlayerID to " + playerID);
-    }
-
-    [Command(requiresAuthority = false)]
-    public void CmdSetSpawnedPlayerID(int playerID)
-    {
-        SetSpawnedPlayerID(playerID);
-        Debug.Log("CmdSetSpawnedPlayerID called with playerID: " + playerID);
     }
 }

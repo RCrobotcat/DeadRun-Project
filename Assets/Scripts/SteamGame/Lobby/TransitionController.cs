@@ -395,12 +395,10 @@ public partial class LobbyController
                 {
                     Debug.Log("Host is setting player position in Splaton Place Generator.");
                     SpawnPosPainting[] startPos = FindObjectsOfType<SpawnPosPainting>();
-                    SpawnPosPainting positionToSpawn = null;
                     foreach (var pos in startPos)
                     {
-                        if (pos.spawnedPlayerID == -1)
+                        if (pos.spawnedPlayerID == playerObjectController.playerID)
                         {
-                            pos.SetSpawnedPlayerID(playerObjectController.playerID);
                             player.transform.position = pos.transform.position;
                             break;
                         }

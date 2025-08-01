@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Mirror;
+using NUnit.Framework;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -165,6 +167,7 @@ public class SplatonPlaceGenerator : Singleton<SplatonPlaceGenerator>
         int maxY = rows - respawnHeight - 1;
 
         List<RectInt> usedAreas = new List<RectInt>();
+        List<SpawnPosPainting> respawnPlaces = new List<SpawnPosPainting>();
 
         int maxAttempts = 10;
         for (int j = 0; j < maxAttempts; j++)
@@ -192,12 +195,26 @@ public class SplatonPlaceGenerator : Singleton<SplatonPlaceGenerator>
                 res.name = $"RespawnPlace_{x}_{y}";
                 NetworkServer.Spawn(res);
 
+                respawnPlaces.Add(res.transform.GetChild(5).GetComponent<SpawnPosPainting>());
+
                 for (int i = 0; i < res.transform.childCount - 1; i++)
                 {
                     PaintablesManager.Instance.RegisterPaintable(res.transform.GetChild(i).GetComponent<Paintable>());
                 }
 
-                if (usedAreas.Count == MyNetworkManager.GamePlayers.Count) break;
+                if (usedAreas.Count == MyNetworkManager.GamePlayers.Count)
+                {
+                    var shuffledPlayers = MyNetworkManager.GamePlayers.OrderBy(_ => Random.value).ToList();
+                    for (int i = 0; i < respawnPlaces.Count && i < shuffledPlayers.Count; i++)
+                    {
+                        if (respawnPlaces[i].spawnedPlayerID == -1)
+                        {
+                            respawnPlaces[i].spawnedPlayerID = shuffledPlayers[i].playerID;
+                        }
+                    }
+
+                    break;
+                }
             }
         }
     }

@@ -131,6 +131,7 @@ public partial class MyNetworkManager : NetworkManager
             yield return new WaitForSeconds(0.5f);
         }
 
+        yield return new WaitForSeconds(1.2f);
         yield return fadeinOutScreen.FadeOut();
 
         if (!NetworkServer.active)
