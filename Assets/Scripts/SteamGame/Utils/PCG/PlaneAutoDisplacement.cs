@@ -16,7 +16,9 @@ public class PlaneAutoDisplacement : MonoBehaviour
     private void Start()
     {
         originalPos = transform.position;
-        StartCoroutine(AutoDisplaceLoop());
+
+        if (NetworkServer.active)
+            StartCoroutine(AutoDisplaceLoop());
     }
 
     IEnumerator AutoDisplaceLoop()
@@ -28,10 +30,10 @@ public class PlaneAutoDisplacement : MonoBehaviour
                 ? new Vector3(0, 0, Random.Range(-verticalAutoDisplacement, verticalAutoDisplacement))
                 : new Vector3(Random.Range(-horizontalAutoDisplacement, horizontalAutoDisplacement), 0, 0);
             Vector3 targetPos = originalPos + offset;
-            
+
             yield return MoveToPosition(targetPos);
             yield return new WaitForSeconds(pauseTime);
-            
+
             yield return MoveToPosition(originalPos);
             yield return new WaitForSeconds(pauseTime);
         }

@@ -1501,7 +1501,7 @@ MonoBehaviour:
   equipItemSlot: {fileID: 6310232972406723056}
   jumpForce: 6
   gravityMultiplier: 1.2
-  jumpTimeInterval: 0.8
+  jumpTimeInterval: 0.9
   isAiming: 0
   gun: {fileID: 2474453205690138116}
   isDead: 0
