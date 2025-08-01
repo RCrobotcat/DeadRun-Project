@@ -276,7 +276,7 @@ public partial class LobbyController
                 player.GetComponent<PlayerObjectController>()
                     .RpcUpdatePlayerParamsAfterTransition(transitionToSceneName);
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.3f);
 
             // Ensure again some settings are applied successfully
             NextSceneSettingsSecondary(transitionToSceneName, player);
@@ -393,9 +393,18 @@ public partial class LobbyController
 
                 if (SplatonPlaceGenerator.Instance.IsInitialized)
                 {
-                    Debug.Log("Host instant generating painting place.");
-                    Transform startPos = GameObject.Find("SpawnPos_Painting").transform;
-                    player.transform.position = startPos.position;
+                    Debug.Log("Host is setting player position in Splaton Place Generator.");
+                    SpawnPosPainting[] startPos = FindObjectsOfType<SpawnPosPainting>();
+                    foreach (var pos in startPos)
+                    {
+                        if (pos.SpawnedPlayerID == -1)
+                        {
+                            player.transform.position = pos.transform.position;
+
+                            pos.SpawnedPlayerID = playerObjectController.playerID;
+                            break;
+                        }
+                    }
                 }
             }
             else

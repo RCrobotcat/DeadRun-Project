@@ -1,4 +1,5 @@
-﻿using Mirror;
+﻿using System.Collections.Generic;
+using Mirror;
 
 public struct PlayerExitMsg : NetworkMessage
 {

@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Mirror;
+using UnityEngine;
 
-public class Paintable : MonoBehaviour
+public class Paintable : NetworkBehaviour
 {
     const int TEXTURE_SIZE = 1024;
 
@@ -39,6 +40,8 @@ public class Paintable : MonoBehaviour
         rend.material.SetTexture(maskTextureID, extendIslandsRenderTexture);
 
         PaintManager.Instance.initTextures(this);
+
+        PaintablesManager.Instance.RegisterPaintable(this);
     }
 
     void OnDisable()

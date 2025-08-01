@@ -149,6 +149,17 @@ public partial class PlayerObjectController
 
     private void MissionFailed()
     {
+        if (NetworkServer.active)
+        {
+            if (gameObject.scene.name != "Scene_1")
+                return;
+        }
+        else
+        {
+            if (!SceneManager.GetSceneByName("Scene_1").isLoaded)
+                return;
+        }
+
         Debug.Log("Mission Failed: Fell too many times.");
         LobbyController.Instance.ShowMissionFailedText("Mission Failed:" + "\n" + " Fell too many times!");
         fellCount = 0;

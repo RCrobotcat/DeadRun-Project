@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PaintablesManager : Singleton<PaintablesManager>
 {
@@ -24,6 +25,7 @@ public class PaintablesManager : Singleton<PaintablesManager>
         if (!paintables.Contains(paintable))
         {
             paintables.Add(paintable);
+            Debug.Log("Registered Paintable: " + paintable.name + " with ID: " + GetPaintableID(paintable));
         }
     }
 

@@ -1491,6 +1491,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3029533380717055107}
+  - component: {fileID: 6084469436733645536}
   m_Layer: 0
   m_Name: SpawnPos_Painting
   m_TagString: Untagged
@@ -1513,6 +1514,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 9100466861172264501}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6084469436733645536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7261711588128115201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cbe855d7e35419087e896e65b5b8a0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  spawnedPlayerID: -1
 --- !u!1 &9115051998299046721
 GameObject:
   m_ObjectHideFlags: 0

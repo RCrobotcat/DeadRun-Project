@@ -376,9 +376,19 @@ public partial class PlayerObjectController : NetworkBehaviour
 
         if (SplatonPlaceGenerator.Instance.IsInitialized)
         {
-            Debug.Log("Splaton place already initialized for player: " + playerID);
-            Transform startPos = GameObject.Find("SpawnPos_Painting").transform;
-            transform.position = startPos.position;
+            Debug.Log("Client is setting player position in Splaton Place Generator.");
+            SpawnPosPainting[] startPos = FindObjectsOfType<SpawnPosPainting>();
+
+            foreach (var pos in startPos)
+            {
+                if (pos.SpawnedPlayerID == -1)
+                {
+                    transform.position = pos.transform.position;
+
+                    pos.SpawnedPlayerID = playerID;
+                    break;
+                }
+            }
         }
         else if (!SplatonPlaceGenerator.Instance.IsInitialized)
             SplatonPlaceGenerator.Instance.InitializePlace();
