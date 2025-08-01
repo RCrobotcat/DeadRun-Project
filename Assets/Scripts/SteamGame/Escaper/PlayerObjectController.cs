@@ -362,6 +362,19 @@ public partial class PlayerObjectController : NetworkBehaviour
     }
 
     [ClientRpc]
+    public void RpcSplatonGenerating()
+    {
+        if (!isClientOnly)
+            return;
+
+        GetComponent<PlayerMovement>().currentEquippedItem = "";
+        fellCountText.gameObject.SetActive(false);
+        CameraController.Instance.freeLookCam.Lens.FieldOfView = 80f;
+        CameraController.Instance.freeLookCam.Lens.FarClipPlane = 500f;
+        SplatonPlaceGenerator.Instance.InitializePlace();
+    }
+
+    [ClientRpc]
     public void RpcSetPlayerFellCountUIState(bool state)
     {
         if (!isClientOnly)

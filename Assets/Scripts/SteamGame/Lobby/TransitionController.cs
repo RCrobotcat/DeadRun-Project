@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public partial class LobbyController
 {
-    int currentGameSceneIndex = 1; // Start from 1 for the first scene
+    int currentGameSceneIndex = 2; // Start from 1 for the first scene
 
     public int CurrentGameSceneIndex
     {
@@ -333,10 +333,13 @@ public partial class LobbyController
             {
                 playerMovement.currentEquippedItem = "";
                 playerObjectController.fellCountText.gameObject.SetActive(false);
+                CameraController.Instance.freeLookCam.Lens.FieldOfView = 80f;
+                CameraController.Instance.freeLookCam.Lens.FarClipPlane = 500f;
+                SplatonPlaceGenerator.Instance.InitializePlace();
             }
             else
             {
-                playerObjectController.RpcSetPlayerFellCountUIState(false);
+                playerObjectController.RpcSplatonGenerating();
             }
         }
 
