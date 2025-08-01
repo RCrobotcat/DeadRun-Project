@@ -22,12 +22,6 @@ public class Bullet : MonoBehaviour
 
     public ParticleSystem explosionParticle;
 
-    private void Start()
-    {
-        Physics.IgnoreCollision(LobbyController.Instance.localPlayerObject.GetComponent<Collider>(),
-            GetComponent<Collider>());
-    }
-
     private void Update()
     {
         if (curDistance > maxDistance)

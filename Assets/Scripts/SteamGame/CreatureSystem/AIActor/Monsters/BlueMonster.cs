@@ -218,6 +218,10 @@ public class BlueMonster : AIActor
 
     public void AttackPlayerAnimationEvent()
     {
+        if (NetworkServer.active)
+            if (LobbyController.Instance.localPlayerObject.scene.name != "Scene_3_1v1")
+                return;
+        
         if (SoundController.Instance != null)
         {
             if (NetworkServer.active)

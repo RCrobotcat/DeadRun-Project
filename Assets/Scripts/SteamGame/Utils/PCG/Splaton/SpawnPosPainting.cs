@@ -1,38 +1,28 @@
 ﻿using Mirror;
+using UnityEngine;
 
 public class SpawnPosPainting : NetworkBehaviour
 {
-    private int spawnedPlayerID = -1;
+    [SyncVar(hook = nameof(OnSpawnedPlayerIDChanged))]
+    public int spawnedPlayerID = -1;
 
-    public int SpawnedPlayerID
+    void OnSpawnedPlayerIDChanged(int oldValue, int newValue)
     {
-        get => spawnedPlayerID;
-        set
-        {
-            spawnedPlayerID = value;
-            if (NetworkServer.active)
-            {
-                RpcSetSpawnedPlayerID(value);
-            }
-            else
-            {
-                CmdSetSpawnedPlayerID(value);
-            }
-        }
+        Debug.Log("SpawnPosPainting: SpawnedPlayerID changed from " + oldValue + " to " + newValue);
     }
 
-    [ClientRpc]
-    public void RpcSetSpawnedPlayerID(int playerID)
+    public void SetSpawnedPlayerID(int playerID)
     {
-        if (!isClientOnly)
-            return;
-
         spawnedPlayerID = playerID;
+        if (!NetworkServer.active)
+            CmdSetSpawnedPlayerID(playerID);
+        Debug.Log("SpawnPosPainting: Set SpawnedPlayerID to " + playerID);
     }
 
     [Command(requiresAuthority = false)]
     public void CmdSetSpawnedPlayerID(int playerID)
     {
-        spawnedPlayerID = playerID;
+        SetSpawnedPlayerID(playerID);
+        Debug.Log("CmdSetSpawnedPlayerID called with playerID: " + playerID);
     }
 }

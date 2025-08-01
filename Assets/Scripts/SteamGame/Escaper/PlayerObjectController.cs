@@ -364,7 +364,7 @@ public partial class PlayerObjectController : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RpcSplatonGenerating(string transitionToSceneName)
+    public void RpcSplatonGenerating()
     {
         if (!isClientOnly)
             return;
@@ -381,11 +381,10 @@ public partial class PlayerObjectController : NetworkBehaviour
 
             foreach (var pos in startPos)
             {
-                if (pos.SpawnedPlayerID == -1)
+                if (pos.spawnedPlayerID == -1)
                 {
+                    pos.SetSpawnedPlayerID(playerID);
                     transform.position = pos.transform.position;
-
-                    pos.SpawnedPlayerID = playerID;
                     break;
                 }
             }

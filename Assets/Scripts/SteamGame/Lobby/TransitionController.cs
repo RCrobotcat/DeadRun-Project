@@ -343,7 +343,7 @@ public partial class LobbyController
             }
             else
             {
-                playerObjectController.RpcSplatonGenerating(transitionToSceneName);
+                playerObjectController.RpcSplatonGenerating();
             }
         }
 
@@ -395,13 +395,13 @@ public partial class LobbyController
                 {
                     Debug.Log("Host is setting player position in Splaton Place Generator.");
                     SpawnPosPainting[] startPos = FindObjectsOfType<SpawnPosPainting>();
+                    SpawnPosPainting positionToSpawn = null;
                     foreach (var pos in startPos)
                     {
-                        if (pos.SpawnedPlayerID == -1)
+                        if (pos.spawnedPlayerID == -1)
                         {
+                            pos.SetSpawnedPlayerID(playerObjectController.playerID);
                             player.transform.position = pos.transform.position;
-
-                            pos.SpawnedPlayerID = playerObjectController.playerID;
                             break;
                         }
                     }
@@ -409,7 +409,7 @@ public partial class LobbyController
             }
             else
             {
-                playerObjectController.RpcSplatonGenerating(transitionToSceneName);
+                playerObjectController.RpcSplatonGenerating();
             }
         }
 
