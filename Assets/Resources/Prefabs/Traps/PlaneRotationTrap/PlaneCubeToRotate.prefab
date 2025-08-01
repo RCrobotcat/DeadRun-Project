@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 4615257855687334011}
   - component: {fileID: 7744985113703289850}
   - component: {fileID: 5823086994501683758}
+  - component: {fileID: 5156890275391864756}
   m_Layer: 3
   m_Name: PlaneCubeToRotate
   m_TagString: Untagged
@@ -216,3 +217,19 @@ MonoBehaviour:
   emiMaterial: {fileID: 2100000, guid: 0860babcc07a98c419bc91388cd6c2c6, type: 2}
   originalMaterials: []
   materialsWithOutline: []
+--- !u!114 &5156890275391864756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6134106947719216321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 641d2dc38ced4df295f2c236fdf0fb20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  verticalAutoDisplacement: 2
+  horizontalAutoDisplacement: 2
+  autoDisplacementSpeed: 1.5
+  pauseTime: 1.5
