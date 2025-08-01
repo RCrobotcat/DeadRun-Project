@@ -418,13 +418,14 @@ public partial class PlayerObjectController : NetworkBehaviour
         Paintable paintable = PaintablesManager.Instance.GetPaintableByID(id);
         PaintManager.Instance.paint(paintable, pos, radius, hardness, strength, color);
     }
-    
+
     [ClientRpc]
-    public void RpcShowMissionSuccessText(string text)
+    public void RpcShowMissionSuccessText(int playerID, string text)
     {
         if (!isClientOnly)
             return;
 
-        LobbyController.Instance.ShowMissionSuccessText(text);
+        if (playerID == LobbyController.Instance.LocalPlayerObjectController.playerID)
+            LobbyController.Instance.ShowMissionSuccessText(text);
     }
 }

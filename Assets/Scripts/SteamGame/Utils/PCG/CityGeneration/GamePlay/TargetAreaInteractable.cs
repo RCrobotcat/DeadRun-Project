@@ -69,7 +69,7 @@ public class TargetAreaInteractable : NetworkBehaviour
                     LobbyController.Instance.ShowMissionSuccessText("Required item count reached in target area!");
                 else
                     player.GetComponent<PlayerObjectController>()
-                        .RpcShowMissionSuccessText("Required item count reached in target area!");
+                        .RpcShowMissionSuccessText(player.GetComponent<PlayerObjectController>().playerID,"Required item count reached in target area!");
             }
 
             RpcUpdateProgressText(currentCollectableItemCount);
