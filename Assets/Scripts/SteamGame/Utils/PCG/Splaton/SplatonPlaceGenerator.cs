@@ -66,30 +66,52 @@ public class SplatonPlaceGenerator : Singleton<SplatonPlaceGenerator>
 
     void GenerateSurroundingWalls()
     {
-        for (int x = 0; x < columns; x++)
-        {
-            // 下边界
-            Vector3 posBottom = new Vector3(x * cellSize, 0, -cellSize / 2);
-            Paintable wallBottom = Instantiate(walls[0], posBottom, Quaternion.identity, groundParent);
-            wallBottom.name = $"Wall_Bottom_{x}";
+        // for (int x = 0; x < columns; x++)
+        // {
+        //     // 下边界
+        //     Vector3 posBottom = new Vector3(x * cellSize, 0, -cellSize / 2);
+        //     Paintable wallBottom = Instantiate(walls[0], posBottom, Quaternion.identity, groundParent);
+        //     wallBottom.name = $"Wall_Bottom_{x}";
+        //
+        //     // 上边界
+        //     Vector3 posTop = new Vector3(x * cellSize, 0, (rows - 1) * cellSize + cellSize / 2);
+        //     Paintable wallTop = Instantiate(walls[0], posTop, Quaternion.identity, groundParent);
+        //     wallTop.name = $"Wall_Top_{x}";
+        // }
+        //
+        // for (int y = 0; y < rows; y++)
+        // {
+        //     // 左边界
+        //     Vector3 posLeft = new Vector3(-cellSize / 2, 0, y * cellSize);
+        //     Paintable wallLeft = Instantiate(walls[0], posLeft, Quaternion.identity, groundParent);
+        //     wallLeft.name = $"Wall_Left_{y}";
+        //
+        //     // 右边界
+        //     Vector3 posRight = new Vector3((columns - 1) * cellSize + cellSize / 2, 0, y * cellSize);
+        //     Paintable wallRight = Instantiate(walls[0], posRight, Quaternion.identity, groundParent);
+        //     wallRight.name = $"Wall_Right_{y}";
+        // }
 
-            // 上边界
-            Vector3 posTop = new Vector3(x * cellSize, 0, (rows - 1) * cellSize + cellSize / 2);
-            Paintable wallTop = Instantiate(walls[0], posTop, Quaternion.identity, groundParent);
-            wallTop.name = $"Wall_Top_{x}";
-        }
+        // 下边界
+        Vector3 posBottom = new Vector3((columns * cellSize) / 2 - cellSize / 2, 0, -cellSize / 2 - 2.5f);
+        Paintable wallBottom = Instantiate(walls[0], posBottom, Quaternion.identity, groundParent);
+        wallBottom.name = "Wall_Bottom";
 
-        for (int y = 0; y < rows; y++)
-        {
-            // 左边界
-            Vector3 posLeft = new Vector3(-cellSize / 2, 0, y * cellSize);
-            Paintable wallLeft = Instantiate(walls[0], posLeft, Quaternion.identity, groundParent);
-            wallLeft.name = $"Wall_Left_{y}";
+        // 上边界
+        Vector3 posTop = new Vector3((columns * cellSize) / 2 - cellSize / 2, 0,
+            (rows - 1) * cellSize + cellSize / 2 + 2.5f);
+        Paintable wallTop = Instantiate(walls[0], posTop, Quaternion.identity, groundParent);
+        wallTop.name = "Wall_Top";
 
-            // 右边界
-            Vector3 posRight = new Vector3((columns - 1) * cellSize + cellSize / 2, 0, y * cellSize);
-            Paintable wallRight = Instantiate(walls[0], posRight, Quaternion.identity, groundParent);
-            wallRight.name = $"Wall_Right_{y}";
-        }
+        // 左边界
+        Vector3 posLeft = new Vector3(-cellSize / 2 - 2.5f, 0, (rows * cellSize) / 2 - cellSize / 2);
+        Paintable wallLeft = Instantiate(walls[0], posLeft, Quaternion.Euler(0, 90, 0), groundParent);
+        wallLeft.name = "Wall_Left";
+
+        // 右边界
+        Vector3 posRight = new Vector3((columns - 1) * cellSize + cellSize / 2 + 2.5f, 0,
+            (rows * cellSize) / 2 - cellSize / 2);
+        Paintable wallRight = Instantiate(walls[0], posRight, Quaternion.Euler(0, 90, 0), groundParent);
+        wallRight.name = "Wall_Right";
     }
 }
