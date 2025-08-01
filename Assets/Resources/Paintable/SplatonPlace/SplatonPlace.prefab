@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3928780494178081853}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3116346687375634715
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6970667362172895457}
+  m_Layer: 0
+  m_Name: RespawnPlaceParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6970667362172895457
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3116346687375634715}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3928780494178081853}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3666234276720922180
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,6 +94,7 @@ Transform:
   m_Children:
   - {fileID: 4690529806734089152}
   - {fileID: 7470005266288252760}
+  - {fileID: 6970667362172895457}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &110826103729645658
@@ -86,6 +118,8 @@ MonoBehaviour:
   groundPrefab: {fileID: 5067928274434238353, guid: 1e68658f3828f6f448b5845a07c401da, type: 3}
   walls:
   - {fileID: 7316141821666246004, guid: c98e70c6400b9bc4c88da2c7444abaf6, type: 3}
+  respawnPlaceParent: {fileID: 6970667362172895457}
+  respawnPlacePrefab: {fileID: 3703289299355364190, guid: 0269e1acb8c527440ac4e68d3df2df46, type: 3}
 --- !u!1 &8398097141399239401
 GameObject:
   m_ObjectHideFlags: 0

@@ -109,7 +109,7 @@ public partial class MyNetworkManager : NetworkManager
         NetworkClient.isLoadingScene = false;
         isInTransition = false;
 
-        if (NetworkServer.active && !isNextSceneSet && !CityGroupGenerator.Instance.IsInitial)
+        if (NetworkServer.active && !isNextSceneSet)
         {
             foreach (var player in GamePlayers)
             {

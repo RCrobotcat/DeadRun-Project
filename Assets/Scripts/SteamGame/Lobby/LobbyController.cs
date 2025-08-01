@@ -307,7 +307,11 @@ public partial class LobbyController : Singleton<LobbyController>
     {
         oneVOnePanel.SetActive(true);
         oneVOnePanel.transform.localScale.To(Vector3.one * 1.5f, 2.5f,
-            (a) => { oneVOnePanel.transform.localScale = a; }, () => { oneVOnePanel.SetActive(false); });
+            (a) => { oneVOnePanel.transform.localScale = a; }, () =>
+            {
+                oneVOnePanel.transform.localScale = Vector3.one;
+                oneVOnePanel.SetActive(false);
+            });
     }
 
     [Header("Mission Status Text")] public GameObject missionSuccessPanel;
@@ -317,7 +321,11 @@ public partial class LobbyController : Singleton<LobbyController>
     {
         missionSuccessPanel.SetActive(true);
         missionSuccessPanel.transform.localScale.To(Vector3.one * 1.5f, 2.5f,
-            (a) => { missionSuccessPanel.transform.localScale = a; }, () => { missionSuccessPanel.SetActive(false); });
+            (a) => { missionSuccessPanel.transform.localScale = a; }, () =>
+            {
+                missionSuccessPanel.transform.localScale = Vector3.one;
+                missionSuccessPanel.SetActive(false);
+            });
         missionSuccessPanel.GetComponentInChildren<Text>().text = text;
     }
 
@@ -325,7 +333,11 @@ public partial class LobbyController : Singleton<LobbyController>
     {
         missionFailedPanel.SetActive(true);
         missionFailedPanel.transform.localScale.To(Vector3.one * 1.5f, 2.5f,
-            (a) => { missionFailedPanel.transform.localScale = a; }, () => { missionFailedPanel.SetActive(false); });
+            (a) => { missionFailedPanel.transform.localScale = a; }, () =>
+            {
+                missionFailedPanel.transform.localScale = Vector3.one;
+                missionFailedPanel.SetActive(false);
+            });
         missionFailedPanel.GetComponentInChildren<Text>().text = text;
     }
 

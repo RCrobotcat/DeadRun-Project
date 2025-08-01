@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using CityGenerator;
 using Mirror;
 using Steamworks;
@@ -358,11 +359,12 @@ public partial class PlayerObjectController : NetworkBehaviour
         CameraController.Instance.freeLookCam.Lens.FieldOfView = 70f;
         CameraController.Instance.freeLookCam.Lens.FarClipPlane = 500f;
         //GetComponent<PlayerMovement>().gun.gameObject.SetActive(false);
-        CityGroupGenerator.Instance.InstantGenerating();
+        if (!CityGroupGenerator.Instance.IsInitial)
+            CityGroupGenerator.Instance.InstantGenerating();
     }
 
     [ClientRpc]
-    public void RpcSplatonGenerating()
+    public void RpcSplatonGenerating(string transitionToSceneName)
     {
         if (!isClientOnly)
             return;
@@ -371,7 +373,15 @@ public partial class PlayerObjectController : NetworkBehaviour
         fellCountText.gameObject.SetActive(false);
         CameraController.Instance.freeLookCam.Lens.FieldOfView = 80f;
         CameraController.Instance.freeLookCam.Lens.FarClipPlane = 500f;
-        SplatonPlaceGenerator.Instance.InitializePlace();
+
+        if (SplatonPlaceGenerator.Instance.IsInitialized)
+        {
+            Debug.Log("Splaton place already initialized for player: " + playerID);
+            Transform startPos = GameObject.Find("SpawnPos_Painting").transform;
+            transform.position = startPos.position;
+        }
+        else if (!SplatonPlaceGenerator.Instance.IsInitialized)
+            SplatonPlaceGenerator.Instance.InitializePlace();
     }
 
     [ClientRpc]

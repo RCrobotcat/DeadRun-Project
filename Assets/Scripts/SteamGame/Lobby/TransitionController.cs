@@ -276,6 +276,8 @@ public partial class LobbyController
                 player.GetComponent<PlayerObjectController>()
                     .RpcUpdatePlayerParamsAfterTransition(transitionToSceneName);
 
+            yield return new WaitForSeconds(0.1f);
+
             // Ensure again some settings are applied successfully
             NextSceneSettingsSecondary(transitionToSceneName, player);
         }
@@ -317,7 +319,8 @@ public partial class LobbyController
                 CameraController.Instance.freeLookCam.Lens.FieldOfView = 70f;
                 CameraController.Instance.freeLookCam.Lens.FarClipPlane = 500f;
                 //player.GetComponent<PlayerMovement>().gun.gameObject.SetActive(false);
-                CityGroupGenerator.Instance.InstantGenerating();
+                if (!CityGroupGenerator.Instance.IsInitial)
+                    CityGroupGenerator.Instance.InstantGenerating();
             }
             else
             {
@@ -335,11 +338,12 @@ public partial class LobbyController
                 playerObjectController.fellCountText.gameObject.SetActive(false);
                 CameraController.Instance.freeLookCam.Lens.FieldOfView = 80f;
                 CameraController.Instance.freeLookCam.Lens.FarClipPlane = 500f;
-                SplatonPlaceGenerator.Instance.InitializePlace();
+                if (!SplatonPlaceGenerator.Instance.IsInitialized)
+                    SplatonPlaceGenerator.Instance.InitializePlace();
             }
             else
             {
-                playerObjectController.RpcSplatonGenerating();
+                playerObjectController.RpcSplatonGenerating(transitionToSceneName);
             }
         }
 
@@ -386,10 +390,17 @@ public partial class LobbyController
             {
                 playerMovement.currentEquippedItem = "";
                 playerObjectController.fellCountText.gameObject.SetActive(false);
+
+                if (SplatonPlaceGenerator.Instance.IsInitialized)
+                {
+                    Debug.Log("Host instant generating painting place.");
+                    Transform startPos = GameObject.Find("SpawnPos_Painting").transform;
+                    player.transform.position = startPos.position;
+                }
             }
             else
             {
-                playerObjectController.RpcSetPlayerFellCountUIState(false);
+                playerObjectController.RpcSplatonGenerating(transitionToSceneName);
             }
         }
 
