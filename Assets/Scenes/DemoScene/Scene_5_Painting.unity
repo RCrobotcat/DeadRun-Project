@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: efd1c33efd2d58340b88804268e6833f, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: f531e09e2ad2fb440b4eed7605863143, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -169,6 +169,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d49165fabd419ea0bd05caf1dd7ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   extendsIslandOffset: 1
 --- !u!64 &275340594
 MeshCollider:
@@ -838,6 +841,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d49165fabd419ea0bd05caf1dd7ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   extendsIslandOffset: 1
 --- !u!64 &879885103
 MeshCollider:
@@ -1553,6 +1559,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d49165fabd419ea0bd05caf1dd7ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   extendsIslandOffset: 1
 --- !u!114 &989099453
 MonoBehaviour:
@@ -2361,6 +2370,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d49165fabd419ea0bd05caf1dd7ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   extendsIslandOffset: 1
 --- !u!64 &1460458430
 MeshCollider:
@@ -2875,8 +2887,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 1
-  m_Color: {r: 0.9622642, g: 0.88797987, b: 0.6853863, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.14901961, g: 0.427451, b: 0.8078432, a: 1}
+  m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3596,6 +3608,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d49165fabd419ea0bd05caf1dd7ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   extendsIslandOffset: 1
 --- !u!114 &1759442127
 MonoBehaviour:
@@ -3873,6 +3888,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d49165fabd419ea0bd05caf1dd7ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   extendsIslandOffset: 1
 --- !u!64 &2060308222
 MeshCollider:
@@ -4257,6 +4275,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d49165fabd419ea0bd05caf1dd7ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   extendsIslandOffset: 1
 --- !u!64 &2068636150
 MeshCollider:
