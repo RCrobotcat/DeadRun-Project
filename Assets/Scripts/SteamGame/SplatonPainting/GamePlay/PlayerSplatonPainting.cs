@@ -1,5 +1,4 @@
-﻿using System;
-using Mirror;
+﻿using Mirror;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,7 +6,10 @@ public class PlayerSplatonPainting : NetworkBehaviour
 {
     private PaintingColor paintingColor;
 
-    public Texture2D normalMap;
+    public Shader litShader;
+
+    public float damageInterval = 0.5f;
+    private float damageTimer = 0f;
 
     public PaintingColor SelfPaintingColor
     {
@@ -57,12 +59,9 @@ public class PlayerSplatonPainting : NetworkBehaviour
     {
         paintingParticles.paintColor = color;
 
-        Material particleMaterial = new Material(Shader.Find("Universal Render Pipeline/Particles/Lit"));
-        particleMaterial.SetFloat("_Surface", 1f); // 1 = Transparent
-        particleMaterial.SetFloat("_Smoothness", 0.1f);
-        particleMaterial.SetTexture("_NormalMap", normalMap);
-        particleMaterial.SetFloat("_NormalScale", 0.2f);
-        particleMaterial.color = color;
+        Material particleMaterial = new Material(litShader);
+        particleMaterial.SetFloat("_Smoothness", 0.5f);
+        particleMaterial.SetColor("_BaseColor", color);
 
         mainParticles.GetComponent<ParticleSystemRenderer>().material = particleMaterial;
         mainParticles.GetComponent<ParticleSystemRenderer>().trailMaterial = particleMaterial;
@@ -96,9 +95,32 @@ public class PlayerSplatonPainting : NetworkBehaviour
                 return;
         }
 
+        if (damageTimer > 0)
+            damageTimer -= Time.deltaTime;
+
         int ownerId = CheckPaintedGroundPlayerId();
+        if (ownerId > 0)
+            Debug.Log(ownerId);
         if (GetComponent<PlayerObjectController>().playerID == ownerId)
-            Debug.Log("Painted player: " + ownerId);
+        {
+            GetComponent<PlayerMovement>().moveSpeed = 8;
+        }
+        else
+        {
+            GetComponent<PlayerMovement>().moveSpeed = 5f;
+            if (damageTimer <= 0)
+            {
+                if (ownerId > 0)
+                {
+                    if (NetworkServer.active)
+                        GetComponent<PlayerMovement>().AttackPlayerRpc();
+                    else
+                        GetComponent<PlayerMovement>().AttackPlayerCmd();
+
+                    damageTimer = damageInterval;
+                }
+            }
+        }
     }
 
     const float rayHeight = 0.1f;

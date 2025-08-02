@@ -7,10 +7,6 @@
     }
     SubShader
     {
-        Tags
-        {
-            "RenderType"="Opaque"
-        }
         Pass
         {
             ZWrite Off
@@ -45,10 +41,15 @@
 
             fixed4 frag(v2f i) : SV_Target
             {
-                float m = (tex2D(_MainTex, i.uv).r + tex2D(_MainTex, i.uv).g + tex2D(_MainTex, i.uv).b) / 3.0;
-                if (m < 0.01) return fixed4(0, 0, 0, 1); // 未喷涂区域 → ID = 0
+                float3 maskCol = tex2D(_MainTex, i.uv).rgb;
+                float m = max(max(maskCol.r, maskCol.g), maskCol.b);
 
-                float idNorm = _OwnerID / 255.0; // 归一化玩家 ID
+                if (m < 0.1)
+                {
+                    return fixed4(0, 0, 0, 0);
+                }
+                
+                float idNorm = _OwnerID / 255.0; // normalize owner ID to [0, 1]
                 return fixed4(idNorm, 0, 0, 1);
             }
             ENDCG

@@ -173,7 +173,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   extendsIslandOffset: 1
-  ownerMaterial: {fileID: 0}
 --- !u!64 &275340594
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -553,6 +552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texturePaint: {fileID: 4800000, guid: 62ceff0291384a10a395a5a00bb68e83, type: 3}
   extendIslands: {fileID: 4800000, guid: baf67c9218934626936ca47bea7fba54, type: 3}
+  ownerShader: {fileID: 4800000, guid: e5b34b4c457542c7b5bf672c2e50e090, type: 3}
 --- !u!43 &479387965
 Mesh:
   m_ObjectHideFlags: 0
@@ -846,7 +846,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   extendsIslandOffset: 1
-  ownerMaterial: {fileID: 0}
 --- !u!64 &879885103
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1565,7 +1564,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   extendsIslandOffset: 1
-  ownerMaterial: {fileID: 0}
 --- !u!114 &989099453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2300,6 +2298,51 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1386321197
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1386321198}
+  - component: {fileID: 1386321199}
+  m_Layer: 0
+  m_Name: Debug
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1386321198
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386321197}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1386321199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386321197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0ff97a8e14b405590e630311cbbdd62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  paintable: {fileID: 0}
 --- !u!1 &1408032862
 GameObject:
   m_ObjectHideFlags: 0
@@ -2377,7 +2420,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   extendsIslandOffset: 1
-  ownerMaterial: {fileID: 0}
 --- !u!64 &1460458430
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3616,7 +3658,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   extendsIslandOffset: 1
-  ownerMaterial: {fileID: 0}
 --- !u!114 &1759442127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3897,7 +3938,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   extendsIslandOffset: 1
-  ownerMaterial: {fileID: 0}
 --- !u!64 &2060308222
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4285,7 +4325,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   extendsIslandOffset: 1
-  ownerMaterial: {fileID: 0}
 --- !u!64 &2068636150
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4632,3 +4671,4 @@ SceneRoots:
   - {fileID: 993374067}
   - {fileID: 1674252281}
   - {fileID: 1408032863}
+  - {fileID: 1386321198}

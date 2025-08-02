@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 namespace RCrobotcat_Water_Plane
 {
@@ -27,6 +29,17 @@ namespace RCrobotcat_Water_Plane
 
         private void Update()
         {
+            if (NetworkServer.active)
+            {
+                if (LobbyController.Instance.localPlayerObject.gameObject.scene.name != "Scene_3_1v1")
+                    return;
+            }
+            else
+            {
+                if(!SceneManager.GetSceneByName("Scene_3_1v1").isLoaded)
+                    return;
+            }
+
             InitializeReflectionCamera();
 
             var normal = GetReflectionNormal();

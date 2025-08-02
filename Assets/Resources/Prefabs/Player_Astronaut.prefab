@@ -1943,7 +1943,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77cf439b2ec742a2abbed212fa54dad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalMap: {fileID: 2800000, guid: 35add2fc28f438c4da2c9a3a720ac55e, type: 3}
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  litShader: {fileID: 4800000, guid: e4a9a5904b8bd534e92266bd78f93f97, type: 3}
+  damageInterval: 0.5
   paintingParticles: {fileID: 235877434484659294}
   mainParticles: {fileID: 235877434533918513}
   splashParticles: {fileID: 235877434643999434}
