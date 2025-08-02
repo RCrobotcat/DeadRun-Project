@@ -12,6 +12,9 @@ public class Paintable : NetworkBehaviour
     RenderTexture maskRenderTexture;
     RenderTexture supportTexture;
 
+    [Header("Owner Texture")] RenderTexture ownerTexture; // R8 格式，只存 ID
+    public Material ownerMaterial;
+
     Renderer rend;
 
     int maskTextureID = Shader.PropertyToID("_MaskTexture");
@@ -21,6 +24,8 @@ public class Paintable : NetworkBehaviour
     public RenderTexture getExtend() => extendIslandsRenderTexture;
     public RenderTexture getSupport() => supportTexture;
     public Renderer getRenderer() => rend;
+
+    public RenderTexture getOwnerTexture() => ownerTexture;
 
     void Start()
     {
@@ -36,6 +41,15 @@ public class Paintable : NetworkBehaviour
         supportTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0);
         supportTexture.filterMode = FilterMode.Bilinear;
 
+        ownerTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0,
+            RenderTextureFormat.R8, RenderTextureReadWrite.Linear)
+        {
+            filterMode = FilterMode.Bilinear,
+            wrapMode = TextureWrapMode.Clamp
+        };
+        ownerTexture.Create();
+        ownerMaterial = new Material(Shader.Find("Painting/OwnerIdPainter"));
+
         rend = GetComponent<Renderer>();
         rend.material.SetTexture(maskTextureID, extendIslandsRenderTexture);
 
@@ -50,5 +64,6 @@ public class Paintable : NetworkBehaviour
         uvIslandsRenderTexture.Release();
         extendIslandsRenderTexture.Release();
         supportTexture.Release();
+        ownerTexture.Release();
     }
 }

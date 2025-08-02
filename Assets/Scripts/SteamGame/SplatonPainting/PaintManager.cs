@@ -40,13 +40,23 @@ public class PaintManager : Singleton<PaintManager>
         RenderTexture support = paintable.getSupport();
         Renderer rend = paintable.getRenderer();
 
-        command.SetRenderTarget(mask);
-        command.SetRenderTarget(extend);
-        command.SetRenderTarget(support);
+        RenderTexture owner = paintable.getOwnerTexture();
 
         paintMaterial.SetFloat(prepareUVID, 1);
         command.SetRenderTarget(uvIslands);
         command.DrawRenderer(rend, paintMaterial, 0);
+
+        command.SetRenderTarget(mask);
+        command.ClearRenderTarget(false, true, Color.clear);
+
+        command.SetRenderTarget(support);
+        command.ClearRenderTarget(false, true, Color.clear);
+
+        command.SetRenderTarget(extend);
+        command.ClearRenderTarget(false, true, Color.clear);
+
+        command.SetRenderTarget(owner);
+        command.ClearRenderTarget(false, true, Color.clear);
 
         Graphics.ExecuteCommandBuffer(command);
         command.Clear();
@@ -54,7 +64,7 @@ public class PaintManager : Singleton<PaintManager>
 
 
     public void paint(Paintable paintable, Vector3 pos, float radius = 1f, float hardness = .5f, float strength = .5f,
-        Color? color = null)
+        Color? color = null, int currentPlayerID = -1)
     {
         RenderTexture mask = paintable.getMask();
         RenderTexture uvIslands = paintable.getUVIslands();
@@ -62,6 +72,9 @@ public class PaintManager : Singleton<PaintManager>
         RenderTexture support = paintable.getSupport();
         Renderer rend = paintable.getRenderer();
 
+        RenderTexture owner = paintable.getOwnerTexture();
+
+        // paint
         paintMaterial.SetFloat(prepareUVID, 0);
         paintMaterial.SetVector(positionID, pos);
         paintMaterial.SetFloat(hardnessID, hardness);
@@ -69,6 +82,8 @@ public class PaintManager : Singleton<PaintManager>
         paintMaterial.SetFloat(radiusID, radius);
         paintMaterial.SetTexture(textureID, support);
         paintMaterial.SetColor(colorID, color ?? Color.red);
+
+        // extend islands
         extendMaterial.SetFloat(uvOffsetID, paintable.extendsIslandOffset);
         extendMaterial.SetTexture(uvIslandsID, uvIslands);
 
@@ -80,6 +95,13 @@ public class PaintManager : Singleton<PaintManager>
 
         command.SetRenderTarget(extend);
         command.Blit(mask, extend, extendMaterial);
+
+        // owner
+        paintable.ownerMaterial.SetFloat("_OwnerID", currentPlayerID);
+        // 让它采样 mask（主贴图），只在 mask 区域写 ID
+        command.SetGlobalTexture("_MainTex", mask);
+        command.SetRenderTarget(owner);
+        command.Blit(mask, owner, paintable.ownerMaterial);
 
         Graphics.ExecuteCommandBuffer(command);
         command.Clear();

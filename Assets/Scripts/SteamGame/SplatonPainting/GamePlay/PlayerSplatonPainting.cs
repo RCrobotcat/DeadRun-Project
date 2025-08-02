@@ -1,6 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using Mirror;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class PlayerSplatonPainting : MonoBehaviour
+public class PlayerSplatonPainting : NetworkBehaviour
 {
     private PaintingColor paintingColor;
 
@@ -73,5 +76,96 @@ public class PlayerSplatonPainting : MonoBehaviour
         shootEffectParticles.GetComponent<ParticleSystemRenderer>().trailMaterial = particleMaterial;
 
         collisionParticles.GetComponent<ParticleSystemRenderer>().material = particleMaterial;
+    }
+
+    private void Start()
+    {
+        _reader = new Texture2D(1, 1, TextureFormat.RGBA32, false);
+    }
+
+    private void Update()
+    {
+        if (NetworkServer.active)
+        {
+            if (gameObject.scene.name != "Scene_5_Painting")
+                return;
+        }
+        else
+        {
+            if (!SceneManager.GetSceneByName("Scene_5_Painting").isLoaded)
+                return;
+        }
+
+        int ownerId = CheckPaintedGroundPlayerId();
+        if (GetComponent<PlayerObjectController>().playerID == ownerId)
+            Debug.Log("Painted player: " + ownerId);
+    }
+
+    const float rayHeight = 0.1f;
+    const float rayDistance = 1;
+
+    Texture2D _reader;
+
+    int CheckPaintedGroundPlayerId()
+    {
+        Vector3 origin = transform.position + Vector3.up * rayHeight;
+        Ray ray = new Ray(origin, Vector3.down);
+
+        LayerMask paintableMask = LayerMask.GetMask("Ground") | LayerMask.GetMask("Default");
+
+        if (isServer)
+        {
+            PhysicsScene physicsScene = gameObject.scene.GetPhysicsScene();
+            if (physicsScene.Raycast(ray.origin, ray.direction, out RaycastHit hit, rayDistance, paintableMask))
+            {
+                var paintable = hit.collider.GetComponent<Paintable>();
+                if (paintable != null)
+                {
+                    Vector2 uv = hit.textureCoord; // get uv
+
+                    return SampleOwnerID(paintable.getOwnerTexture(), uv);
+                }
+            }
+        }
+        else
+        {
+            if (Physics.Raycast(ray, out RaycastHit hit, rayDistance, paintableMask))
+            {
+                var paintable = hit.collider.GetComponent<Paintable>();
+                if (paintable != null)
+                {
+                    Vector2 uv = hit.textureCoord; // get uv
+
+                    return SampleOwnerID(paintable.getOwnerTexture(), uv);
+                }
+            }
+        }
+
+        return 0;
+    }
+
+    int SampleOwnerID(RenderTexture rt, Vector2 uv)
+    {
+        RenderTexture prev = RenderTexture.active;
+        RenderTexture.active = rt;
+
+        int x = Mathf.Clamp(Mathf.FloorToInt(uv.x * rt.width), 0, rt.width - 1);
+        int y = Mathf.Clamp(Mathf.FloorToInt(uv.y * rt.height), 0, rt.height - 1);
+
+        // read 1x1 pixel
+        _reader.ReadPixels(new Rect(x, y, 1, 1), 0, 0);
+        _reader.Apply();
+
+        RenderTexture.active = prev; // recover
+
+        float idNorm = _reader.GetPixel(0, 0).r;
+        return Mathf.RoundToInt(idNorm * 255f);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Vector3 origin = transform.position + Vector3.up * rayHeight;
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(origin, origin + Vector3.down * rayDistance);
     }
 }

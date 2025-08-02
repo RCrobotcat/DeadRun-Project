@@ -15,6 +15,8 @@ public class ParticlesController : MonoBehaviour
     [Space] ParticleSystem part;
     List<ParticleCollisionEvent> collisionEvents;
 
+    public float paintAreas = 0;
+
     void Start()
     {
         part = GetComponent<ParticleSystem>();
@@ -38,24 +40,26 @@ public class ParticlesController : MonoBehaviour
             {
                 Vector3 pos = collisionEvents[i].intersection;
                 float radius = Random.Range(minRadius, maxRadius);
-                PaintManager.Instance.paint(p, pos, radius, hardness, strength, paintColor);
+                PaintManager.Instance.paint(p, pos, radius, hardness, strength, paintColor, player.playerID);
 
-                SyncPaint(p, pos, radius, hardness, strength, paintColor);
+                paintAreas += radius * 0.01f;
+
+                SyncPaint(p, pos, radius, hardness, strength, paintColor, player.playerID);
             }
         }
     }
 
-    void SyncPaint(Paintable paintable, Vector3 pos, float radius = 1f, float hardness = .5f, float strength = .5f,
-        Color? color = null)
+    void SyncPaint(Paintable paintable, Vector3 pos, float radius, float hardness, float strength,
+        Color color, int playerId)
     {
         int paintableId = PaintablesManager.Instance.GetPaintableID(paintable);
         if (NetworkServer.active)
         {
-            player.RpcSyncPaint(paintableId, pos, radius, hardness, strength, color ?? paintColor);
+            player.RpcSyncPaint(paintableId, pos, radius, hardness, strength, color, playerId);
         }
         else
         {
-            player.CmdSyncPaint(paintableId, pos, radius, hardness, strength, color ?? paintColor);
+            player.CmdSyncPaint(paintableId, pos, radius, hardness, strength, color, playerId);
         }
     }
 }

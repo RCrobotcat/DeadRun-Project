@@ -421,20 +421,21 @@ public partial class PlayerObjectController : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RpcSyncPaint(int id, Vector3 pos, float radius, float hardness, float strength, Color color)
+    public void RpcSyncPaint(int id, Vector3 pos, float radius, float hardness, float strength, Color color,
+        int paintPlayerId)
     {
         if (!isClientOnly) return;
 
         Paintable paintable = PaintablesManager.Instance.GetPaintableByID(id);
-        PaintManager.Instance.paint(paintable, pos, radius, hardness, strength, color);
+        PaintManager.Instance.paint(paintable, pos, radius, hardness, strength, color, paintPlayerId);
     }
 
     [Command(requiresAuthority = false)]
     public void CmdSyncPaint(int id, Vector3 pos, float radius, float hardness, float strength,
-        Color color)
+        Color color, int paintPlayerId)
     {
         Paintable paintable = PaintablesManager.Instance.GetPaintableByID(id);
-        PaintManager.Instance.paint(paintable, pos, radius, hardness, strength, color);
+        PaintManager.Instance.paint(paintable, pos, radius, hardness, strength, color, paintPlayerId);
     }
 
     [ClientRpc]

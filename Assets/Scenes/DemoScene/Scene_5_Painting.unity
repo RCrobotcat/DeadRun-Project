@@ -173,6 +173,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   extendsIslandOffset: 1
+  ownerMaterial: {fileID: 0}
 --- !u!64 &275340594
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -845,6 +846,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   extendsIslandOffset: 1
+  ownerMaterial: {fileID: 0}
 --- !u!64 &879885103
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1563,6 +1565,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   extendsIslandOffset: 1
+  ownerMaterial: {fileID: 0}
 --- !u!114 &989099453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2374,6 +2377,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   extendsIslandOffset: 1
+  ownerMaterial: {fileID: 0}
 --- !u!64 &1460458430
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3612,6 +3616,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   extendsIslandOffset: 1
+  ownerMaterial: {fileID: 0}
 --- !u!114 &1759442127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3892,6 +3897,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   extendsIslandOffset: 1
+  ownerMaterial: {fileID: 0}
 --- !u!64 &2060308222
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4279,6 +4285,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   extendsIslandOffset: 1
+  ownerMaterial: {fileID: 0}
 --- !u!64 &2068636150
 MeshCollider:
   m_ObjectHideFlags: 0

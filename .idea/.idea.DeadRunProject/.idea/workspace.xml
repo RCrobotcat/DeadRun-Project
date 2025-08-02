@@ -5,18 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7061f1fe-81be-4fca-999e-11768f455133" name="Changes" comment="added color assignment logic">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/SplatonPainting/GamePlay.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/SplatonPainting/GamePlay/PlayerSplatonPainting.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/SplatonPainting/GamePlay/PlayerSplatonPainting.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/SplatonPainting/GamePlay/Debug.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/SplatonPainting/GamePlay/Debug/OwnerDebugGUI.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/SplatonPainting/GamePlay/Debug/OwnerDebugGUI.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/SplatonPainting/Shaders/ownerIdPainter.shader" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/SplatonPainting/Shaders/ownerIdPainter.shader.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AssetPacks/SkySeries Freebie/ExampleScenes/SceneObjects/2_10.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AssetPacks/SkySeries Freebie/ExampleScenes/SceneObjects/2_10.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/MetaballShaders/MetaEffect.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/MetaballShaders/MetaEffect.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Paintable/Materials/ParticleMaterial 1.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Paintable/Materials/ParticleMaterial 1.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player_Astronaut.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player_Astronaut.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/DemoScene/Scene_5_Painting.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DemoScene/Scene_5_Painting.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Escaper/PlayerObjectController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Escaper/PlayerObjectController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Lobby/TransitionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Lobby/TransitionController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/PCG/Splaton/SpawnPosPainting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/PCG/Splaton/SpawnPosPainting.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/PCG/Splaton/SplatonPlaceGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/PCG/Splaton/SplatonPlaceGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/SplatonPainting/GamePlay/PlayerSplatonPainting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/SplatonPainting/GamePlay/PlayerSplatonPainting.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/SplatonPainting/PaintManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/SplatonPainting/PaintManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/SplatonPainting/Paintable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/SplatonPainting/Paintable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/SplatonPainting/ParticleController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/SplatonPainting/ParticleController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Settings/PC_Renderer.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/PC_Renderer.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,16 +59,19 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0900e0d4bb644dafbfd59eb7fd222a681ddc00/02/e7a2cb8f/SceneManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0900e0d4bb644dafbfd59eb7fd222a681ddc00/1d/adf86658/FilterMode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0900e0d4bb644dafbfd59eb7fd222a681ddc00/35/8697b773/GameObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0900e0d4bb644dafbfd59eb7fd222a681ddc00/53/6d321624/LayerMask.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0900e0d4bb644dafbfd59eb7fd222a681ddc00/74/715d4955/Object.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0900e0d4bb644dafbfd59eb7fd222a681ddc00/8b/3d0fc938/SetupCoroutine.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0900e0d4bb644dafbfd59eb7fd222a681ddc00/96/ad8f855b/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0900e0d4bb644dafbfd59eb7fd222a681ddc00/cf/098e7c97/CommandBuffer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/263d51d6d05c4dfd887995e84080bc2f28000/69/25eb41b4/ParticleSystem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6524f18ff747462d8847618bfcedbe402ac00/59/324ce4f5/QueryTriggerInteraction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c34cbf4d96f64646aa2dfafcf26806e318600/73/f9623f4e/AudioSource.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ed969b0e627d471da4848289f9c322df46ae00/55/8b89858c/ThrowHelper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/SteamGame/CreatureSystem/AIActor/AIActor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/SteamGame/SplatonPainting/GamePlay/Debug/OwnerDebugGUI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/EventSystemController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/PCG/SeamlessNoiseGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/PCG/TerrainGeneration.cs" root0="FORCE_HIGHLIGHTING" />
@@ -207,7 +211,8 @@
       <workItem from="1753883256630" duration="1622000" />
       <workItem from="1753887138121" duration="1378000" />
       <workItem from="1754062347661" duration="3294000" />
-      <workItem from="1754118501840" duration="10855000" />
+      <workItem from="1754118501840" duration="12780000" />
+      <workItem from="1754132128985" duration="6861000" />
     </task>
     <task id="LOCAL-00001" summary="fixed exit lobby bugs">
       <option name="closed" value="true" />
@@ -385,7 +390,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754121828656</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="added color assignment logic">
+      <option name="closed" value="true" />
+      <created>1754130075787</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1754130075787</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5095ad5a23da49a488fae2672c0ba79c, type: 3}
   m_Name: MaterialToLayerRenderFeature
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   m_RenderQueueRange: 0
   m_LayerMask:
     serializedVersion: 2
