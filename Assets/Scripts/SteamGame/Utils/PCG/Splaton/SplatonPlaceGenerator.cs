@@ -205,11 +205,14 @@ public class SplatonPlaceGenerator : Singleton<SplatonPlaceGenerator>
                 if (usedAreas.Count == MyNetworkManager.GamePlayers.Count)
                 {
                     var shuffledPlayers = MyNetworkManager.GamePlayers.OrderBy(_ => Random.value).ToList();
+                    var shuffledColors = System.Enum.GetValues(typeof(PaintingColor)).Cast<PaintingColor>()
+                        .OrderBy(_ => Random.value).ToList();
                     for (int i = 0; i < respawnPlaces.Count && i < shuffledPlayers.Count; i++)
                     {
                         if (respawnPlaces[i].spawnedPlayerID == -1)
                         {
                             respawnPlaces[i].spawnedPlayerID = shuffledPlayers[i].playerID;
+                            respawnPlaces[i].paintingColor = shuffledColors[i % shuffledColors.Count];
                         }
                     }
 

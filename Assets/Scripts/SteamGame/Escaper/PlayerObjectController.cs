@@ -401,6 +401,7 @@ public partial class PlayerObjectController : NetworkBehaviour
                 if (pos.spawnedPlayerID == playerID)
                 {
                     transform.position = pos.transform.position;
+                    GetComponent<PlayerSplatonPainting>().SelfPaintingColor = pos.paintingColor;
                     break;
                 }
             }

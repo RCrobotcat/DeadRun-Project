@@ -1660,6 +1660,7 @@ GameObject:
   - component: {fileID: 6079483899543180120}
   - component: {fileID: 7548509304880714756}
   - component: {fileID: 3372605269492794854}
+  - component: {fileID: 7932739432224908560}
   m_Layer: 9
   m_Name: Player_Astronaut
   m_TagString: Untagged
@@ -1930,6 +1931,25 @@ MonoBehaviour:
   jetpackSmokeParent: {fileID: 4204403811488950149}
   jetpackUIPanel: {fileID: 6804565946597318538}
   fuelBarImage: {fileID: 4139088436409373620}
+--- !u!114 &7932739432224908560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9019578353437237485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77cf439b2ec742a2abbed212fa54dad2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalMap: {fileID: 2800000, guid: 35add2fc28f438c4da2c9a3a720ac55e, type: 3}
+  paintingParticles: {fileID: 235877434484659294}
+  mainParticles: {fileID: 235877434533918513}
+  splashParticles: {fileID: 235877434643999434}
+  subEmitter0: {fileID: 235877433108931315}
+  shootEffectParticles: {fileID: 235877434115878411}
+  collisionParticles: {fileID: 235877434484659280}
 --- !u!1001 &1971487635102530812
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2332,11 +2352,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7437337088918576540, guid: a4a7bc883c75ead40b83bb31e7a1998f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: 1.005
       objectReference: {fileID: 0}
     - target: {fileID: 7437337088918576540, guid: a4a7bc883c75ead40b83bb31e7a1998f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.311
+      value: -0.081
       objectReference: {fileID: 0}
     - target: {fileID: 7437337088918576540, guid: a4a7bc883c75ead40b83bb31e7a1998f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2375,6 +2395,32 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4a7bc883c75ead40b83bb31e7a1998f, type: 3}
+--- !u!198 &235877433108931315 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7437337086894941090, guid: a4a7bc883c75ead40b83bb31e7a1998f, type: 3}
+  m_PrefabInstance: {fileID: 7237491221622096209}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &235877434115878411 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7437337088431419226, guid: a4a7bc883c75ead40b83bb31e7a1998f, type: 3}
+  m_PrefabInstance: {fileID: 7237491221622096209}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &235877434484659280 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7437337088807539969, guid: a4a7bc883c75ead40b83bb31e7a1998f, type: 3}
+  m_PrefabInstance: {fileID: 7237491221622096209}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &235877434484659294 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7437337088807539983, guid: a4a7bc883c75ead40b83bb31e7a1998f, type: 3}
+  m_PrefabInstance: {fileID: 7237491221622096209}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57caa52cbfd04313ad00d4203431858e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &235877434533918513 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 7437337088823375456, guid: a4a7bc883c75ead40b83bb31e7a1998f, type: 3}
@@ -2383,5 +2429,10 @@ ParticleSystem:
 --- !u!4 &235877434570792141 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7437337088918576540, guid: a4a7bc883c75ead40b83bb31e7a1998f, type: 3}
+  m_PrefabInstance: {fileID: 7237491221622096209}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &235877434643999434 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7437337088983788443, guid: a4a7bc883c75ead40b83bb31e7a1998f, type: 3}
   m_PrefabInstance: {fileID: 7237491221622096209}
   m_PrefabAsset: {fileID: 0}

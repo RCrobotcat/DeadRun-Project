@@ -400,6 +400,7 @@ public partial class LobbyController
                         if (pos.spawnedPlayerID == playerObjectController.playerID)
                         {
                             player.transform.position = pos.transform.position;
+                            player.GetComponent<PlayerSplatonPainting>().SelfPaintingColor = pos.paintingColor;
                             break;
                         }
                     }

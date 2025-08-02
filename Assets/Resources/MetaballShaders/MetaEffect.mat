@@ -37,10 +37,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Body_Threeshold: 0.485
-    - _Min_Alpha_Threesold: 0.1
+    - _Body_Threeshold: 0.305
+    - _Min_Alpha_Threesold: 0.069
     m_Colors:
-    - _Body_Color: {r: 0.22352937, g: 0.58431375, b: 0.8509804, a: 1}
-    - _Border_Color: {r: 0.22352941, g: 0.58431375, b: 0.8509804, a: 1}
+    - _Body_Color: {r: 0.7137255, g: 0.60784316, b: 0.7647059, a: 0.19607843}
+    - _Border_Color: {r: 0.7131944, g: 0.60915804, b: 0.764151, a: 0.19607843}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
