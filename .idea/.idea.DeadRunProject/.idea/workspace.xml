@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7061f1fe-81be-4fca-999e-11768f455133" name="Changes" comment="modified level 1 plane displacement logic">
+    <list default="true" id="7061f1fe-81be-4fca-999e-11768f455133" name="Changes" comment="optimized ui, added player name ui">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player_Astronaut.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player_Astronaut.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Traps/PlaneRotationTrap/PlaneRotationTrapController.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Traps/PlaneRotationTrap/PlaneRotationTrapController.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/DemoScene/Scene_1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DemoScene/Scene_1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Escaper/PlayerObjectController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Escaper/PlayerObjectController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/UIFaceCamera.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/UIFaceCamera.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,13 +133,15 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="72068">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="72068" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list />
+        <list>
+          <MonoRuntime />
+        </list>
       </option>
       <option name="selectedOptions">
         <list />
@@ -193,6 +201,7 @@
       <workItem from="1753883256630" duration="1622000" />
       <workItem from="1753887138121" duration="1378000" />
       <workItem from="1754062347661" duration="3294000" />
+      <workItem from="1754118501840" duration="3175000" />
     </task>
     <task id="LOCAL-00001" summary="fixed exit lobby bugs">
       <option name="closed" value="true" />
@@ -354,7 +363,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754064837385</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="optimized ui and postprocessing">
+      <option name="closed" value="true" />
+      <created>1754118602130</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1754118602130</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -410,6 +427,8 @@
     <MESSAGE value="Fixed health bugs and transition bugs" />
     <MESSAGE value="Added level 1 plane displacement logic" />
     <MESSAGE value="modified level 1 plane displacement logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="modified level 1 plane displacement logic" />
+    <MESSAGE value="optimized ui and postprocessing" />
+    <MESSAGE value="optimized ui, added player name ui" />
+    <option name="LAST_COMMIT_MESSAGE" value="optimized ui, added player name ui" />
   </component>
 </project>

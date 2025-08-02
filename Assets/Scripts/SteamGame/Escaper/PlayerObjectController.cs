@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using CityGenerator;
 using Mirror;
 using Steamworks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum PlayerRole
 {
@@ -30,6 +30,9 @@ public partial class PlayerObjectController : NetworkBehaviour
     private MyNetworkManager _myNetworkManager;
 
     public Animator animator;
+
+    public GameObject floatingUIPanel;
+    public Text playerNameText;
 
     private MyNetworkManager MyNetworkManager
     {
@@ -195,6 +198,20 @@ public partial class PlayerObjectController : NetworkBehaviour
 
     public void UpdateImportantParams()
     {
+        if (playerID == LobbyController.Instance.LocalPlayerObjectController.playerID)
+        {
+            if (floatingUIPanel.activeSelf)
+                floatingUIPanel.SetActive(false);
+        }
+        else
+        {
+            if (!floatingUIPanel.activeSelf)
+                floatingUIPanel.SetActive(true);
+        }
+
+        if (playerNameText.text != playerName)
+            playerNameText.text = playerName;
+
         if (SceneManager.GetSceneByName("PersistentScene").isLoaded)
         {
             if (SceneManager.GetSceneByName("Scene_1").isLoaded
