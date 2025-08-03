@@ -20,6 +20,8 @@ public class TargetAreaInteractable : NetworkBehaviour
 
     public Text progressText;
 
+    public GameObject flag;
+
     private void Start()
     {
         itemsManager = FindObjectOfType<ItemsManager>();
@@ -47,7 +49,11 @@ public class TargetAreaInteractable : NetworkBehaviour
         if (possessivePlayerId != LobbyController.Instance.LocalPlayerObjectController.playerID)
         {
             if (gameObject.layer == LayerMask.NameToLayer("Interactable"))
+            {
                 gameObject.layer = LayerMask.NameToLayer("Default");
+                foreach (Transform child in flag.transform)
+                    child.gameObject.layer = LayerMask.NameToLayer("Default");
+            }
         }
     }
 
@@ -69,7 +75,8 @@ public class TargetAreaInteractable : NetworkBehaviour
                     LobbyController.Instance.ShowMissionSuccessText("Required item count reached in target area!");
                 else
                     player.GetComponent<PlayerObjectController>()
-                        .RpcShowMissionSuccessText(player.GetComponent<PlayerObjectController>().playerID,"Required item count reached in target area!");
+                        .RpcShowMissionSuccessText(player.GetComponent<PlayerObjectController>().playerID,
+                            "Required item count reached in target area!");
             }
 
             RpcUpdateProgressText(currentCollectableItemCount);

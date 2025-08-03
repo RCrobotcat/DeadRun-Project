@@ -13,6 +13,8 @@ public class InteractiveObject : NetworkBehaviour
     public Material[] originalMaterials; // 原始材质列表
     public Material[] materialsWithOutline; // 包含 Outline 的材质列表
 
+    Camera camera;
+
     private void Awake()
     {
         if (string.IsNullOrEmpty(Io_name))
@@ -66,11 +68,16 @@ public class InteractiveObject : NetworkBehaviour
         if (isServer)
         {
             PhysicsScene physicsScene = gameObject.scene.GetPhysicsScene();
-            if (Camera.main == null)
-                return;
+            if (camera == null)
+            {
+                if (FindObjectOfType<TrapperCameraMovement>() != null)
+                    camera = FindObjectOfType<TrapperCameraMovement>().GetComponent<Camera>();
+                else
+                    camera = Camera.main;
+            }
 
             //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Ray ray = Camera.main.ScreenPointToRay(InteractionManager.Instance.crosshair.position);
+            Ray ray = camera.ScreenPointToRay(InteractionManager.Instance.crosshair.position);
 
             RaycastHit hit;
             float maxDistance = 100f;
