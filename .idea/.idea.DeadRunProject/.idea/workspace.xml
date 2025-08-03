@@ -4,28 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7061f1fe-81be-4fca-999e-11768f455133" name="Changes" comment="Added scifi table">
+    <list default="true" id="7061f1fe-81be-4fca-999e-11768f455133" name="Changes" comment="modified shaders and materials">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AssetPacks/Reversed Interactive/The Portal Collection/Textures/wuze85y2.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AssetPacks/Reversed Interactive/The Portal Collection/Textures/wuze85y2.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AssetPacks/SkySeries Freebie/AmbienceExposure.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AssetPacks/SkySeries Freebie/AmbienceExposure.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Examples/AdditiveLevels/Materials/Portal.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Examples/AdditiveLevels/Materials/Portal.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Materials/PlaneMat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Materials/PlaneMat.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Materials/Road/Dirt.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Materials/Road/Dirt.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Materials/Road/MainRoad.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Materials/Road/MainRoad.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Materials/Road/MajorRoad.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Materials/Road/MajorRoad.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/City/City Component/Building/Modular Buildings/Materials/Brick.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/City/City Component/Building/Modular Buildings/Materials/Brick.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/City/City Component/Building/Modular Buildings/Materials/Dark_brick.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/City/City Component/Building/Modular Buildings/Materials/Dark_brick.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/City/City Component/Building/Modular Buildings/Materials/FrontColor.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/City/City Component/Building/Modular Buildings/Materials/FrontColor.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/City/City Component/Building/Modular Buildings/Materials/Glass.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/City/City Component/Building/Modular Buildings/Materials/Glass.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/City/City Component/Building/Modular Buildings/Materials/Roof.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/City/City Component/Building/Modular Buildings/Materials/Roof.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/City/TargetArea.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/City/TargetArea.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Traps/PlaneRotationTrap/EndPlane.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Traps/PlaneRotationTrap/EndPlane.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Traps/PlaneRotationTrap/PlaneCubeToRotate.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Traps/PlaneRotationTrap/PlaneCubeToRotate.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Traps/PlaneRotationTrap/TargetCyberTable.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Traps/PlaneRotationTrap/TargetCyberTable.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Traps/PlaneRotationTrap/TargetCyberTable.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Traps/PlaneRotationTrap/TargetCyberTable.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/DemoScene/Scene_2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DemoScene/Scene_2.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestScene/PaintableTestScene/Global Volume Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestScene/PaintableTestScene/Global Volume Profile.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestScene/TestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestScene/TestScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/SoundController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/SoundController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -221,7 +202,7 @@
       <workItem from="1754062347661" duration="3294000" />
       <workItem from="1754118501840" duration="12780000" />
       <workItem from="1754132128985" duration="33859000" />
-      <workItem from="1754207259535" duration="6138000" />
+      <workItem from="1754207259535" duration="7652000" />
     </task>
     <task id="LOCAL-00001" summary="fixed exit lobby bugs">
       <option name="closed" value="true" />
@@ -447,7 +428,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754212242545</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="modified shaders and materials">
+      <option name="closed" value="true" />
+      <created>1754226793467</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1754226793467</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -485,8 +474,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed exit lobby bugs" />
-    <MESSAGE value="Added trapper and escaper logic" />
     <MESSAGE value="Added player ingame quit logic" />
     <MESSAGE value="Fixed bugs" />
     <MESSAGE value="Added plane PCG logic" />
@@ -510,6 +497,8 @@
     <MESSAGE value="fixed player detect colors bugs" />
     <MESSAGE value="added scfi collection" />
     <MESSAGE value="Added scifi table" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added scifi table" />
+    <MESSAGE value="modifed shaders and materials" />
+    <MESSAGE value="modified shaders and materials" />
+    <option name="LAST_COMMIT_MESSAGE" value="modified shaders and materials" />
   </component>
 </project>
