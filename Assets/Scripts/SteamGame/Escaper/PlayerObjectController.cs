@@ -27,13 +27,14 @@ public partial class PlayerObjectController : NetworkBehaviour
     [SyncVar(hook = nameof(OnReadyStatusChanged))]
     public bool isReady;
 
-    private MyNetworkManager _myNetworkManager;
-
     public Animator animator;
 
     public GameObject floatingUIPanel;
     public Text playerNameText;
+    
+    public ParticlesController particlesController;
 
+    private MyNetworkManager _myNetworkManager;
     private MyNetworkManager MyNetworkManager
     {
         get
@@ -421,21 +422,20 @@ public partial class PlayerObjectController : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RpcSyncPaint(int id, Vector3 pos, float radius, float hardness, float strength, Color color,
-        int paintPlayerId)
+    public void RpcSyncPaint(int id, Vector3 pos, float radius, float hardness, float strength, Color color)
     {
         if (!isClientOnly) return;
 
         Paintable paintable = PaintablesManager.Instance.GetPaintableByID(id);
-        PaintManager.Instance.paint(paintable, pos, radius, hardness, strength, color, paintPlayerId);
+        PaintManager.Instance.paint(paintable, pos, radius, hardness, strength, color);
     }
 
     [Command(requiresAuthority = false)]
     public void CmdSyncPaint(int id, Vector3 pos, float radius, float hardness, float strength,
-        Color color, int paintPlayerId)
+        Color color)
     {
         Paintable paintable = PaintablesManager.Instance.GetPaintableByID(id);
-        PaintManager.Instance.paint(paintable, pos, radius, hardness, strength, color, paintPlayerId);
+        PaintManager.Instance.paint(paintable, pos, radius, hardness, strength, color);
     }
 
     [ClientRpc]

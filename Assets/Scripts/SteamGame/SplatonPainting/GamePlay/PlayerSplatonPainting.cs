@@ -8,7 +8,7 @@ public class PlayerSplatonPainting : NetworkBehaviour
 
     public Shader litShader;
 
-    public float damageInterval = 0.5f;
+    public float damageInterval = 1f;
     private float damageTimer = 0f;
 
     public PaintingColor SelfPaintingColor
@@ -17,33 +17,18 @@ public class PlayerSplatonPainting : NetworkBehaviour
         set
         {
             paintingColor = value;
-            Color color = Color.white;
-            switch (paintingColor)
-            {
-                case PaintingColor.Red:
-                    color = Color.red;
-                    break;
-                case PaintingColor.Green:
-                    color = Color.green;
-                    break;
-                case PaintingColor.Blue:
-                    color = Color.blue;
-                    break;
-                case PaintingColor.Yellow:
-                    color = Color.yellow;
-                    break;
-                case PaintingColor.Purple:
-                    color = new Color(0.5f, 0f, 0.5f); // Purple
-                    break;
-                case PaintingColor.Orange:
-                    color = new Color(1f, 0.5f, 0f); // Orange
-                    break;
-                default:
-                    color = Color.white;
-                    break;
-            }
+            Color color = GetColorFromPaintingColor(paintingColor);
 
             SetColors(color);
+
+            if (NetworkServer.active)
+            {
+                RpcSetPaintingColor(paintingColor);
+            }
+            else
+            {
+                CmdSetPaintingColor(paintingColor);
+            }
         }
     }
 
@@ -77,9 +62,25 @@ public class PlayerSplatonPainting : NetworkBehaviour
         collisionParticles.GetComponent<ParticleSystemRenderer>().material = particleMaterial;
     }
 
+    private MyNetworkManager _myNetworkManager;
+
+    private MyNetworkManager MyNetworkManager
+    {
+        get
+        {
+            if (_myNetworkManager != null)
+            {
+                return _myNetworkManager;
+            }
+
+            return _myNetworkManager = MyNetworkManager.singleton as MyNetworkManager;
+        }
+    }
+
     private void Start()
     {
         _reader = new Texture2D(1, 1, TextureFormat.RGBA32, false);
+        damageTimer = damageInterval;
     }
 
     private void Update()
@@ -98,19 +99,18 @@ public class PlayerSplatonPainting : NetworkBehaviour
         if (damageTimer > 0)
             damageTimer -= Time.deltaTime;
 
-        int ownerId = CheckPaintedGroundPlayerId();
-        if (ownerId > 0)
-            Debug.Log(ownerId);
-        if (GetComponent<PlayerObjectController>().playerID == ownerId)
+        int num = CheckIfPaintedGroundIsPlayer();
+        if (num == 1)
         {
-            GetComponent<PlayerMovement>().moveSpeed = 8;
+            GetComponent<PlayerMovement>().moveSpeed = 10;
         }
         else
         {
             GetComponent<PlayerMovement>().moveSpeed = 5f;
-            if (damageTimer <= 0)
+            if (num == 0)
             {
-                if (ownerId > 0)
+                GetComponent<PlayerMovement>().moveSpeed = 3f;
+                if (damageTimer <= 0)
                 {
                     if (NetworkServer.active)
                         GetComponent<PlayerMovement>().AttackPlayerRpc();
@@ -124,11 +124,11 @@ public class PlayerSplatonPainting : NetworkBehaviour
     }
 
     const float rayHeight = 0.1f;
-    const float rayDistance = 1;
+    const float rayDistance = 0.7f;
 
     Texture2D _reader;
 
-    int CheckPaintedGroundPlayerId()
+    int CheckIfPaintedGroundIsPlayer()
     {
         Vector3 origin = transform.position + Vector3.up * rayHeight;
         Ray ray = new Ray(origin, Vector3.down);
@@ -144,8 +144,7 @@ public class PlayerSplatonPainting : NetworkBehaviour
                 if (paintable != null)
                 {
                     Vector2 uv = hit.textureCoord; // get uv
-
-                    return SampleOwnerID(paintable.getOwnerTexture(), uv);
+                    return SampleOwnerID(paintable.getSupport(), uv);
                 }
             }
         }
@@ -157,13 +156,12 @@ public class PlayerSplatonPainting : NetworkBehaviour
                 if (paintable != null)
                 {
                     Vector2 uv = hit.textureCoord; // get uv
-
-                    return SampleOwnerID(paintable.getOwnerTexture(), uv);
+                    return SampleOwnerID(paintable.getSupport(), uv);
                 }
             }
         }
 
-        return 0;
+        return -1;
     }
 
     int SampleOwnerID(RenderTexture rt, Vector2 uv)
@@ -180,8 +178,67 @@ public class PlayerSplatonPainting : NetworkBehaviour
 
         RenderTexture.active = prev; // recover
 
-        float idNorm = _reader.GetPixel(0, 0).r;
-        return Mathf.RoundToInt(idNorm * 255f);
+        Color pixelColor = _reader.GetPixel(0, 0);
+
+        if (pixelColor == Color.clear)
+            return -1;
+
+        if (IsColorSimilar(pixelColor, GetColorFromPaintingColor(SelfPaintingColor)))
+            return 1; // self color
+
+        if (MyNetworkManager.GamePlayers.Count > 1)
+        {
+            foreach (var p in MyNetworkManager.GamePlayers)
+            {
+                Color color = GetColorFromPaintingColor(p.GetComponent<PlayerSplatonPainting>().SelfPaintingColor);
+                if (p.playerID != LobbyController.Instance.LocalPlayerObjectController.playerID &&
+                    IsColorSimilar(pixelColor, color))
+                {
+                    return 0; // other player color
+                }
+            }
+        }
+
+        return -1;
+    }
+
+    bool IsColorSimilar(Color a, Color b, float threshold = 0.8f)
+    {
+        float diff = Mathf.Abs(a.r - b.r) + Mathf.Abs(a.g - b.g) + Mathf.Abs(a.b - b.b);
+        return diff < threshold;
+    }
+
+    Color GetColorFromPaintingColor(PaintingColor color)
+    {
+        switch (color)
+        {
+            case PaintingColor.Red: return Color.red;
+            case PaintingColor.Green: return Color.green;
+            case PaintingColor.Blue: return Color.blue;
+            default: return Color.white;
+        }
+    }
+
+    [ClientRpc]
+    void RpcSetPaintingColor(PaintingColor paintColor)
+    {
+        if (!isClientOnly) return;
+
+        paintingColor = paintColor;
+
+        SetColors(GetColorFromPaintingColor(paintingColor));
+
+        Debug.Log("RpcSetPaintingColor called with color: " + paintColor);
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdSetPaintingColor(PaintingColor paintColor)
+    {
+        paintingColor = paintColor;
+
+        SetColors(GetColorFromPaintingColor(paintingColor));
+
+        Debug.Log("CmdSetPaintingColor called with color: " + paintColor);
     }
 
     private void OnDrawGizmos()

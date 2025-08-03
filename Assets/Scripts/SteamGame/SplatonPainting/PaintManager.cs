@@ -6,8 +6,6 @@ public class PaintManager : Singleton<PaintManager>
     public Shader texturePaint;
     public Shader extendIslands;
 
-    public Shader ownerShader;
-
     int prepareUVID = Shader.PropertyToID("_PrepareUV");
     int positionID = Shader.PropertyToID("_PainterPosition");
     int hardnessID = Shader.PropertyToID("_Hardness");
@@ -22,8 +20,6 @@ public class PaintManager : Singleton<PaintManager>
     Material paintMaterial;
     Material extendMaterial;
 
-    Material ownerMaterial;
-
     CommandBuffer command;
 
     protected override void Awake()
@@ -32,7 +28,6 @@ public class PaintManager : Singleton<PaintManager>
 
         paintMaterial = new Material(texturePaint);
         extendMaterial = new Material(extendIslands);
-        ownerMaterial = new Material(ownerShader);
         command = new CommandBuffer();
         command.name = "CommmandBuffer - " + gameObject.name;
     }
@@ -44,8 +39,6 @@ public class PaintManager : Singleton<PaintManager>
         RenderTexture extend = paintable.getExtend();
         RenderTexture support = paintable.getSupport();
         Renderer rend = paintable.getRenderer();
-
-        RenderTexture owner = paintable.getOwnerTexture();
 
         paintMaterial.SetFloat(prepareUVID, 1);
         command.SetRenderTarget(uvIslands);
@@ -60,23 +53,18 @@ public class PaintManager : Singleton<PaintManager>
         command.SetRenderTarget(extend);
         command.ClearRenderTarget(false, true, Color.clear);
 
-        command.SetRenderTarget(owner);
-        command.ClearRenderTarget(false, true, Color.clear);
-
         Graphics.ExecuteCommandBuffer(command);
         command.Clear();
     }
 
     public void paint(Paintable paintable, Vector3 pos, float radius = 1f, float hardness = .5f, float strength = .5f,
-        Color? color = null, int currentPlayerID = -1)
+        Color? color = null)
     {
         RenderTexture mask = paintable.getMask();
         RenderTexture uvIslands = paintable.getUVIslands();
         RenderTexture extend = paintable.getExtend();
         RenderTexture support = paintable.getSupport();
         Renderer rend = paintable.getRenderer();
-
-        RenderTexture owner = paintable.getOwnerTexture();
 
         // paint
         paintMaterial.SetFloat(prepareUVID, 0);
@@ -99,13 +87,6 @@ public class PaintManager : Singleton<PaintManager>
 
         command.SetRenderTarget(extend);
         command.Blit(mask, extend, extendMaterial);
-
-        // owner
-        ownerMaterial.SetFloat("_OwnerID", currentPlayerID);
-        command.SetGlobalTexture("_MainTex", support);
-
-        command.SetRenderTarget(owner);
-        command.Blit(support, owner, ownerMaterial, 0);
 
         Graphics.ExecuteCommandBuffer(command);
         command.Clear();

@@ -7,9 +7,9 @@ public class OwnerDebugGUI : MonoBehaviour
 
     void OnGUI()
     {
-        if (paintable != null && paintable.getOwnerTexture() != null)
+        if (paintable != null && paintable.getExtend() != null)
         {
-            GUI.DrawTexture(texRect, paintable.getOwnerTexture(), ScaleMode.ScaleToFit, false);
+            GUI.DrawTexture(texRect, paintable.getExtend(), ScaleMode.ScaleToFit, false);
         }
     }
 }

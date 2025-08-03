@@ -6,9 +6,6 @@ public enum PaintingColor
     Red,
     Green,
     Blue,
-    Yellow,
-    Purple,
-    Orange
 }
 
 public class SpawnPosPainting : NetworkBehaviour
