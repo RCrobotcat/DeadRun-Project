@@ -50,7 +50,7 @@ MonoBehaviour:
   planeRotationTrapPrefab: {fileID: 6134106947719216321, guid: ef38c5d069dfc6d46a210115c7bae228, type: 3}
   startPlanePrefab: {fileID: 6493595029224243830, guid: cbc3629001285f9458beac6e2b11026a, type: 3}
   endPlanePrefab: {fileID: 1779194011955087901, guid: 8449c37dac8b9374681d8f84f63658da, type: 3}
-  tablePrefab: {fileID: 7488834685195679328, guid: d9ff31d0b68b34d45886426f6440c55e, type: 3}
+  tablePrefab: {fileID: 2108651458695237837, guid: 4523e2e6868da5b42828ea205984c54e, type: 3}
   planeTransformParent: {fileID: 9074882632264181491}
 --- !u!1 &4693124304238212948
 GameObject:

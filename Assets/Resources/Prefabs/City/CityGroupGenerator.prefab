@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4836818158493233149}
   - component: {fileID: 910399375978182894}
+  - component: {fileID: 9124738490151300975}
   - component: {fileID: 6005335872304518268}
   m_Layer: 0
   m_Name: CityGroupGenerator
@@ -68,12 +69,27 @@ MonoBehaviour:
   edgePrefab: {fileID: 4832456215228124777, guid: d8897581f8dda4e23b6b23b60347c94a, type: 3}
   isRealtimeRefresh: 1
   cameraPosition: {fileID: 6352754722455855958}
-  tableCollectionPrefab: {fileID: 7488834685195679328, guid: d9ff31d0b68b34d45886426f6440c55e, type: 3}
+  tableCollectionPrefab: {fileID: 2108651458695237837, guid: 4523e2e6868da5b42828ea205984c54e, type: 3}
   maximumTableCount: 15
   tablesParent: {fileID: 0}
   targetAreaPrefab: {fileID: 4593236637377365868, guid: 819e6b46b0355aa47b3a788f9cbef5dc, type: 3}
   targetAreaParent: {fileID: 0}
   currentTableCount: 0
+--- !u!114 &9124738490151300975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329767177517391532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1589b880bf0485f8d3adae4e36fd44e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redMonsterPrefab: {fileID: 7220425214883531268, guid: ea8a126bf04c6a04f8009599ca163d6b, type: 3}
+  monsterCount: 6
+  monstersParent: {fileID: 0}
 --- !u!114 &6005335872304518268
 MonoBehaviour:
   m_ObjectHideFlags: 0
