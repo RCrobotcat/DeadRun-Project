@@ -57,6 +57,8 @@ public partial class PlayerObjectController
                             pm.isDead = true;
                         if (transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
                             gunShooting.enabled = false;
+                        if (transform.GetChild(2).TryGetComponent<PaintingShooting>(out PaintingShooting paintingShooting))
+                            paintingShooting.enabled = false;
 
                         DropCurrentItem();
 

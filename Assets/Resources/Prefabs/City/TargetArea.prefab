@@ -337,7 +337,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   requiredCollectableItemCount: 5
-  desiredItem: Item_1
+  desiredItem: Collection_1
   possessivePlayerId: 0
   progressText: {fileID: 8962478281182714918}
 --- !u!114 &3282208396727170879

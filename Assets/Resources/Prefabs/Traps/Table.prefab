@@ -157,7 +157,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  desiredItem: Item_1
+  desiredItem: Collection_1
+  targetTable: 0
 --- !u!114 &4520219688321295387
 MonoBehaviour:
   m_ObjectHideFlags: 0
