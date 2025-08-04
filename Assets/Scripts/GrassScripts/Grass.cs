@@ -110,9 +110,12 @@ namespace Grass_RC_14
         {
             if (NetworkServer.active)
             {
-                if (LobbyController.Instance.localPlayerObject.scene.name != "Scene_3_1v1")
+                if (LobbyController.Instance.localPlayerObject != null)
                 {
-                    return;
+                    if (LobbyController.Instance.localPlayerObject.scene.name != "Scene_3_1v1")
+                    {
+                        return;
+                    }
                 }
             }
             else

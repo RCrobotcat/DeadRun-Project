@@ -31,12 +31,15 @@ namespace RCrobotcat_Water_Plane
         {
             if (NetworkServer.active)
             {
-                if (LobbyController.Instance.localPlayerObject.gameObject.scene.name != "Scene_3_1v1")
-                    return;
+                if (LobbyController.Instance.localPlayerObject != null)
+                {
+                    if (LobbyController.Instance.localPlayerObject.gameObject.scene.name != "Scene_3_1v1")
+                        return;
+                }
             }
             else
             {
-                if(!SceneManager.GetSceneByName("Scene_3_1v1").isLoaded)
+                if (!SceneManager.GetSceneByName("Scene_3_1v1").isLoaded)
                     return;
             }
 

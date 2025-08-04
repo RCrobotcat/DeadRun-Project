@@ -28,6 +28,9 @@ public class SplatonPlaceGenerator : Singleton<SplatonPlaceGenerator>
     public Transform respawnPlaceParent;
     public GameObject respawnPlacePrefab;
 
+    public Transform platformParent;
+    public GameObject platformPrefab;
+
     bool isInitialized = false;
     public bool IsInitialized => isInitialized;
 
@@ -57,6 +60,8 @@ public class SplatonPlaceGenerator : Singleton<SplatonPlaceGenerator>
 
         CreateRespawnPlace();
 
+        GeneratePlatforms();
+
         isInitialized = true;
     }
 
@@ -69,6 +74,7 @@ public class SplatonPlaceGenerator : Singleton<SplatonPlaceGenerator>
                 Vector3 position = new Vector3(x * cellSize, 0, y * cellSize);
                 SplatonCellMark cellMark = Instantiate(cellMarkPrefab, position, Quaternion.identity, cellMarkParent);
                 cellMark.name = $"CellMark_{x}_{y}";
+                cellMark.CellPosition = new Vector2(x, y);
                 cellMarks.Add(cellMark);
             }
         }
@@ -189,10 +195,25 @@ public class SplatonPlaceGenerator : Singleton<SplatonPlaceGenerator>
             if (!overlap)
             {
                 usedAreas.Add(area);
-                Vector3 pos = new Vector3(x * cellSize + (respawnWidth * cellSize) / 2 - cellSize / 2, 1,
+                Vector3 pos = new Vector3(x * cellSize + (respawnWidth * cellSize) / 2 - cellSize / 2, 2,
                     y * cellSize + (respawnHeight * cellSize) / 2 - cellSize / 2);
                 GameObject res = Instantiate(respawnPlacePrefab, pos, Quaternion.identity, respawnPlaceParent);
                 res.name = $"RespawnPlace_{x}_{y}";
+
+                SplatonCellMark cellMark;
+                for (int i = 0; i < respawnWidth; i++)
+                {
+                    for (int k = 0; k < respawnHeight; k++)
+                    {
+                        Vector2 cellPosition = new Vector2(x + i, y + k);
+                        GetCellMark(cellPosition, out cellMark);
+                        if (cellMark != null)
+                        {
+                            cellMark.IsMarked = true;
+                        }
+                    }
+                }
+
                 NetworkServer.Spawn(res);
 
                 respawnPlaces.Add(res.transform.GetChild(5).GetComponent<SpawnPosPainting>());
@@ -202,7 +223,7 @@ public class SplatonPlaceGenerator : Singleton<SplatonPlaceGenerator>
                     PaintablesManager.Instance.RegisterPaintable(res.transform.GetChild(i).GetComponent<Paintable>());
                 }
 
-                if (usedAreas.Count == MyNetworkManager.GamePlayers.Count)
+                if (usedAreas.Count == 3)
                 {
                     var shuffledPlayers = MyNetworkManager.GamePlayers.OrderBy(_ => Random.value).ToList();
                     var shuffledColors = System.Enum.GetValues(typeof(PaintingColor)).Cast<PaintingColor>()
@@ -219,6 +240,91 @@ public class SplatonPlaceGenerator : Singleton<SplatonPlaceGenerator>
                     break;
                 }
             }
+        }
+    }
+
+    void GeneratePlatforms()
+    {
+        if (!NetworkServer.active)
+            return;
+        if (platformParent == null || platformPrefab == null)
+            return;
+
+        int platformWidth = 7;
+        int platformHeight = 7;
+        int minX = 1;
+        int maxX = columns - platformWidth - 1;
+        int minY = 1;
+        int maxY = rows - platformHeight - 1;
+
+        if (maxX < minX || maxY < minY) return;
+
+        List<RectInt> usedAreas = new List<RectInt>();
+        foreach (var cellMark in cellMarks)
+        {
+            if (cellMark.IsMarked)
+            {
+                usedAreas.Add(new RectInt(
+                    (int)cellMark.CellPosition.x, (int)cellMark.CellPosition.y, 1, 1));
+            }
+        }
+
+        int maxAttempts = 100;
+        for (int attempt = 0; attempt < maxAttempts; attempt++)
+        {
+            int x = Random.Range(minX, maxX + 1);
+            int y = Random.Range(minY, maxY + 1);
+            RectInt area = new RectInt(x, y, platformWidth, platformHeight);
+
+            bool overlap = false;
+            foreach (var used in usedAreas)
+            {
+                if (used.Overlaps(area))
+                {
+                    overlap = true;
+                    break;
+                }
+            }
+
+            if (!overlap)
+            {
+                Vector3 pos = new Vector3(x * cellSize + (platformWidth * cellSize) / 2 - cellSize / 2, 14.6f,
+                    y * cellSize + (platformHeight * cellSize) / 2 - cellSize / 2);
+                GameObject platform = Instantiate(platformPrefab, pos, Quaternion.identity, platformParent);
+                platform.name = $"Platform_{x}_{y}";
+
+                SplatonCellMark cellMark;
+                for (int i = 0; i < platformWidth; i++)
+                {
+                    for (int j = 0; j < platformHeight; j++)
+                    {
+                        Vector2 cellPosition = new Vector2(x + i, y + j);
+                        GetCellMark(cellPosition, out cellMark);
+                        if (cellMark != null)
+                        {
+                            cellMark.IsMarked = true;
+                        }
+                    }
+                }
+                
+                NetworkServer.Spawn(platform);
+                
+                for (int i = 0; i < platform.transform.childCount - 1; i++)
+                {
+                    PaintablesManager.Instance.RegisterPaintable(platform.transform.GetChild(i).GetComponent<Paintable>());
+                }
+                
+                break;
+            }
+        }
+    }
+
+    void GetCellMark(Vector2 cellPosition, out SplatonCellMark cellMark)
+    {
+        cellMark = cellMarks.FirstOrDefault(mark => mark.CellPosition == cellPosition);
+        if (cellMark == null)
+        {
+            Debug.LogError($"Cell mark not found for position: {cellPosition}");
         }
     }
 

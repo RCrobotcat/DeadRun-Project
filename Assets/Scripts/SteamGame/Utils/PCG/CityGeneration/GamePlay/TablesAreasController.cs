@@ -12,23 +12,26 @@ public class TablesAreasController : MonoBehaviour
     {
         if (NetworkServer.active)
         {
-            if (LobbyController.Instance.localPlayerObject.scene.name == "Scene_4")
+            if (LobbyController.Instance.localPlayerObject != null)
             {
-                if (tables.activeSelf && areas.activeSelf && monsters.activeSelf)
-                    return;
+                if (LobbyController.Instance.localPlayerObject.scene.name == "Scene_4")
+                {
+                    if (tables.activeSelf && areas.activeSelf && monsters.activeSelf)
+                        return;
 
-                tables.SetActive(true);
-                areas.SetActive(true);
-                monsters.SetActive(true);
-            }
-            else
-            {
-                if (!tables.activeSelf && !areas.activeSelf && !monsters.activeSelf)
-                    return;
+                    tables.SetActive(true);
+                    areas.SetActive(true);
+                    monsters.SetActive(true);
+                }
+                else
+                {
+                    if (!tables.activeSelf && !areas.activeSelf && !monsters.activeSelf)
+                        return;
 
-                tables.SetActive(false);
-                areas.SetActive(false);
-                monsters.SetActive(false);
+                    tables.SetActive(false);
+                    areas.SetActive(false);
+                    monsters.SetActive(false);
+                }
             }
         }
         else

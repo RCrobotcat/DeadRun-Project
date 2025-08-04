@@ -1829,7 +1829,7 @@ MonoBehaviour:
   currentEquippedItem: 
   _animator: {fileID: 1971487635109874076}
   equipItemSlot: {fileID: 6310232972406723056}
-  jumpForce: 6
+  jumpForce: 8
   gravityMultiplier: 1.2
   jumpTimeInterval: 0.8
   isAiming: 0

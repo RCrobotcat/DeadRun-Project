@@ -12,21 +12,24 @@ public class Monster_1v1_Controller : MonoBehaviour
     {
         if (NetworkServer.active)
         {
-            if (LobbyController.Instance.localPlayerObject.scene.name != "Scene_3_1v1")
+            if (LobbyController.Instance.localPlayerObject != null)
             {
-                isInitialized = false;
-                return;
-            }
-
-            if (!isInitialized)
-            {
-                for (int i = 0; i < transform.childCount; i++)
+                if (LobbyController.Instance.localPlayerObject.scene.name != "Scene_3_1v1")
                 {
-                    Transform monster = transform.GetChild(i);
-                    monster.position = monsterPositions[i];
+                    isInitialized = false;
+                    return;
                 }
 
-                isInitialized = true;
+                if (!isInitialized)
+                {
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        Transform monster = transform.GetChild(i);
+                        monster.position = monsterPositions[i];
+                    }
+
+                    isInitialized = true;
+                }
             }
         }
     }

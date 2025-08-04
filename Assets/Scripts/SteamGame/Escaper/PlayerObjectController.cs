@@ -33,6 +33,7 @@ public partial class PlayerObjectController : NetworkBehaviour
     public Text playerNameText;
 
     private MyNetworkManager _myNetworkManager;
+
     private MyNetworkManager MyNetworkManager
     {
         get
@@ -199,6 +200,9 @@ public partial class PlayerObjectController : NetworkBehaviour
 
     public void UpdateImportantParams()
     {
+        if (LobbyController.Instance.LocalPlayerObjectController == null)
+            return;
+        
         if (playerID == LobbyController.Instance.LocalPlayerObjectController.playerID)
         {
             if (floatingUIPanel.activeSelf)

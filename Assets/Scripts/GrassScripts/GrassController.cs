@@ -10,13 +10,16 @@ public class GrassController : Singleton<GrassController>
     {
         if (NetworkServer.active)
         {
-            if (LobbyController.Instance.localPlayerObject.scene.name == "Scene_3_1v1")
+            if (LobbyController.Instance.localPlayerObject != null)
             {
-                grass.gameObject.SetActive(true);
-            }
-            else
-            {
-                grass.gameObject.SetActive(false);
+                if (LobbyController.Instance.localPlayerObject.scene.name == "Scene_3_1v1")
+                {
+                    grass.gameObject.SetActive(true);
+                }
+                else
+                {
+                    grass.gameObject.SetActive(false);
+                }
             }
         }
         else

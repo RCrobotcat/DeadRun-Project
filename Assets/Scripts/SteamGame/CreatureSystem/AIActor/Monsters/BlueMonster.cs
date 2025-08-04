@@ -19,8 +19,13 @@ public class BlueMonster : AIActor
     protected override void Update()
     {
         if (NetworkServer.active)
-            if (LobbyController.Instance.localPlayerObject.scene.name != "Scene_3_1v1")
-                return;
+        {
+            if (LobbyController.Instance.localPlayerObject != null)
+            {
+                if (LobbyController.Instance.localPlayerObject.scene.name != "Scene_3_1v1")
+                    return;
+            }
+        }
 
         base.Update();
 
@@ -33,8 +38,13 @@ public class BlueMonster : AIActor
     protected override void FixedUpdate()
     {
         if (NetworkServer.active)
-            if (LobbyController.Instance.localPlayerObject.scene.name != "Scene_3_1v1")
-                return;
+        {
+            if (LobbyController.Instance.localPlayerObject != null)
+            {
+                if (LobbyController.Instance.localPlayerObject.scene.name != "Scene_3_1v1")
+                    return;
+            }
+        }
 
         base.FixedUpdate();
 
@@ -221,7 +231,7 @@ public class BlueMonster : AIActor
         if (NetworkServer.active)
             if (LobbyController.Instance.localPlayerObject.scene.name != "Scene_3_1v1")
                 return;
-        
+
         if (SoundController.Instance != null)
         {
             if (NetworkServer.active)
@@ -244,7 +254,7 @@ public class BlueMonster : AIActor
         {
             if (Vector3.Dot(attackTarget.transform.position - transform.position, transform.forward) < 0)
                 return;
-            
+
             if (NetworkServer.active)
             {
                 if (attackTarget.gameObject.scene.name == "Scene_3_1v1")
