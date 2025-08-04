@@ -112,7 +112,8 @@ namespace Grass_RC_14
             {
                 if (LobbyController.Instance.localPlayerObject != null)
                 {
-                    if (LobbyController.Instance.localPlayerObject.scene.name != "Scene_3_1v1")
+                    if (LobbyController.Instance.localPlayerObject.scene.name != "Scene_3_1v1" &&
+                        LobbyController.Instance.localPlayerObject.scene.name != "Scene_6_End")
                     {
                         return;
                     }
@@ -120,7 +121,8 @@ namespace Grass_RC_14
             }
             else
             {
-                if (!SceneManager.GetSceneByName("Scene_3_1v1").isLoaded)
+                if (!SceneManager.GetSceneByName("Scene_3_1v1").isLoaded &&
+                    !SceneManager.GetSceneByName("Scene_6_End").isLoaded)
                 {
                     return;
                 }

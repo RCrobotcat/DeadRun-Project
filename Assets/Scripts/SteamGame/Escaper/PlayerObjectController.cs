@@ -47,9 +47,8 @@ public partial class PlayerObjectController : NetworkBehaviour
         }
     }
 
-    private PlayerRole _role = PlayerRole.None;
+    [SerializeField] private PlayerRole _role = PlayerRole.None;
 
-    [HideInInspector]
     public PlayerRole role
     {
         get => _role;
@@ -284,7 +283,8 @@ public partial class PlayerObjectController : NetworkBehaviour
             if (LobbyController.Instance.LocalPlayerObjectController != null)
             {
                 var planeRotation = FindObjectOfType<PlaneRotation>();
-                if (LobbyController.Instance.LocalPlayerObjectController.role == PlayerRole.Trapper)
+                var local = LobbyController.Instance.LocalPlayerObjectController;
+                if (local.role == PlayerRole.Trapper)
                 {
                     if (planeRotation != null)
                     {
@@ -304,12 +304,16 @@ public partial class PlayerObjectController : NetworkBehaviour
                         }
                     }
 
+                    if (!local.scoreUIBase.activeSelf)
+                    {
+                        local.scoreUIBase.SetActive(true);
+                        local.scoreText.text = local.CurrentScore.ToString();
+                    }
+
                     CameraController.Instance.gameObject.SetActive(false);
-                    LobbyController.Instance.LocalPlayerObjectController.transform.position =
-                        new Vector3(1000, 1000, 1000); // offscreen
+                    local.transform.position = new Vector3(1000, 1000, 1000); // offscreen
                 }
-                else if (LobbyController.Instance.LocalPlayerObjectController.role == PlayerRole.Escaper ||
-                         LobbyController.Instance.LocalPlayerObjectController.role == PlayerRole.None)
+                else if (local.role == PlayerRole.Escaper || local.role == PlayerRole.None)
                 {
                     if (planeRotation != null)
                     {
@@ -363,11 +367,10 @@ public partial class PlayerObjectController : NetworkBehaviour
         for (int i = roles.Count - 1; i >= 0; i--)
         {
             PlayerRoles player = roles[i];
-            if (player.playerID == LobbyController.Instance.LocalPlayerObjectController.playerID)
-            {
-                LobbyController.Instance.LocalPlayerObjectController.role = player.role;
-                Debug.Log("Player role set to: " + player.role + " for playerID: " + player.playerID);
-            }
+            PlayerObjectController playerObjectController =
+                MyNetworkManager.GamePlayers.Find(p => p.playerID == player.playerID);
+            if (playerObjectController != null)
+                playerObjectController.role = player.role;
         }
 
         LobbyController.Instance.ShowPlayerRoleText();
@@ -392,6 +395,7 @@ public partial class PlayerObjectController : NetworkBehaviour
         {
             player.role = PlayerRole.Escaper;
             player.SetPlayerUIState(true);
+            player.scoreText.text = player.CurrentScore.ToString();
             if (sceneToTransit != "Assets/Scenes/DemoScene/Scene_1.unity" &&
                 sceneToTransit != "Assets/Scenes/DemoScene/Scene_2.unity")
                 player.fellCountText.gameObject.SetActive(false);

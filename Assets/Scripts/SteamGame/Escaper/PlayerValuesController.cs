@@ -18,6 +18,10 @@ public partial class PlayerObjectController
     public GameObject counterUIBase;
     public Image counterUIFillImage;
 
+    [Header("Score")] public GameObject scoreUIBase;
+    public Text scoreText;
+    public Text plusOneScoreText;
+
     public float CurrentHealth
     {
         get => currentHealth;
@@ -131,12 +135,28 @@ public partial class PlayerObjectController
         }
     }
 
-    static int currentScore = 0;
+    [SerializeField] int currentScore = 0;
 
     public int CurrentScore
     {
         get => currentScore;
-        set { currentScore = value; }
+        set
+        {
+            int formalValue = currentScore;
+            currentScore = value;
+
+            if (currentScore > formalValue && playerID == LobbyController.Instance.LocalPlayerObjectController.playerID)
+            {
+                plusOneScoreText.transform.localScale.To(Vector3.one, 0.2f,
+                    (scale) => { plusOneScoreText.transform.localScale = scale; },
+                    () => { plusOneScoreText.transform.localScale = Vector3.zero; });
+            }
+
+            scoreText.text = currentScore.ToString();
+
+            if (NetworkServer.active)
+                RpcSyncPlayerScoreToClient(currentScore);
+        }
     }
 
     [Header("Fell Count")] static int fellCount = 0;
@@ -184,7 +204,18 @@ public partial class PlayerObjectController
 
         LobbyController.Instance.ClearBullets();
 
-        // TODO: Add Score to Trapper
+        // Add Score to Trapper
+        foreach (var player in MyNetworkManager.GamePlayers)
+        {
+            if (player.role == PlayerRole.Trapper)
+            {
+                if (NetworkServer.active)
+                    player.CurrentScore++;
+                else
+                    player.CmdAddScore();
+                break;
+            }
+        }
 
         if (!NetworkServer.active)
             CmdSetDeadEscaperCount(SceneManager.GetSceneByName("Scene_1").path);
@@ -201,8 +232,21 @@ public partial class PlayerObjectController
 
         LobbyController.Instance.ClearBullets();
 
+        // On Server
         if (playerID == LobbyController.Instance.LocalPlayerObjectController.playerID)
             LobbyController.Instance.ShowMissionFailedText("Mission Failed: " + "\n" + "You died in 1v1!");
+
+        // Add Score to the other player
+        foreach (var player in MyNetworkManager.GamePlayers)
+        {
+            if (player.playerID != this.playerID)
+            {
+                if (NetworkServer.active)
+                    player.CurrentScore++;
+                else
+                    player.CmdAddScore();
+            }
+        }
 
         if (!NetworkServer.active)
         {
@@ -217,6 +261,7 @@ public partial class PlayerObjectController
     public void SetPlayerUIState(bool state)
     {
         healthBarBase.SetActive(state);
+        scoreUIBase.SetActive(state);
         fellCountText.gameObject.SetActive(state);
     }
 
@@ -243,6 +288,21 @@ public partial class PlayerObjectController
     void CmdDropCurrentItem()
     {
         DropCurrentItem();
+    }
+
+    [ClientRpc]
+    public void RpcSyncPlayerScoreToClient(int score)
+    {
+        if (!isClientOnly)
+            return;
+
+        CurrentScore = score;
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdAddScore()
+    {
+        CurrentScore++;
     }
 
     void DropCurrentItem()

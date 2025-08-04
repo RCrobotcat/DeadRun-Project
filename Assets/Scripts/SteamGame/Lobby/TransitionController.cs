@@ -252,12 +252,22 @@ public partial class LobbyController
             SceneManager.MoveGameObjectToScene(player, SceneManager.GetSceneByPath(transitionToSceneName));
             NetworkServer.AddPlayerForConnection(conn, player);
 
-            if (player.GetComponent<PlayerObjectController>().playerID == LocalPlayerObjectController.playerID)
+            if (NetworkServer.active)
+            {
+                PlayerObjectController p = player.GetComponent<PlayerObjectController>();
+                p.RpcUpdatePlayerParamsAfterTransition(transitionToSceneName);
+            }
+
+            if (player.GetComponent<PlayerObjectController>().playerID ==
+                LocalPlayerObjectController.playerID) // playerID == 1
             {
                 if (CameraController.Instance.freeLookCam.Target.TrackingTarget == null)
                     CameraController.Instance.freeLookCam.Target.TrackingTarget = player.transform;
 
                 player.GetComponent<PlayerObjectController>().SetPlayerUIState(true);
+                player.GetComponent<PlayerObjectController>().scoreText.text = player
+                    .GetComponent<PlayerObjectController>()
+                    .CurrentScore.ToString();
             }
 
             if (NetworkClient.localPlayer != null &&
@@ -271,10 +281,6 @@ public partial class LobbyController
                 if (player.TryGetComponent<Collider>(out Collider collider))
                     collider.enabled = true;
             }
-
-            if (NetworkServer.active)
-                player.GetComponent<PlayerObjectController>()
-                    .RpcUpdatePlayerParamsAfterTransition(transitionToSceneName);
 
             yield return new WaitForSeconds(0.3f);
 
@@ -355,6 +361,12 @@ public partial class LobbyController
     {
         PlayerObjectController playerObjectController = player.GetComponent<PlayerObjectController>();
         PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+
+        if (NetworkServer.active)
+        {
+            PlayerObjectController playerValues = player.GetComponent<PlayerObjectController>();
+            playerValues.RpcSyncPlayerScoreToClient(playerValues.CurrentScore);
+        }
 
         // 1v1 Scene Transition
         if (transitionToSceneName == SceneManager.GetSceneByName("Scene_3_1v1").path)

@@ -392,7 +392,7 @@ public class SplatonPlaceGenerator : Singleton<SplatonPlaceGenerator>
 
                     NetworkServer.Spawn(otherObj);
 
-                    if (usedAreas.Count == 8)
+                    if (usedAreas.Count == 5)
                         break;
                 }
             }

@@ -87,6 +87,11 @@ public class TransitionToScene : NetworkBehaviour
                 playerMove.enabled = true;
             }
 
+            if (NetworkServer.active)
+            {
+                PlayerObjectController p = player.GetComponent<PlayerObjectController>();
+                p.RpcUpdatePlayerParamsAfterTransition(transitionToSceneName);
+            }
 
             if (player.GetComponent<PlayerObjectController>().playerID ==
                 LobbyController.Instance.LocalPlayerObjectController.playerID)
@@ -95,10 +100,16 @@ public class TransitionToScene : NetworkBehaviour
                     CameraController.Instance.freeLookCam.Target.TrackingTarget = player.transform;
 
                 player.GetComponent<PlayerObjectController>().SetPlayerUIState(true);
+                player.GetComponent<PlayerObjectController>().scoreText.text = player
+                    .GetComponent<PlayerObjectController>()
+                    .CurrentScore.ToString();
             }
 
             if (NetworkServer.active)
-                player.GetComponent<PlayerObjectController>().RpcUpdatePlayerParamsAfterTransition(transitionToSceneName);
+            {
+                PlayerObjectController playerValues = player.GetComponent<PlayerObjectController>();
+                playerValues.RpcSyncPlayerScoreToClient(playerValues.CurrentScore);
+            }
 
             // 1v1 Scene Transition
             if (transitionToSceneName == SceneManager.GetSceneByName("Scene_3_1v1").path)

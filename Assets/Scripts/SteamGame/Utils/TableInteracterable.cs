@@ -117,8 +117,12 @@ public class TableInteracterable : NetworkBehaviour
                 }
                 else if (player.role == PlayerRole.Escaper)
                 {
-                    // TODO: Add Score
-                    
+                    // Add Score
+                    if (NetworkServer.active)
+                        player.CurrentScore++;
+                    else
+                        player.CmdAddScore();
+
                     if (player.TryGetComponent<PlayerMovement>(out PlayerMovement pm))
                         pm.enabled = false;
 

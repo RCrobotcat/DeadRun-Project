@@ -22,6 +22,21 @@ public class TargetAreaInteractable : NetworkBehaviour
 
     public GameObject flag;
 
+    MyNetworkManager _myNetworkManager;
+
+    private MyNetworkManager MyNetworkManager
+    {
+        get
+        {
+            if (_myNetworkManager != null)
+            {
+                return _myNetworkManager;
+            }
+
+            return _myNetworkManager = MyNetworkManager.singleton as MyNetworkManager;
+        }
+    }
+
     private void Start()
     {
         itemsManager = FindObjectOfType<ItemsManager>();
@@ -106,7 +121,23 @@ public class TargetAreaInteractable : NetworkBehaviour
             isRequiredItemCountReached = true;
             Debug.Log("Required item count reached in target area.");
 
-            // TODO: Add Score
+            // Add Score
+            PlayerObjectController winPlayer = MyNetworkManager.GamePlayers.Find(
+                p => p.playerID == possessivePlayerId);
+            if (NetworkServer.active)
+            {
+                if (winPlayer != null)
+                {
+                    winPlayer.CurrentScore++;
+                }
+            }
+            else
+            {
+                if (winPlayer != null)
+                {
+                    winPlayer.CmdAddScore();
+                }
+            }
 
             if (!NetworkServer.active)
             {
