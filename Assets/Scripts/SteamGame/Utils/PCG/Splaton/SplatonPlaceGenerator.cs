@@ -31,6 +31,9 @@ public class SplatonPlaceGenerator : Singleton<SplatonPlaceGenerator>
     public Transform platformParent;
     public GameObject platformPrefab;
 
+    public Transform othersParent;
+    public List<GameObject> others;
+
     bool isInitialized = false;
     public bool IsInitialized => isInitialized;
 
@@ -61,6 +64,7 @@ public class SplatonPlaceGenerator : Singleton<SplatonPlaceGenerator>
         CreateRespawnPlace();
 
         GeneratePlatforms();
+        GenerateOthers();
 
         isInitialized = true;
     }
@@ -306,15 +310,91 @@ public class SplatonPlaceGenerator : Singleton<SplatonPlaceGenerator>
                         }
                     }
                 }
-                
+
                 NetworkServer.Spawn(platform);
-                
+
                 for (int i = 0; i < platform.transform.childCount - 1; i++)
                 {
-                    PaintablesManager.Instance.RegisterPaintable(platform.transform.GetChild(i).GetComponent<Paintable>());
+                    PaintablesManager.Instance.RegisterPaintable(platform.transform.GetChild(i)
+                        .GetComponent<Paintable>());
                 }
-                
+
                 break;
+            }
+        }
+    }
+
+    void GenerateOthers()
+    {
+        if (!NetworkServer.active)
+            return;
+        if (othersParent == null || others.Count == 0)
+            return;
+
+        int otherWidth = 2;
+        int otherHeight = 2;
+        int minX = 1;
+        int maxX = columns - otherWidth - 1;
+        int minY = 1;
+        int maxY = rows - otherHeight - 1;
+
+        List<RectInt> usedAreas = new List<RectInt>();
+        foreach (var cellMark in cellMarks)
+        {
+            if (cellMark.IsMarked)
+            {
+                usedAreas.Add(new RectInt(
+                    (int)cellMark.CellPosition.x, (int)cellMark.CellPosition.y, 1, 1));
+            }
+        }
+
+        int maxAttempts = 50;
+        for (int i = 0; i < others.Count; i++)
+        {
+            for (int attempt = 0; attempt < maxAttempts; attempt++)
+            {
+                int x = Random.Range(minX, maxX + 1);
+                int y = Random.Range(minY, maxY + 1);
+                RectInt area = new RectInt(x, y, otherWidth, otherHeight);
+
+                bool overlap = false;
+                foreach (var used in usedAreas)
+                {
+                    if (used.Overlaps(area))
+                    {
+                        overlap = true;
+                        break;
+                    }
+                }
+
+                if (!overlap)
+                {
+                    Vector3 pos = new Vector3(x * cellSize + cellSize, 2, y * cellSize + cellSize);
+                    GameObject otherObj = Instantiate(others[i], pos, Quaternion.identity, othersParent);
+                    otherObj.name = $"Other_{i}_{x}_{y}";
+
+                    // 标记格子
+                    SplatonCellMark cellMark;
+                    for (int dx = 0; dx < otherWidth; dx++)
+                    {
+                        for (int dy = 0; dy < otherHeight; dy++)
+                        {
+                            Vector2 cellPosition = new Vector2(x + dx, y + dy);
+                            GetCellMark(cellPosition, out cellMark);
+                            if (cellMark != null)
+                            {
+                                cellMark.IsMarked = true;
+                            }
+
+                            usedAreas.Add(new RectInt(x + dx, y + dy, 1, 1));
+                        }
+                    }
+
+                    NetworkServer.Spawn(otherObj);
+
+                    if (usedAreas.Count == 8)
+                        break;
+                }
             }
         }
     }

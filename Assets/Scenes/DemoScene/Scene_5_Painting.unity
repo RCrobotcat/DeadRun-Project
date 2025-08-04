@@ -253,12 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff6b89142f674a0a868443bad3fe09cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paintables:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  paintables: []
 --- !u!1001 &993374067
 PrefabInstance:
   m_ObjectHideFlags: 0
