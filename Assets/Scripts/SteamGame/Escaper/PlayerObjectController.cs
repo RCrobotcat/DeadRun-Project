@@ -84,8 +84,48 @@ public partial class PlayerObjectController : NetworkBehaviour
                     pm.isDead = false;
                 if (transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
                     gunShooting.enabled = true;
-                if (transform.GetChild(2).TryGetComponent<PaintingShooting>(out PaintingShooting paintingShooting))
-                    paintingShooting.enabled = true;
+
+                if (NetworkServer.active)
+                {
+                    if (gameObject.scene.name == "Scene_5_Painting")
+                    {
+                        if (transform.GetChild(2)
+                            .TryGetComponent<PaintingShooting>(out PaintingShooting paintingShooting))
+                        {
+                            paintingShooting.enabled = true;
+                            SpawnPosPainting[] startPos = FindObjectsOfType<SpawnPosPainting>();
+                            foreach (var pos in startPos)
+                            {
+                                if (pos.spawnedPlayerID == playerID)
+                                {
+                                    transform.position = pos.transform.position;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (SceneManager.GetSceneByName("Scene_5_Painting").isLoaded)
+                    {
+                        if (transform.GetChild(2)
+                            .TryGetComponent<PaintingShooting>(out PaintingShooting paintingShooting))
+                        {
+                            paintingShooting.enabled = true;
+                            SpawnPosPainting[] startPos = FindObjectsOfType<SpawnPosPainting>();
+                            foreach (var pos in startPos)
+                            {
+                                if (pos.spawnedPlayerID == playerID)
+                                {
+                                    transform.position = pos.transform.position;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+
                 counterUIBase.SetActive(false);
 
                 foreach (Transform child in GetComponent<PlayerMovement>().astronautModel
@@ -202,7 +242,7 @@ public partial class PlayerObjectController : NetworkBehaviour
     {
         if (LobbyController.Instance.LocalPlayerObjectController == null)
             return;
-        
+
         if (playerID == LobbyController.Instance.LocalPlayerObjectController.playerID)
         {
             if (floatingUIPanel.activeSelf)

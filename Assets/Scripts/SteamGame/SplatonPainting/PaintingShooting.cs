@@ -21,6 +21,9 @@ public class PaintingShooting : MonoBehaviour
 
     void Update()
     {
+        if (!player.GetComponent<PlayerMovement>().isLocalPlayer)
+            return;
+
         if (!playerCamera) playerCamera = Camera.main;
 
         if (Input.GetMouseButton(1))

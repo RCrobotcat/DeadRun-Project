@@ -62,6 +62,8 @@ public partial class PlayerObjectController
                         {
                             paintingShooting.inkParticle.Stop();
                             paintingShooting.enabled = false;
+                            if (SoundController.Instance.sfxSource_splash.isPlaying)
+                                SoundController.Instance.sfxSource_splash.Stop();
                         }
 
                         DropCurrentItem();
@@ -97,6 +99,8 @@ public partial class PlayerObjectController
                     {
                         paintingShooting.inkParticle.Stop();
                         paintingShooting.enabled = false;
+                        if (SoundController.Instance.sfxSource_splash.isPlaying)
+                            SoundController.Instance.sfxSource_splash.Stop();
                     }
 
                     CmdDropCurrentItem();
