@@ -57,8 +57,12 @@ public partial class PlayerObjectController
                             pm.isDead = true;
                         if (transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
                             gunShooting.enabled = false;
-                        if (transform.GetChild(2).TryGetComponent<PaintingShooting>(out PaintingShooting paintingShooting))
+                        if (transform.GetChild(2)
+                            .TryGetComponent<PaintingShooting>(out PaintingShooting paintingShooting))
+                        {
+                            paintingShooting.inkParticle.Stop();
                             paintingShooting.enabled = false;
+                        }
 
                         DropCurrentItem();
 
@@ -88,6 +92,12 @@ public partial class PlayerObjectController
                         pm.isDead = true;
                     if (transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
                         gunShooting.enabled = false;
+                    if (transform.GetChild(2)
+                        .TryGetComponent<PaintingShooting>(out PaintingShooting paintingShooting))
+                    {
+                        paintingShooting.inkParticle.Stop();
+                        paintingShooting.enabled = false;
+                    }
 
                     CmdDropCurrentItem();
 

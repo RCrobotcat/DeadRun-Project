@@ -52,6 +52,8 @@ public class PaintingShooting : MonoBehaviour
             else if (Input.GetMouseButtonUp(0))
             {
                 inkParticle.Stop();
+                if (SoundController.Instance.sfxSource_splash.isPlaying)
+                    SoundController.Instance.sfxSource_splash.Stop();
                 if (NetworkServer.active)
                 {
                     player.GetComponent<PlayerMovement>().RpcSetPainting(Vector3.zero, false);
