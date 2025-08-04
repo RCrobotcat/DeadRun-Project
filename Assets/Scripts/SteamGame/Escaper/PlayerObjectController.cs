@@ -373,6 +373,8 @@ public partial class PlayerObjectController : NetworkBehaviour
         LobbyController.Instance.ShowPlayerRoleText();
         if (LobbyController.Instance.LocalPlayerObjectController.role == PlayerRole.Escaper)
             LobbyController.Instance.LocalPlayerObjectController.SetPlayerUIState(true);
+
+        LobbyController.Instance.ShowPopupText("Level 1: Just Jump!");
     }
 
     [ClientRpc]
@@ -450,6 +452,8 @@ public partial class PlayerObjectController : NetworkBehaviour
                     break;
                 }
             }
+
+            LobbyController.Instance.ShowPopupText("Level 3: Paint Paint Paint!");
         }
         else if (!SplatonPlaceGenerator.Instance.IsInitialized)
             SplatonPlaceGenerator.Instance.InitializePlace();
@@ -463,6 +467,15 @@ public partial class PlayerObjectController : NetworkBehaviour
 
         fellCountText.gameObject.SetActive(state);
         GetComponent<PlayerMovement>().currentEquippedItem = "";
+    }
+
+    [ClientRpc]
+    public void RpcShowPopupText(string text)
+    {
+        if (!isClientOnly)
+            return;
+
+        LobbyController.Instance.ShowPopupText(text);
     }
 
     [ClientRpc]

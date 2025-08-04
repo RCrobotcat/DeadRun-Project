@@ -376,10 +376,12 @@ public partial class LobbyController
             if (playerObjectController.playerID == 1) // Host
             {
                 playerObjectController.fellCountText.gameObject.SetActive(false);
+                ShowPopupText("Level 2: Fight for Collections!");
             }
             else
             {
                 playerObjectController.RpcSetPlayerFellCountUIState(false);
+                playerObjectController.RpcShowPopupText("Level 2: Fight for Collections!");
             }
         }
 
@@ -405,6 +407,8 @@ public partial class LobbyController
                         }
                     }
                 }
+
+                ShowPopupText("Level 3: Paint Paint Paint!");
             }
             else
             {

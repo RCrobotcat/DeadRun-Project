@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 641d2dc38ced4df295f2c236fdf0fb20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verticalAutoDisplacement: 2
-  horizontalAutoDisplacement: 2
-  autoDisplacementSpeed: 1.5
+  verticalAutoDisplacement: 3
+  horizontalAutoDisplacement: 3
+  autoDisplacementSpeed: 1.6
   pauseTime: 1.5

@@ -179,6 +179,7 @@ public partial class MyNetworkManager
         }
 
         allPlayersInGameScene_server = true;
+        LobbyController.Instance.ShowPopupText("Level 1: Just Jump!");
     }
 
     public List<PlayerRoles> SetPlayersRoles()

@@ -316,6 +316,7 @@ public partial class LobbyController : Singleton<LobbyController>
 
     [Header("Mission Status Text")] public GameObject missionSuccessPanel;
     public GameObject missionFailedPanel;
+    public GameObject popupTextPanel;
 
     public void ShowMissionSuccessText(string text)
     {
@@ -339,6 +340,18 @@ public partial class LobbyController : Singleton<LobbyController>
                 missionFailedPanel.SetActive(false);
             });
         missionFailedPanel.GetComponentInChildren<Text>().text = text;
+    }
+
+    public void ShowPopupText(string text)
+    {
+        popupTextPanel.SetActive(true);
+        popupTextPanel.transform.localScale.To(Vector3.one * 1.5f, 2.5f,
+            (a) => { popupTextPanel.transform.localScale = a; }, () =>
+            {
+                popupTextPanel.transform.localScale = Vector3.one;
+                popupTextPanel.SetActive(false);
+            });
+        popupTextPanel.GetComponentInChildren<Text>().text = text;
     }
 
     #endregion
