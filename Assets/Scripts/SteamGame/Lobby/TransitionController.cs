@@ -159,6 +159,8 @@ public partial class LobbyController
                         SceneManager.GetSceneByName("Scene_3_1v1").path, "SpawnPos", previousScenePathName));
             }
         }
+
+        SoundController.Instance.PlayMusic(1, true);
     }
 
     public void TransitionAllPlayersToScene(string scenePathName, string scenePosToSpawnOn,
@@ -375,6 +377,7 @@ public partial class LobbyController
             if (playerObjectController.playerID == 1) // Host
             {
                 playerObjectController.fellCountText.gameObject.SetActive(false);
+                SoundController.Instance.PlayMusic(Random.Range(0, 3), true);
             }
             else
             {
@@ -390,6 +393,7 @@ public partial class LobbyController
                 playerObjectController.fellCountText.gameObject.SetActive(false);
                 ShowPopupText("Level 2: Fight for Collections!");
                 playerObjectController.collectionUIBase.SetActive(true);
+                playerMovement.moveSpeed = 10f;
             }
             else
             {

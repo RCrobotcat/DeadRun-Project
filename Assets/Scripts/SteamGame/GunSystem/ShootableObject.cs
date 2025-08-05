@@ -83,10 +83,10 @@ public partial class PlayerMovement
         }
     }
 
-    public void AttackPlayerRpc()
+    public void AttackPlayerRpc(float damage = 5f)
     {
         RpcDamagePlayer();
-        playerObjectController.CurrentHealth -= 5f;
+        playerObjectController.CurrentHealth -= damage;
         if (outlineShowTimerLocal <= 0)
         {
             foreach (Transform child in astronautModel.GetComponentsInChildren<Transform>(true))
@@ -95,9 +95,10 @@ public partial class PlayerMovement
         }
     }
 
-    public void AttackPlayerCmd()
+    public void AttackPlayerCmd(float damage = 5f)
     {
-        CmdDamagePlayer(5f);
+        CmdDamagePlayer(damage);
+
         if (outlineShowTimerLocal <= 0)
         {
             foreach (Transform child in astronautModel.GetComponentsInChildren<Transform>(true))
@@ -117,6 +118,7 @@ public partial class PlayerMovement
                     child.gameObject.layer = LayerMask.NameToLayer("Outlined");
                 outlineShowTimer = outlineShowTime;
             }
+
             RpcDamagePlayer();
         }
     }

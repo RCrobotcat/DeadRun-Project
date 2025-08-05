@@ -6,6 +6,7 @@ using Steamworks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public enum PlayerRole
 {
@@ -60,6 +61,11 @@ public partial class PlayerObjectController : NetworkBehaviour
                 _role = value;
             }
         }
+    }
+
+    private void OnEnable()
+    {
+        damageImage.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -458,12 +464,14 @@ public partial class PlayerObjectController : NetworkBehaviour
             }
 
             LobbyController.Instance.ShowPopupText("Level 3: Paint Paint Paint!");
-            
+
             // Countdown logic will be handled via lobby controller's rpc update method
             GetComponent<PlayerSplatonPainting>().currentPaintedAreasPanel.SetActive(true);
         }
         else if (!SplatonPlaceGenerator.Instance.IsInitialized)
             SplatonPlaceGenerator.Instance.InitializePlace();
+
+        SoundController.Instance.PlayMusic(Random.Range(0, 3), true);
     }
 
     [ClientRpc]
@@ -474,6 +482,8 @@ public partial class PlayerObjectController : NetworkBehaviour
 
         fellCountText.gameObject.SetActive(state);
         GetComponent<PlayerMovement>().currentEquippedItem = "";
+
+        SoundController.Instance.PlayMusic(Random.Range(0, 3), true);
     }
 
     [ClientRpc]

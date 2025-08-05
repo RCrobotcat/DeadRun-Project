@@ -111,6 +111,8 @@ public class SteamLobby : MonoBehaviour
         currentLobbyID = callback.m_ulSteamIDLobby;
         networkManager.SetUpClientMsgHandlers();
 
+        SoundController.Instance.PlayMusic(Random.Range(0, 3), true);
+
         if (NetworkServer.active)
             return;
 

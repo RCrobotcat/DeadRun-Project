@@ -90,8 +90,10 @@ MonoBehaviour:
   redMonsterPrefab: {fileID: 7220425214883531268, guid: ea8a126bf04c6a04f8009599ca163d6b, type: 3}
   carsPrefabs:
   - {fileID: 317369444969690471, guid: 0764b635fbb90a040a2fc3bd5928a16c, type: 3}
+  - {fileID: 8150406114401893393, guid: 27ef38539132e3341a5a8ec101ca41c9, type: 3}
+  - {fileID: 8484030449367306885, guid: f8b63e9da3f00914cb2ad70695afc10e, type: 3}
   monsterCount: 6
-  carCount: 6
+  carCount: 10
   monstersParent: {fileID: 0}
 --- !u!114 &6005335872304518268
 MonoBehaviour:

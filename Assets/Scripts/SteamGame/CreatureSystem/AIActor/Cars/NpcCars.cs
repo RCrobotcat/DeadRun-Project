@@ -3,14 +3,18 @@ using CleverCrow.Fluid.BTs.Trees;
 using CleverCrow.Fluid.BTs.Tasks;
 using System.Collections.Generic;
 using Mirror;
+using Random = UnityEngine.Random;
 
-public class NPCShip : AIActor
+public class NpcCars : AIActor
 {
     [Range(0.1f, 100f)] public float interactiveRadius = 10f;
 
     bool interative = false;
 
     WayPointNavigator wayPointNavigator;
+
+    public float attackInterval = 0.5f;
+    private float attackTimer = 0f;
 
     protected override void Start()
     {
@@ -19,6 +23,21 @@ public class NPCShip : AIActor
         InitAI();
 
         wayPointNavigator = GetComponent<WayPointNavigator>();
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if (attackTimer <= 0)
+            {
+                if (NetworkServer.active)
+                    other.transform.GetComponent<PlayerMovement>().AttackPlayerRpc(20f);
+                else
+                    other.transform.GetComponent<PlayerMovement>().AttackPlayerCmd(20f);
+                attackTimer = attackInterval;
+            }
+        }
     }
 
     protected override void Update()
@@ -31,6 +50,9 @@ public class NPCShip : AIActor
                     return;
             }
         }
+
+        if (attackTimer > 0)
+            attackTimer -= Time.deltaTime;
 
         base.Update();
 

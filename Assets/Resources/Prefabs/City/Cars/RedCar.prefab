@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4438774953071190996}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Wheels_15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,8 @@ GameObject:
   - component: {fileID: 1200725940331374890}
   - component: {fileID: 8175253029102748350}
   - component: {fileID: -2168650848877121433}
-  m_Layer: 12
+  - component: {fileID: 8040911872839296115}
+  m_Layer: 0
   m_Name: RedCar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,8 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84428e4219b042ec8a7387888d235657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVelocity: 7
-  maxAcceleration: 10
+  maxVelocity: 20
+  maxAcceleration: 15
   turnSpeed: 20
   targetRadius: 1.5
   slowRadius: 1
@@ -174,6 +175,7 @@ MonoBehaviour:
   viewRadius: 10
   attackRadius: 1
   interactiveRadius: 10
+  attackInterval: 0.5
 --- !u!114 &8175253029102748350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,7 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayStart: 0.5
-  rayLength: 10
+  rayLength: 17
   rayCount: 36
   collisionLayers:
     serializedVersion: 2
@@ -209,6 +211,40 @@ MonoBehaviour:
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
+--- !u!114 &8040911872839296115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317369444969690471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 8125807269101040963}
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  onlySyncOnChange: 1
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 0
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  onlySyncOnChangeCorrectionMultiplier: 2
+  useFixedUpdate: 0
+  rotationSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
 --- !u!1 &781151319816797516
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,7 +254,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1757551640530359422}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: wheel_FR_15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +288,7 @@ GameObject:
   - component: {fileID: 3854275987523457515}
   - component: {fileID: 7135489621510865208}
   - component: {fileID: 1696520481546513112}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: wheel_RL_Mesh_15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +374,7 @@ GameObject:
   - component: {fileID: 4851429559075167142}
   - component: {fileID: 4609007829751564324}
   - component: {fileID: 5216717622993680196}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Body_Mesh_15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424,7 +460,7 @@ GameObject:
   - component: {fileID: 7149339742593912862}
   - component: {fileID: 4738814766116111552}
   - component: {fileID: 5445170922239626686}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: wheel_RR_Mesh_15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +544,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3237457077108299412}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: CarBody_15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -540,7 +576,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7748632531218947016}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: wheel_FL_15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -574,7 +610,7 @@ GameObject:
   - component: {fileID: 7786894341298106152}
   - component: {fileID: 3403565784444359345}
   - component: {fileID: 8846161526277856950}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: wheel_FR_Mesh_15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -660,7 +696,7 @@ GameObject:
   - component: {fileID: 7553167770148391679}
   - component: {fileID: 193100830715503946}
   - component: {fileID: 1162357238983204447}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: wheel_FL_Mesh_15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -744,7 +780,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1383086251624519687}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: wheel_RL_15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -776,7 +812,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8943127722006035292}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: wheel_RR_15
   m_TagString: Untagged
   m_Icon: {fileID: 0}

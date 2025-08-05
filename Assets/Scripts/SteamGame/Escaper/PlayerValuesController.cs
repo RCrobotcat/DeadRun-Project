@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using Mirror;
@@ -43,8 +44,26 @@ public partial class PlayerObjectController
                 return;
             }
 
+            float formalValue = currentHealth;
             currentHealth = Mathf.Clamp(value, 0, maxHealth);
             healthBarFillImage.DOFillAmount(currentHealth / maxHealth, 0.2f);
+
+            if (formalValue > value)
+            {
+                if (playerID == LobbyController.Instance.LocalPlayerObjectController.playerID)
+                {
+                    StartCoroutine(DamageImageFadeInOut());
+                    if (!SoundController.Instance.sfxSource_hit_2.isPlaying)
+                        SoundController.Instance.PlaySFX(SoundController.Instance.sfxSource_hit_1,
+                            SoundController.Instance.sfxClip_hit, 0.7f);
+                }
+                else
+                {
+                    if (!SoundController.Instance.sfxSource_hit_2.isPlaying)
+                        SoundController.Instance.PlaySFX(SoundController.Instance.sfxSource_hit_2,
+                            SoundController.Instance.sfxClip_hit, 0.7f);
+                }
+            }
 
             if (NetworkServer.active)
                 RpcSyncPlayersHealthToClient(currentHealth);
@@ -55,6 +74,7 @@ public partial class PlayerObjectController
                 {
                     if (gameObject.scene.name == "Scene_3_1v1")
                     {
+                        damageImage.gameObject.SetActive(false);
                         DieIn1V1();
                     }
                     else
@@ -90,6 +110,7 @@ public partial class PlayerObjectController
                 {
                     if (SceneManager.GetSceneByName("Scene_3_1v1").isLoaded)
                     {
+                        damageImage.gameObject.SetActive(false);
                         if (playerID == LobbyController.Instance.LocalPlayerObjectController.playerID)
                             LobbyController.Instance.ShowMissionFailedText("Mission Failed: " + "\n" +
                                                                            "You died in 1v1!");
@@ -358,6 +379,10 @@ public partial class PlayerObjectController
             return;
 
         collectionUIBase.SetActive(state);
+        if (state)
+            GetComponent<PlayerMovement>().moveSpeed = 10f;
+        else
+            GetComponent<PlayerMovement>().moveSpeed = 5f;
     }
 
     [ClientRpc]
@@ -375,7 +400,54 @@ public partial class PlayerObjectController
     {
         if (!isClientOnly)
             return;
-        
+
         FindObjectOfType<MatchResultsList>().HideMatchResults();
+    }
+
+    public Image damageImage;
+
+    private IEnumerator DamageImageFadeInOut()
+    {
+        float fadeInDuration = 0.2f;
+        float fadeOutDuration = 0.3f;
+        float maxAlpha = 0.35f;
+
+        if (damageImage == null)
+            yield break;
+
+        if (!damageImage.gameObject.activeSelf)
+        {
+            damageImage.gameObject.SetActive(true);
+        }
+
+        Color color = damageImage.color;
+
+        float timer = 0f;
+        while (timer < fadeInDuration)
+        {
+            timer += Time.deltaTime;
+            color.a = Mathf.Lerp(0, maxAlpha, timer / fadeInDuration);
+            damageImage.color = color;
+            yield return null;
+        }
+
+        color.a = maxAlpha;
+        damageImage.color = color;
+
+        yield return new WaitForSeconds(0.1f);
+
+        timer = 0f;
+        while (timer < fadeOutDuration)
+        {
+            timer += Time.deltaTime;
+            color.a = Mathf.Lerp(maxAlpha, 0, timer / fadeOutDuration);
+            damageImage.color = color;
+            yield return null;
+        }
+
+        color.a = 0;
+        damageImage.color = color;
+
+        damageImage.gameObject.SetActive(false);
     }
 }
