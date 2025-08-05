@@ -92,7 +92,7 @@ public class TargetAreaInteractable : NetworkBehaviour
             if (playerObjectController.playerID > 1) // Not host player
             {
                 playerObjectController.RpcUpdateCollectionsText(currentCollectableItemCount,
-                    currentCollectableItemCount);
+                    requiredCollectableItemCount);
             }
 
             if (currentCollectableItemCount >= requiredCollectableItemCount)
