@@ -2034,7 +2034,7 @@ MonoBehaviour:
   startGameBtn: {fileID: 1680123933}
   exitLobbyBtn: {fileID: 9139546624027335217}
   lobbyCanvas: {fileID: 874843923}
-  countDownTime: 180
+  countDownTime: 20
   countDownTimer: 0
   countDownPanel: {fileID: 1491194986}
   countDownText: {fileID: 641959102}

@@ -361,11 +361,21 @@ public partial class PlayerObjectController
     }
 
     [ClientRpc]
-    public void RpcUpdateCollectionsText(string text)
+    public void RpcUpdateCollectionsText(int current, int required)
     {
         if (!isClientOnly)
             return;
 
-        collectionText.text = text;
+        currentCollectionCount = current;
+        collectionText.text = current + "/" + required;
+    }
+
+    [ClientRpc]
+    public void RpcHideOtherPlayersResultsPanel()
+    {
+        if (!isClientOnly)
+            return;
+        
+        FindObjectOfType<MatchResultsList>().HideMatchResults();
     }
 }

@@ -385,7 +385,17 @@ public partial class LobbyController : Singleton<LobbyController>
         countDownText.text = "00:00";
         UpdateOtherPlayersCountdown(0f);
 
-        // TODO: count down finished logic
+        yield return new WaitForSeconds(0.2f);
+
+        // Show Match Results
+        countDownTimer = 10f; // show match results for 10 seconds
+        FindObjectOfType<MatchResultsList>().ShowMatchResults();
+        yield return new WaitForSeconds(countDownTimer);
+
+        FindObjectOfType<MatchResultsList>().HideMatchResults();
+        HideOtherPlayersResultsPanel();
+
+        // TODO: go to end scene
     }
 
     void UpdateOtherPlayersCountdown(float currentTime)
@@ -395,6 +405,17 @@ public partial class LobbyController : Singleton<LobbyController>
             if (player.playerID != 1) // Not the host
             {
                 player.RpcUpdateCountdown(currentTime);
+            }
+        }
+    }
+
+    void HideOtherPlayersResultsPanel()
+    {
+        foreach (var player in MyNetworkManager.GamePlayers)
+        {
+            if (player.playerID != 1) // Not the host
+            {
+                player.RpcHideOtherPlayersResultsPanel();
             }
         }
     }

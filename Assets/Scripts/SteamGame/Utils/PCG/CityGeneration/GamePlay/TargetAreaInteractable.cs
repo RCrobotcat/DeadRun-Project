@@ -88,11 +88,11 @@ public class TargetAreaInteractable : NetworkBehaviour
             playerObjectController.currentCollectionCount = currentCollectableItemCount;
             playerObjectController.collectionText.text =
                 currentCollectableItemCount + "/" + requiredCollectableItemCount;
-            
+
             if (playerObjectController.playerID > 1) // Not host player
             {
-                playerObjectController.RpcUpdateCollectionsText(
-                    currentCollectableItemCount + "/" + requiredCollectableItemCount);
+                playerObjectController.RpcUpdateCollectionsText(currentCollectableItemCount,
+                    currentCollectableItemCount);
             }
 
             if (currentCollectableItemCount >= requiredCollectableItemCount)
