@@ -1,4 +1,5 @@
 ﻿using Mirror;
+using Mirror.BouncyCastle.Bcpg.Sig;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -81,6 +82,19 @@ public class TargetAreaInteractable : NetworkBehaviour
             currentCollectableItemCount++;
             player.GetComponent<PlayerMovement>().currentEquippedItem = "";
             progressText.text = currentCollectableItemCount + "/" + requiredCollectableItemCount;
+
+            PlayerObjectController playerObjectController =
+                player.GetComponent<PlayerObjectController>();
+            playerObjectController.currentCollectionCount = currentCollectableItemCount;
+            playerObjectController.collectionText.text =
+                currentCollectableItemCount + "/" + requiredCollectableItemCount;
+            
+            if (playerObjectController.playerID > 1) // Not host player
+            {
+                playerObjectController.RpcUpdateCollectionsText(
+                    currentCollectableItemCount + "/" + requiredCollectableItemCount);
+            }
+
             if (currentCollectableItemCount >= requiredCollectableItemCount)
             {
                 progressText.text = "Done!";

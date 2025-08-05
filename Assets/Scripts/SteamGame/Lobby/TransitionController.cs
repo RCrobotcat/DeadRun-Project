@@ -389,11 +389,13 @@ public partial class LobbyController
             {
                 playerObjectController.fellCountText.gameObject.SetActive(false);
                 ShowPopupText("Level 2: Fight for Collections!");
+                playerObjectController.collectionUIBase.SetActive(true);
             }
             else
             {
                 playerObjectController.RpcSetPlayerFellCountUIState(false);
                 playerObjectController.RpcShowPopupText("Level 2: Fight for Collections!");
+                playerObjectController.RpcSetCollectionUIState(true);
             }
         }
 
@@ -402,6 +404,8 @@ public partial class LobbyController
         {
             if (playerObjectController.playerID == 1) // Host
             {
+                playerObjectController.collectionUIBase.SetActive(false);
+
                 playerMovement.currentEquippedItem = "";
                 playerObjectController.fellCountText.gameObject.SetActive(false);
 
@@ -427,6 +431,7 @@ public partial class LobbyController
             }
             else
             {
+                playerObjectController.RpcSetCollectionUIState(false);
                 playerObjectController.RpcSplatonGenerating();
             }
         }

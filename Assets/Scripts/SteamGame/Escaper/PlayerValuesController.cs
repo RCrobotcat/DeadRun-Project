@@ -22,6 +22,10 @@ public partial class PlayerObjectController
     public Text scoreText;
     public Text plusOneScoreText;
 
+    [Header("Collecions")] public GameObject collectionUIBase;
+    public Text collectionText;
+    [HideInInspector] public int currentCollectionCount = 0;
+
     public float CurrentHealth
     {
         get => currentHealth;
@@ -345,5 +349,23 @@ public partial class PlayerObjectController
         }
         else if (currentTime == 0)
             LobbyController.Instance.countDownText.text = "00:00";
+    }
+
+    [ClientRpc]
+    public void RpcSetCollectionUIState(bool state)
+    {
+        if (!isClientOnly)
+            return;
+
+        collectionUIBase.SetActive(state);
+    }
+
+    [ClientRpc]
+    public void RpcUpdateCollectionsText(string text)
+    {
+        if (!isClientOnly)
+            return;
+
+        collectionText.text = text;
     }
 }
