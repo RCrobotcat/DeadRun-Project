@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Mirror;
-using NUnit.Framework;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -369,7 +368,7 @@ public class SplatonPlaceGenerator : Singleton<SplatonPlaceGenerator>
 
                 if (!overlap)
                 {
-                    Vector3 pos = new Vector3(x * cellSize + cellSize, 2, y * cellSize + cellSize);
+                    Vector3 pos = new Vector3(x * cellSize + cellSize, 3, y * cellSize + cellSize);
                     GameObject otherObj = Instantiate(others[i], pos, Quaternion.identity, othersParent);
                     otherObj.name = $"Other_{i}_{x}_{y}";
 

@@ -1,16 +1,19 @@
 ﻿using Mirror;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerSplatonPainting : NetworkBehaviour
 {
-    private PaintingColor paintingColor;
+    public GameObject currentPaintedAreasPanel;
+    public Text currentPaintedAreasText;
 
     public Shader litShader;
 
     public float damageInterval = 1f;
     private float damageTimer = 0f;
-
+    
+    private PaintingColor paintingColor;
     public PaintingColor SelfPaintingColor
     {
         get => paintingColor;
@@ -239,6 +242,26 @@ public class PlayerSplatonPainting : NetworkBehaviour
         SetColors(GetColorFromPaintingColor(paintingColor));
 
         Debug.Log("CmdSetPaintingColor called with color: " + paintColor);
+    }
+
+    [ClientRpc]
+    public void RpcUpdatePaintAreas(float paintAreas)
+    {
+        if (!isClientOnly) return;
+
+        if (paintAreas < 0)
+            return;
+
+        GetComponent<PlayerSplatonPainting>().paintingParticles.PaintAreas = paintAreas;
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdUpdatePaintAreas(float paintAreas)
+    {
+        if (paintAreas < 0)
+            return;
+
+        GetComponent<PlayerSplatonPainting>().paintingParticles.PaintAreas = paintAreas;
     }
 
     private void OnDrawGizmos()

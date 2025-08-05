@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Mirror;
 using Steamworks;
@@ -26,6 +27,11 @@ public partial class LobbyController : Singleton<LobbyController>
     public GameObject lobbyCanvas;
 
     private List<PlayerRoles> roles; // all players roles set in host server
+
+    [Header("Splaton 1v1 Settings")] public float countDownTime = 180f; // seconds
+    [HideInInspector] public float countDownTimer = 0;
+    public GameObject countDownPanel;
+    public Text countDownText;
 
     MyNetworkManager _myNetworkManager;
 
@@ -352,6 +358,45 @@ public partial class LobbyController : Singleton<LobbyController>
                 popupTextPanel.SetActive(false);
             });
         popupTextPanel.GetComponentInChildren<Text>().text = text;
+    }
+
+    public void ShowCountDownText()
+    {
+        if (!NetworkServer.active)
+            return;
+
+        countDownPanel.SetActive(true);
+        countDownTimer = countDownTime;
+        StartCoroutine(CountDownCoroutine());
+    }
+
+    private IEnumerator CountDownCoroutine()
+    {
+        while (countDownTimer > 0)
+        {
+            int minutes = Mathf.FloorToInt(countDownTimer / 60f);
+            int seconds = Mathf.FloorToInt(countDownTimer % 60f);
+            countDownText.text = $"{minutes:D2}:{seconds:D2}";
+            UpdateOtherPlayersCountdown(countDownTimer);
+            yield return new WaitForSeconds(1f);
+            countDownTimer -= 1f;
+        }
+
+        countDownText.text = "00:00";
+        UpdateOtherPlayersCountdown(0f);
+
+        // TODO: count down finished logic
+    }
+
+    void UpdateOtherPlayersCountdown(float currentTime)
+    {
+        foreach (var player in MyNetworkManager.GamePlayers)
+        {
+            if (player.playerID != 1) // Not the host
+            {
+                player.RpcUpdateCountdown(currentTime);
+            }
+        }
     }
 
     #endregion

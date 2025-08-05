@@ -458,6 +458,9 @@ public partial class PlayerObjectController : NetworkBehaviour
             }
 
             LobbyController.Instance.ShowPopupText("Level 3: Paint Paint Paint!");
+            
+            // Countdown logic will be handled via lobby controller's rpc update method
+            GetComponent<PlayerSplatonPainting>().currentPaintedAreasPanel.SetActive(true);
         }
         else if (!SplatonPlaceGenerator.Instance.IsInitialized)
             SplatonPlaceGenerator.Instance.InitializePlace();

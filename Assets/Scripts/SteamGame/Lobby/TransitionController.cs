@@ -421,6 +421,9 @@ public partial class LobbyController
                 }
 
                 ShowPopupText("Level 3: Paint Paint Paint!");
+
+                ShowCountDownText(); // start countdown for painting
+                player.GetComponent<PlayerSplatonPainting>().currentPaintedAreasPanel.SetActive(true);
             }
             else
             {

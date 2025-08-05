@@ -5,6 +5,7 @@ using UnityEngine;
 public class ParticlesController : MonoBehaviour
 {
     public PlayerObjectController player;
+    public PlayerSplatonPainting playerSplatonPainting;
 
     public Color paintColor;
 
@@ -15,7 +16,30 @@ public class ParticlesController : MonoBehaviour
     [Space] ParticleSystem part;
     List<ParticleCollisionEvent> collisionEvents;
 
-    public float paintAreas = 0;
+    private float paintAreas = 0;
+
+    public float PaintAreas
+    {
+        get => paintAreas;
+        set
+        {
+            paintAreas = value;
+
+            if (player.playerID == LobbyController.Instance.LocalPlayerObjectController.playerID)
+            {
+                playerSplatonPainting.currentPaintedAreasText.text = $"{paintAreas:F2} m²";
+            }
+
+            if (NetworkServer.active)
+            {
+                playerSplatonPainting.RpcUpdatePaintAreas(paintAreas);
+            }
+            else
+            {
+                playerSplatonPainting.CmdUpdatePaintAreas(paintAreas);
+            }
+        }
+    }
 
     void Start()
     {
@@ -42,7 +66,7 @@ public class ParticlesController : MonoBehaviour
                 float radius = Random.Range(minRadius, maxRadius);
                 PaintManager.Instance.paint(p, pos, radius, hardness, strength, paintColor);
 
-                paintAreas += radius * 0.01f;
+                PaintAreas += radius * 0.05f;
 
                 SyncPaint(p, pos, radius, hardness, strength, paintColor);
             }

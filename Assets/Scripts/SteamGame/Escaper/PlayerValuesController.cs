@@ -327,4 +327,23 @@ public partial class PlayerObjectController
         SceneManager.MoveGameObjectToScene(go, SceneManager.GetSceneByName(gameObject.scene.name));
         NetworkServer.Spawn(go);
     }
+
+    [ClientRpc]
+    public void RpcUpdateCountdown(float currentTime)
+    {
+        if (!isClientOnly)
+            return;
+
+        LobbyController.Instance.countDownPanel.SetActive(true);
+        LobbyController.Instance.countDownTimer = currentTime;
+
+        if (currentTime > 0f)
+        {
+            int minutes = Mathf.FloorToInt(currentTime / 60f);
+            int seconds = Mathf.FloorToInt(currentTime % 60f);
+            LobbyController.Instance.countDownText.text = $"{minutes:D2}:{seconds:D2}";
+        }
+        else if (currentTime == 0)
+            LobbyController.Instance.countDownText.text = "00:00";
+    }
 }
