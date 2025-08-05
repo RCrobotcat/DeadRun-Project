@@ -88,7 +88,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   redMonsterPrefab: {fileID: 7220425214883531268, guid: ea8a126bf04c6a04f8009599ca163d6b, type: 3}
+  carsPrefabs:
+  - {fileID: 317369444969690471, guid: 0764b635fbb90a040a2fc3bd5928a16c, type: 3}
   monsterCount: 6
+  carCount: 6
   monstersParent: {fileID: 0}
 --- !u!114 &6005335872304518268
 MonoBehaviour:

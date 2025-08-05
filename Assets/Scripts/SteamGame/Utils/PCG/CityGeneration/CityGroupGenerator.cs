@@ -128,6 +128,25 @@ namespace CityGenerator
                 RegenrateChecking();
         }
 
+        void GetAllRoadWayPoints()
+        {
+            if (!NetworkServer.active)
+                return;
+
+            foreach (var mark in cityMarks)
+            {
+                if (mark.markType == CityObjectType.MajorRoad ||
+                    mark.markType == CityObjectType.MinorRoad ||
+                    mark.markType == CityObjectType.Junction ||
+                    mark.markType == CityObjectType.MajorJunction)
+                {
+                    WayPointManager.Instance.AddWayPoint(mark.GetComponent<WayPoint>());
+                }
+            }
+
+            WayPointManager.Instance.InitializeCurrentWaypointsAdded();
+        }
+
         void SpawnTargetAreas()
         {
             if (!NetworkServer.active)
@@ -154,6 +173,7 @@ namespace CityGenerator
                         val1 = BitConverter.ToInt32(bytes, 0) % cityMarks.GetLength(1);
                         if (val1 < 0) val1 += cityMarks.GetLength(1);
                     }
+
                     var candidate = cityMarks[val0, val1];
                     if ((candidate.markType == CityObjectType.MajorRoad ||
                          candidate.markType == CityObjectType.MinorRoad)
@@ -239,7 +259,9 @@ namespace CityGenerator
                 isExpandScale = true;
             }
 
-            GetComponent<MonsterGeneration>().GenerateMonsters();
+            GetAllRoadWayPoints();
+
+            GetComponent<MonsterGeneration>().GenerateMonstersAndCars();
 
             isInitial = true;
         }

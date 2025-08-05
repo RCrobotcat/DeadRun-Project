@@ -9,7 +9,7 @@ public class SteeringBehaviors : MonoBehaviour
 
     // If the distance to the target point is less than this value, it is considered to reach the target point
     [Header("Arrive Behavior")] public float targetRadius = 0.005f;
-    
+
     public float slowRadius = 1f; // Start deceleration within this radius
     public float timeToTarget = 0.1f;
 
@@ -34,7 +34,8 @@ public class SteeringBehaviors : MonoBehaviour
             rb.linearVelocity = rb.linearVelocity.normalized * maxVelocity;
         }
 
-        animator.SetFloat("Speed", rb.linearVelocity.magnitude);
+        if (animator != null)
+            animator.SetFloat("Speed", rb.linearVelocity.magnitude);
     }
 
     public Vector3 Seek(Vector3 targetPosition, float maxSeekAcceleration)
@@ -54,7 +55,7 @@ public class SteeringBehaviors : MonoBehaviour
     {
         return (targetPosition - transform.position).sqrMagnitude <= targetRadius * targetRadius;
     }
-    
+
     public Vector3 Arrive(Vector3 targetPosition)
     {
         Vector3 targetVelocity = targetPosition - rb.position;
@@ -78,7 +79,7 @@ public class SteeringBehaviors : MonoBehaviour
 
         targetVelocity.Normalize();
         targetVelocity *= targetSpeed;
-        
+
         Vector3 acceleration = targetVelocity - rb.linearVelocity;
         acceleration *= 1 / timeToTarget;
 
