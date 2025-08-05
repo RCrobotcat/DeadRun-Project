@@ -4,14 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7061f1fe-81be-4fca-999e-11768f455133" name="Changes" comment="fixed bugs">
+    <list default="true" id="7061f1fe-81be-4fca-999e-11768f455133" name="Changes" comment="optimized and fixed bugs">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DeadRunProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Materials/Flag_self.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Materials/Flag_self.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/City/TargetArea.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/City/TargetArea.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Monsters/RedMonster.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Monsters/RedMonster.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Traps/InteractiveObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Traps/InteractiveObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/PCG/CityGeneration/GamePlay/TargetAreaInteractable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/Utils/PCG/CityGeneration/GamePlay/TargetAreaInteractable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/SplatonPainting/GamePlay/PlayerSplatonPainting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/SplatonPainting/GamePlay/PlayerSplatonPainting.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SteamGame/SplatonPainting/ParticleController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SteamGame/SplatonPainting/ParticleController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/PC_RPAsset.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/PC_RPAsset.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,15 +138,13 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="55868">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="55868" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list>
-          <MonoRuntime />
-        </list>
+        <list />
       </option>
       <option name="selectedOptions">
         <list />
@@ -209,6 +207,8 @@
       <workItem from="1754118501840" duration="12780000" />
       <workItem from="1754132128985" duration="33859000" />
       <workItem from="1754207259535" duration="10402000" />
+      <workItem from="1754399031518" duration="1132000" />
+      <workItem from="1754407712047" duration="3003000" />
     </task>
     <task id="LOCAL-00001" summary="fixed exit lobby bugs">
       <option name="closed" value="true" />
@@ -488,7 +488,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added plane PCG logic" />
     <MESSAGE value="Fixed plane traps synchronization bugs" />
     <MESSAGE value="Fixed plane traps synchronization bugs_2" />
     <MESSAGE value="Fixed transition to scene_4 bug" />
@@ -513,6 +512,7 @@
     <MESSAGE value="modified shaders and materials" />
     <MESSAGE value="Added splash sounds" />
     <MESSAGE value="fixed bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed bugs" />
+    <MESSAGE value="optimized and fixed bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="optimized and fixed bugs" />
   </component>
 </project>

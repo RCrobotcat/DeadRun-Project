@@ -31,13 +31,7 @@ public class ParticlesController : MonoBehaviour
             }
 
             if (NetworkServer.active)
-            {
                 playerSplatonPainting.RpcUpdatePaintAreas(paintAreas);
-            }
-            else
-            {
-                playerSplatonPainting.CmdUpdatePaintAreas(paintAreas);
-            }
         }
     }
 
@@ -66,7 +60,10 @@ public class ParticlesController : MonoBehaviour
                 float radius = Random.Range(minRadius, maxRadius);
                 PaintManager.Instance.paint(p, pos, radius, hardness, strength, paintColor);
 
-                PaintAreas += radius * 0.05f;
+                if (NetworkServer.active)
+                    PaintAreas += radius * 0.05f;
+                else
+                    playerSplatonPainting.CmdUpdatePaintAreas(radius * 0.05f);
 
                 SyncPaint(p, pos, radius, hardness, strength, paintColor);
             }

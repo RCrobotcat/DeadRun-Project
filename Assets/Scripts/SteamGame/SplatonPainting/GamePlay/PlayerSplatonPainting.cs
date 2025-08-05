@@ -256,12 +256,12 @@ public class PlayerSplatonPainting : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdUpdatePaintAreas(float paintAreas)
+    public void CmdUpdatePaintAreas(float paintAreasAdded)
     {
-        if (paintAreas < 0)
+        if (paintAreasAdded < 0)
             return;
 
-        GetComponent<PlayerSplatonPainting>().paintingParticles.PaintAreas = paintAreas;
+        GetComponent<PlayerSplatonPainting>().paintingParticles.PaintAreas += paintAreasAdded;
     }
 
     private void OnDrawGizmos()
