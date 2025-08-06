@@ -14,6 +14,7 @@ public partial class PlayerMovement : NetworkBehaviour
 
     private Rigidbody rb;
     private Vector3 horizontalVelocity;
+    private Vector3 inputDir = Vector3.zero;
 
     Vector3 lastGroundedPosition;
     Vector3 resPosition = Vector3.zero;
@@ -49,7 +50,6 @@ public partial class PlayerMovement : NetworkBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        // 锁定旋转 X、Z，避免物理碰撞时翻滚
         rb.freezeRotation = true;
 
         itemsManager = FindObjectOfType<ItemsManager>();
@@ -63,7 +63,7 @@ public partial class PlayerMovement : NetworkBehaviour
     {
         if (isEnd)
             return;
-        
+
         HandleOutlineTimerLogic();
 
         if (!isLocalPlayer) // 确保只在本地玩家上执行
@@ -106,33 +106,9 @@ public partial class PlayerMovement : NetworkBehaviour
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
         //Vector3 inputDir = new Vector3(h, 0f, v).normalized;
-        Vector3 inputDir = (camForward * v + camRight * h).normalized;
+        inputDir = (camForward * v + camRight * h).normalized;
 
         PlayMovementSounds(h, v);
-
-        horizontalVelocity = Vector3.zero;
-        if (inputDir.magnitude >= 0.1f)
-        {
-            if (!isAiming)
-            {
-                // 计算并平滑朝向
-                float targetAngle = Mathf.Atan2(inputDir.x, inputDir.z) * Mathf.Rad2Deg;
-                float smoothAngle = Mathf.SmoothDampAngle(
-                    transform.eulerAngles.y,
-                    targetAngle,
-                    ref turnSmoothVelocity,
-                    turnSmoothTime
-                );
-                transform.rotation = Quaternion.Euler(0f, smoothAngle, 0f);
-
-                // 计算水平速度向量
-                horizontalVelocity = transform.forward * moveSpeed;
-            }
-            else
-            {
-                horizontalVelocity = inputDir * moveSpeed;
-            }
-        }
 
         _animator.SetFloat("Speed", horizontalVelocity.magnitude);
         _animator.SetBool("Grounded", isGrounded);
@@ -251,7 +227,7 @@ public partial class PlayerMovement : NetworkBehaviour
     {
         if (isEnd)
             return;
-        
+
         if (!isLocalPlayer)
             return;
 
@@ -259,6 +235,30 @@ public partial class PlayerMovement : NetworkBehaviour
         {
             rb.linearVelocity = Vector3.zero;
             return;
+        }
+
+        horizontalVelocity = Vector3.zero;
+        if (inputDir.magnitude >= 0.1f)
+        {
+            if (!isAiming)
+            {
+                // 计算并平滑朝向
+                float targetAngle = Mathf.Atan2(inputDir.x, inputDir.z) * Mathf.Rad2Deg;
+                float smoothAngle = Mathf.SmoothDampAngle(
+                    transform.eulerAngles.y,
+                    targetAngle,
+                    ref turnSmoothVelocity,
+                    turnSmoothTime
+                );
+                transform.rotation = Quaternion.Euler(0f, smoothAngle, 0f);
+
+                // 计算水平速度向量
+                horizontalVelocity = transform.forward * moveSpeed;
+            }
+            else
+            {
+                horizontalVelocity = inputDir * moveSpeed;
+            }
         }
 
         Vector3 newVelocity = new Vector3(

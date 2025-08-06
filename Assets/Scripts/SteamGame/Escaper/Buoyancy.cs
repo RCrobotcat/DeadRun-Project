@@ -13,7 +13,7 @@ public class Buoyancy : MonoBehaviour
     private const float waterDensity = 1000;
 
     // Damping coefficient
-    private const float DAMPFER = 0.1f;
+    [SerializeField] private float DAMPFER = 2f;
 
     private Vector3 LocalArchimedesForce { get; set; }
 
