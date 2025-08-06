@@ -50,6 +50,9 @@ public class Jetpack : NetworkBehaviour
 
     void Update()
     {
+        if (GetComponent<PlayerMovement>().isEnd)
+            return;
+        
         if (NetworkServer.active)
         {
             if (gameObject.scene.name != "Scene_4")

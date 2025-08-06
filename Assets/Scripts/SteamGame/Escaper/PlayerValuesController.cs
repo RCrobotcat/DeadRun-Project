@@ -27,6 +27,8 @@ public partial class PlayerObjectController
     public Text collectionText;
     [HideInInspector] public int currentCollectionCount = 0;
 
+    public bool isEnd = false;
+
     public float CurrentHealth
     {
         get => currentHealth;
@@ -449,5 +451,29 @@ public partial class PlayerObjectController
         damageImage.color = color;
 
         damageImage.gameObject.SetActive(false);
+    }
+
+    [ClientRpc]
+    public void RpcShowResultCanvas(string winnerName, int winnerScore, int yourScore)
+    {
+        if (!isClientOnly)
+            return;
+
+        CameraController.Instance.gameObject.SetActive(false);
+        LobbyController.Instance.countDownPanel.gameObject.SetActive(false);
+
+        foreach (var p in MyNetworkManager.GamePlayers)
+        {
+            p.isEnd = true;
+            p.GetComponent<PlayerMovement>().isEnd = true;
+        }
+
+        ResultCanvas resultCanvas = FindObjectOfType<ResultCanvas>();
+        if (resultCanvas != null)
+        {
+            resultCanvas.ShowResult(winnerName, winnerScore, yourScore);
+        }
+
+        gameObject.SetActive(false);
     }
 }

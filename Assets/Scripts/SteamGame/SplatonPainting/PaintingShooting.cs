@@ -21,6 +21,9 @@ public class PaintingShooting : MonoBehaviour
 
     void Update()
     {
+        if (player.GetComponent<PlayerMovement>().isEnd)
+            return;
+
         if (!player.GetComponent<PlayerMovement>().isLocalPlayer)
             return;
 

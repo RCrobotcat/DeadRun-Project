@@ -395,7 +395,8 @@ public partial class LobbyController : Singleton<LobbyController>
         FindObjectOfType<MatchResultsList>().HideMatchResults();
         HideOtherPlayersResultsPanel();
 
-        // TODO: go to end scene
+        // go to end scene
+        TransitionAllPlayersToEndScene(SceneManager.GetSceneByName("Scene_5_Painting").path);
     }
 
     void UpdateOtherPlayersCountdown(float currentTime)

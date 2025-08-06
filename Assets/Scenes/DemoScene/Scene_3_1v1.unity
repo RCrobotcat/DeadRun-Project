@@ -280,6 +280,93 @@ MonoBehaviour:
   - {x: 100, y: 10, z: 200}
   - {x: 100, y: 10, z: 210}
   - {x: 100, y: 10, z: 220}
+--- !u!1 &677509943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 677509945}
+  - component: {fileID: 677509944}
+  m_Layer: 0
+  m_Name: Grass
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &677509944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 677509943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d3b8ead7a904056820e9947287fbf17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  computeShader: {fileID: 7200000, guid: f5053061ca32465abe54d864d6297eb5, type: 3}
+  material: {fileID: 2100000, guid: 1682d002c538b4f4ebb08f431ee2a2f6, type: 2}
+  cam: {fileID: 0}
+  tileResolution: 512
+  tileCount: 20
+  jitterStrength: 0.26
+  distanceCullStartDisLOD0: 0
+  distanceCullEndDisLOD0: 80
+  distanceCullStartDisLOD1: 120
+  distanceCullEndDisLOD1: 300
+  frustumCullNearOffset: -3
+  frustumCullEdgeOffset: -1
+  clumpTextureHeight: 512
+  clumpTextureWidth: 512
+  clumpingVoronoiMaterial: {fileID: 2100000, guid: 66c2d32f27d92374d938d488893da2f7, type: 2}
+  clumpScale: 1
+  clumpParameters:
+  - pullToCentre: 90
+    pointInSameDirection: 0.5
+    baseHeight: 0.8
+    heightRandom: 0.2
+    baseWidth: 0.02
+    widthRandom: 0.01
+    baseTilt: 0.9
+    tiltRandom: 0.02
+    baseBend: 1.5
+    bendRandom: 0.05
+  - pullToCentre: 90
+    pointInSameDirection: 0.4
+    baseHeight: 0.8
+    heightRandom: 0.2
+    baseWidth: 0.03
+    widthRandom: 0.01
+    baseTilt: 0.85
+    tiltRandom: 0.02
+    baseBend: 1
+    bendRandom: 0.05
+  localWindTex: {fileID: 2800000, guid: c3e4dbb6b81530547b82006996e99f40, type: 3}
+  localWindStrength: 0.5
+  localWindScale: 0.01
+  localWindSpeed: 0.1
+  localWindRotateAmount: 0.3
+  localWindDirection: {x: 1, y: 0.7}
+--- !u!4 &677509945
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 677509943}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1028000444}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &709657450
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -346,7 +433,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5372814282254586377, guid: 1403d6b478e3fbb40bf8ee5c71cbdd70, type: 3}
   m_PrefabInstance: {fileID: 709657450}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &874210108
+--- !u!1 &1028000442
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -354,8 +441,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 874210109}
-  - component: {fileID: 874210110}
+  - component: {fileID: 1028000444}
+  - component: {fileID: 1028000443}
   m_Layer: 0
   m_Name: GrassController
   m_TagString: Untagged
@@ -363,35 +450,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &874210109
+--- !u!114 &1028000443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028000442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30c1090ce0fa4e15bfdad10b08c8a298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grass: {fileID: 677509944}
+--- !u!4 &1028000444
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 874210108}
+  m_GameObject: {fileID: 1028000442}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 766707784001045365}
+  - {fileID: 677509945}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &874210110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 874210108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30c1090ce0fa4e15bfdad10b08c8a298, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grass: {fileID: 6528776689538593919}
 --- !u!1 &1369595032
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,21 +985,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!4 &766707784001045365
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4140436339641201857}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 874210109}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2246405837321060440
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1032,23 +1104,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &4140436339641201857
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 766707784001045365}
-  - component: {fileID: 6528776689538593919}
-  m_Layer: 0
-  m_Name: Grass
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!65 &4245738654629773329
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1243,61 +1298,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6570419856046909628}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &6528776689538593919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4140436339641201857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d3b8ead7a904056820e9947287fbf17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  computeShader: {fileID: 7200000, guid: f5053061ca32465abe54d864d6297eb5, type: 3}
-  material: {fileID: 2100000, guid: 1682d002c538b4f4ebb08f431ee2a2f6, type: 2}
-  cam: {fileID: 0}
-  tileResolution: 512
-  tileCount: 20
-  jitterStrength: 0.26
-  distanceCullStartDisLOD0: 0
-  distanceCullEndDisLOD0: 80
-  distanceCullStartDisLOD1: 120
-  distanceCullEndDisLOD1: 300
-  frustumCullNearOffset: -3
-  frustumCullEdgeOffset: -1
-  clumpTextureHeight: 512
-  clumpTextureWidth: 512
-  clumpingVoronoiMaterial: {fileID: 2100000, guid: 66c2d32f27d92374d938d488893da2f7, type: 2}
-  clumpScale: 1
-  clumpParameters:
-  - pullToCentre: 90
-    pointInSameDirection: 0.5
-    baseHeight: 0.8
-    heightRandom: 0.2
-    baseWidth: 0.02
-    widthRandom: 0.01
-    baseTilt: 0.9
-    tiltRandom: 0.02
-    baseBend: 1.5
-    bendRandom: 0.05
-  - pullToCentre: 90
-    pointInSameDirection: 0.4
-    baseHeight: 0.8
-    heightRandom: 0.2
-    baseWidth: 0.03
-    widthRandom: 0.01
-    baseTilt: 0.85
-    tiltRandom: 0.02
-    baseBend: 1
-    bendRandom: 0.05
-  localWindTex: {fileID: 2800000, guid: c3e4dbb6b81530547b82006996e99f40, type: 3}
-  localWindStrength: 0.5
-  localWindScale: 0.01
-  localWindSpeed: 0.1
-  localWindRotateAmount: 0.3
-  localWindDirection: {x: 1, y: 0.7}
 --- !u!1 &6570419856046909628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1448,6 +1448,6 @@ SceneRoots:
   - {fileID: 1794962922}
   - {fileID: 1933311002}
   - {fileID: 5606480497050292300}
-  - {fileID: 874210109}
+  - {fileID: 1028000444}
   - {fileID: 1671237436}
   - {fileID: 384603707}

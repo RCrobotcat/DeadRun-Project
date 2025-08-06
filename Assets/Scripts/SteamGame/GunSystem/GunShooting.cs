@@ -34,6 +34,9 @@ public class GunShooting : MonoBehaviour
 
     private void Update()
     {
+        if (player.GetComponent<PlayerMovement>().isEnd)
+            return;
+        
         if (!player.GetComponent<PlayerMovement>().isLocalPlayer)
             return;
 

@@ -2517,6 +2517,7 @@ MonoBehaviour:
   gun: {fileID: 2474453205690138116}
   isDead: 0
   paintingShooting: {fileID: 8075969818739956959}
+  isEnd: 0
   astronautModel: {fileID: 1971487635102628434}
   outlineShowTime: 0.3
   shotForce: 5
@@ -2544,6 +2545,7 @@ MonoBehaviour:
   animator: {fileID: 1971487635109874076}
   floatingUIPanel: {fileID: 1982219078675772522}
   playerNameText: {fileID: 6450793058145396915}
+  UICanvas: {fileID: 5361936491994051780}
   _role: 0
   healthBarBase: {fileID: 3664847903410532424}
   healthBarFillImage: {fileID: 5868287945290895650}
@@ -2557,6 +2559,7 @@ MonoBehaviour:
   collectionUIBase: {fileID: 489643675790100791}
   collectionText: {fileID: 5133732519825335887}
   currentCollectionCount: 0
+  isEnd: 0
   currentScore: 0
   fellCountText: {fileID: 5127545172576463263}
   damageImage: {fileID: 4102929786910498166}

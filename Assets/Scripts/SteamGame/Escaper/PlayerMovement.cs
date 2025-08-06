@@ -44,6 +44,8 @@ public partial class PlayerMovement : NetworkBehaviour
 
     public PaintingShooting paintingShooting;
 
+    public bool isEnd = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -59,6 +61,9 @@ public partial class PlayerMovement : NetworkBehaviour
 
     void Update()
     {
+        if (isEnd)
+            return;
+        
         HandleOutlineTimerLogic();
 
         if (!isLocalPlayer) // 确保只在本地玩家上执行
@@ -244,6 +249,9 @@ public partial class PlayerMovement : NetworkBehaviour
 
     void FixedUpdate()
     {
+        if (isEnd)
+            return;
+        
         if (!isLocalPlayer)
             return;
 

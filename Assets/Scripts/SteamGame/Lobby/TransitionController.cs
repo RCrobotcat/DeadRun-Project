@@ -159,8 +159,6 @@ public partial class LobbyController
                         SceneManager.GetSceneByName("Scene_3_1v1").path, "SpawnPos", previousScenePathName));
             }
         }
-
-        SoundController.Instance.PlayMusic(1, true);
     }
 
     public void TransitionAllPlayersToScene(string scenePathName, string scenePosToSpawnOn,
@@ -207,6 +205,28 @@ public partial class LobbyController
                     StartCoroutine(SendNewPlayerToScene(player.gameObject, scenePathName, scenePosToSpawnOn,
                         previousScenePathName));
             }
+        }
+    }
+
+    public void TransitionAllPlayersToEndScene(string previousPathName)
+    {
+        PlayerObjectController[] allPlayers = FindObjectsOfType<PlayerObjectController>();
+
+        MyNetworkManager.isNextSceneSet = false;
+
+        foreach (var player in allPlayers)
+        {
+            if (player.TryGetComponent<Collider>(out Collider collider))
+                collider.enabled = false;
+
+            if (player.TryGetComponent<PlayerMovement>(out PlayerMovement pm))
+                pm.enabled = false;
+            if (player.transform.GetChild(2).TryGetComponent<GunShooting>(out GunShooting gunShooting))
+                gunShooting.enabled = false;
+
+            if (player.isServer)
+                StartCoroutine(SendNewPlayerToScene(player.gameObject,
+                    SceneManager.GetSceneByName("Scene_6_End").path, "SpawnPos", previousPathName));
         }
     }
 
@@ -377,6 +397,7 @@ public partial class LobbyController
             if (playerObjectController.playerID == 1) // Host
             {
                 playerObjectController.fellCountText.gameObject.SetActive(false);
+
                 SoundController.Instance.PlayMusic(Random.Range(0, 3), true);
             }
             else
@@ -394,6 +415,8 @@ public partial class LobbyController
                 ShowPopupText("Level 2: Fight for Collections!");
                 playerObjectController.collectionUIBase.SetActive(true);
                 playerMovement.moveSpeed = 10f;
+
+                SoundController.Instance.PlayMusic(Random.Range(0, 3), true);
             }
             else
             {
@@ -432,11 +455,50 @@ public partial class LobbyController
 
                 ShowCountDownText(); // start countdown for painting
                 player.GetComponent<PlayerSplatonPainting>().currentPaintedAreasPanel.SetActive(true);
+
+                SoundController.Instance.PlayMusic(Random.Range(0, 3), true);
             }
             else
             {
                 playerObjectController.RpcSetCollectionUIState(false);
                 playerObjectController.RpcSplatonGenerating();
+            }
+        }
+
+        // Scene 6 (End Scene) Transition
+        if (transitionToSceneName == SceneManager.GetSceneByName("Scene_6_End").path)
+        {
+            PlayerObjectController winner = null;
+            int maxScore = -1;
+            foreach (var p in MyNetworkManager.GamePlayers)
+            {
+                p.isEnd = true;
+                p.GetComponent<PlayerMovement>().isEnd = true;
+
+                if (p.CurrentScore > maxScore)
+                {
+                    maxScore = p.CurrentScore;
+                    winner = p;
+                }
+            }
+
+            if (playerObjectController.playerID == 1) // Host
+            {
+                CameraController.Instance.gameObject.SetActive(false);
+                countDownPanel.gameObject.SetActive(false);
+
+                ResultCanvas resultCanvas = FindObjectOfType<ResultCanvas>();
+                if (resultCanvas != null)
+                    resultCanvas.ShowResult(winner.playerName, winner.CurrentScore,
+                        playerObjectController.CurrentScore);
+            }
+            else
+            {
+                CameraController.Instance.gameObject.SetActive(false);
+                countDownPanel.gameObject.SetActive(false);
+
+                playerObjectController.RpcShowResultCanvas(winner.playerName, winner.CurrentScore,
+                    playerObjectController.CurrentScore);
             }
         }
 

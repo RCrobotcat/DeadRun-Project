@@ -33,6 +33,8 @@ public partial class PlayerObjectController : NetworkBehaviour
     public GameObject floatingUIPanel;
     public Text playerNameText;
 
+    public GameObject UICanvas;
+
     private MyNetworkManager _myNetworkManager;
 
     private MyNetworkManager MyNetworkManager
@@ -70,6 +72,12 @@ public partial class PlayerObjectController : NetworkBehaviour
 
     private void Update()
     {
+        if (isEnd)
+        {
+            UICanvas.SetActive(false);
+            return;
+        }
+
         UpdateImportantParams();
 
         HandleRespawnLogic();
