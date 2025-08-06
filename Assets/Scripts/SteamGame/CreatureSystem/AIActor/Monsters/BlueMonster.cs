@@ -236,9 +236,12 @@ public class BlueMonster : AIActor
         {
             if (NetworkServer.active)
             {
-                if (attackTarget.gameObject.scene.name == "Scene_3_1v1")
+                if (attackTarget != null)
                 {
-                    SoundController.Instance.PlaySFX_others(SoundController.Instance.sfxClip_monsterAttack, 0.4f);
+                    if (attackTarget.gameObject.scene.name == "Scene_3_1v1")
+                    {
+                        SoundController.Instance.PlaySFX_others(SoundController.Instance.sfxClip_monsterAttack, 0.4f);
+                    }
                 }
             }
             else

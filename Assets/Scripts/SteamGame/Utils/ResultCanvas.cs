@@ -23,9 +23,15 @@ public class ResultCanvas : MonoBehaviour
 
     private void Update()
     {
-        if (LobbyController.Instance.LocalPlayerObjectController.isEnd)
-            if (!Cursor.visible)
-                Cursor.visible = true;
+        if (LobbyController.Instance != null)
+        {
+            if (LobbyController.Instance.LocalPlayerObjectController != null)
+            {
+                if (LobbyController.Instance.LocalPlayerObjectController.isEnd)
+                    if (!Cursor.visible)
+                        Cursor.visible = true;
+            }
+        }
     }
 
     public void ShowResult(string winner, int winnerTotalScore, int yourTotalScore)

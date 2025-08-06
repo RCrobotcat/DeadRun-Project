@@ -198,7 +198,7 @@ public class RedMonster : AIActor
     {
         if (actor == null) return false;
         return (Vector3.Distance(transform.position, actor.transform.position) < attackRadius + 1f)
-                && (Vector3.Dot(actor.transform.position - transform.position, transform.forward) > 0);
+               && (Vector3.Dot(actor.transform.position - transform.position, transform.forward) > 0);
     }
 
     void UpdateAttackTarget()
@@ -241,9 +241,12 @@ public class RedMonster : AIActor
         {
             if (NetworkServer.active)
             {
-                if (attackTarget.gameObject.scene.name == "Scene_4")
+                if (attackTarget != null)
                 {
-                    SoundController.Instance.PlaySFX_others(SoundController.Instance.sfxClip_monsterAttack, 0.4f);
+                    if (attackTarget.gameObject.scene.name == "Scene_4")
+                    {
+                        SoundController.Instance.PlaySFX_others(SoundController.Instance.sfxClip_monsterAttack, 0.4f);
+                    }
                 }
             }
             else

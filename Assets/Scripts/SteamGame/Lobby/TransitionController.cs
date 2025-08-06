@@ -513,7 +513,7 @@ public partial class LobbyController
         {
             if (bullet.TryGetComponent<NetworkIdentity>(out NetworkIdentity identity))
             {
-                DestroyImmediate(bullet.gameObject);
+                Destroy(bullet.gameObject);
             }
         }
     }
