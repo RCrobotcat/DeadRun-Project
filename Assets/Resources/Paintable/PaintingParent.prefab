@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7437337086894941088}
   - component: {fileID: 7437337086894941090}
   - component: {fileID: 7437337086894941091}
-  m_Layer: 4
+  m_Layer: 0
   m_Name: SubEmitter0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4902,7 +4902,7 @@ GameObject:
   - component: {fileID: 7437337088431419224}
   - component: {fileID: 7437337088431419226}
   - component: {fileID: 7437337088431419227}
-  m_Layer: 4
+  m_Layer: 0
   m_Name: Shoot Effect Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9849,7 +9849,7 @@ GameObject:
   - component: {fileID: 7437337088807539969}
   - component: {fileID: 7437337088807539982}
   - component: {fileID: 7437337088807539983}
-  m_Layer: 4
+  m_Layer: 0
   m_Name: Collision Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14737,6 +14737,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57caa52cbfd04313ad00d4203431858e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  playerSplatonPainting: {fileID: 0}
   paintColor: {r: 0.22352941, g: 0.58431375, b: 0.8509804, a: 1}
   minRadius: 0.2
   maxRadius: 1.5
@@ -14753,7 +14755,7 @@ GameObject:
   - component: {fileID: 7437337088823375470}
   - component: {fileID: 7437337088823375456}
   - component: {fileID: 7437337088823375457}
-  m_Layer: 4
+  m_Layer: 0
   m_Name: Main Visual Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19734,7 +19736,7 @@ GameObject:
   - component: {fileID: 7437337088983788441}
   - component: {fileID: 7437337088983788443}
   - component: {fileID: 7437337088983788440}
-  m_Layer: 4
+  m_Layer: 0
   m_Name: Splash Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

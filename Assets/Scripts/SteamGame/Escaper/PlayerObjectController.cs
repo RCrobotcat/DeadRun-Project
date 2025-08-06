@@ -479,6 +479,8 @@ public partial class PlayerObjectController : NetworkBehaviour
         else if (!SplatonPlaceGenerator.Instance.IsInitialized)
             SplatonPlaceGenerator.Instance.InitializePlace();
 
+        GetComponent<PlayerMovement>().jumpForce = 15f;
+
         SoundController.Instance.PlayMusic(Random.Range(0, 3), true);
     }
 

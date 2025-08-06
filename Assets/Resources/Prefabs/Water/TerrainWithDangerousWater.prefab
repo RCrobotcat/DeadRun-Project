@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 5001869263595371611}
   - component: {fileID: 5726224138215433117}
   - component: {fileID: 6542332930031636229}
-  m_Layer: 3
+  - component: {fileID: 1541450716184077727}
+  m_Layer: 4
   m_Name: PlaneWater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,6 +108,27 @@ MonoBehaviour:
   waterMaterial: {fileID: 2100000, guid: 55529c4b172e19545931f04ae9d59997, type: 2}
   viewer: {fileID: 0}
   wavesSettings: {fileID: 11400000, guid: 2251c04796277164b997fd1d180214d1, type: 2}
+--- !u!65 &1541450716184077727
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5193449316802222214}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 2.220446e-16, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7706104403915429416
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8066871297452390952}
   - component: {fileID: 1427492868477304820}
-  m_Layer: 3
+  m_Layer: 4
   m_Name: PlanarReflection
   m_TagString: Untagged
   m_Icon: {fileID: 0}

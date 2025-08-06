@@ -455,6 +455,8 @@ public partial class LobbyController
 
                 ShowCountDownText(); // start countdown for painting
                 player.GetComponent<PlayerSplatonPainting>().currentPaintedAreasPanel.SetActive(true);
+                
+                playerMovement.jumpForce = 15f;
 
                 SoundController.Instance.PlayMusic(Random.Range(0, 3), true);
             }

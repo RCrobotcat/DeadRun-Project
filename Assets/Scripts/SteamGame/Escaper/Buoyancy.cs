@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Buoyancy : MonoBehaviour
 {
@@ -44,6 +46,55 @@ public class Buoyancy : MonoBehaviour
             foreach (var point in Voxels)
             {
                 ApplyBuoyancyForce(point);
+            }
+        }
+
+        HandleUnderwaterSpeedReduction();
+    }
+
+    private void HandleUnderwaterSpeedReduction()
+    {
+        if (GetComponent<PlayerMovement>() == null)
+            return;
+
+        if (NetworkServer.active)
+        {
+            if (gameObject.scene.name == "Scene_3_1v1")
+            {
+                PhysicsScene physicsScene = gameObject.scene.GetPhysicsScene();
+                LayerMask layerMask = LayerMask.GetMask("Water");
+                Collider[] buffer = new Collider[16];
+                if (physicsScene.OverlapSphere(transform.position + Vector3.up * 0.5f, 0.7f, buffer, layerMask,
+                        QueryTriggerInteraction.UseGlobal) > 0)
+                {
+                    if (GetComponent<PlayerMovement>().moveSpeed > 3f)
+                        GetComponent<PlayerMovement>().moveSpeed = 3f;
+                }
+                else
+                {
+                    if (GetComponent<PlayerMovement>().moveSpeed < 5f)
+                        GetComponent<PlayerMovement>().moveSpeed = 5f;
+                }
+            }
+        }
+        else
+        {
+            if (SceneManager.GetSceneByName("Scene_3_1v1").isLoaded)
+            {
+                PhysicsScene physicsScene = gameObject.scene.GetPhysicsScene();
+                Collider[] buffer = new Collider[16];
+                LayerMask layerMask = LayerMask.GetMask("Water");
+                if (physicsScene.OverlapSphere(transform.position + Vector3.up * 0.5f, 0.7f, buffer, layerMask,
+                        QueryTriggerInteraction.UseGlobal) > 0)
+                {
+                    if (GetComponent<PlayerMovement>().moveSpeed > 3f)
+                        GetComponent<PlayerMovement>().moveSpeed = 3f;
+                }
+                else
+                {
+                    if (GetComponent<PlayerMovement>().moveSpeed < 5f)
+                        GetComponent<PlayerMovement>().moveSpeed = 5f;
+                }
             }
         }
     }
@@ -190,5 +241,8 @@ public class Buoyancy : MonoBehaviour
             Gizmos.DrawCube(force[0], Vector3.one * gizmoSize); // Draw Buoyancy position
             Gizmos.DrawLine(force[0], force[0] + force[1] / rb.mass); // Draw Buoyancy direction
         }
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, 0.7f);
     }
 }

@@ -2578,7 +2578,7 @@ MonoBehaviour:
   slicesPerAxis: 2
   voxelsLimit: 16
   density: 350
-  DAMPFER: 7
+  DAMPFER: 1
   waterHeight: 13
   isCreature: 1
 --- !u!114 &7548509304880714756

@@ -122,7 +122,9 @@ public partial class PlayerMovement : NetworkBehaviour
             _animator.SetBool("Falling", false);
 
         Collider[] objectsDetected;
-        LayerMask interactableMask = LayerMask.GetMask("Interactable") | LayerMask.GetMask("Items");
+        LayerMask interactableMask =
+            LayerMask.GetMask("Interactable") | LayerMask.GetMask("Items")
+                                              | LayerMask.GetMask("Water");
 
         if (isServer)
         {
