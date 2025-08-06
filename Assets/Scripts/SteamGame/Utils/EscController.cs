@@ -36,7 +36,7 @@ public class EscController : MonoBehaviour
         bool inRoomScene = MyNetworkManager.allPlayersInGameScene_server;
         bool escActive = escPanel.activeSelf;
 
-        Cursor.visible = !inRoomScene || escActive;
+        Cursor.visible = !inRoomScene || escActive || LobbyController.Instance.LocalPlayerObjectController.isEnd;
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
