@@ -137,7 +137,8 @@ public class PlayerSplatonPainting : NetworkBehaviour
         Vector3 origin = transform.position + Vector3.up * rayHeight;
         Ray ray = new Ray(origin, Vector3.down);
 
-        LayerMask paintableMask = LayerMask.GetMask("Ground") | LayerMask.GetMask("Default");
+        LayerMask paintableMask =
+            LayerMask.GetMask("Ground") | LayerMask.GetMask("Default") | LayerMask.GetMask("Obstacles");
 
         if (isServer)
         {

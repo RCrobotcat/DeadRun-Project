@@ -1,5 +1,6 @@
 ﻿using Mirror;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GunShooting : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class GunShooting : MonoBehaviour
     {
         if (player.GetComponent<PlayerMovement>().isEnd)
             return;
-        
+
         if (!player.GetComponent<PlayerMovement>().isLocalPlayer)
             return;
 
@@ -52,6 +53,7 @@ public class GunShooting : MonoBehaviour
         {
             //player.GetComponent<PlayerMovementOffline>().isAiming = true;
             player.GetComponent<PlayerMovement>().isAiming = true;
+            player.GetComponent<PlayerMovement>().moveSpeed = 2.5f;
 
             UpdateRotation();
 
@@ -71,6 +73,28 @@ public class GunShooting : MonoBehaviour
         {
             //player.GetComponent<PlayerMovementOffline>().isAiming = false;
             player.GetComponent<PlayerMovement>().isAiming = false;
+            if (NetworkServer.active)
+            {
+                if (player.gameObject.scene.name == "Scene_4")
+                {
+                    player.GetComponent<PlayerMovement>().moveSpeed = 10f;
+                }
+                else
+                {
+                    player.GetComponent<PlayerMovement>().moveSpeed = 5f;
+                }
+            }
+            else
+            {
+                if (SceneManager.GetSceneByName("Scene_4").isLoaded)
+                {
+                    player.GetComponent<PlayerMovement>().moveSpeed = 10f;
+                }
+                else
+                {
+                    player.GetComponent<PlayerMovement>().moveSpeed = 5f;
+                }
+            }
 
             currentFOV = Mathf.SmoothDamp(currentFOV, normalFOV, ref fovSmoothVelocity, 0.2f);
             CameraController.Instance.freeLookCam.Lens.FieldOfView = currentFOV;

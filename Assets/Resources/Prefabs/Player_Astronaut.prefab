@@ -2549,7 +2549,7 @@ MonoBehaviour:
   _role: 0
   healthBarBase: {fileID: 3664847903410532424}
   healthBarFillImage: {fileID: 5868287945290895650}
-  maxHealth: 100
+  maxHealth: 50
   respawnTime: 6
   counterUIBase: {fileID: 899763631901775901}
   counterUIFillImage: {fileID: 181446364402046293}
