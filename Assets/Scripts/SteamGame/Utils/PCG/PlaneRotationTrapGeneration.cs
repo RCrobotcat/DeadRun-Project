@@ -16,6 +16,8 @@ public class PlaneRotationTrapGeneration : MonoBehaviour
     public GameObject endPlanePrefab;
     public GameObject tablePrefab;
 
+    public int tableCount = 4;
+
     private List<Vector2Int> mainPathPoints = new();
     private int[,] maze; // 0 = 路径，1 = 墙壁
     private int[,] newMap;
@@ -175,11 +177,22 @@ public class PlaneRotationTrapGeneration : MonoBehaviour
         mainPathPoints.Add(new Vector2Int(width - 1, height - 1));
 
         // Table
-        var randomIndex_1 = Random.Range(10, mainPathPoints.Count + 1);
-        Vector2Int randomPoint = new Vector2Int(mainPathPoints[randomIndex_1].x, mainPathPoints[randomIndex_1].y);
-        Vector3 tablePosition = new Vector3(randomPoint.x, 0.65f, randomPoint.y);
-        GameObject table = Instantiate(tablePrefab, tablePosition, Quaternion.identity);
-        NetworkServer.Spawn(table);
-        table.transform.parent = planeTransformParent;
+        List<int> usedIndices = new List<int>();
+        for (int i = 0; i < tableCount; i++)
+        {
+            int randomIndex_1;
+            do
+            {
+                randomIndex_1 = Random.Range(10, mainPathPoints.Count + 1);
+            } while (usedIndices.Contains(randomIndex_1));
+
+            usedIndices.Add(randomIndex_1);
+
+            Vector2Int randomPoint = new Vector2Int(mainPathPoints[randomIndex_1].x, mainPathPoints[randomIndex_1].y);
+            Vector3 tablePosition = new Vector3(randomPoint.x, 0.65f, randomPoint.y);
+            GameObject table = Instantiate(tablePrefab, tablePosition, Quaternion.identity);
+            NetworkServer.Spawn(table);
+            table.transform.parent = planeTransformParent;
+        }
     }
 }

@@ -114,15 +114,16 @@ public class GunShooting : MonoBehaviour
         //         .CmdSpawnFireEffect(shootingFirePoint, shootingFirePoint.position);
         // }
 
-        bullet.SetDirection(ray.direction + Vector3.up * 0.05f);
+        bullet.SetDirection(ray.direction + Vector3.left * 0.007f + Vector3.up * 0.03f);
 
         // Server
         if (NetworkServer.active)
             player.GetComponent<PlayerMovement>()
-                .RPCSpawnBulletFromHost(shootingPoint.position, ray.direction + Vector3.up * 0.05f);
+                .RPCSpawnBulletFromHost(shootingPoint.position,
+                    ray.direction + Vector3.left * 0.007f + Vector3.up * 0.03f);
         else // Client
             player.GetComponent<PlayerMovement>()
-                .CmdSpawnBullet(shootingPoint.position, ray.direction + Vector3.up * 0.05f);
+                .CmdSpawnBullet(shootingPoint.position, ray.direction + Vector3.left * 0.007f + Vector3.up * 0.03f);
 
         shootingFire.GetComponent<ParticleSystem>()
             .Spawn(shootingFirePoint, shootingFirePoint.localPosition, Quaternion.identity);

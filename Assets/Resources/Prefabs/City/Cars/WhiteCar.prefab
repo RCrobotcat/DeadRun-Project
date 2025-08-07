@@ -779,7 +779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayStart: 0.5
-  rayLength: 17
+  rayLength: 20
   rayCount: 36
   collisionLayers:
     serializedVersion: 2
