@@ -237,6 +237,13 @@ public class RedMonster : AIActor
 
     public void AttackPlayerAnimationEvent()
     {
+        if (NetworkServer.active)
+            if (LobbyController.Instance.localPlayerObject.scene.name != "Scene_4")
+                return;
+        
+        if (attackTarget == null)
+            return;
+
         if (SoundController.Instance != null)
         {
             if (NetworkServer.active)

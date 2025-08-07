@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6836205540035028662}
   - component: {fileID: 5565280025733333488}
   - component: {fileID: 2861263171682992167}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Surroundings (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -439,7 +439,7 @@ GameObject:
   - component: {fileID: 4947787534205264944}
   - component: {fileID: 1535095063675873921}
   - component: {fileID: 3058350571740239998}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -808,7 +808,7 @@ GameObject:
   - component: {fileID: 8397354803730157174}
   - component: {fileID: 3844610692520514883}
   - component: {fileID: 2036128848597145510}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Surroundings (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1177,7 +1177,7 @@ GameObject:
   - component: {fileID: 3720447616932311748}
   - component: {fileID: 6137245269959021826}
   - component: {fileID: 4169980359295787505}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Ramp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1558,7 +1558,7 @@ GameObject:
   - component: {fileID: 1364342021201478451}
   - component: {fileID: 8785031843867337856}
   - component: {fileID: 5791241809098874206}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Surroundings (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

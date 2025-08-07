@@ -1,13 +1,16 @@
-﻿using CleverCrow.Fluid.BTs.Trees;
+﻿using System.Collections.Generic;
 using CleverCrow.Fluid.BTs.Tasks;
-using UnityEngine;
-using System.Collections.Generic;
+using CleverCrow.Fluid.BTs.Trees;
 using Mirror;
-using UnityEngine.SceneManagement;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class BlueMonster : AIActor
+public class BallPainter : AIActor
 {
     public Actor attackTarget = null;
+
+    [Header("Paint Settings")] public float minRadius = 0.05f;
+    public float maxRadius = 0.2f;
 
     protected override void Start()
     {
@@ -16,13 +19,38 @@ public class BlueMonster : AIActor
         InitAI();
     }
 
+    private void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.layer == 3) // Layer 3 is "Ground"
+        {
+            var contacts = other.contacts;
+            foreach (var contact in contacts)
+            {
+                if (contact.thisCollider == null) continue;
+                if (contact.thisCollider.gameObject != gameObject) continue;
+
+                Paintable paintable = other.gameObject.GetComponent<Paintable>();
+                if (paintable != null)
+                {
+                    if (PaintManager.Instance != null)
+                    {
+                        float radius = Random.Range(minRadius, maxRadius);
+                        PaintManager.Instance.paint(paintable, contact.point, radius, 1, 0.5f, Color.black);
+
+                        SyncPaint(paintable, contact.point, radius, 1, 0.5f, Color.black);
+                    }
+                }
+            }
+        }
+    }
+
     protected override void Update()
     {
         if (NetworkServer.active)
         {
             if (LobbyController.Instance.localPlayerObject != null)
             {
-                if (LobbyController.Instance.localPlayerObject.scene.name != "Scene_3_1v1")
+                if (LobbyController.Instance.localPlayerObject.scene.name != "Scene_5_Painting")
                     return;
             }
         }
@@ -41,7 +69,7 @@ public class BlueMonster : AIActor
         {
             if (LobbyController.Instance.localPlayerObject != null)
             {
-                if (LobbyController.Instance.localPlayerObject.scene.name != "Scene_3_1v1")
+                if (LobbyController.Instance.localPlayerObject.scene.name != "Scene_5_Painting")
                     return;
             }
         }
@@ -73,33 +101,21 @@ public class BlueMonster : AIActor
             })
             .End()
             .End()
-            .Selector("Try Wander")
-            .Sequence("Wander Branch")
-            .Condition("Sky or Ground?", () => { return GroundOrSkyPatrol(); })
-            .Do("Sky Wander", () => // sky wander behavior Leaf
-            {
-                DoSkyWander();
-                return TaskStatus.Success;
-            })
-            .End()
-            .Do("Ground Wander", () => // ground wander behavior Leaf
+            .Do("Wander", () => // wander behavior Leaf
             {
                 DoGroundWander();
                 return TaskStatus.Success;
             })
-            .End()
             .Build();
     }
 
     void DoGroundWander()
     {
-        if (animator != null)
-        {
-            animator.SetBool("Attack", false);
-            animator.SetBool("Flying", false);
-        }
+        // if (animator != null)
+        // {
+        //     animator.SetBool("Attack", false);
+        // }
 
-        wanderBehaviors.targetHeight = 9f;
         Vector3 acceleration = wanderBehaviors.GetSteering();
 
         if (collisionSensor != null)
@@ -112,49 +128,16 @@ public class BlueMonster : AIActor
 
         steeringBehaviors.Steer(acceleration);
         steeringBehaviors.LookMoveDirection();
-    }
-
-    void DoSkyWander()
-    {
-        if (animator != null)
-        {
-            animator.SetBool("Attack", false);
-            animator.SetBool("Flying", true);
-        }
-
-        wanderBehaviors.targetHeight = 20f;
-        Vector3 acceleration = wanderBehaviors.GetSteering();
-
-        if (collisionSensor != null)
-        {
-            Vector3 accelerationDir = acceleration.normalized;
-            collisionSensor.GetCollisionFreeDirection(accelerationDir, out accelerationDir);
-            accelerationDir *= acceleration.magnitude;
-            acceleration = accelerationDir;
-        }
-
-        steeringBehaviors.Steer(acceleration);
-        steeringBehaviors.LookMoveDirection();
-    }
-
-    bool GroundOrSkyPatrol()
-    {
-        float num = Random.value;
-        if (num <= 0.7f)
-            return true; // sky patrol
-        return false; // ground patrol
     }
 
     void DoAttack(Actor actor)
     {
         if (actor == null) return;
-        PlayerMovement target = actor.GetComponent<PlayerMovement>();
 
-        if (animator != null)
-        {
-            animator.SetBool("Attack", true);
-            animator.SetBool("Flying", false);
-        }
+        // if (animator != null)
+        // {
+        //     animator.SetBool("Attack", true);
+        // }
 
         steeringBehaviors.Steer(Vector3.zero);
         steeringBehaviors.LookAtDirection(attackTarget.transform.position - transform.position);
@@ -164,7 +147,7 @@ public class BlueMonster : AIActor
     {
         if (actor == null) return;
 
-        if (animator != null) animator.SetBool("Attack", false);
+        //if (animator != null) animator.SetBool("Attack", false);
 
         Vector3 acceleration = pursueBehaviors.GetSteering(actor.GetRigidbody());
 
@@ -226,57 +209,17 @@ public class BlueMonster : AIActor
         return actors[0];
     }
 
-    public void AttackPlayerAnimationEvent()
+    void SyncPaint(Paintable paintable, Vector3 pos, float radius, float hardness, float strength, Color color)
     {
+        PlayerObjectController player = LobbyController.Instance.LocalPlayerObjectController;
+        int paintableId = PaintablesManager.Instance.GetPaintableID(paintable);
         if (NetworkServer.active)
-            if (LobbyController.Instance.localPlayerObject.scene.name != "Scene_3_1v1")
-                return;
-
-        if (attackTarget == null)
-            return;
-
-        if (SoundController.Instance != null)
         {
-            if (NetworkServer.active)
-            {
-                if (attackTarget != null)
-                {
-                    if (attackTarget.gameObject.scene.name == "Scene_3_1v1")
-                    {
-                        SoundController.Instance.PlaySFX_others(SoundController.Instance.sfxClip_monsterAttack, 0.4f);
-                    }
-                }
-            }
-            else
-            {
-                if (SceneManager.GetSceneByName("Scene_3_1v1").isLoaded)
-                {
-                    SoundController.Instance.PlaySFX_others(SoundController.Instance.sfxClip_monsterAttack, 0.4f);
-                }
-            }
+            player.RpcSyncPaint(paintableId, pos, radius, hardness, strength, color);
         }
-
-        if (Vector3.Distance(attackTarget.transform.position, transform.position) < attackRadius)
+        else
         {
-            if (Vector3.Dot(attackTarget.transform.position - transform.position, transform.forward) < 0)
-                return;
-
-            if (NetworkServer.active)
-            {
-                if (attackTarget.gameObject.scene.name == "Scene_3_1v1")
-                {
-                    PlayerMovement player = attackTarget.GetComponent<PlayerMovement>();
-                    player.MonsterAttackPlayer(5);
-                }
-            }
-            else
-            {
-                if (SceneManager.GetSceneByName("Scene_3_1v1").isLoaded)
-                {
-                    PlayerMovement player = attackTarget.GetComponent<PlayerMovement>();
-                    player.MonsterAttackPlayer(5);
-                }
-            }
+            player.CmdSyncPaint(paintableId, pos, radius, hardness, strength, color);
         }
     }
 }

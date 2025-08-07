@@ -1356,6 +1356,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d49165fabd419ea0bd05caf1dd7ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   extendsIslandOffset: 1
 --- !u!64 &879885103
 MeshCollider:
@@ -2250,6 +2253,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d49165fabd419ea0bd05caf1dd7ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   extendsIslandOffset: 1
 --- !u!1 &1022172995
 GameObject:
@@ -3002,6 +3008,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d49165fabd419ea0bd05caf1dd7ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   extendsIslandOffset: 1
 --- !u!64 &1460458430
 MeshCollider:
@@ -3924,6 +3933,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d49165fabd419ea0bd05caf1dd7ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   extendsIslandOffset: 1
 --- !u!1 &1574552348
 GameObject:

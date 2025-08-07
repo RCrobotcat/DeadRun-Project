@@ -2637,6 +2637,12 @@ MonoBehaviour:
   edgePrefab: {fileID: 4832456215228124777, guid: d8897581f8dda4e23b6b23b60347c94a, type: 3}
   isRealtimeRefresh: 1
   cameraPosition: {fileID: 3087770741516928379}
+  tableCollectionPrefab: {fileID: 0}
+  maximumTableCount: 15
+  tablesParent: {fileID: 0}
+  targetAreaPrefab: {fileID: 0}
+  targetAreaParent: {fileID: 0}
+  currentTableCount: 0
 --- !u!1 &9195045664614433992
 GameObject:
   m_ObjectHideFlags: 0

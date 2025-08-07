@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 5556085772874688993}
   m_Layer: 3
   m_Name: Ground_100x100
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -252,17 +252,9 @@ MonoBehaviour:
   m_Mesh: {fileID: 0}
   m_VersionIndex: 912
   m_IsSelectable: 1
-  m_SelectedFaces: 04000000
-  m_SelectedEdges:
-  - a: 16
-    b: 17
-  - a: 18
-    b: 16
-  - a: 17
-    b: 19
-  - a: 19
-    b: 18
-  m_SelectedVertices: 10000000110000001200000013000000
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!114 &1331595338709748704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,6 +366,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d49165fabd419ea0bd05caf1dd7ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   extendsIslandOffset: 1
 --- !u!114 &5556085772874688993
 MonoBehaviour:

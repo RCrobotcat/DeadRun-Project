@@ -12,8 +12,9 @@ public class PlayerSplatonPainting : NetworkBehaviour
 
     public float damageInterval = 1f;
     private float damageTimer = 0f;
-    
+
     private PaintingColor paintingColor;
+
     public PaintingColor SelfPaintingColor
     {
         get => paintingColor;
@@ -202,13 +203,16 @@ public class PlayerSplatonPainting : NetworkBehaviour
             }
         }
 
+        if (IsColorSimilar(pixelColor, Color.black))
+            return 0; // monster color
+
         return -1;
     }
 
-    bool IsColorSimilar(Color a, Color b, float threshold = 0.8f)
+    bool IsColorSimilar(Color a, Color b, float threshold = 1)
     {
         float diff = Mathf.Abs(a.r - b.r) + Mathf.Abs(a.g - b.g) + Mathf.Abs(a.b - b.b);
-        return diff < threshold;
+        return diff <= threshold;
     }
 
     Color GetColorFromPaintingColor(PaintingColor color)

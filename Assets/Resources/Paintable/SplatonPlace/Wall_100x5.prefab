@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 817167165596028294}
   - component: {fileID: 7316141821666246004}
   - component: {fileID: 6117909306960036862}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall_100x5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -366,6 +366,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d49165fabd419ea0bd05caf1dd7ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   extendsIslandOffset: 1
 --- !u!114 &6117909306960036862
 MonoBehaviour:

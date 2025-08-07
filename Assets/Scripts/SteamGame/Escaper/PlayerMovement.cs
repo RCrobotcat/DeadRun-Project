@@ -3,7 +3,6 @@ using System.Linq;
 using Mirror;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 public partial class PlayerMovement : NetworkBehaviour

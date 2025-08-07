@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &138933311293346171
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9010544475882301518}
+  m_Layer: 0
+  m_Name: MonsterParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9010544475882301518
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138933311293346171}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3928780494178081853}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &617216111657871827
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,6 +190,7 @@ Transform:
   - {fileID: 6970667362172895457}
   - {fileID: 9029813484438289106}
   - {fileID: 6485703569425052512}
+  - {fileID: 9010544475882301518}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &110826103729645658
@@ -191,6 +223,9 @@ MonoBehaviour:
   - {fileID: 4355422577923820334, guid: 0d6fae92b4ab4ed4e8539957fb6f6c7c, type: 3}
   - {fileID: 2418155045910253578, guid: a910b387db70e034092d2190eda5e72c, type: 3}
   - {fileID: 2744241044320214804, guid: ad61aa606b3b87e408db9ff528e30d8b, type: 3}
+  monsterCount: 5
+  ballPainterPrefab: {fileID: 5726004952200242674, guid: 4aa5e1b324ef41548af660264424c3b7, type: 3}
+  monstersParent: {fileID: 9010544475882301518}
 --- !u!1 &8398097141399239401
 GameObject:
   m_ObjectHideFlags: 0

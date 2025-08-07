@@ -4075,6 +4075,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc2cc611da63451c9fb3c1479e06fe77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   viewRadius: 10
   attackRadius: 1
 --- !u!114 &7668763637292880170

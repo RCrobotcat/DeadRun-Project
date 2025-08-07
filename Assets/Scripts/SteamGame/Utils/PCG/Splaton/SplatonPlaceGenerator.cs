@@ -33,6 +33,10 @@ public class SplatonPlaceGenerator : Singleton<SplatonPlaceGenerator>
     public Transform othersParent;
     public List<GameObject> others;
 
+    public int monsterCount = 5;
+    public GameObject ballPainterPrefab;
+    public Transform monstersParent;
+
     bool isInitialized = false;
     public bool IsInitialized => isInitialized;
 
@@ -64,6 +68,8 @@ public class SplatonPlaceGenerator : Singleton<SplatonPlaceGenerator>
 
         GeneratePlatforms();
         GenerateOthers();
+
+        GenerateMonsters();
 
         isInitialized = true;
     }
@@ -393,6 +399,69 @@ public class SplatonPlaceGenerator : Singleton<SplatonPlaceGenerator>
 
                     if (usedAreas.Count == 5)
                         break;
+                }
+            }
+        }
+    }
+
+    void GenerateMonsters()
+    {
+        if (!NetworkServer.active)
+            return;
+
+        int monsterWidth = 1;
+        int monsterHeight = 1;
+        int minX = 1;
+        int maxX = columns - monsterWidth - 1;
+        int minY = 1;
+        int maxY = rows - monsterHeight - 1;
+
+        List<RectInt> usedAreas = new List<RectInt>();
+        foreach (var cellMark in cellMarks)
+        {
+            if (cellMark.IsMarked)
+            {
+                usedAreas.Add(new RectInt(
+                    (int)cellMark.CellPosition.x, (int)cellMark.CellPosition.y, 1, 1));
+            }
+        }
+
+        int maxAttempts = 50;
+        for (int i = 0; i < monsterCount; i++)
+        {
+            for (int attempt = 0; attempt < maxAttempts; attempt++)
+            {
+                int x = Random.Range(minX, maxX + 1);
+                int y = Random.Range(minY, maxY + 1);
+                RectInt area = new RectInt(x, y, monsterWidth, monsterHeight);
+
+                bool overlap = false;
+                foreach (var used in usedAreas)
+                {
+                    if (used.Overlaps(area))
+                    {
+                        overlap = true;
+                        break;
+                    }
+                }
+
+                if (!overlap)
+                {
+                    Vector3 pos = new Vector3(x * cellSize + cellSize / 2, 2, y * cellSize + cellSize / 2);
+                    GameObject monsterObj = Instantiate(ballPainterPrefab, pos, Quaternion.identity, monstersParent);
+                    monsterObj.name = $"Monster_{i}_{x}_{y}";
+
+                    SplatonCellMark cellMark;
+                    GetCellMark(new Vector2(x, y), out cellMark);
+                    if (cellMark != null)
+                    {
+                        cellMark.IsMarked = true;
+                    }
+
+                    usedAreas.Add(new RectInt(x, y, 1, 1));
+
+                    NetworkServer.Spawn(monsterObj);
+                    break;
                 }
             }
         }

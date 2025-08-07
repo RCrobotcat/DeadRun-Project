@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 665205205027122067}
   - component: {fileID: 5578856963280420471}
   - component: {fileID: 5667774505940532694}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,7 +379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7856643623225353193}
   - component: {fileID: 5419355909039797617}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform_small
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -435,7 +435,7 @@ GameObject:
   - component: {fileID: 53926704073547006}
   - component: {fileID: 9222010718429437823}
   - component: {fileID: 2749207699366218752}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Prism
   m_TagString: Untagged
   m_Icon: {fileID: 0}
