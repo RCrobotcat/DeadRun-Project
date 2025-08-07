@@ -212,7 +212,7 @@ public class PlayerSplatonPainting : NetworkBehaviour
     bool IsColorSimilar(Color a, Color b, float threshold = 1)
     {
         float diff = Mathf.Abs(a.r - b.r) + Mathf.Abs(a.g - b.g) + Mathf.Abs(a.b - b.b);
-        return diff <= threshold;
+        return diff < threshold;
     }
 
     Color GetColorFromPaintingColor(PaintingColor color)
