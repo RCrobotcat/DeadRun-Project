@@ -58,6 +58,7 @@ public partial class PlayerObjectController
                     if (!SoundController.Instance.sfxSource_hit_2.isPlaying)
                         SoundController.Instance.PlaySFX(SoundController.Instance.sfxSource_hit_1,
                             SoundController.Instance.sfxClip_hit, 0.7f);
+                    CameraController.Instance.StartShake();
                 }
                 else
                 {
