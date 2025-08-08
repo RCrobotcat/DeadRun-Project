@@ -68,12 +68,20 @@ public class Buoyancy : MonoBehaviour
                         QueryTriggerInteraction.UseGlobal) > 0)
                 {
                     if (GetComponent<PlayerMovement>().moveSpeed > 3f)
+                    {
                         GetComponent<PlayerMovement>().moveSpeed = 3f;
+                        if (SoundController.Instance != null && !SoundController.Instance.sfxSource_water.isPlaying)
+                            SoundController.Instance.PlayWaterSplash(0.5f, 1.2f);
+                    }
                 }
                 else
                 {
                     if (GetComponent<PlayerMovement>().moveSpeed < 5f)
+                    {
                         GetComponent<PlayerMovement>().moveSpeed = 5f;
+                        if (SoundController.Instance != null && SoundController.Instance.sfxSource_water.isPlaying)
+                            SoundController.Instance.sfxSource_water.Stop();
+                    }
                 }
             }
         }
@@ -215,9 +223,6 @@ public class Buoyancy : MonoBehaviour
             var localDampingForce = -velocity * DAMPFER * rb.mass; // Damping force
             var force = localDampingForce * k + LocalArchimedesForce; // Buoyancy force
             rb.AddForceAtPosition(force, worldPoint);
-
-            if (SoundController.Instance != null && !SoundController.Instance.sfxSource_water.isPlaying)
-                SoundController.Instance.PlayWaterSplash(0.5f, 1.2f);
 
             Forces.Add(new[] { worldPoint, force });
         }

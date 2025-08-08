@@ -94,6 +94,9 @@ public class TargetAreaInteractable : NetworkBehaviour
                     requiredCollectableItemCount);
             }
 
+            SoundController.Instance.PlaySFX(SoundController.Instance.sfxSource_pickup,
+                SoundController.Instance.sfxClip_pickup);
+
             if (currentCollectableItemCount >= requiredCollectableItemCount)
             {
                 progressText.text = "Done!";

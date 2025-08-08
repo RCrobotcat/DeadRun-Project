@@ -60,6 +60,8 @@ public class TableInteracterable : NetworkBehaviour
             player.GetComponent<PlayerMovement>().currentEquippedItem = tableItem;
 
             tableItem = "";
+            SoundController.Instance.PlaySFX(SoundController.Instance.sfxSource_pickup,
+                SoundController.Instance.sfxClip_pickup);
         }
         else if (tableItem == "" &&
                  player.GetComponent<PlayerMovement>().currentEquippedItem == desiredItem)
@@ -67,6 +69,8 @@ public class TableInteracterable : NetworkBehaviour
             tableItem = player.GetComponent<PlayerMovement>().currentEquippedItem;
 
             player.GetComponent<PlayerMovement>().currentEquippedItem = "";
+            SoundController.Instance.PlaySFX(SoundController.Instance.sfxSource_pickup,
+                SoundController.Instance.sfxClip_pickup);
         }
     }
 

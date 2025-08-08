@@ -14,6 +14,7 @@ public class SoundController : Singleton<SoundController>
     public AudioSource sfxSource_splash;
     public AudioSource sfxSource_hit_1;
     public AudioSource sfxSource_hit_2;
+    public AudioSource sfxSource_pickup;
 
     [Header("Music Clips")] [SerializeField]
     private List<AudioClip> musicClips;
@@ -26,6 +27,7 @@ public class SoundController : Singleton<SoundController>
     public AudioClip sfxClip_monsterAttack;
     public AudioClip sfxClip_Splash;
     public AudioClip sfxClip_hit;
+    public AudioClip sfxClip_pickup;
 
     private int currentMusicIndex = 0;
 
