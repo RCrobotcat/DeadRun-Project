@@ -398,7 +398,7 @@ public partial class LobbyController
             {
                 playerObjectController.fellCountText.gameObject.SetActive(false);
 
-                SoundController.Instance.PlayMusic(Random.Range(0, 3), true);
+                SoundController.Instance.PlayMusic(Random.Range(0, 4), true);
             }
             else
             {
@@ -416,7 +416,7 @@ public partial class LobbyController
                 playerObjectController.collectionUIBase.SetActive(true);
                 playerMovement.moveSpeed = 10f;
 
-                SoundController.Instance.PlayMusic(Random.Range(0, 3), true);
+                SoundController.Instance.PlayMusic(Random.Range(0, 4), true);
             }
             else
             {
@@ -458,7 +458,7 @@ public partial class LobbyController
                 
                 playerMovement.jumpForce = 15f;
 
-                SoundController.Instance.PlayMusic(Random.Range(0, 3), true);
+                SoundController.Instance.PlayMusic(Random.Range(0, 4), true);
             }
             else
             {

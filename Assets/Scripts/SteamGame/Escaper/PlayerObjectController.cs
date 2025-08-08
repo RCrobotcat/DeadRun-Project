@@ -481,7 +481,7 @@ public partial class PlayerObjectController : NetworkBehaviour
 
         GetComponent<PlayerMovement>().jumpForce = 15f;
 
-        SoundController.Instance.PlayMusic(Random.Range(0, 3), true);
+        SoundController.Instance.PlayMusic(Random.Range(0, 4), true);
     }
 
     [ClientRpc]
@@ -493,7 +493,7 @@ public partial class PlayerObjectController : NetworkBehaviour
         fellCountText.gameObject.SetActive(state);
         GetComponent<PlayerMovement>().currentEquippedItem = "";
 
-        SoundController.Instance.PlayMusic(Random.Range(0, 3), true);
+        SoundController.Instance.PlayMusic(Random.Range(0, 4), true);
     }
 
     [ClientRpc]

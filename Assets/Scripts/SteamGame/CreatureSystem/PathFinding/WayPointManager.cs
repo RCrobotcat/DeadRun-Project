@@ -91,7 +91,8 @@ public class WayPointManager : Singleton<WayPointManager>
         var costSoFar =
             new Dictionary<WayPoint, float>();
 
-        PathNode startNode = new PathNode(startPoint, 0, Vector3.Distance(startPoint.Position, endPoint.Position));
+        //PathNode startNode = new PathNode(startPoint, 0, Vector3.Distance(startPoint.Position, endPoint.Position));
+        PathNode startNode = new PathNode(startPoint, 0, CalculateManhattanDistance(startPoint, endPoint));
         frontier.Add(startNode);
         costSoFar[startNode.waypoint] = 0;
 
@@ -120,12 +121,16 @@ public class WayPointManager : Singleton<WayPointManager>
                 var next = connection.targetPoint;
                 if (visited.Contains(next)) continue;
 
+                if (connection.cost > 15f)
+                    continue;
+
                 float newCost = costSoFar[current.waypoint] + connection.cost;
 
                 if (!costSoFar.ContainsKey(next) || newCost < costSoFar[next])
                 {
                     costSoFar[next] = newCost;
-                    float hCost = Vector3.Distance(next.Position, endPoint.Position);
+                    //float hCost = Vector3.Distance(next.Position, endPoint.Position);
+                    float hCost = CalculateManhattanDistance(next, endPoint);
 
                     PathNode nextNode = new PathNode(next, newCost, hCost);
 
@@ -168,5 +173,13 @@ public class WayPointManager : Singleton<WayPointManager>
         path.Reverse();
 
         return path;
+    }
+
+    public float CalculateManhattanDistance(WayPoint current, WayPoint target)
+    {
+        float distance = Mathf.Abs(current.Position.x - target.Position.x) +
+                         Mathf.Abs(current.Position.z - target.Position.z);
+
+        return distance;
     }
 }

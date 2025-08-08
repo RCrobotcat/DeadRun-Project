@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CityGenerator;
 using UnityEngine;
 
 [System.Serializable]
@@ -66,15 +67,23 @@ public class WayPoint : MonoBehaviour
         {
             if (point == this) continue;
 
-            float distance = Vector3.Distance(Position, point.Position);
+            //float distance = Vector3.Distance(Position, point.Position);
+            float distance = WayPointManager.Instance.CalculateManhattanDistance(this, point);
 
             if (distance <= WayPointRadius)
             {
-                connections.Add(new WayPointConnection
+                CityMark mark = point.GetComponent<CityMark>();
+                if (mark.markType == CityObjectType.MajorRoad ||
+                    mark.markType == CityObjectType.MinorRoad ||
+                    mark.markType == CityObjectType.Junction ||
+                    mark.markType == CityObjectType.MajorJunction)
                 {
-                    targetPoint = point,
-                    cost = distance
-                });
+                    connections.Add(new WayPointConnection
+                    {
+                        targetPoint = point,
+                        cost = distance
+                    });
+                }
             }
         }
     }

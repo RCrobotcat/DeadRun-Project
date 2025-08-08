@@ -137,10 +137,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxVelocity: 20
-  maxAcceleration: 15
-  turnSpeed: 20
+  maxAcceleration: 12
+  turnSpeed: 40
   targetRadius: 1.5
-  slowRadius: 1
+  slowRadius: 3
   timeToTarget: 0.1
 --- !u!114 &410325402147961015
 MonoBehaviour:
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayStart: 0.5
-  rayLength: 20
+  rayLength: 25
   rayCount: 36
   collisionLayers:
     serializedVersion: 2

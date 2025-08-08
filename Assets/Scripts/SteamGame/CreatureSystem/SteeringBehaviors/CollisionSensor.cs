@@ -58,7 +58,7 @@ public class CollisionSensor : MonoBehaviour
             if (GetComponent<AIActor>().isServer)
             {
                 PhysicsScene physicsScene = gameObject.scene.GetPhysicsScene();
-                QueryTriggerInteraction query = QueryTriggerInteraction.Collide;
+                QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal;
                 physicsScene.Raycast(transform.position + direction * rayStart, direction, out hit,
                     rayLength,
                     collisionLayers, query);
