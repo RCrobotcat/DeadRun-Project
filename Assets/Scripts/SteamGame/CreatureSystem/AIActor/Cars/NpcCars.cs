@@ -104,8 +104,8 @@ public class NpcCars : AIActor
                     acceleration = acclerationDir;
                 }
 
-                steeringBehaviors.Steer(acceleration);
                 steeringBehaviors.LookMoveDirection();
+                steeringBehaviors.Steer(acceleration);
 
                 return TaskStatus.Success;
             })

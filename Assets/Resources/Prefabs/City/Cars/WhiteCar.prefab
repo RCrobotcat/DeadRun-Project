@@ -728,10 +728,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxVelocity: 20
   maxAcceleration: 12
-  turnSpeed: 40
+  turnSpeed: 60
   targetRadius: 1.5
-  slowRadius: 3
-  timeToTarget: 0.1
+  slowRadius: 10
+  timeToTarget: 0.5
 --- !u!114 &5102076621168908728
 MonoBehaviour:
   m_ObjectHideFlags: 0
