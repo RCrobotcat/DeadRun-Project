@@ -349,6 +349,9 @@ public partial class PlayerMovement : NetworkBehaviour
                 Transform newObj = Instantiate(itemsManager.items.transform.Find(newItem), equipItemSlot);
                 newObj.transform.name = newItem;
                 newObj.gameObject.SetActive(true);
+                
+                SoundController.Instance.PlaySFX(SoundController.Instance.sfxSource_pickup,
+                    SoundController.Instance.sfxClip_pickup);
             }
         }
     }

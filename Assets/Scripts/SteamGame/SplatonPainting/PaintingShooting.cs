@@ -43,8 +43,14 @@ public class PaintingShooting : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 inkParticle.Play();
+                
                 if (!SoundController.Instance.sfxSource_splash.isPlaying)
-                    SoundController.Instance.PlayPaintingSplash();
+                {
+                    if (player.GetComponent<PlayerObjectController>().playerID ==
+                        LobbyController.Instance.LocalPlayerObjectController.playerID)
+                        SoundController.Instance.PlayPaintingSplash();
+                }
+
                 // Server
                 if (NetworkServer.active)
                 {
@@ -58,8 +64,14 @@ public class PaintingShooting : MonoBehaviour
             else if (Input.GetMouseButtonUp(0))
             {
                 inkParticle.Stop();
+
                 if (SoundController.Instance.sfxSource_splash.isPlaying)
-                    SoundController.Instance.sfxSource_splash.Stop();
+                {
+                    if (player.GetComponent<PlayerObjectController>().playerID ==
+                        LobbyController.Instance.LocalPlayerObjectController.playerID)
+                        SoundController.Instance.sfxSource_splash.Stop();
+                }
+
                 if (NetworkServer.active)
                 {
                     player.GetComponent<PlayerMovement>().RpcSetPainting(Vector3.zero, false);
@@ -73,8 +85,14 @@ public class PaintingShooting : MonoBehaviour
         else
         {
             inkParticle.Stop();
+
             if (SoundController.Instance.sfxSource_splash.isPlaying)
-                SoundController.Instance.sfxSource_splash.Stop();
+            {
+                if (player.GetComponent<PlayerObjectController>().playerID ==
+                    LobbyController.Instance.LocalPlayerObjectController.playerID)
+                    SoundController.Instance.sfxSource_splash.Stop();
+            }
+
             if (NetworkServer.active)
             {
                 player.GetComponent<PlayerMovement>().RpcSetPainting(Vector3.zero, false);

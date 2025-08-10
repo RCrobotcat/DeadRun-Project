@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3300104266679384588}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: wheel_RL_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8121732714266674804}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: wheel_FL_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3368139724443502684}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CarBody_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 9136678430959470419}
   - component: {fileID: 8410410400054218694}
   - component: {fileID: 8831803582010947723}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: wheel_RR_Mesh_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4698943996479211766}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Wheels_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5609268067875663971}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: wheel_FR_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7030291979712552959}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: wheel_RR_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 4080271610378697339}
   - component: {fileID: 4732895817246168037}
   - component: {fileID: 3547596421028083621}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Body_Mesh_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 3362539632783264066}
   - component: {fileID: 7797108808245510916}
   - component: {fileID: 2083880194114312191}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: wheel_FR_Mesh_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -464,7 +464,7 @@ GameObject:
   - component: {fileID: 5816912559136933775}
   - component: {fileID: 1191543802553297762}
   - component: {fileID: 3830009287305016411}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: wheel_RL_Mesh_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 5179263348106558687}
   - component: {fileID: 8777861525263083060}
   - component: {fileID: 3133700875212267371}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: wheel_FL_Mesh_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -642,7 +642,7 @@ GameObject:
   - component: {fileID: 4189793569417173355}
   - component: {fileID: 6007899424813299937}
   - component: {fileID: 3977977591128304170}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: WhiteCar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -729,7 +729,7 @@ MonoBehaviour:
   maxVelocity: 20
   maxAcceleration: 12
   turnSpeed: 60
-  targetRadius: 1.5
+  targetRadius: 2
   slowRadius: 10
   timeToTarget: 0.5
 --- !u!114 &5102076621168908728
@@ -744,8 +744,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1843a94ad6aa48a79e328e7c64a34b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wayPointReachedDistance: 1.5
-  debugPath: 0
+  wayPointReachedDistance: 2
+  debugPath: 1
   currentPath: []
 --- !u!114 &2723900072042290158
 MonoBehaviour:
@@ -778,12 +778,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 332a9a760682412e8f27f900c97e5b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayStart: 0.5
+  rayStart: 1.5
   rayLength: 25
   rayCount: 36
   collisionLayers:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 4416
 --- !u!114 &6007899424813299937
 MonoBehaviour:
   m_ObjectHideFlags: 0

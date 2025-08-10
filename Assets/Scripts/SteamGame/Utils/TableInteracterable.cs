@@ -60,8 +60,6 @@ public class TableInteracterable : NetworkBehaviour
             player.GetComponent<PlayerMovement>().currentEquippedItem = tableItem;
 
             tableItem = "";
-            SoundController.Instance.PlaySFX(SoundController.Instance.sfxSource_pickup,
-                SoundController.Instance.sfxClip_pickup);
         }
         else if (tableItem == "" &&
                  player.GetComponent<PlayerMovement>().currentEquippedItem == desiredItem)
@@ -69,8 +67,6 @@ public class TableInteracterable : NetworkBehaviour
             tableItem = player.GetComponent<PlayerMovement>().currentEquippedItem;
 
             player.GetComponent<PlayerMovement>().currentEquippedItem = "";
-            SoundController.Instance.PlaySFX(SoundController.Instance.sfxSource_pickup,
-                SoundController.Instance.sfxClip_pickup);
         }
     }
 
@@ -91,6 +87,9 @@ public class TableInteracterable : NetworkBehaviour
                 newObj.transform.localScale = Vector3.one * 0.6f;
                 newObj.gameObject.SetActive(true);
                 // NetworkServer.Spawn(newObj.gameObject);
+
+                SoundController.Instance.PlaySFX(SoundController.Instance.sfxSource_pickup,
+                    SoundController.Instance.sfxClip_pickup);
             }
         }
     }

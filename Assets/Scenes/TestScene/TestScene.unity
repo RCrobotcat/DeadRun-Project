@@ -912,6 +912,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   freeLookCam: {fileID: 0}
+  shakeDuration: 1
+  shakeAmplitude: 1.2
+  shakeFrequency: 2
 --- !u!114 &1688248511
 MonoBehaviour:
   m_ObjectHideFlags: 0

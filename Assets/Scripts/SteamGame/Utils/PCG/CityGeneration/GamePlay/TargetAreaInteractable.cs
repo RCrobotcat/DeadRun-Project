@@ -94,9 +94,6 @@ public class TargetAreaInteractable : NetworkBehaviour
                     requiredCollectableItemCount);
             }
 
-            SoundController.Instance.PlaySFX(SoundController.Instance.sfxSource_pickup,
-                SoundController.Instance.sfxClip_pickup);
-
             if (currentCollectableItemCount >= requiredCollectableItemCount)
             {
                 progressText.text = "Done!";
@@ -132,6 +129,10 @@ public class TargetAreaInteractable : NetworkBehaviour
     private void OnAreaItemsCountChanged(int oldCount, int newCount)
     {
         Debug.Log($"Target Area Items Count Changed: {newCount}/{requiredCollectableItemCount}");
+        
+        SoundController.Instance.PlaySFX(SoundController.Instance.sfxSource_pickup,
+            SoundController.Instance.sfxClip_pickup);
+        
         if (currentCollectableItemCount >= requiredCollectableItemCount && !isRequiredItemCountReached)
         {
             isRequiredItemCountReached = true;
