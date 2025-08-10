@@ -131,7 +131,7 @@ public class TargetAreaInteractable : NetworkBehaviour
         Debug.Log($"Target Area Items Count Changed: {newCount}/{requiredCollectableItemCount}");
         
         SoundController.Instance.PlaySFX(SoundController.Instance.sfxSource_pickup,
-            SoundController.Instance.sfxClip_pickup);
+            SoundController.Instance.sfxClip_pickup, 0.5f);
         
         if (currentCollectableItemCount >= requiredCollectableItemCount && !isRequiredItemCountReached)
         {

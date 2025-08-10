@@ -89,7 +89,7 @@ public class TableInteracterable : NetworkBehaviour
                 // NetworkServer.Spawn(newObj.gameObject);
 
                 SoundController.Instance.PlaySFX(SoundController.Instance.sfxSource_pickup,
-                    SoundController.Instance.sfxClip_pickup);
+                    SoundController.Instance.sfxClip_pickup, 0.5f);
             }
         }
     }
