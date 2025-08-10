@@ -88,6 +88,11 @@ public class TargetAreaInteractable : NetworkBehaviour
             playerObjectController.collectionText.text =
                 currentCollectableItemCount + "/" + requiredCollectableItemCount;
 
+            if (player.GetComponent<PlayerObjectController>().playerID ==
+                LobbyController.Instance.LocalPlayerObjectController.playerID)
+                SoundController.Instance.PlaySFX(SoundController.Instance.sfxSource_pickup,
+                    SoundController.Instance.sfxClip_pickup, 0.5f);
+
             if (playerObjectController.playerID > 1) // Not host player
             {
                 playerObjectController.RpcUpdateCollectionsText(currentCollectableItemCount,
@@ -129,10 +134,7 @@ public class TargetAreaInteractable : NetworkBehaviour
     private void OnAreaItemsCountChanged(int oldCount, int newCount)
     {
         Debug.Log($"Target Area Items Count Changed: {newCount}/{requiredCollectableItemCount}");
-        
-        SoundController.Instance.PlaySFX(SoundController.Instance.sfxSource_pickup,
-            SoundController.Instance.sfxClip_pickup, 0.5f);
-        
+
         if (currentCollectableItemCount >= requiredCollectableItemCount && !isRequiredItemCountReached)
         {
             isRequiredItemCountReached = true;

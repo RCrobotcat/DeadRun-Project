@@ -93,8 +93,10 @@ public partial class PlayerObjectController
                         {
                             paintingShooting.inkParticle.Stop();
                             paintingShooting.enabled = false;
+
                             if (SoundController.Instance.sfxSource_splash.isPlaying)
-                                SoundController.Instance.sfxSource_splash.Stop();
+                                if (playerID == LobbyController.Instance.LocalPlayerObjectController.playerID)
+                                    SoundController.Instance.sfxSource_splash.Stop();
                         }
 
                         DropCurrentItem();
@@ -132,7 +134,8 @@ public partial class PlayerObjectController
                         paintingShooting.inkParticle.Stop();
                         paintingShooting.enabled = false;
                         if (SoundController.Instance.sfxSource_splash.isPlaying)
-                            SoundController.Instance.sfxSource_splash.Stop();
+                            if (playerID == LobbyController.Instance.LocalPlayerObjectController.playerID)
+                                SoundController.Instance.sfxSource_splash.Stop();
                     }
 
                     CmdDropCurrentItem();
@@ -396,6 +399,9 @@ public partial class PlayerObjectController
 
         currentCollectionCount = current;
         collectionText.text = current + "/" + required;
+
+        SoundController.Instance.PlaySFX(SoundController.Instance.sfxSource_pickup,
+            SoundController.Instance.sfxClip_pickup, 0.5f);
     }
 
     [ClientRpc]

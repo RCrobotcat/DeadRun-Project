@@ -87,9 +87,6 @@ public class TableInteracterable : NetworkBehaviour
                 newObj.transform.localScale = Vector3.one * 0.6f;
                 newObj.gameObject.SetActive(true);
                 // NetworkServer.Spawn(newObj.gameObject);
-
-                SoundController.Instance.PlaySFX(SoundController.Instance.sfxSource_pickup,
-                    SoundController.Instance.sfxClip_pickup, 0.5f);
             }
         }
     }
@@ -99,6 +96,9 @@ public class TableInteracterable : NetworkBehaviour
     /// </summary>
     void HandleTargetTablePlaced()
     {
+        SoundController.Instance.PlaySFX(SoundController.Instance.sfxSource_pickup,
+            SoundController.Instance.sfxClip_pickup, 0.5f);
+
         if (tableItem.Equals(desiredItem))
         {
             PlayerObjectController[] allPlayers = FindObjectsOfType<PlayerObjectController>();
