@@ -16,6 +16,7 @@ public class TargetAreaInteractable : NetworkBehaviour
 
     private ItemsManager itemsManager;
 
+    [SyncVar]
     public int possessivePlayerId;
 
     public Text progressText;
