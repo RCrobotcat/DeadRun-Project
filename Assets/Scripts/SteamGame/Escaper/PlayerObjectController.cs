@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CityGenerator;
 using Mirror;
 using Steamworks;
@@ -132,9 +133,11 @@ public partial class PlayerObjectController : NetworkBehaviour
                 }
                 else
                 {
-                    if(SceneManager.GetSceneByName("Scene_4").isLoaded)
+                    if (SceneManager.GetSceneByName("Scene_4").isLoaded)
                     {
-                        foreach (var area in CityGroupGenerator.Instance.targetAreas)
+                        List<TargetAreaInteractable> targetAreas =
+                            FindObjectsOfType<TargetAreaInteractable>().ToList();
+                        foreach (var area in targetAreas)
                         {
                             if (area.possessivePlayerId == playerID)
                             {
@@ -143,7 +146,7 @@ public partial class PlayerObjectController : NetworkBehaviour
                             }
                         }
                     }
-                    
+
                     if (SceneManager.GetSceneByName("Scene_5_Painting").isLoaded)
                     {
                         if (transform.GetChild(2)
