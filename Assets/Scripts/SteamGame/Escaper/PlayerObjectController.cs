@@ -100,6 +100,18 @@ public partial class PlayerObjectController : NetworkBehaviour
 
                 if (NetworkServer.active)
                 {
+                    if (gameObject.scene.name == "Scene_4")
+                    {
+                        foreach (var area in CityGroupGenerator.Instance.targetAreas)
+                        {
+                            if (area.possessivePlayerId == playerID)
+                            {
+                                transform.position = area.transform.position + Vector3.up * 2.5f;
+                                break;
+                            }
+                        }
+                    }
+
                     if (gameObject.scene.name == "Scene_5_Painting")
                     {
                         if (transform.GetChild(2)
@@ -120,6 +132,18 @@ public partial class PlayerObjectController : NetworkBehaviour
                 }
                 else
                 {
+                    if(SceneManager.GetSceneByName("Scene_4").isLoaded)
+                    {
+                        foreach (var area in CityGroupGenerator.Instance.targetAreas)
+                        {
+                            if (area.possessivePlayerId == playerID)
+                            {
+                                transform.position = area.transform.position + Vector3.up * 2.5f;
+                                break;
+                            }
+                        }
+                    }
+                    
                     if (SceneManager.GetSceneByName("Scene_5_Painting").isLoaded)
                     {
                         if (transform.GetChild(2)

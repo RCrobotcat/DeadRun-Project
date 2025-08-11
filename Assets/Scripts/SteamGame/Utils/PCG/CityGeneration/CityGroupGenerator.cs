@@ -74,6 +74,7 @@ namespace CityGenerator
 
         public GameObject targetAreaPrefab;
         public Transform targetAreaParent;
+        public List<TargetAreaInteractable> targetAreas = new List<TargetAreaInteractable>();
 
         private MyNetworkManager _myNetworkManager;
 
@@ -199,6 +200,8 @@ namespace CityGenerator
                 targetArea.GetComponent<TargetAreaInteractable>().possessivePlayerId = player.playerID;
                 targetArea.GetComponent<TargetAreaInteractable>()
                     .RpcUpdateTargetAreaPossessivePlayerId(player.playerID);
+
+                targetAreas.Add(targetArea.GetComponent<TargetAreaInteractable>());
             }
         }
 

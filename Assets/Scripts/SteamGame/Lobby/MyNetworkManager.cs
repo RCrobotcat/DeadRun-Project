@@ -3,7 +3,6 @@ using Mirror;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
-using CityGenerator;
 
 public partial class MyNetworkManager : NetworkManager
 {
